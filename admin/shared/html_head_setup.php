@@ -1,0 +1,113 @@
+<?php?>
+
+<meta charset=UTF-8 />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<style>
+	/* Roboto font by Google */
+	
+	@font-face{
+		font-family: Roboto;
+		src: url("/admin/res/fonts/Roboto/Roboto-Regular.ttf");
+	}
+	@font-face{
+		font-family: Roboto;
+		font-weight: bold;
+		src: url("/admin/res/fonts/Roboto/Roboto-Bold.ttf");
+	}
+	@font-face{
+		font-family: Roboto;
+		font-style: italic;
+		src: url("/admin/res/fonts/Roboto/Roboto-Italic.ttf");
+	}
+	@font-face{
+		font-family: Roboto;
+		font-weight: bold;
+		font-style: italic;
+		src: url("/admin/res/fonts/Roboto/Roboto-BoldItalic.ttf");
+	}
+	@font-face{
+		font-family: Roboto;
+		font-weight: 100;
+		src: url("/admin/res/fonts/Roboto/Roboto-Thin.ttf");
+	}
+	@font-face{
+		font-family: Roboto;
+		font-weight: 100;
+		font-style: italic;
+		src: url("/admin/res/fonts/Roboto/Roboto-ThinItalic.ttf");
+	}
+	@font-face{
+		font-family: Roboto;
+		font-weight: 300;
+		src: url("/admin/res/fonts/Roboto/Roboto-Light.ttf");
+	}
+	@font-face{
+		font-family: Roboto;
+		font-weight: 300;
+		font-style: italic;
+		src: url("/admin/res/fonts/Roboto/Roboto-LightItalic.ttf");
+	}
+	@font-face{
+		font-family: Roboto;
+		font-weight: 500;
+		src: url("/admin/res/fonts/Roboto/Roboto-Medium.ttf");
+	}
+	@font-face{
+		font-family: Roboto;
+		font-weight: 500;
+		font-style: italic;
+		src: url("/admin/res/fonts/Roboto/Roboto-MediumItalic.ttf");
+	}
+	@font-face{
+		font-family: Roboto;
+		font-weight: 900;
+		src: url("/admin/res/fonts/Roboto/Roboto-Black.ttf");
+	}
+	@font-face{
+		font-family: Roboto;
+		font-weight: 900;
+		font-style: italic;
+		src: url("/admin/res/fonts/Roboto/Roboto-BlackItalic.ttf");
+	}
+	
+	/*
+		Material Icons by Google
+		
+		To download and use, check documentation at: https://developers.google.com/fonts/docs/material_icons	
+	*/
+	
+	@font-face {
+		font-family: 'Material Icons Round';
+		font-style: normal;
+		font-weight: 400;
+		src: url("/admin/res/fonts/MaterialIconsRound-Regular.otf");
+	}
+	
+	.card button, .card button:hover, .card button:active {
+		margin: 15px;
+		color: black;
+		width: 250px;
+	}
+	
+	main form {
+		margin: 15px;
+	}
+	
+	main form input {
+		margin: 10px;
+	}
+	
+	/* For some reason, this works here but not when I insert it on the [index.php] where I need it, so I'll just define here which fields are going to have a triangle down icon, this is only for datepicker fields. */
+	#id_veh_faby {
+		background: url("/admin/res/img/icons/triangle-upside-down.svg") 99% center/16px 16px no-repeat;
+	}
+</style>
+
+<!-- Font Awesome icons -->
+<link rel=stylesheet href="/admin/res/extras/font-awesome/css/fontawesome.min.css" />
+<link rel=stylesheet href="/admin/res/extras/font-awesome/css/solid.min.css" />
+<link rel=stylesheet href="/admin/res/extras/font-awesome/css/brands.min.css" />
+
+<!-- Material Dashboard's stylesheet -->
+<link rel=stylesheet href="/admin/assets/css/material-dashboard.css?v=3.0.4" id=pagestyle />
