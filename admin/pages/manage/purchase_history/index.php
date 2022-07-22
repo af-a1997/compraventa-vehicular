@@ -4,6 +4,11 @@
 <?php
 	include "../../../shared/Constant_Strings[A].php";
 	include "../../../shared/Constant_Strings[G].php";
+	
+	include "../../../classes/Utils_ClassLoader.class.php";
+	
+	$acq_inst = new Acquired_Veh();
+	$acq_list = $acq_inst->ACQ_ShowAllForList();
 ?>
 
 <html lang="es">
@@ -64,60 +69,6 @@
 									<i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
 								</a>
 							</li>
-							<li class="nav-item dropdown pe-2 d-flex align-items-center">
-								<a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-									<i class="fa fa-bell cursor-pointer"></i>
-								</a>
-
-								<ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-									<li class="mb-2">
-										<a class="dropdown-item border-radius-md" href="javascript:;">
-											<div class="d-flex py-1">
-												<div class="my-auto">
-													<img src="./assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
-												</div>
-												<div class="d-flex flex-column justify-content-center">
-													<h6 class="text-sm font-weight-normal mb-1">
-														<span class="font-weight-bold">New message</span> from Laur
-													</h6>
-													<p class="text-xs text-white opacity-8 mb-0">
-														<i class="fa fa-clock me-1"></i> 13 minutes ago
-													</p>
-												</div>
-											</div>
-										</a>
-									</li>
-									<li class="mb-2">
-										<a class="dropdown-item border-radius-md" href="javascript:;">
-											<div class="d-flex py-1">
-												<div class="my-auto">
-													<img src="./assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3 " />
-												</div>
-												<div class="d-flex flex-column justify-content-center">
-													<h6 class="text-sm font-weight-normal mb-1"> <span class="font-weight-bold">New album</span> by Travis Scott</h6>
-													<p class="text-xs text-white opacity-8 mb-0">
-														<i class="fa fa-clock me-1"></i> 1 day
-													</p>
-												</div>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a class="dropdown-item border-radius-md" href="javascript:;">
-											<div class="d-flex py-1">
-												<div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-													<svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>credit-card</title> <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero"> <g transform="translate(1716.000000, 291.000000)"> <g transform="translate(453.000000, 454.000000)"> <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path> <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path> </g> </g> </g> </g> </svg>
-												</div>
-												<div class="d-flex flex-column justify-content-center">
-													<h6 class="text-sm font-weight-normal mb-1"> Payment successfully completed</h6>
-													<p class="text-xs text-white opacity-8 mb-0">
-														<i class="fa fa-clock me-1"></i> 2 days</p>
-												</div>
-											</div>
-										</a>
-									</li>
-								</ul>
-							</li>
 						</ul>
 					</div>
 				</div>
@@ -146,35 +97,36 @@
 												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Acciones</th>
 											</tr>
 										</thead>
-										<!-- TODO: create server-side loop structure to generate rows per car registered in the database. -->
 										<tbody>
-											<tr>
-												<td>
-													<div class="d-flex px-2 py-1">
-														<!-- <div><img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1"></div> -->
-														<div class="d-flex flex-column justify-content-center">
-															<h6 class="mb-0 text-sm">BMW</h6>
-															<p class="text-xs text-white opacity-8 mb-0">X3 (2013)</p>
-														</div>
-													</div>
-												</td>
-												<td class="align-middle text-center text-sm">Impecable, muy cuidada.</td>
-												<td>
-													<p class="text-xs font-weight-bold mb-0">29 de Junio de 2022</p>
-													<p class="text-xs text-white opacity-8 mb-0">14:34:20</p>
-												</td>
-												<td class="align-middle text-center text-sm">SBS1474</td>
-												<td class="align-middle text-center text-sm">#7D8F9B</td>
-												<td>
-													<a href="javascript:;" class="text-white opacity-8 font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Eliminar"><i class="material-icons opacity-10">delete</i></a>
-												</td>
-											</tr>
+											<?php
+												foreach($acq_list as $al){
+													echo "
+														<tr>
+															<td>
+																<div class=\"d-flex px-2 py-1\">
+																	<div class=\"d-flex flex-column justify-content-center\">
+																		<h6 class=\"mb-0 text-sm\">$al->na</h6>
+																		<p class=\"text-xs text-white opacity-8 mb-0\">$al->ma</p>
+																	</div>
+																</div>
+															</td>
+															<td class=\"align-middle text-center text-sm\">$al->es</td>
+															<td class=\"align-middle text-center text-sm\">$al->dt</td>
+															<td class=\"align-middle text-center text-sm\">$al->mat</td>
+															<td class=\"align-middle text-center text-sm\">$al->rgb</td>
+															<td>
+																<a href=\"./del/$al->ida\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
+															</td>
+														</tr>
+													";
+												}
+											?>
 										</tbody>
 									</table>
 								</div>
 							</div>
 							
-							<button class="btn btn-success"><i class="material-icons opacity-10">more_time</i> Nueva entrada</button>
+							<button class="btn btn-success" id=new_ph_entry><i class="material-icons opacity-10">more_time</i> Nueva entrada</button>
 							<button class="btn btn-warning"><i class="material-icons opacity-10">delete_forever</i> Limpiar historial</button>
 						</div>
 					</div>
@@ -186,6 +138,10 @@
 
 		<script>
 			$('#sidebar-choice-6').addClass("active bg-gradient-primary");
+			
+			$("#new_ph_entry").click(function(){
+				location.href = "./new";
+			});
 		</script>
 	</body>
 </html>

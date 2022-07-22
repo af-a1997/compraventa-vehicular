@@ -18,4 +18,6 @@
 	const a_o_brands = "Gestionar marcas";
 	const a_o_catveh = "Gestionar categorización de vehículos";
 	const a_o_curr = "Gestionar divisas";
+	
+	const a_n_acq = "Registrar adquisición de vehículo";
 ?>

@@ -46,8 +46,9 @@
 		}
 		
 		// List all clients by running a query on the database, return its result and convert it into a 2D array that can be easily manipulated.
+		// Also, this method may only be used on the users list.
 		public function CLI_ShowAll(){
-			$sql_query_list_all_cli = "SELECT $this->tbl.*, puesto.id_puesto, puesto.nombre FROM $this->tbl INNER JOIN puesto ON usuarios.cargo_en_sitio = puesto.id_puesto;";
+			$sql_query_list_all_cli = "SELECT usuarios.nro_id_u, usuarios.nombre, usuarios.apellidos, usuarios.nombre_usuario, usuarios.tel_cel, usuarios.email, puesto.nombre AS cargo_en_sitio FROM usuarios, puesto WHERE usuarios.cargo_en_sitio = puesto.id_puesto;";
 			$rt_db = mysqli_query($this->conn, $sql_query_list_all_cli);
 			
 			$arr_list_users = null;
@@ -55,16 +56,17 @@
 			while($res = mysqli_fetch_assoc($rt_db)){
 				$o = new Users();
 				
+				// Match each item in the SELECT query to an element in the object as shown below
 				$o->nro_id_u = $res["nro_id_u"];
 				$o->nombre = $res["nombre"];
 				$o->apellidos = $res["apellidos"];
 				$o->nombre_usuario = $res["nombre_usuario"];
-				$o->clave = $res["clave"];
-				$o->cedula_identidad = $res["cedula_identidad"];
+				// $o->clave = $res["clave"];
+				// $o->cedula_identidad = $res["cedula_identidad"];
 				$o->email = $res["email"];
-				$o->residencia_actual = $res["residencia_actual"];
+				// $o->residencia_actual = $res["residencia_actual"];
 				$o->tel_cel = $res["tel_cel"];
-				$o->tel_fijo = $res["tel_fijo"];
+				// $o->tel_fijo = $res["tel_fijo"];
 				$o->cargo_en_sitio = $res["cargo_en_sitio"];
 				
 				$arr_list_users[] = $o;
