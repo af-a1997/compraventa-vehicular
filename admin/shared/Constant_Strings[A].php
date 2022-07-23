@@ -4,6 +4,7 @@
 	const a_dsb = "Panel de administración";
 	
 	const a_mp = "Gestión de ";
+	const a_reg = "Registrar ";
 	
 	const a_climan = a_mp."clientela";
 	const a_credits = "Agradecimientos";
@@ -19,6 +20,7 @@
 	const a_o_catveh = "Gestionar categorización de vehículos";
 	const a_o_curr = "Gestionar divisas";
 	
-	const a_n_acq = "Registrar adquisición de vehículo";
-	const a_n_cli = "Registrar cliente";
+	const a_n_acq = a_reg."adquisición de vehículo";
+	const a_n_cli = a_reg."cliente";
+	const a_n_veh = a_reg."vehículo";
 ?>

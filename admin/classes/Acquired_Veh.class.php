@@ -29,28 +29,6 @@ class Acquired_Veh{
 		return $this->$key = $value;
 	}
 	
-	/*
-	public function ACQ_Reg($also_add_veh = 0){
-		if($also_add_veh == 1){
-			$sql_query_adq_reg_1 = "INSERT INTO vehiculos (idno, modelo, unidades, anho_fab, puertas, transmision, combustible_tipo, combustible_capac, motor, marca, categorizacion) VALUES ($this->idno, '$this->modelo', $this->unidades, $this->anho_fab, $this->puertas, $this->transmision, '$this->combustible_tipo', '$this->combustible_capac', $this->motor, $this->marca, $this->categorizacion);";
-			
-			$r = mysqli_query($this->conn, $sql_query_adq_reg_1);
-		}
-		$sql_query_adq_reg_2 = " INSERT INTO registros (ultima_act_info, color, matricula, estado_act, kilometraje_act, usado, vehiculo_asociado) VALUES ('$this->ultima_act_info', '$this->color', '$this->matricula', '$this->estado_act', '$this->kilometraje_act', $this->usado, $this->vehiculo_asociado);";
-		$sql_query_adq_reg_3 = "INSERT INTO $this->tbl (tiempo, precio, estado_adq, kilometraje_adq, divisa_precio, id_del_adquirido) VALUES ('$this->tiempo', $this->precio, '$this->estado_adq', $this->kilometraje_adq, $this->divisa_precio, $this->id_del_adquirido);";
-		
-		if($also_add_veh == 1){
-			$r .= mysqli_query($this->conn, $sql_query_adq_reg_2);
-		}
-		else{
-			
-			$r = mysqli_query($this->conn, $sql_query_adq_reg_2);
-		}
-		$r .= mysqli_query($this->conn, $sql_query_adq_reg_3);
-		
-		return $r;
-	}
-	*/
 	public function ACQ_Add(){
 		$sql_query_adq_reg = "INSERT INTO $this->tbl (tiempo, precio, estado_adq, kilometraje_adq, divisa_precio, id_del_adquirido) VALUES ('$this->tiempo', $this->precio, '$this->estado_adq', $this->kilometraje_adq, $this->divisa_precio, $this->id_del_adquirido);";
 		

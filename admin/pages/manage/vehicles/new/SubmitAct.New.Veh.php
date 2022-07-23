@@ -6,44 +6,21 @@
 	include "../../../../shared/Constant_Strings[A].php";
 	include "../../../../shared/Constant_Strings[G].php";
 	
-	include "../../../../shared/Utils.Admin.Time.php";
-
-	$credentials = mysqli_connect("localhost","cmman_admin","#V!c2bMr69xo!8%A","gestion_veh") or die ("Hubo un fallo al conectarse a la BBDD, conexión abortada.");
+	$o_veh = new Vehicles();
 	
-	$o_rvi = new Registered_Veh_Info();
-	$o_acq = new Acquired_Veh();
+	$o_veh->modelo = $_POST["fln_veh_model"];
+	$o_veh->unidades = $_POST["fln_veh_stock"];
+	if($_POST["fln_veh_yfab"] == "") $o_veh->anho_fab = null;
+	else $o_veh->anho_fab = $_POST["fln_veh_yfab"];
+	$o_veh->puertas = $_POST["fln_veh_doors"];
+	$o_veh->transmision = $_POST["fln_veh_tr"];
+	$o_veh->combustible_tipo = $_POST["fln_veh_ft"];
+	$o_veh->combustible_capac = $_POST["fln_veh_fc"];
+	$o_veh->motor = $_POST["fln_veh_eng"];
+	$o_veh->marca = $_POST["fln_veh_brand"];
+	$o_veh->categorizacion = $_POST["fln_veh_type"];
 	
-	$o_rvi->ultima_act_info = $cdt;
-	if(!$_POST["fln_veh_color"]){
-		$o_rvi->color = null;
-	}
-	else{
-		$o_rvi->color = $_POST["fln_veh_color"];
-	}
-	if(!$_POST["fln_veh_lp"]){
-		$o_rvi->matricula = null;
-	}
-	else{
-		$o_rvi->matricula = $_POST["fln_veh_lp"];
-	}
-	$o_rvi->matricula = $_POST["fln_veh_lp"];
-	$o_rvi->estado_act = $_POST["fln_veh_status_acq"];
-	$o_rvi->kilometraje_act = $_POST["fln_acq_dist"];
-	$o_rvi->usado = $_POST["fln_acq_used"];
-	$o_rvi->vehiculo_asociado = $_POST["fln_veh_models"];
-	
-	$r_add_rvi = $o_rvi->RVI_Add();
-	
-	$r_rvi_id = mysqli_query($credentials, "SELECT id_reg FROM registros ORDER BY id_reg DESC LIMIT 1;")->fetch_object()->id_reg;
-	
-	$o_acq->tiempo = $cdt;
-	$o_acq->precio = $_POST["fln_veh_cost"];
-	$o_acq->estado_adq = $_POST["fln_veh_status_acq"];
-	$o_acq->kilometraje_adq = $_POST["fln_acq_dist"];
-	$o_acq->divisa_precio = $_POST["fln_veh_cost_curr"];
-	$o_acq->id_del_adquirido = $r_rvi_id;
-	
-	$r_add_acq = $o_acq->ACQ_Add();
+	$r_add_veh = $o_veh->VEH_Add();
 ?>
 
 <html lang=es>
@@ -53,7 +30,7 @@
 			include "../../../../shared/Imports.jQuery_UI.php";
 		?>
 		
-		<title>Panel de administrador - <?php echo a_n_acq; ?></title>
+		<title>Panel de administrador - <?php echo a_n_veh; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -67,11 +44,11 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
-							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/purchase_history/"><?php echo a_purchase_history; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_n_acq; ?></li>
+							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../"><?php echo a_vehman; ?></a></li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_n_veh; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_n_acq; ?></h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_n_veh; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -82,10 +59,10 @@
 						</div>
 						<ul class="navbar-nav justify-content-end">
 							<li class="nav-item d-flex align-items-center">
-								<a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
+								<a href="../../../../../login/admin/act/Logout.php" class="nav-link text-body font-weight-bold px-0">
 									<i class="fa fa-user me-sm-1"></i>
 
-									<span class="d-sm-inline d-none"><?php echo g_login; ?></span>
+									<span class="d-sm-inline d-none"><?php echo g_logout; ?></span>
 								</a>
 							</li>
 							
@@ -110,11 +87,11 @@
 			<br />
 			
 			<?php
-				if($r_add_rvi && $r_add_acq){
-					echo "<p>Compra registrada, <a href=\"../\">pincha aquí para ir a la lista</a>.</p>";
+				if($r_add_veh){
+					echo "<p>Vehículo registrado, <a href=\"../\">pincha aquí para volver a la lista</a>.</p>";
 				}
 				else{
-					echo "<p>No se pudo registrar la compra, <a href=\"./\">pincha aquí para volver a intentarlo</a>.</p>";
+					echo "<p>No se pudo registrar el vehículo, <a href=\"./\">pincha aquí para volver a intentarlo</a>.</p>";
 				}
 			?>
 		</main>
@@ -122,7 +99,7 @@
 		<?php include "../../../../shared/Imports.Scripts.php"; ?>
 		
 		<script>
-			$('#sidebar-choice-6').addClass("active bg-gradient-primary");
+			$('#sidebar-choice-3').addClass("active bg-gradient-primary");
 		</script>
 	</body>
 </html>

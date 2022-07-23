@@ -34,7 +34,7 @@ class Vehicles{
 		return $this->$key = $value;
 	}
 	
-	public function VEH_Reg(){
+	public function VEH_Add(){
 		$sql_query_veh_reg = "INSERT INTO $this->tbl (modelo, unidades, anho_fab, puertas, transmision, combustible_tipo, combustible_capac, motor, marca, categorizacion) VALUES ('$this->modelo', $this->unidades, $this->anho_fab, $this->puertas, $this->transmision, '$this->combustible_tipo', $this->combustible_capac, '$this->motor', $this->marca, $this->categorizacion);";
 		
 		$r = mysqli_query($this->conn, $sql_query_veh_reg);
@@ -67,6 +67,7 @@ class Vehicles{
 		return $arr_list_veh;
 	}
 	
+	// List used for dropdown menu when registering acquisition and/or license plate.
 	public function VEH_ShowAllForDD(){
 		$sql_query_list_all_veh = "SELECT vehiculos.idno, vehiculos.modelo, marcas.nombre AS mno FROM vehiculos, marcas WHERE vehiculos.marca = marcas.idno;";
 		$rt_db = mysqli_query($this->conn, $sql_query_list_all_veh);
@@ -85,6 +86,28 @@ class Vehicles{
 		return $arr_list_veh_for_dd;
 	}
 	
+	// Shows list of vehicles for vehicle manager.
+	public function VEH_ShowAllForList(){
+		$sql_query_list_all_veh = "SELECT vehiculos.idno, vehiculos.modelo, vehiculos.unidades, vehiculos.anho_fab, marcas.nombre AS mno FROM vehiculos, marcas WHERE vehiculos.marca = marcas.idno;";
+		$rt_db = mysqli_query($this->conn, $sql_query_list_all_veh);
+		
+		$arr_list_veh_for_dd = null;
+		
+		while($res = mysqli_fetch_assoc($rt_db)){
+			$o = new Vehicles();
+			
+			$o->idno = $res["idno"];
+			$o->modelo = $res["modelo"];
+			$o->unidades = $res["unidades"];
+			$o->anho_fab = $res["anho_fab"];
+			$o->mno = $res["mno"];
+			
+			$arr_list_veh_for_dd[] = $o;
+		}
+		return $arr_list_veh_for_dd;
+	}
+	
+	// Shows all info for one vehicle.
 	public function VEH_ShowOne(){
 		$sql_query_list_1_veh ="SELECT * FROM $this->tbl WHERE idno=$this->idno";
 		$retorno = mysqli_query($this->conn, $sql_query_list_1_veh);

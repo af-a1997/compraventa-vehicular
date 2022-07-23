@@ -100,6 +100,20 @@
 	#id_veh_faby {
 		background: url("/admin/res/img/icons/triangle-upside-down.svg") 99% center/16px 16px no-repeat;
 	}
+	
+	label[id$="-error"]{
+		position: absolute;
+		bottom: 5px;
+		right: 10px;
+		z-index: 10;
+		
+		background-color: rgba(64,0,0,0.8);
+		box-shadow: 0 0 5px rgba(64,0,0,0.8);
+		color: white;
+		
+		padding: 10px;
+		border-radius: 5px;
+	}
 </style>
 
 <!-- Font Awesome icons -->

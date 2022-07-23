@@ -114,25 +114,6 @@
 					<label for=fln_acq_used_0>No</label>
 				</div>
 				
-				<p>Transmisión <?php echo g_snp_reqf ?>:</p>
-				<div class="input-group input-group-outline">
-					<input type=radio name=fln_acq_tr id=fln_acq_tr_a_id value="Automática" required />
-					<label for=fln_acq_tr_a>Automática</label> &emsp;
-					
-					<input type=radio name=fln_acq_tr id=fln_acq_tr_m_id value="Manual" />
-					<label for=fln_acq_tr_m>Manual</label>
-				</div>
-				
-				<div class="input-group input-group-outline">
-					<label class="form-label">Combustible <?php echo g_snp_reqf ?></label>
-					<input class="form-control" name=fln_veh_fuel required />*
-				</div>
-				
-				<div class="input-group input-group-outline">
-					<label class="form-label">Motor <?php echo g_snp_reqf ?></label>
-					<input class="form-control" name=fln_veh_eng required />
-				</div>
-				
 				<p>Precio <?php echo g_snp_reqf ?>:</p>
 				<div class="input-group input-group-outline">
 					<input class=form-control style="width: 75%;" name=fln_veh_cost required />
@@ -148,7 +129,7 @@
 				
 				<p>Vehículo <?php echo g_snp_reqf ?>:</p>
 				<div class="input-group input-group-outline">
-					<select id=id_brands name=fln_veh_models class="form-control" required>
+					<select id=id_brands name=fln_veh_models class=form-control required>
 						<option value="" selected>Selecciona un vehículo</option>
 						<?php
 							foreach($veh_list as $vl){

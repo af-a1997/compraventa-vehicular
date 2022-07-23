@@ -2,8 +2,16 @@
 
 <!-- Constant strings of text -->
 <?php
+	include "../../../shared/Utils.Admin.SessionCheck.php";
+	
+	include "../../../classes/Utils_ClassLoader.class.php";
+	
 	include "../../../shared/Constant_Strings[A].php";
 	include "../../../shared/Constant_Strings[G].php";
+	
+	$o_veh = new Vehicles();
+	
+	$o_veh_list = $o_veh->VEH_ShowAllForList();
 ?>
 
 <html lang="es">
@@ -30,18 +38,12 @@
 						<h6 class="font-weight-bolder mb-0"><?php echo a_vehman; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-						<div class="ms-md-auto pe-md-3 d-flex align-items-center">
-							<div class="input-group input-group-outline">
-								<label class="form-label">Buscar en el panel</label>
-								<input type="text" class="form-control">
-							</div>
-						</div>
 						<ul class="navbar-nav justify-content-end">
 							<li class="nav-item d-flex align-items-center">
-								<a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
+								<a href="../../../../login/admin/Logout.php" class="nav-link text-body font-weight-bold px-0">
 									<i class="fa fa-user me-sm-1"></i>
 
-									<span class="d-sm-inline d-none"><?php echo g_login; ?></span>
+									<span class="d-sm-inline d-none"><?php echo g_logout; ?></span>
 								</a>
 							</li>
 							
@@ -80,41 +82,44 @@
 											<tr>
 												<th class="text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Vehículo</th>
 												<th class="text-uppercase text-white opacity-8 text-xxs font-weight-bolder ps-2">Disponibilidad</th>
-												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Última adquisición</th>
 												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Acciones</th>
 											</tr>
 										</thead>
-										<!-- TODO: create server-side loop structure to generate rows per car registered in the database. -->
 										<tbody>
-											<tr>
-												<td>
-													<div class="d-flex px-2 py-1">
-														<!-- <div><img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1"></div> -->
-														<div class="d-flex flex-column justify-content-center">
-															<h6 class="mb-0 text-sm">BMW</h6>
-															<p class="text-xs text-white opacity-8 mb-0">X3 (2013)</p>
-														</div>
-													</div>
-												</td>
-												<td class="align-middle text-center text-sm">
-													<!-- TODO: There's also a gray badge, use it when units=0 -->
-													<span class="badge badge-sm bg-gradient-success">1 unidad</span>
-												</td>
-												<td>
-													<p class="text-xs font-weight-bold mb-0">29 de Junio de 2022</p>
-													<p class="text-xs text-white opacity-8 mb-0">14:34:20</p>
-												</td>
-												<td class="align-middle text-center">
-													<a href="./edit/" class="text-white opacity-8 font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Editar"><i class="material-icons opacity-10">edit</i></a>
-													<a href="./del/" class="text-white opacity-8 font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Eliminar"><i class="material-icons opacity-10">delete</i></a>
-												</td>
-											</tr>
+											<?php
+												foreach($o_veh_list as $vl){
+													$units_text = "";
+													
+													if($vl->unidades == 0) $units_text = "<span class=\"badge badge-sm bg-gradient-danger\">Sin stock</span>";
+													else if($vl->unidades == 1) $units_text = "<span class=\"badge badge-sm bg-gradient-warning\">1 unidad</span>";
+													else if($vl->unidades > 1) $units_text = "<span class=\"badge badge-sm bg-gradient-success\">".$vl->unidades." unidades</span>";
+													
+													echo "
+														<tr>
+															<td>
+																<div class=\"d-flex px-2 py-1\">
+																	<div class=\"d-flex flex-column justify-content-center\">
+																		<h6 class=\"mb-0 text-sm\">$vl->mno</h6>
+																		<p class=\"text-xs text-white opacity-8 mb-0\">$vl->modelo ($vl->anho_fab)</p>
+																	</div>
+																</div>
+															</td>
+															<td class=\"align-middle text-center text-sm\">$units_text</td>
+															<td class=\"align-middle text-center\">
+																<a href=\"./do/Details.php?id_veh=$vl->idno\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=tooltip data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
+																<a href=\"./do/Edit.php?id_veh=$vl->idno\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=tooltip data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
+																<a href=\"./do/Delete.php?id_veh=$vl->idno\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=tooltip data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
+															</td>
+														</tr>
+													";
+												}
+											?>
 										</tbody>
 									</table>
 								</div>
 							</div>
 			
-							<button class="btn btn-success"><i class="material-icons opacity-10">commute</i> Nuevo vehículo</button>
+							<button id=id_btn_new_veh class="btn btn-success"><i class="material-icons opacity-10">commute</i> Nuevo vehículo</button>
 						</div>
 					</div>
 				</div>
@@ -126,7 +131,11 @@
 		<script>
 			$().ready(function(){
 				$('#sidebar-choice-1').addClass("active bg-gradient-primary");
-			}
+			});
+			
+			$("#id_btn_new_veh").click(function(){
+				location.href = "./new";
+			});
 		</script>
 	</body>
 </html>
