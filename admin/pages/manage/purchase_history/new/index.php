@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 
-<!-- Constant strings of text -->
 <?php
+	include "../../../../shared/Utils.Admin.SessionCheck.php";
+	
 	include "../../../../shared/Constant_Strings[A].php";
 	include "../../../../shared/Constant_Strings[G].php";
 	
@@ -52,10 +53,10 @@
 						</div>
 						<ul class="navbar-nav justify-content-end">
 							<li class="nav-item d-flex align-items-center">
-								<a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
+								<a href="../../../../../login/admin/act/Logout.php" class="nav-link text-body font-weight-bold px-0">
 									<i class="fa fa-user me-sm-1"></i>
 
-									<span class="d-sm-inline d-none"><?php echo g_login; ?></span>
+									<span class="d-sm-inline d-none"><?php echo g_logout; ?></span>
 								</a>
 							</li>
 							
@@ -81,7 +82,7 @@
 			
 			<p>Aquí se registran adquisiciones de vehículos por parte de la empresa, si la marca y modelo del vehículo que adquirió no está listada abajo, es porque no se registró, primero regístrala <a href="../../vehicles/new/">aquí</a>.</p>
 			
-			<p>* = Campos obligatorios.</p>
+			<p><?php echo g_snp_reqf ?> = Campos obligatorios.</p>
 			
 			<form id=id_form_acqreg method=POST action="./SubmitAct.New.Acq.php">
 				<p>Color:</p>
@@ -94,49 +95,45 @@
 					<input id=id_field_lp class=form-control name=fln_veh_lp />
 				</div>
 				
-				<p>Estado del vehículo:</p>
+				<p>Estado del vehículo <?php echo g_snp_reqf ?>:</p>
 				<div class="input-group input-group-outline">
-					<textarea class="form-control" name=fln_veh_status_acq placeholder="Describa como se encontraba el vehículo al momento de su adquisición." required></textarea>*
+					<textarea class="form-control" name=fln_veh_status_acq placeholder="Describa como se encontraba el vehículo al momento de su adquisición." required></textarea>
 				</div>
 				
 				<div class="input-group input-group-outline">
-					<label class="form-label">Kilometraje</label>
-					<input class="form-control" step=.01 min=0 name=fln_acq_dist type=number required />*
+					<label class="form-label">Kilometraje <?php echo g_snp_reqf ?></label>
+					<input class="form-control" step=.01 min=0 name=fln_acq_dist type=number required />
 				</div>
 				
-				<p>¿Es usado?</p>
+				<p>¿Es usado? <?php echo g_snp_reqf ?></p>
 				<div class="input-group input-group-outline">
 					<input type=radio name=fln_acq_used id=fln_acq_used_1 value=1 />
 					<label for=fln_acq_used_1 required>Sí</label> &emsp;
 					
 					<input type=radio name=fln_acq_used id=fln_acq_used_0 value=0 />
 					<label for=fln_acq_used_0>No</label>
-					
-					*
 				</div>
 				
-				<p>Transmisión:</p>
+				<p>Transmisión <?php echo g_snp_reqf ?>:</p>
 				<div class="input-group input-group-outline">
 					<input type=radio name=fln_acq_tr id=fln_acq_tr_a_id value="Automática" required />
 					<label for=fln_acq_tr_a>Automática</label> &emsp;
 					
 					<input type=radio name=fln_acq_tr id=fln_acq_tr_m_id value="Manual" />
 					<label for=fln_acq_tr_m>Manual</label>
-					
-					*
 				</div>
 				
 				<div class="input-group input-group-outline">
-					<label class="form-label">Combustible</label>
+					<label class="form-label">Combustible <?php echo g_snp_reqf ?></label>
 					<input class="form-control" name=fln_veh_fuel required />*
 				</div>
 				
 				<div class="input-group input-group-outline">
-					<label class="form-label">Motor</label>
-					<input class="form-control" name=fln_veh_eng required />*
+					<label class="form-label">Motor <?php echo g_snp_reqf ?></label>
+					<input class="form-control" name=fln_veh_eng required />
 				</div>
 				
-				<p>Precio:</p>
+				<p>Precio <?php echo g_snp_reqf ?>:</p>
 				<div class="input-group input-group-outline">
 					<input class=form-control style="width: 75%;" name=fln_veh_cost required />
 					<select id=id_brands name=fln_veh_cost_curr class=form-control style="width: 20%;" required>
@@ -147,11 +144,9 @@
 							}
 						?>
 					</select>
-					
-					*
 				</div>
 				
-				<p>Vehículo:</p>
+				<p>Vehículo <?php echo g_snp_reqf ?>:</p>
 				<div class="input-group input-group-outline">
 					<select id=id_brands name=fln_veh_models class="form-control" required>
 						<option value="" selected>Selecciona un vehículo</option>
@@ -161,8 +156,6 @@
 							}
 						?>
 					</select>
-					
-					*
 				</div>
 				
 				<br />

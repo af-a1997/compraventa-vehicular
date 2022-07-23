@@ -206,6 +206,7 @@ CREATE TABLE IF NOT EXISTS `gestion_veh`.`usuarios` (
   `residencia_actual` VARCHAR(100) NULL,
   `tel_cel` VARCHAR(20) NULL,
   `tel_fijo` VARCHAR(20) NULL,
+  `momento_registro` DATETIME NULL,
   `cargo_en_sitio` INT NOT NULL,
   PRIMARY KEY (`nro_id_u`),
   CONSTRAINT `fk_usuarios_puesto1`

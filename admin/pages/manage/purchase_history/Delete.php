@@ -1,54 +1,21 @@
 <?php
-	include "../../../../classes/Utils_ClassLoader.class.php";
-	
-	include "../../../../shared/Constant_Strings[A].php";
-	include "../../../../shared/Constant_Strings[G].php";
-	
-	include "../../../../shared/Utils.Admin.Time.php";
-
-	$credentials = mysqli_connect("localhost","cmman_admin","#V!c2bMr69xo!8%A","gestion_veh") or die ("Hubo un fallo al conectarse a la BBDD, conexión abortada.");
-	
-	$o_rvi = new Registered_Veh_Info();
-	$o_acq = new Acquired_Veh();
-	
-	$o_rvi->ultima_act_info = $cdt;
-	if(!$_POST["fln_veh_color"]){
-		$o_rvi->color = null;
+	if(!$_GET['id_adq']){
+		header("location:./");
 	}
-	else{
-		$o_rvi->color = $_POST["fln_veh_color"];
-	}
-	if(!$_POST["fln_veh_lp"]){
-		$o_rvi->matricula = null;
-	}
-	else{
-		$o_rvi->matricula = $_POST["fln_veh_lp"];
-	}
-	$o_rvi->matricula = $_POST["fln_veh_lp"];
-	$o_rvi->estado_act = $_POST["fln_veh_status_acq"];
-	$o_rvi->kilometraje_act = $_POST["fln_acq_dist"];
-	$o_rvi->usado = $_POST["fln_acq_used"];
-	$o_rvi->vehiculo_asociado = $_POST["fln_veh_models"];
 	
-	$r_add_rvi = $o_rvi->RVI_Add();
+	include "../../../classes/Utils_ClassLoader.class.php";
 	
-	$r_rvi_id = mysqli_query($credentials, "SELECT id_reg FROM registros ORDER BY id_reg DESC LIMIT 1;")->fetch_object()->id_reg;
+	include "../../../shared/Constant_Strings[A].php";
+	include "../../../shared/Constant_Strings[G].php";
 	
-	$o_acq->tiempo = $cdt;
-	$o_acq->precio = $_POST["fln_veh_cost"];
-	$o_acq->estado_adq = $_POST["fln_veh_status_acq"];
-	$o_acq->kilometraje_adq = $_POST["fln_acq_dist"];
-	$o_acq->divisa_precio = $_POST["fln_veh_cost_curr"];
-	$o_acq->id_del_adquirido = $r_rvi_id;
-	
-	$r_add_acq = $o_acq->ACQ_Add();
+	include "../../../shared/Utils.Admin.Time.php";
 ?>
 
 <html lang=es>
 	<head>
 		<?php
-			include "../../../../shared/html_head_setup.php";
-			include "../../../../shared/Imports.jQuery_UI.php";
+			include "../../../shared/html_head_setup.php";
+			include "../../../shared/Imports.jQuery_UI.php";
 		?>
 		
 		<title>Panel de administrador - <?php echo a_n_acq; ?></title>
@@ -56,7 +23,7 @@
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
 		<!-- Sidebar -->
-		<?php include "../../../../shared/Snippets.Sidebar.php"; ?>
+		<?php include "../../../shared/Snippets.Sidebar.php"; ?>
 		
 		<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
 			<!-- Top bar conents -->
@@ -108,16 +75,26 @@
 			<br />
 			
 			<?php
-				if($r_add_rvi && $r_add_acq){
-					echo "<p>Compra registrada, <a href=\"../\">pincha aquí para ir a la lista</a>.</p>";
+				if($_GET['id_adq']){
+					$id_2del = $_GET['id_adq'];
+					
+					$o_acq = new Acquired_Veh();
+					$o_acq->id_adq = $id_2del;
+					
+					$r_act_del = $o_acq->ACQ_DelOne();
+	
+					if($r_act_del){
+						echo "<p>Registro de compra eliminada, <a href=\"./\">pincha aquí para volver a la lista</a>.</p>";
+					}
+					else{
+						echo "<p>No se pudo registrar la compra, <a href=\"./\">pincha aquí para volver a la lista</a>.</p>";
+					}
 				}
-				else{
-					echo "<p>No se pudo registrar la compra, <a href=\"./new/\">pincha aquí para volver a intentarlo</a>.</p>";
-				}
+				else echo "<p>No se especificó una ID válida de registro de compra a eliminar.";
 			?>
 		</main>
 	
-		<?php include "../../../../shared/Imports.Scripts.php"; ?>
+		<?php include "../../../shared/Imports.Scripts.php"; ?>
 		
 		<script>
 			$('#sidebar-choice-6').addClass("active bg-gradient-primary");

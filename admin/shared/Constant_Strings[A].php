@@ -20,4 +20,5 @@
 	const a_o_curr = "Gestionar divisas";
 	
 	const a_n_acq = "Registrar adquisición de vehículo";
+	const a_n_cli = "Registrar cliente";
 ?>

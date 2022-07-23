@@ -11,6 +11,7 @@
 		private $residencia_actual;
 		private $tel_cel;
 		private $tel_fijo;
+		private $momento_registro;
 		private $cargo_en_sitio;
 		
 		private $conn;
@@ -38,11 +39,50 @@
 		}
 		
 		// Register a client
-		public function CLI_Reg(){
-			$sql_query_cli_reg = "INSERT INTO $this->tbl (nombre, apellidos, nombre_usuario, clave, cedula_identidad, email, residencia_actual, tel_cel, tel_fijo, cargo_en_sitio) VALUES ('$this->nombre', '$this->apellidos', '$this->nombre_usuario', '$this->clave', '$this->cedula_identidad', '$this->email', '$this->residencia_actual', '$this->tel_cel', '$this->tel_fijo', $this->cargo_en_sitio);";
+		public function CLI_Add(){
+			$sql_query_cli_reg = "INSERT INTO $this->tbl (nombre, apellidos, nombre_usuario, clave, cedula_identidad, email, residencia_actual, tel_cel, tel_fijo, momento_registro, cargo_en_sitio) VALUES ('$this->nombre', '$this->apellidos', '$this->nombre_usuario', '$this->clave', '$this->cedula_identidad', '$this->email', '$this->residencia_actual', '$this->tel_cel', '$this->tel_fijo', '$this->momento_registro', $this->cargo_en_sitio);";
 			
 			$r = mysqli_query($this->conn, $sql_query_cli_reg);
 			return $r;
+		}
+		
+		// Verifies the username before the user can be registered in the DDBB, if a match was found, return true, otherwise false.
+		public function CLI_VerifyUsernameAvail($compare_param){
+			$sql_query_un_lookup = "SELECT nombre_usuario FROM $this->tbl;";
+			
+			$ret_un_list = mysqli_query($this->conn, $sql_query_un_lookup);
+			
+			$un_entries = array();
+			
+			while($un_entry = mysqli_fetch_array($ret_un_list, MYSQLI_NUM))
+				$un_entries[] = $un_entry;
+			
+			foreach($un_entries as $c){
+				if($c[0] == $compare_param){
+					return $ret_compare_result = true;
+				}
+				else{
+					$ret_compare_result = false;
+				}
+			}
+			
+			/*
+				Solution inspired from code found at: https://www.codegrepper.com/code-examples/php/php+foreach+mysql+result
+				
+				How does this work?
+				
+				1) Fetch inputted username from POST in the form submit action, and passes it to this function in a variable.
+				2) This function gets all the usernames.
+				3) Creates an array of all usernames.
+				4) Loops through each username, it's important to define index 0 in $c so that PHP understands you want to get the username from each row.
+				5) Compares it with the parameter that was passed in step 1.
+				6) If a match was found, stops looking up and returns true (this results in a message for the client, in which they learn the username was taken.
+				7) If no match was found, stops once the FOREACH instruction finishes and returns false (this results in a successful user register).
+				
+				TODO: more checks like this may be done in the future, for now this one was necessary since username is used for login, other fields don't feel as important to be treated in this moment.
+			*/
+			
+			return $ret_compare_result;
 		}
 		
 		// List all clients by running a query on the database, return its result and convert it into a 2D array that can be easily manipulated.
@@ -67,6 +107,7 @@
 				// $o->residencia_actual = $res["residencia_actual"];
 				$o->tel_cel = $res["tel_cel"];
 				// $o->tel_fijo = $res["tel_fijo"];
+				// $o->momento_registro = $res["momento_registro"];
 				$o->cargo_en_sitio = $res["cargo_en_sitio"];
 				
 				$arr_list_users[] = $o;
@@ -75,7 +116,7 @@
 		}
 		
 		// Shows the info for only one client, works the same way as the function above.
-		public function CLI_Show_one(){
+		public function CLI_ShowOne(){
 			$sql_query_list_1_cli ="SELECT * FROM $this->tbl WHERE nro_id_u=$this->nro_id_u";
 			$retorno = mysqli_query($this->conn, $sql_query_list_1_cli);
 			
@@ -95,6 +136,7 @@
 				$o->residencia_actual = $res["residencia_actual"];
 				$o->tel_cel = $res["tel_cel"];
 				$o->tel_fijo = $res["tel_fijo"];
+				$o->momento_registro = $res["momento_registro"];
 				$o->cargo_en_sitio = $res["cargo_en_sitio"];
 				
 				$cli_info_r = $o;
@@ -110,15 +152,15 @@
 		 *
 		 * In a system I previously made, I had to make a separate function for when the user doesn't need to have their profile picture update, since this feature isn't planned, only one function has been made.
 		 */
-		public function CLI_edit_one(){
-			$sql_query_upd_1u = "UPDATE $this->tbl SET nombre='$this->nombre', apellidos='$this->apellidos', nombre_usuario='$this->nombre_usuario', clave='$this->clave', cedula_identidad=$this->cedula_identidad, 'email=$this->email', 'residencia_actual=$this->residencia_actual', 'tel_cel='$this->tel_cel', tel_fijo='$this->tel_fijo', cargo_en_sitio=$this->cargo_en_sitio WHERE nro_id_u=$this->nro_id_u";
+		public function CLI_UpdateOne(){
+			$sql_query_upd_1u = "UPDATE $this->tbl SET nombre='$this->nombre', apellidos='$this->apellidos', nombre_usuario='$this->nombre_usuario', clave='$this->clave', cedula_identidad=$this->cedula_identidad, email='$this->email', residencia_actual='$this->residencia_actual', tel_cel='$this->tel_cel', tel_fijo='$this->tel_fijo', momento_registro='$this->momento_registro', cargo_en_sitio=$this->cargo_en_sitio WHERE nro_id_u=$this->nro_id_u";
 			$r = mysqli_query($this->conn, $sql_query_upd_1u);
 			
 			return $r;
 		}
 		
 		// Remove information of one client.
-		public function CLI_remove_one(){
+		public function CLI_DeleteOne(){
 			// TODO: handle potential database relation issues if client is referenced elsewhere.
 			
 			$sql_query_del_1u = "DELETE FROM $this->tbl WHERE nro_id_u=$this->nro_id_u";
@@ -128,7 +170,7 @@
 		}
 		
 		// Function required to find an admin, used to check the credentials the user is inputting are valid.
-		public function ADM_login(){
+		public function ADM_Login_Check(){
 			$sql_find_admin ="SELECT * FROM $this->tbl WHERE nombre_usuario='$this->nombre_usuario' AND clave='$this->clave' AND cargo_en_sitio=1;";
 			$r_adm_find = mysqli_query($this->conn, $sql_find_admin);
 			

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 
-<!-- Constant strings of text -->
 <?php
+	include "../../../shared/Utils.Admin.SessionCheck.php";
+	
 	include "../../../shared/Constant_Strings[A].php";
 	include "../../../shared/Constant_Strings[G].php";
 	
@@ -115,7 +116,7 @@
 															<td class=\"align-middle text-center text-sm\">$al->mat</td>
 															<td class=\"align-middle text-center text-sm\">$al->rgb</td>
 															<td>
-																<a href=\"./del/$al->ida\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
+																<a href=\"./Delete.php?id_adq=$al->ida\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
 															</td>
 														</tr>
 													";
@@ -127,7 +128,6 @@
 							</div>
 							
 							<button class="btn btn-success" id=new_ph_entry><i class="material-icons opacity-10">more_time</i> Nueva entrada</button>
-							<button class="btn btn-warning"><i class="material-icons opacity-10">delete_forever</i> Limpiar historial</button>
 						</div>
 					</div>
 				</div>

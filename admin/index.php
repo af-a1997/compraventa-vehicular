@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="es">
+
+<?php include "./shared/Utils.Admin.SessionCheck.php"; ?>
+
+<html lang=es>
 	<head>
 		<?php include "./shared/html_head_setup.php"; ?>
 		
@@ -36,10 +39,10 @@
 						</div>
 						<ul class="navbar-nav justify-content-end">
 							<li class="nav-item d-flex align-items-center">
-								<a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
+								<a href="../login/admin/act/Logout.php" class="nav-link text-body font-weight-bold px-0">
 									<i class="fa fa-user me-sm-1"></i>
 
-									<span class="d-sm-inline d-none"><?php echo g_login; ?></span>
+									<span class="d-sm-inline d-none"><?php echo g_logout; ?></span>
 								</a>
 							</li>
 							
@@ -61,7 +64,9 @@
 				</div>
 			</nav>
 			
-			<p>Test test.</p>
+			<p>Bienvenido/a al panel de administración.</p>
+			
+			<p>Administra varias secciones del sitio desde el menú a la izquierda, o toca el menú hamburguesa si estás visitando este sitio desde un teléfono.</p>
 		</main>
 		
 		<?php include "./shared/Imports.Scripts.php"; ?>

@@ -60,7 +60,7 @@ INSERT INTO puesto(nombre,descripcion) VALUES
 	("Cliente","Potenciales compradores/vendedores.")
 ;
 
-INSERT INTO usuarios(nombre,apellidos,nombre_usuario,clave,cedula_identidad,email,residencia_actual,tel_cel,tel_fijo,cargo_en_sitio) VALUES
-	("Administrador","Principal","admin","12345678",01234567,"hola@example.com","Placeholder","000000000","00000000",1),
-	("Un tal","Fulano","fulano","12345678",12345678,"hola2@example.com","Placeholder","000000000","00000000",2)
+INSERT INTO usuarios(nombre,apellidos,nombre_usuario,clave,cedula_identidad,email,residencia_actual,tel_cel,tel_fijo,momento_registro,cargo_en_sitio) VALUES
+	("Administrador","Principal","admin","12345678",01234567,"hola@example.com","Placeholder","000000000","00000000",NOW(),1),
+	("Un tal","Fulano","fulano","12345678",12345678,"hola2@example.com","Placeholder","000000000","00000000",NOW(),2)
 ;

@@ -10,40 +10,52 @@
 
 	$credentials = mysqli_connect("localhost","cmman_admin","#V!c2bMr69xo!8%A","gestion_veh") or die ("Hubo un fallo al conectarse a la BBDD, conexión abortada.");
 	
-	$o_rvi = new Registered_Veh_Info();
-	$o_acq = new Acquired_Veh();
+	$o_users = new Users();
 	
-	$o_rvi->ultima_act_info = $cdt;
-	if(!$_POST["fln_veh_color"]){
-		$o_rvi->color = null;
+	$o_users->nombre = $_POST["fln_user_name"];
+	$o_users->apellidos = $_POST["fln_user_surname"];
+	$o_users->nombre_usuario = $_POST["fln_user_un"];
+	$o_users->clave = $_POST["fln_user_pwd"];
+	$o_users->cedula_identidad = $_POST["fln_user_uyid"];
+	
+	// Fields that are optional, if they're empty, send them with null info, if this isn't done, an error will appear instead.
+	if(!$_POST["fln_user_emailaddr"]){
+		$o_users->email = null;
 	}
 	else{
-		$o_rvi->color = $_POST["fln_veh_color"];
+		$o_users->email = $_POST["fln_user_emailaddr"];
 	}
-	if(!$_POST["fln_veh_lp"]){
-		$o_rvi->matricula = null;
+	if(!$_POST["fln_user_houseloc"]){
+		$o_users->residencia_actual = null;
 	}
 	else{
-		$o_rvi->matricula = $_POST["fln_veh_lp"];
+		$o_users->residencia_actual = $_POST["fln_user_houseloc"];
 	}
-	$o_rvi->matricula = $_POST["fln_veh_lp"];
-	$o_rvi->estado_act = $_POST["fln_veh_status_acq"];
-	$o_rvi->kilometraje_act = $_POST["fln_acq_dist"];
-	$o_rvi->usado = $_POST["fln_acq_used"];
-	$o_rvi->vehiculo_asociado = $_POST["fln_veh_models"];
+	if(!$_POST["fln_user_phone_cel"]){
+		$o_users->tel_cel = null;
+	}
+	else{
+		$o_users->tel_cel = $_POST["fln_user_phone_cel"];
+	}
+	if(!$_POST["fln_user_phone_home"]){
+		$o_users->tel_fijo = null;
+	}
+	else{
+		$o_users->tel_fijo = $_POST["fln_user_phone_home"];
+	}
 	
-	$r_add_rvi = $o_rvi->RVI_Add();
+	// Add the rest of the parameters.
+	$o_users->momento_registro = $cdt;
+	$o_users->cargo_en_sitio = 2;
 	
-	$r_rvi_id = mysqli_query($credentials, "SELECT id_reg FROM registros ORDER BY id_reg DESC LIMIT 1;")->fetch_object()->id_reg;
-	
-	$o_acq->tiempo = $cdt;
-	$o_acq->precio = $_POST["fln_veh_cost"];
-	$o_acq->estado_adq = $_POST["fln_veh_status_acq"];
-	$o_acq->kilometraje_adq = $_POST["fln_acq_dist"];
-	$o_acq->divisa_precio = $_POST["fln_veh_cost_curr"];
-	$o_acq->id_del_adquirido = $r_rvi_id;
-	
-	$r_add_acq = $o_acq->ACQ_Add();
+	// Checks if the username was taken, if yes, returns an error, otherwise proceeds to register the user.
+	$check_username_avail = $o_users->CLI_VerifyUsernameAvail($o_users->nombre_usuario);
+	if($check_username_avail == true){
+		header("Location:./?msg=username_taken");
+	}
+	else{
+		$r_add_cli = $o_users->CLI_Add();
+	}
 ?>
 
 <html lang=es>
@@ -53,7 +65,7 @@
 			include "../../../../shared/Imports.jQuery_UI.php";
 		?>
 		
-		<title>Panel de administrador - <?php echo a_n_acq; ?></title>
+		<title>Panel de administrador - <?php echo a_n_cli; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -67,11 +79,11 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
-							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/purchase_history/"><?php echo a_purchase_history; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_n_acq; ?></li>
+							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../"><?php echo a_climan; ?></a></li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_n_cli; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_n_acq; ?></h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_n_cli; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -110,11 +122,11 @@
 			<br />
 			
 			<?php
-				if($r_add_rvi && $r_add_acq){
-					echo "<p>Compra registrada, <a href=\"../\">pincha aquí para ir a la lista</a>.</p>";
+				if($r_add_cli){
+					echo "<p>Usuario registrado, <a href=\"../\">pincha aquí para ir a la lista</a>.</p>";
 				}
 				else{
-					echo "<p>No se pudo registrar la compra, <a href=\"./new/\">pincha aquí para volver a intentarlo</a>.</p>";
+					echo "<p>No se pudo registrar al usuario, <a href=\"./\">pincha aquí para volver a intentarlo</a>.</p>";
 				}
 			?>
 		</main>
@@ -122,7 +134,7 @@
 		<?php include "../../../../shared/Imports.Scripts.php"; ?>
 		
 		<script>
-			$('#sidebar-choice-6').addClass("active bg-gradient-primary");
+			$('#sidebar-choice-2').addClass("active bg-gradient-primary");
 		</script>
 	</body>
 </html>
