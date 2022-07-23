@@ -1,12 +1,14 @@
 <?php
-	include "../../../../shared/Utils.Admin.SessionCheck.php";
+	include "../../../../../shared/Utils.Admin.SessionCheck.php";
 	
-	include "../../../../classes/Utils_ClassLoader.class.php";
+	include "../../../../../classes/Utils_ClassLoader.class.php";
 	
-	include "../../../../shared/Constant_Strings[A].php";
-	include "../../../../shared/Constant_Strings[G].php";
+	include "../../../../../shared/Constant_Strings[A].php";
+	include "../../../../../shared/Constant_Strings[G].php";
 	
 	$o_veh = new Vehicles();
+	
+	$o_veh->idno = $_POST["fln_veh_id"];
 	
 	$o_veh->modelo = $_POST["fln_veh_model"];
 	$o_veh->unidades = $_POST["fln_veh_stock"];
@@ -26,22 +28,22 @@
 	$o_veh->marca = $_POST["fln_veh_brand"];
 	$o_veh->categorizacion = $_POST["fln_veh_type"];
 	
-	$r_add_veh = $o_veh->VEH_Add();
+	$r_add_veh = $o_veh->VEH_UpdateOne();
 ?>
 
 <html lang=es>
 	<head>
 		<?php
-			include "../../../../shared/html_head_setup.php";
-			include "../../../../shared/Imports.jQuery_UI.php";
+			include "../../../../../shared/html_head_setup.php";
+			include "../../../../../shared/Imports.jQuery_UI.php";
 		?>
 		
-		<title>Panel de administrador - <?php echo a_n_veh; ?></title>
+		<title>Panel de administrador - Editar vehículo</title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
 		<!-- Sidebar -->
-		<?php include "../../../../shared/Snippets.Sidebar.php"; ?>
+		<?php include "../../../../../shared/Snippets.Sidebar.php"; ?>
 		
 		<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
 			<!-- Top bar conents -->
@@ -51,10 +53,10 @@
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
 							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../"><?php echo a_vehman; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_n_veh; ?></li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page">Editar</li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_n_veh; ?></h6>
+						<h6 class="font-weight-bolder mb-0">Editar vehículo</h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -65,7 +67,7 @@
 						</div>
 						<ul class="navbar-nav justify-content-end">
 							<li class="nav-item d-flex align-items-center">
-								<a href="../../../../../login/admin/act/Logout.php" class="nav-link text-body font-weight-bold px-0">
+								<a href="/login/admin/act/Logout.php" class="nav-link text-body font-weight-bold px-0">
 									<i class="fa fa-user me-sm-1"></i>
 
 									<span class="d-sm-inline d-none"><?php echo g_logout; ?></span>
@@ -94,15 +96,15 @@
 			
 			<?php
 				if($r_add_veh){
-					echo "<p>Vehículo registrado, <a href=\"../\">pincha aquí para volver a la lista</a>.</p>";
+					echo "<p>Vehículo actualizado, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
 				}
 				else{
-					echo "<p>No se pudo registrar el vehículo, <a href=\"./\">pincha aquí para volver a intentarlo</a>.</p>";
+					echo "<p>No se pudo actualizar el vehículo, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
 				}
 			?>
 		</main>
 	
-		<?php include "../../../../shared/Imports.Scripts.php"; ?>
+		<?php include "../../../../../shared/Imports.Scripts.php"; ?>
 		
 		<script>
 			$('#sidebar-choice-1').addClass("active bg-gradient-primary");

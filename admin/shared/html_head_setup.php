@@ -114,6 +114,29 @@
 		padding: 10px;
 		border-radius: 5px;
 	}
+	
+	ul.ul_style_elem_details{
+		list-style-type: none;
+		margin-left: 5px;
+		line-height: 1.5;
+	}
+	ul.ul_style_elem_details li{
+		border: 1px solid white;
+		border-radius: 15px;
+		padding: 15px 5px;
+		margin-bottom: 10px;
+	}
+	
+	span.hidden_pwd {
+		color: #222;
+		background-color: #222;
+		border-radius: 15px;
+		padding: 2px;
+		cursor: help;
+	}
+	span.hidden_pwd:hover {
+		color: white;
+	}
 </style>
 
 <!-- Font Awesome icons -->

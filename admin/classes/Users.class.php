@@ -118,6 +118,7 @@
 		// Shows the info for only one client, works the same way as the function above.
 		public function CLI_ShowOne(){
 			$sql_query_list_1_cli ="SELECT * FROM $this->tbl WHERE nro_id_u=$this->nro_id_u";
+			
 			$retorno = mysqli_query($this->conn, $sql_query_list_1_cli);
 			
 			$res = mysqli_fetch_assoc($retorno);
@@ -153,7 +154,7 @@
 		 * In a system I previously made, I had to make a separate function for when the user doesn't need to have their profile picture update, since this feature isn't planned, only one function has been made.
 		 */
 		public function CLI_UpdateOne(){
-			$sql_query_upd_1u = "UPDATE $this->tbl SET nombre='$this->nombre', apellidos='$this->apellidos', nombre_usuario='$this->nombre_usuario', clave='$this->clave', cedula_identidad=$this->cedula_identidad, email='$this->email', residencia_actual='$this->residencia_actual', tel_cel='$this->tel_cel', tel_fijo='$this->tel_fijo', momento_registro='$this->momento_registro', cargo_en_sitio=$this->cargo_en_sitio WHERE nro_id_u=$this->nro_id_u";
+			$sql_query_upd_1u = "UPDATE $this->tbl SET nombre='$this->nombre', apellidos='$this->apellidos', nombre_usuario='$this->nombre_usuario', clave='$this->clave', cedula_identidad=$this->cedula_identidad, email='$this->email', residencia_actual='$this->residencia_actual', tel_cel='$this->tel_cel', tel_fijo='$this->tel_fijo', cargo_en_sitio=$this->cargo_en_sitio WHERE nro_id_u=$this->nro_id_u";
 			$r = mysqli_query($this->conn, $sql_query_upd_1u);
 			
 			return $r;

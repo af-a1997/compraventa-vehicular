@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 
-<!-- Constant strings of text -->
 <?php
+	if($_GET["id_cli"] == 1){
+		header("Location:../?msg=err_main_admin_protected");
+	}
+	
+	if(!$_GET["id_cli"]){
+		header("Location:../");
+	}
+	
 	include "../../../../shared/Constant_Strings[A].php";
 	include "../../../../shared/Constant_Strings[G].php";
 ?>
@@ -10,7 +17,7 @@
 	<head>
 		<?php include "../../../../shared/html_head_setup.php"; ?>
 		
-		<title>Panel de administrador - Eliminar vehículo</title>
+		<title>Panel de administrador - Eliminar cliente</title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -24,11 +31,11 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
-							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/vehicles/"><?php echo a_vehman; ?></a></li>
+							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/clients/"><?php echo a_climan; ?></a></li>
 							<li class="breadcrumb-item text-sm text-white active" aria-current="page">Eliminar</li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0">Eliminar vehículo</h6>
+						<h6 class="font-weight-bolder mb-0">Eliminar cliente</h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end">
@@ -58,17 +65,15 @@
 				</div>
 			</nav>
 			
-			<p>¿Seguro que quieres eliminar este vehículo? Esta acción no se puede deshacer.</p>
+			<p>¿Seguro que quieres eliminar este cliente? Esta acción no se puede deshacer.</p>
 			
 			<input type=checkbox id=id_del_confirm name=n_del_confirm />
-			<label for=n_del_confirm>Confirmo que deseo eliminar este vehículo</label>
+			<label for=n_del_confirm>Consiento que esta acción es irreversible y deseo proceder</label>
 			
 			<br />
 			
 			<button class="btn btn-danger disabled" id=id_del_y name=n_del_n disabled><i class="material-icons opacity-10">delete</i> Sí</button>
 			<button class="btn btn-success" id=id_del_n name=n_del_n><i class="material-icons opacity-10">undo</i> No</button>
-			
-			<p style="font-size: 10px; color: #ffc600;">Esta característica se está probando aquí por el momento, no implementada en otras secciones hasta más adelante.</p>
 		</main>
 	
 		<?php include "../../../../shared/Imports.Scripts.php"; ?>
@@ -99,7 +104,7 @@
 		<?php echo "
 			<script>
 				$(\"#id_del_y\").click(function(){
-					location.href = \"./act/SubmitAct.Del.Veh.php?id_veh=".$_GET["id_veh"]."\";
+					location.href = \"./act/SubmitAct.Del.Cli.php?id_cli=".$_GET["id_cli"]."\";
 				});
 			</script>";
 		?>

@@ -76,6 +76,14 @@
 				</div>
 			</nav>
 			
+			<?php
+				if(isset($_GET['msg']) && ($_GET['msg']) == "err_main_admin_protected"){
+					echo "
+						<div class=\"alert alert-danger\" role=alert>Si has visto este mensaje, es porque estabas tratanto de editar al administrador principal ingresando su ID en la URL, esto no es posible.</div>
+					";
+				}
+			?>
+			
 			<!-- Table containing clients list. -->
 			<div class="container-fluid py-4">
 				<div class="row">
@@ -147,8 +155,9 @@
 																</td>
 																<td class=\"align-middle text-center text-sm\">$o->cargo_en_sitio</td>
 																<td class=\"align-middle text-center\">
-																	<a href=\"./edit/$o->nro_id_u\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
-																	<a href=\"./del/$o->nro_id_u\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
+																	<a href=\"./do/Details.php?id_cli=$o->nro_id_u\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
+																	<a href=\"./do/Edit.php?id_cli=$o->nro_id_u\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
+																	<a href=\"./do/Delete.php?id_cli=$o->nro_id_u\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
 																</td>
 															</tr>
 														";

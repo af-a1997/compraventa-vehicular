@@ -1,47 +1,29 @@
 <?php
-	include "../../../../shared/Utils.Admin.SessionCheck.php";
-	
-	include "../../../../classes/Utils_ClassLoader.class.php";
-	
-	include "../../../../shared/Constant_Strings[A].php";
-	include "../../../../shared/Constant_Strings[G].php";
-	
-	$o_veh = new Vehicles();
-	
-	$o_veh->modelo = $_POST["fln_veh_model"];
-	$o_veh->unidades = $_POST["fln_veh_stock"];
-	
-	if($_POST["fln_veh_yfab"] == ""){
-		$o_veh->anho_fab = 0;
-	}
-	else{
-		$o_veh->anho_fab = $_POST["fln_veh_yfab"];
+	if(!$_GET['id_veh']){
+		header("location:../../");
 	}
 	
-	$o_veh->puertas = $_POST["fln_veh_doors"];
-	$o_veh->transmision = $_POST["fln_veh_tr"];
-	$o_veh->combustible_tipo = $_POST["fln_veh_ft"];
-	$o_veh->combustible_capac = $_POST["fln_veh_fc"];
-	$o_veh->motor = $_POST["fln_veh_eng"];
-	$o_veh->marca = $_POST["fln_veh_brand"];
-	$o_veh->categorizacion = $_POST["fln_veh_type"];
+	include "../../../../../classes/Utils_ClassLoader.class.php";
 	
-	$r_add_veh = $o_veh->VEH_Add();
+	include "../../../../../shared/Constant_Strings[A].php";
+	include "../../../../../shared/Constant_Strings[G].php";
+	
+	include "../../../../../shared/Utils.Admin.Time.php";
 ?>
 
 <html lang=es>
 	<head>
 		<?php
-			include "../../../../shared/html_head_setup.php";
-			include "../../../../shared/Imports.jQuery_UI.php";
+			include "../../../../../shared/html_head_setup.php";
+			include "../../../../../shared/Imports.jQuery_UI.php";
 		?>
 		
-		<title>Panel de administrador - <?php echo a_n_veh; ?></title>
+		<title>Panel de administrador - <?php echo a_n_acq; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
 		<!-- Sidebar -->
-		<?php include "../../../../shared/Snippets.Sidebar.php"; ?>
+		<?php include "../../../../../shared/Snippets.Sidebar.php"; ?>
 		
 		<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
 			<!-- Top bar conents -->
@@ -50,11 +32,11 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
-							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../"><?php echo a_vehman; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_n_veh; ?></li>
+							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/purchase_history/"><?php echo a_purchase_history; ?></a></li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_n_acq; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_n_veh; ?></h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_n_acq; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -65,10 +47,10 @@
 						</div>
 						<ul class="navbar-nav justify-content-end">
 							<li class="nav-item d-flex align-items-center">
-								<a href="../../../../../login/admin/act/Logout.php" class="nav-link text-body font-weight-bold px-0">
+								<a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
 									<i class="fa fa-user me-sm-1"></i>
 
-									<span class="d-sm-inline d-none"><?php echo g_logout; ?></span>
+									<span class="d-sm-inline d-none"><?php echo g_login; ?></span>
 								</a>
 							</li>
 							
@@ -93,16 +75,26 @@
 			<br />
 			
 			<?php
-				if($r_add_veh){
-					echo "<p>Vehículo registrado, <a href=\"../\">pincha aquí para volver a la lista</a>.</p>";
+				if($_GET['id_veh']){
+					$id_2del = $_GET['id_veh'];
+					
+					$o_veh = new Vehicles();
+					$o_veh->idno = $id_2del;
+					
+					$r_veh_del = $o_veh->VEH_DeleteOne();
+	
+					if($r_veh_del){
+						echo "<p>Vehículo eliminado, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
+					}
+					else{
+						echo "<p>No se pudo eliminar el vehículo, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
+					}
 				}
-				else{
-					echo "<p>No se pudo registrar el vehículo, <a href=\"./\">pincha aquí para volver a intentarlo</a>.</p>";
-				}
+				else echo "<p>No se especificó una ID válida de vehículo a eliminar.";
 			?>
 		</main>
 	
-		<?php include "../../../../shared/Imports.Scripts.php"; ?>
+		<?php include "../../../../../shared/Imports.Scripts.php"; ?>
 		
 		<script>
 			$('#sidebar-choice-1').addClass("active bg-gradient-primary");

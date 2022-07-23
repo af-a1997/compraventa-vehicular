@@ -31,7 +31,7 @@
 				<div class="container-fluid py-1 px-3">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;"><?php echo a_dsb; ?></a></li>
+							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
 							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_vehman; ?></li>
 						</ol>
 						
@@ -89,10 +89,15 @@
 											<?php
 												foreach($o_veh_list as $vl){
 													$units_text = "";
+													$veh_year = "";
 													
 													if($vl->unidades == 0) $units_text = "<span class=\"badge badge-sm bg-gradient-danger\">Sin stock</span>";
 													else if($vl->unidades == 1) $units_text = "<span class=\"badge badge-sm bg-gradient-warning\">1 unidad</span>";
 													else if($vl->unidades > 1) $units_text = "<span class=\"badge badge-sm bg-gradient-success\">".$vl->unidades." unidades</span>";
+													
+													if($vl->anho_fab == 0) $veh_year = "Año desc.";
+													else $veh_year = $vl->anho_fab;
+													
 													
 													echo "
 														<tr>
@@ -100,7 +105,7 @@
 																<div class=\"d-flex px-2 py-1\">
 																	<div class=\"d-flex flex-column justify-content-center\">
 																		<h6 class=\"mb-0 text-sm\">$vl->mno</h6>
-																		<p class=\"text-xs text-white opacity-8 mb-0\">$vl->modelo ($vl->anho_fab)</p>
+																		<p class=\"text-xs text-white opacity-8 mb-0\">$vl->modelo ($veh_year)</p>
 																	</div>
 																</div>
 															</td>

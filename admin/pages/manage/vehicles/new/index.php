@@ -158,18 +158,13 @@
 		<script src="../../../../res/extras/jquery/validation/jquery.validate.min.js"></script>
 		
 		<script>
-			$('#sidebar-choice-2').addClass("active bg-gradient-primary");
+			$('#sidebar-choice-1').addClass("active bg-gradient-primary");
 			
 			$('#id_veh_yfab_unknown').click(function(){
 				$('#id_veh_yfab').val(null);
 			});
 			
 			$().ready(function(){
-				$('#id_veh_yfab_unknown').prop("checked", false);
-				
-				$('#id_veh_yfab').prop("disabled", false);
-				$('#id_veh_yfab').val(new Date().getFullYear());
-				
 				// Masks
 				$("#id_veh_yfab").mask("0000");
 				$("#validate_format_phone_cel").mask("000 000 000",{
@@ -196,7 +191,7 @@
 					messages:{
 						fln_veh_type: "Especifique el tipo de vehículo.",
 						fln_veh_brand: "Especifique la marca del vehículo.",
-						fln_veh_model: "Especifique el model del vehículo."
+						fln_veh_model: "Especifique el modelo del vehículo."
 					}
 				});
 			});

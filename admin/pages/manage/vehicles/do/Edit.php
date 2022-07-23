@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 
-<!-- Constant strings of text -->
 <?php
+	include "../../../../shared/Utils.Admin.SessionCheck.php";
+	
+	include "../../../../classes/Utils_ClassLoader.class.php";
+	
 	include "../../../../shared/Constant_Strings[A].php";
 	include "../../../../shared/Constant_Strings[G].php";
+	
+	$o_veh = new Vehicles();
+	$o_veh->idno = $_GET["id_veh"];
+	
+	$o_vcat = new Veh_Cat();
+	$o_brands = new Brands();
+	
+	$o_veh_data_in = $o_veh->VEH_ShowOne();
+	$o_vcat_list = $o_vcat->VCAT_ShowAll();
+	$o_brands_list = $o_brands->BRAND_ShowAll();
 ?>
 
-<html lang="es">
+<html lang=es>
 	<head>
 		<?php
 			include "../../../../shared/html_head_setup.php";
@@ -34,18 +47,13 @@
 						<h6 class="font-weight-bolder mb-0">Editar vehículo</h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-						<div class="ms-md-auto pe-md-3 d-flex align-items-center">
-							<div class="input-group input-group-outline">
-								<label class="form-label">Buscar en el panel</label>
-								<input type="text" class="form-control">
-							</div>
 						</div>
 						<ul class="navbar-nav justify-content-end">
 							<li class="nav-item d-flex align-items-center">
-								<a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
+								<a href="/login/admin/act/Logout.php" class="nav-link text-body font-weight-bold px-0">
 									<i class="fa fa-user me-sm-1"></i>
 
-									<span class="d-sm-inline d-none"><?php echo g_login; ?></span>
+									<span class="d-sm-inline d-none"><?php echo g_logout; ?></span>
 								</a>
 							</li>
 							
@@ -62,66 +70,6 @@
 							</li>
 							
 							<!-- End of hamburger menu container. -->
-							
-							<li class="nav-item px-3 d-flex align-items-center">
-								<a href="javascript:;" class="nav-link text-body p-0">
-									<i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-								</a>
-							</li>
-							<li class="nav-item dropdown pe-2 d-flex align-items-center">
-								<a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-									<i class="fa fa-bell cursor-pointer"></i>
-								</a>
-
-								<ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-									<li class="mb-2">
-										<a class="dropdown-item border-radius-md" href="javascript:;">
-											<div class="d-flex py-1">
-												<div class="my-auto">
-													<img src="./assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
-												</div>
-												<div class="d-flex flex-column justify-content-center">
-													<h6 class="text-sm font-weight-normal mb-1">
-														<span class="font-weight-bold">New message</span> from Laur
-													</h6>
-													<p class="text-xs text-white opacity-8 mb-0">
-														<i class="fa fa-clock me-1"></i> 13 minutes ago
-													</p>
-												</div>
-											</div>
-										</a>
-									</li>
-									<li class="mb-2">
-										<a class="dropdown-item border-radius-md" href="javascript:;">
-											<div class="d-flex py-1">
-												<div class="my-auto">
-													<img src="./assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3 " />
-												</div>
-												<div class="d-flex flex-column justify-content-center">
-													<h6 class="text-sm font-weight-normal mb-1"> <span class="font-weight-bold">New album</span> by Travis Scott</h6>
-													<p class="text-xs text-white opacity-8 mb-0">
-														<i class="fa fa-clock me-1"></i> 1 day
-													</p>
-												</div>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a class="dropdown-item border-radius-md" href="javascript:;">
-											<div class="d-flex py-1">
-												<div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-													<svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>credit-card</title> <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero"> <g transform="translate(1716.000000, 291.000000)"> <g transform="translate(453.000000, 454.000000)"> <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path> <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path> </g> </g> </g> </g> </svg>
-												</div>
-												<div class="d-flex flex-column justify-content-center">
-													<h6 class="text-sm font-weight-normal mb-1"> Payment successfully completed</h6>
-													<p class="text-xs text-white opacity-8 mb-0">
-														<i class="fa fa-clock me-1"></i> 2 days</p>
-												</div>
-											</div>
-										</a>
-									</li>
-								</ul>
-							</li>
 						</ul>
 					</div>
 				</div>
@@ -129,57 +77,103 @@
 			
 			<br />
 			
-			<form method=GET action="./edit_act.php">
-				<p>Tipo:</p>
+			<form method=POST action="./act/SubmitAct.Edit.Veh.php">
+				<input type=hidden name=fln_veh_id value=<?php echo "\"$o_veh_data_in->idno\""; ?> />
+			
+				<p>Tipo<?php echo g_snp_reqf ?>:</p>
 				<div class="input-group input-group-outline">
-					<select id=id_brands name=fln_veh_type class="form-control">
-						<option value=1 selected>Automóvil</option>
+					<select class=form-control name=fln_veh_type>
+						<?php
+							foreach($o_vcat_list as $vcatl){
+								if($vcatl->id_tipo == $o_veh_data_in->categorizacion)
+									echo "<option value='$vcatl->id_tipo' selected>$vcatl->nombre</option>";
+								
+								else
+									echo "<option value='$vcatl->id_tipo'>$vcatl->nombre</option>";
+							}
+						?>
 					</select>
 				</div>
-				
-				<p>Marca:</p>
+				<p>Marca<?php echo g_snp_reqf ?>:</p>
 				<div class="input-group input-group-outline">
-					<select id=id_brands name=fln_veh_brands class="form-control">
-						<option value="BMW" selected>BMW</option>
+					<select class=form-control name=fln_veh_brand>
+						<?php
+							foreach($o_brands_list as $bl){
+								if($bl->idno == $o_veh_data_in->marca)
+									echo "<option value='$bl->idno' selected>$bl->nombre</option>";
+								
+								else
+									echo "<option value='$bl->idno'>$bl->nombre</option>";
+							}
+						?>
 					</select>
 				</div>
-				
 				<div class="input-group input-group-outline">
-					<label class="form-label">Modelo</label>
-					<input class="form-control" name=fln_veh_model />
+					<label class=form-label>Modelo <?php echo g_snp_reqf ?></label>
+					<input class=form-control name=fln_veh_model value=<?php echo "\"$o_veh_data_in->modelo\""; ?> />
+				</div>
+				<div class="input-group input-group-outline">
+					<label class=form-label>Stock</label>
+					<input class=form-control name=fln_veh_stock type=number min=1 value=<?php echo "\"$o_veh_data_in->unidades\""; ?> />
+				</div>
+				<div class="input-group input-group-outline">
+					<label class=form-label>Año de fabricación</label>
+					<input class=form-control id=id_veh_yfab name=fln_veh_yfab value=<?php echo "\"$o_veh_data_in->anho_fab\""; ?> />
+					
+					<button class="btn btn-warning" id=id_veh_yfab_unknown name=fln_veh_yfab_unknown>Año desconocido</button>
+				</div>
+				<div class="input-group input-group-outline">
+					<label class=form-label>Puertas</label>
+					<input class=form-control name=fln_veh_doors type=number min=1 value=<?php echo "\"$o_veh_data_in->puertas\""; ?> />
+				</div>
+				<p>Transmisión:</p>
+				<div class="input-group input-group-outline">
+					<?php
+						if($o_veh_data_in->transmision == 0){
+							echo "
+								<input type=radio name=fln_veh_tr value=1 />
+								<label for=fln_acq_tr_a>Automática</label> &emsp;
+								
+								<input type=radio name=fln_veh_tr value=0 checked />
+								<label for=fln_acq_tr_m>Manual</label>
+							";
+						}
+						else if($o_veh_data_in->transmision == 1){
+							echo "
+								<input type=radio name=fln_veh_tr value=1 checked />
+								<label for=fln_acq_tr_a>Automática</label> &emsp;
+								
+								<input type=radio name=fln_veh_tr value=0 />
+								<label for=fln_acq_tr_m>Manual</label>
+							";
+						}
+						else{
+							echo "
+								<input type=radio name=fln_veh_tr value=1 />
+								<label for=fln_acq_tr_a>Automática</label> &emsp;
+								
+								<input type=radio name=fln_veh_tr value=0 />
+								<label for=fln_acq_tr_m>Manual</label>
+							";
+						}
+					?>
+				</div>
+				<div class="input-group input-group-outline">
+					<label class=form-label>Tipo de combustible</label>
+					<input class=form-control name=fln_veh_ft value=<?php echo "\"$o_veh_data_in->combustible_tipo\""; ?> />
+				</div>
+				<div class="input-group input-group-outline">
+					<label class=form-label>Capacidad para combustible</label>
+					<input class=form-control name=fln_veh_fc step=.01 type=number min=0 value=<?php echo "\"$o_veh_data_in->combustible_capac\""; ?> />
+				</div>
+				<div class="input-group input-group-outline">
+					<label class=form-label>Motor</label>
+					<input class=form-control name=fln_veh_eng value=<?php echo "\"$o_veh_data_in->motor\""; ?> />
 				</div>
 				
-				<div class="input-group input-group-outline">
-					<label class="form-label">Stock</label>
-					<input class="form-control" type=number name=fln_veh_stock />
-				</div>
+				<br />
 				
-				<p>Año de fabricación:</p>
-				<div class="input-group input-group-outline">
-					<input class="form-control" id=id_veh_faby name=fln_veh_faby class=inr_datepicker />
-				</div>
-				
-				<div class="input-group input-group-outline">
-					<label class="form-label">Puertas</label>
-					<input class="form-control" type=number name=fln_veh_doors min=1 max=10 />
-				</div>
-				
-				<div class="input-group input-group-outline">
-					<label class="form-label">Transmisión</label>
-					<input class="form-control" name=fln_veh_model />
-				</div>
-				
-				<div class="input-group input-group-outline">
-					<label class="form-label">Combustible</label>
-					<input class="form-control" name=fln_veh_model />
-				</div>
-				
-				<div class="input-group input-group-outline">
-					<label class="form-label">Motor</label>
-					<input class="form-control" name=fln_veh_model />
-				</div>
-				
-				<button class="btn btn-success" type=submit>Guardar cambios</button>
+				<button class="btn btn-success" type=submit><i class="material-icons opacity-10">autorenew</i> Actualizar vehículo</button>
 			</form>
 		</main>
 	

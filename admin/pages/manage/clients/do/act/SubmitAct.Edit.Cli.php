@@ -1,47 +1,50 @@
 <?php
-	include "../../../../shared/Utils.Admin.SessionCheck.php";
-	
-	include "../../../../classes/Utils_ClassLoader.class.php";
-	
-	include "../../../../shared/Constant_Strings[A].php";
-	include "../../../../shared/Constant_Strings[G].php";
-	
-	$o_veh = new Vehicles();
-	
-	$o_veh->modelo = $_POST["fln_veh_model"];
-	$o_veh->unidades = $_POST["fln_veh_stock"];
-	
-	if($_POST["fln_veh_yfab"] == ""){
-		$o_veh->anho_fab = 0;
-	}
-	else{
-		$o_veh->anho_fab = $_POST["fln_veh_yfab"];
+	// The main admin cannot be edited from the website.
+	if(!$_POST["fln_user_id"]){
+		header("Location:../../");
 	}
 	
-	$o_veh->puertas = $_POST["fln_veh_doors"];
-	$o_veh->transmision = $_POST["fln_veh_tr"];
-	$o_veh->combustible_tipo = $_POST["fln_veh_ft"];
-	$o_veh->combustible_capac = $_POST["fln_veh_fc"];
-	$o_veh->motor = $_POST["fln_veh_eng"];
-	$o_veh->marca = $_POST["fln_veh_brand"];
-	$o_veh->categorizacion = $_POST["fln_veh_type"];
+	if($_POST["fln_user_id"] == 1){
+		header("Location:../../?msg=err_main_admin_protected");
+	}
 	
-	$r_add_veh = $o_veh->VEH_Add();
+	include "../../../../../shared/Utils.Admin.SessionCheck.php";
+	
+	include "../../../../../classes/Utils_ClassLoader.class.php";
+	
+	include "../../../../../shared/Constant_Strings[A].php";
+	include "../../../../../shared/Constant_Strings[G].php";
+	
+	$o_veh = new Users();
+	
+	$o_veh->nro_id_u = $_POST["fln_user_id"];
+	$o_veh->nombre = $_POST["fln_user_name"];
+	$o_veh->apellidos = $_POST["fln_user_surname"];
+	$o_veh->nombre_usuario = $_POST["fln_user_un"];
+	$o_veh->clave = $_POST["fln_user_pwd"];
+	$o_veh->cedula_identidad = $_POST["fln_user_uyid"];
+	$o_veh->email = $_POST["fln_user_emailaddr"];
+	$o_veh->residencia_actual = $_POST["fln_user_houseloc"];
+	$o_veh->tel_cel = $_POST["fln_user_phone_cel"];
+	$o_veh->tel_fijo = $_POST["fln_user_phone_home"];
+	$o_veh->cargo_en_sitio = $_POST["fln_user_site_role"];
+	
+	$r_add_veh = $o_veh->CLI_UpdateOne();
 ?>
 
 <html lang=es>
 	<head>
 		<?php
-			include "../../../../shared/html_head_setup.php";
-			include "../../../../shared/Imports.jQuery_UI.php";
+			include "../../../../../shared/html_head_setup.php";
+			include "../../../../../shared/Imports.jQuery_UI.php";
 		?>
 		
-		<title>Panel de administrador - <?php echo a_n_veh; ?></title>
+		<title>Panel de administrador - Editar cliente</title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
 		<!-- Sidebar -->
-		<?php include "../../../../shared/Snippets.Sidebar.php"; ?>
+		<?php include "../../../../../shared/Snippets.Sidebar.php"; ?>
 		
 		<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
 			<!-- Top bar conents -->
@@ -50,11 +53,11 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
-							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../"><?php echo a_vehman; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_n_veh; ?></li>
+							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../"><?php echo a_climan; ?></a></li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page">Editar</li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_n_veh; ?></h6>
+						<h6 class="font-weight-bolder mb-0">Editar cliente</h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -65,7 +68,7 @@
 						</div>
 						<ul class="navbar-nav justify-content-end">
 							<li class="nav-item d-flex align-items-center">
-								<a href="../../../../../login/admin/act/Logout.php" class="nav-link text-body font-weight-bold px-0">
+								<a href="/login/admin/act/Logout.php" class="nav-link text-body font-weight-bold px-0">
 									<i class="fa fa-user me-sm-1"></i>
 
 									<span class="d-sm-inline d-none"><?php echo g_logout; ?></span>
@@ -94,18 +97,18 @@
 			
 			<?php
 				if($r_add_veh){
-					echo "<p>Vehículo registrado, <a href=\"../\">pincha aquí para volver a la lista</a>.</p>";
+					echo "<p>Cliente actualizado, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
 				}
 				else{
-					echo "<p>No se pudo registrar el vehículo, <a href=\"./\">pincha aquí para volver a intentarlo</a>.</p>";
+					echo "<p>No se pudo actualizar el cliente, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
 				}
 			?>
 		</main>
 	
-		<?php include "../../../../shared/Imports.Scripts.php"; ?>
+		<?php include "../../../../../shared/Imports.Scripts.php"; ?>
 		
 		<script>
-			$('#sidebar-choice-1').addClass("active bg-gradient-primary");
+			$('#sidebar-choice-2').addClass("active bg-gradient-primary");
 		</script>
 	</body>
 </html>
