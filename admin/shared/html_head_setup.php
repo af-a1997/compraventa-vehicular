@@ -145,4 +145,4 @@
 <link rel=stylesheet href="/admin/res/extras/font-awesome/css/brands.min.css" />
 
 <!-- Material Dashboard's stylesheet -->
-<link rel=stylesheet href="/admin/assets/css/material-dashboard.css?v=3.0.4" id=pagestyle />
+<link rel=stylesheet href="/admin/res/css/material-dashboard.css?v=3.0.4" id=pagestyle />

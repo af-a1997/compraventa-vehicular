@@ -43,7 +43,7 @@
 				
 				<br />
 				
-				<button class="btn btn-success" type=submit><?php echo g_login; ?></button>
+				<button class="btn btn-success" type=submit><?php echo g_login; ?></button> o <a href="../../">volver al inicio</a>
 			</form>
 		</main>
 	

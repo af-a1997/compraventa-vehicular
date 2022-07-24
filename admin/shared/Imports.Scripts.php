@@ -1,10 +1,10 @@
-<script src="/admin/assets/js/core/popper.min.js" ></script>
-<script src="/admin/assets/js/core/bootstrap.min.js" ></script>
-<script src="/admin/assets/js/plugins/perfect-scrollbar.min.js" ></script>
-<script src="/admin/assets/js/plugins/smooth-scrollbar.min.js" ></script>
+<script src="/admin/res/js/material-dashboard/core/bootstrap.min.js" ></script>
+<script src="/admin/res/js/material-dashboard/core/popper.min.js" ></script>
+<script src="/admin/res/js/material-dashboard/plugins/perfect-scrollbar.min.js" ></script>
+<script src="/admin/res/js/material-dashboard/plugins/smooth-scrollbar.min.js" ></script>
 <script src="/admin/res/extras/github-buttons/buttons.min.js"></script>
 <script src="/admin/res/extras/jquery/jquery-3.6.0.min.js"></script>
-<script src="/admin/assets/js/material-dashboard.min.js?v=3.0.4"></script>
+<script src="/admin/res/js/material-dashboard/material-dashboard.js"></script>
 
 <script>
 	var win = navigator.platform.indexOf('Win') > -1;
