@@ -64,3 +64,8 @@ INSERT INTO usuarios(nombre,apellidos,nombre_usuario,clave,cedula_identidad,emai
 	("Administrador","Principal","admin","12345678",01234567,"hola@example.com","Placeholder","000000000","00000000",NOW(),1),
 	("Un tal","Fulano","fulano","12345678",12345678,"hola2@example.com","Placeholder","000000000","00000000",NOW(),2)
 ;
+
+INSERT INTO seleccion_alquiler(id_reg_veh, id_divisa, valor_diario_alq, disponibilidad) VALUES (1,2,1200,1);
+INSERT INTO historial_alquiler(momento_alquilado, momento_devolucion, estado_alquiler, id_veh_alquilado, no_cli) VALUES
+	("2022-07-01 00:00:00",NOW(),2,1,1)
+;

@@ -115,6 +115,26 @@
 			return $arr_list_users;
 		}
 		
+		// Same as above but used for listing users in dropdown menus, which are used in editing stuff where the referred user may be edited.
+		public function CLI_ShowAllForDD(){
+			$sql_query_list_all_dd_cli = "SELECT nro_id_u, nombre, apellidos, nombre_usuario FROM $this->tbl;";
+			$rt_db = mysqli_query($this->conn, $sql_query_list_all_dd_cli);
+			
+			$arr_list_users = null;
+			
+			while($res = mysqli_fetch_assoc($rt_db)){
+				$o = new Users();
+				
+				$o->nro_id_u = $res["nro_id_u"];
+				$o->nombre = $res["nombre"];
+				$o->apellidos = $res["apellidos"];
+				$o->nombre_usuario = $res["nombre_usuario"];
+				
+				$arr_list_users[] = $o;
+			}
+			return $arr_list_users;
+		}
+		
 		// Shows the info for only one client, works the same way as the function above.
 		public function CLI_ShowOne(){
 			$sql_query_list_1_cli ="SELECT * FROM $this->tbl WHERE nro_id_u=$this->nro_id_u";

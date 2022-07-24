@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-<!-- Constant strings of text -->
 <?php
 	include "../../../shared/Utils.Admin.SessionCheck.php";
 	

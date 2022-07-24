@@ -171,11 +171,18 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `gestion_veh`.`seleccion_alquiler` (
   `id_art_alq` INT NOT NULL AUTO_INCREMENT,
   `id_reg_veh` INT NOT NULL,
+  `id_divisa` INT NOT NULL,
   `valor_diario_alq` DOUBLE NOT NULL,
+  `disponibilidad` TINYINT NOT NULL,
   PRIMARY KEY (`id_art_alq`),
   CONSTRAINT `fk_seleccion_alquiler_registros1`
     FOREIGN KEY (`id_reg_veh`)
     REFERENCES `gestion_veh`.`registros` (`id_reg`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_seleccion_alquiler_divisas1`
+    FOREIGN KEY (`id_divisa`)
+    REFERENCES `gestion_veh`.`divisas` (`id_moneda`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -222,9 +229,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gestion_veh`.`historial_alquiler` (
   `id_hst_alq` INT NOT NULL AUTO_INCREMENT,
-  `disponibilidad` TINYINT NOT NULL,
   `momento_alquilado` DATETIME NULL,
   `momento_devolucion` DATETIME NULL,
+  `estado_alquiler` TINYINT NOT NULL,
   `id_veh_alquilado` INT NOT NULL,
   `no_cli` INT NOT NULL,
   PRIMARY KEY (`id_hst_alq`, `no_cli`, `id_veh_alquilado`),
