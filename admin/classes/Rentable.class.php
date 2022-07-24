@@ -84,7 +84,7 @@
 		}
 		
 		public function RNT_ShowAllForList(){
-			$sql_query_list_all_rnt = "SELECT * FROM $this->tbl;";
+			$sql_query_list_all_rnt = "SELECT $this->tbl.*, vehiculos.modelo AS vmo, vehiculos.anho_fab AS vfb, marcas.nombre AS bno, divisas.abr AS cab FROM $this->tbl INNER JOIN registros ON $this->tbl.id_reg_veh = registros.id_reg INNER JOIN vehiculos ON registros.vehiculo_asociado = vehiculos.idno INNER JOIN marcas ON vehiculos.marca = marcas.idno INNER JOIN divisas ON $this->tbl.id_divisa = divisas.id_moneda;";
 			
 			$rt_db = mysqli_query($this->conn, $sql_query_list_all_rnt);
 			
@@ -93,11 +93,18 @@
 			while($res = mysqli_fetch_assoc($rt_db)){
 				$o = new Rentable();
 				
-				$o->id_hst_alq = $res["id_hst_alq"];
+				// Base
+				$o->id_art_alq = $res["id_art_alq"];
 				$o->id_reg_veh = $res["id_reg_veh"];
 				$o->id_divisa = $res["id_divisa"];
 				$o->valor_diario_alq = $res["valor_diario_alq"];
 				$o->disponibilidad = $res["disponibilidad"];
+				
+				// Joins
+				$o->vmo = $res["vmo"];
+				$o->vfb = $res["vfb"];
+				$o->bno = $res["bno"];
+				$o->cab = $res["cab"];
 				
 				$arr_list_rnt_for_list[] = $o;
 			}

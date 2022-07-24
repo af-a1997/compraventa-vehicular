@@ -7,10 +7,6 @@
 	</div>
 
 	<hr class="horizontal light mt-0 mb-2" />
-	
-	<!--
-		TODO: once sessions and ranks are implemented, make it so that a user that enters to /admin/ is kicked out, if there's no active log-in, allows the user to stay in the page but all other sections other than the first will be hidden and a prompt to log-in as an admin will appear.
-	-->
 
 	<div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
 		<ul class="navbar-nav">
@@ -55,11 +51,11 @@
 		</ul>
 		<ul class="navbar-nav">
 			<li class="nav-item">
-				<a class="nav-link text-white" href="/admin/pages/manage/vehicles/selling/" id=sidebar-choice-4>
+				<a class="nav-link text-white" href="/admin/pages/manage/vehicles/articles/" id=sidebar-choice-4>
 					<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 						<i class="material-icons opacity-10">add_shopping_cart</i>
 					</div>
-					<span class="nav-link-text ms-1"><?php echo a_sellman; ?></span>
+					<span class="nav-link-text ms-1"><?php echo a_artman; ?></span>
 				</a>
 			</li>
 		</ul>

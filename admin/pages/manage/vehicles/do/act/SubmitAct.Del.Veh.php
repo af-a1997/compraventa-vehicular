@@ -45,7 +45,7 @@
 								<input type="text" class="form-control">
 							</div>
 						</div>
-						<ul class="navbar-nav justify-content-end">
+						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
 							<li class="nav-item d-flex align-items-center">
 								<a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
 									<i class="fa fa-user me-sm-1"></i>

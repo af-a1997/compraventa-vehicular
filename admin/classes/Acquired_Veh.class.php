@@ -109,7 +109,7 @@ class Acquired_Veh{
 	}
 	
 	public function ACQ_EditOne(){
-		$sql_query_upd_1_acq = "UPDATE $this->tbl SET tiempo='$this->tiempo', precio=$this->precio, 'estado_adq=$this->estado_adq', kilometraje_adq=$this->kilometraje_adq, divisa_precio=$this->divisa_precio, id_del_adquirido=$this->id_del_adquirido WHERE id_adq=$this->id_adq;";
+		$sql_query_upd_1_acq = "UPDATE $this->tbl SET tiempo='$this->tiempo', precio=$this->precio, estado_adq='$this->estado_adq', kilometraje_adq=$this->kilometraje_adq, divisa_precio=$this->divisa_precio, id_del_adquirido=$this->id_del_adquirido WHERE id_adq=$this->id_adq;";
 		$r = mysqli_query($this->conn, $sql_query_upd_1_acq);
 		
 		return $r;

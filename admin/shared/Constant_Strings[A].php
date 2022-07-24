@@ -6,12 +6,12 @@
 	const a_mp = "Gestión de ";
 	const a_reg = "Registrar ";
 	
+	const a_artman = a_mp."artículos";
 	const a_climan = a_mp."clientela";
 	const a_credits = "Agradecimientos";
 	const a_hvman = a_mp."alquileres";
 	const a_oman = "Gestionar otros";
 	const a_purchase_history = "Historial de adquisiciones";
-	const a_sellman = a_mp."artículos";
 	const a_tcman = a_mp."remises";
 	const a_taxicab_cs = "Remises contratados";
 	const a_vehman = a_mp."vehículos";
@@ -23,4 +23,7 @@
 	const a_n_acq = a_reg."adquisición de vehículo";
 	const a_n_cli = a_reg."cliente";
 	const a_n_veh = a_reg."vehículo";
+
+	const a_ss_sellable = "Artículos disponibles para vender";
+	const a_ss_rentable = "Vehículos disponibles para alquilar";
 ?>
