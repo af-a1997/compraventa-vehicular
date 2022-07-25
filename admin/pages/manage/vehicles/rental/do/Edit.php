@@ -101,9 +101,7 @@
 						<?php
 							include "../../../../../../shared/utils/Utils.Veh_Statuses.php";
 							
-							$x = 0;
-							
-							while($x < 4){
+							while($x < $em){
 								if($o_rhi_data_in->estado_alquiler == $x)
 									echo "<option value=$x selected>$e[$x]</option>";
 								

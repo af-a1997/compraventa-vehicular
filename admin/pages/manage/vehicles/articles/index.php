@@ -84,17 +84,17 @@
 										</thead>
 										<tbody>
 											<?php
+												include "../../../../../shared/utils/Utils.Veh_Statuses.php";
+
 												$vfb_str = "";
-												$avail = "";
 
 												if($o_rnt_list != null){
 													foreach($o_rnt_list as $orl){
+														
 														if($orl->vfb == 0) $vfb_str = "Año desc.";
 														else $vfb_str = $orl->vfb;
 														
-														if($orl->disponibilidad == 0) $avail = "<span class=\"badge badge-sm bg-gradient-danger\">Sin stock</span>";
-														else if($orl->disponibilidad == 1) $avail = "<span class=\"badge badge-sm bg-gradient-warning\">1 unidad</span>";
-														else if($orl->disponibilidad > 1) $avail = "<span class=\"badge badge-sm bg-gradient-success\">".$orl->disponibilidad." unidades</span>";
+														$avail = UVS_BuildBadge($orl->disponibilidad);
 	
 														echo "
 															<tr>
@@ -109,9 +109,9 @@
 																<td class=\"align-middle text-center text-sm\">$avail</td>
 																<td class=\"align-middle text-center text-sm\">$orl->valor_diario_alq $orl->cab</td>
 																<td class=\"align-middle text-center\">
-																	<a href=\"./do/rentable/Details.php?id_rnt=$orl->id_art_alq\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
-																	<a href=\"./do/rentable/Edit.php?id_rnt=$orl->id_art_alq\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
-																	<a href=\"./do/rentable/Delete.php?id_rnt=$orl->id_art_alq\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
+																	<a href=\"./do/rentable/act/Details.php?id_rnt=$orl->id_art_alq\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
+																	<a href=\"./do/rentable/act/Edit.php?id_rnt=$orl->id_art_alq\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
+																	<a href=\"./do/rentable/act/Delete.php?id_rnt=$orl->id_art_alq\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
 																</td>
 															</tr>
 														";
@@ -173,9 +173,9 @@
 																<td class=\"align-middle text-center text-sm\">$oal->valor_venta $oal->cab</td>
 																<td></td>
 																<td class=\"align-middle text-center\">
-																	<a href=\"./do/rentable/Delete.php?id_rnt=$oal->id_art_venta\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
-																	<a href=\"./do/rentable/Delete.php?id_rnt=$oal->id_art_venta\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
-																	<a href=\"./do/rentable/Delete.php?id_rnt=$oal->id_art_venta\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
+																	<a href=\"./do/sellable/act/Delete.php?id_rnt=$oal->id_art_venta\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
+																	<a href=\"./do/sellable/act/Delete.php?id_rnt=$oal->id_art_venta\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
+																	<a href=\"./do/sellable/act/Delete.php?id_rnt=$oal->id_art_venta\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
 																</td>
 															</tr>
 														";
@@ -215,6 +215,13 @@
 
 		<script>
 			$('#sidebar-choice-4').addClass("active bg-gradient-primary");
+			
+			$("#id_btn_add_rnt").click(function(){
+				location.href = "./do/rentable/new/";
+			});
+			$("#id_btn_add_art").click(function(){
+				location.href = "./do/sellable/new/";
+			});
 		</script>
 	</body>
 </html>

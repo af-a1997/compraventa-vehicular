@@ -60,6 +60,26 @@
 			return $arr_list_rvi;
 		}
 		
+		public function RVI_ShowAllForDD(){
+			$sql_query_list_all_rvi = "SELECT $this->tbl.id_reg, $this->tbl.matricula, vehiculos.modelo AS vmo, vehiculos.anho_fab AS vfb, marcas.nombre AS bna FROM $this->tbl INNER JOIN vehiculos ON $this->tbl.vehiculo_asociado = vehiculos.idno INNER JOIN marcas ON vehiculos.marca = marcas.idno;";
+			$rt_db = mysqli_query($this->conn, $sql_query_list_all_rvi);
+			
+			$arr_list_rvi = null;
+			
+			while($res = mysqli_fetch_assoc($rt_db)){
+				$o = new Registered_Veh_Info();
+				
+				$o->id_reg = $res["id_reg"];
+				$o->matricula = $res["matricula"];
+				$o->vmo = $res["vmo"];
+				$o->vfb = $res["vfb"];
+				$o->bna = $res["bna"];
+				
+				$arr_list_rvi[] = $o;
+			}
+			return $arr_list_rvi;
+		}
+		
 		public function RVI_ShowOne(){
 			$sql_query_list_1_rvi ="SELECT * FROM $this->tbl WHERE id_reg=$this->id_reg";
 			$retorno = mysqli_query($this->conn, $sql_query_list_1_rvi);

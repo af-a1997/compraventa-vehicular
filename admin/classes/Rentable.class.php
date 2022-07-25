@@ -136,7 +136,8 @@
 		}
 		
 		public function RNT_UpdateOne(){
-			$sql_query_upd_1rnt = "UPDATE $this->tbl SET id_reg_veh=$this->id_reg_veh, id_divisa=$this->id_divisa, valor_diario_alq=this->$valor_diario_alq, id_veh_alquilado=$this->id_veh_alquilado, disponibilidad=$this->disponibilidad WHERE id_art_alq=$this->id_art_alq;";
+			$sql_query_upd_1rnt = "UPDATE $this->tbl SET id_reg_veh=$this->id_reg_veh, id_divisa=$this->id_divisa, valor_diario_alq=$this->valor_diario_alq, disponibilidad=$this->disponibilidad WHERE id_art_alq=$this->id_art_alq;";
+			
 			$r = mysqli_query($this->conn, $sql_query_upd_1rnt);
 			
 			return $r;

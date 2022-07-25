@@ -102,9 +102,6 @@
 	}
 	
 	label[id$="-error"]{
-		position: absolute;
-		bottom: 5px;
-		right: 10px;
 		z-index: 10;
 		
 		background-color: rgba(64,0,0,0.8);

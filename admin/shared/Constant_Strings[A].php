@@ -9,6 +9,7 @@
 	const a_artman = a_mp."artículos";
 	const a_climan = a_mp."clientela";
 	const a_credits = "Agradecimientos";
+	const a_haman = a_mp."vehículos alquilables";
 	const a_hvman = a_mp."alquileres";
 	const a_oman = "Gestionar otros";
 	const a_purchase_history = "Historial de adquisiciones";

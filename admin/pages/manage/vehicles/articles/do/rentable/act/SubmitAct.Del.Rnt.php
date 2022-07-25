@@ -1,21 +1,19 @@
 <?php
-	if(!$_GET['id_veh']){
-		header("location:../../");
+	if(!$_GET['id_rnt']){
+		header("location:../../../");
 	}
 	
-	include "../../../../../classes/Utils_ClassLoader.class.php";
+	include "../../../../../../../classes/Utils_ClassLoader.class.php";
 	
-	include "../../../../../shared/Constant_Strings[A].php";
-	include "../../../../../shared/Constant_Strings[G].php";
-	
-	include "../../../../../shared/Utils.Admin.Time.php";
+	include "../../../../../../../shared/Constant_Strings[A].php";
+	include "../../../../../../../shared/Constant_Strings[G].php";
 ?>
 
 <html lang=es>
 	<head>
 		<?php
-			include "../../../../../shared/html_head_setup.php";
-			include "../../../../../shared/Imports.jQuery_UI.php";
+			include "../../../../../../../shared/html_head_setup.php";
+			include "../../../../../../../shared/Imports.jQuery_UI.php";
 		?>
 		
 		<title>Panel de administrador - <?php echo a_n_acq; ?></title>
@@ -23,7 +21,7 @@
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
 		<!-- Sidebar -->
-		<?php include "../../../../../shared/Snippets.Sidebar.php"; ?>
+		<?php include "../../../../../../../shared/Snippets.Sidebar.php"; ?>
 		
 		<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
 			<!-- Top bar conents -->
@@ -39,8 +37,20 @@
 						<h6 class="font-weight-bolder mb-0"><?php echo a_n_acq; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+						<div class="ms-md-auto pe-md-3 d-flex align-items-center">
+							<div class="input-group input-group-outline">
+								<label class="form-label">Buscar en el panel</label>
+								<input type="text" class="form-control">
+							</div>
+						</div>
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
-							<?php include "../../../shared/Snippets.Adm_Logout.php"; ?>
+							<li class="nav-item d-flex align-items-center">
+								<a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
+									<i class="fa fa-user me-sm-1"></i>
+
+									<span class="d-sm-inline d-none"><?php echo g_login; ?></span>
+								</a>
+							</li>
 							
 							<!-- Hamburger menu that shows the navigation menu from the left in wide screens, when the display width is not big enough (most notably on phone screens). -->
 							
@@ -63,26 +73,26 @@
 			<br />
 			
 			<?php
-				if($_GET['id_veh']){
-					$id_2del = $_GET['id_veh'];
+				if($_GET['id_rnt']){
+					$id_2del = $_GET['id_rnt'];
 					
-					$o_veh = new Vehicles();
-					$o_veh->idno = $id_2del;
+					$o_rnt = new Rentable();
+					$o_rnt->id_art_alq = $id_2del;
 					
-					$r_veh_del = $o_veh->VEH_DeleteOne();
+					$r_rnt_del = $o_rnt->RNT_DeleteOne();
 	
-					if($r_veh_del){
-						echo "<p>Vehículo eliminado, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
+					if($r_rnt_del){
+						echo "<p>Artículo alquilable eliminado, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
 					}
 					else{
-						echo "<p>No se pudo eliminar el vehículo, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
+						echo "<p>No se pudo eliminar el artículo alquilable, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
 					}
 				}
-				else echo "<p>No se especificó una ID válida de vehículo a eliminar.";
+				else echo "<p>No se especificó una ID válida de artículo alquilable a eliminar.";
 			?>
 		</main>
 	
-		<?php include "../../../../../shared/Imports.Scripts.php"; ?>
+		<?php include "../../../../../../../shared/Imports.Scripts.php"; ?>
 		
 		<script>
 			$('#sidebar-choice-1').addClass("active bg-gradient-primary");

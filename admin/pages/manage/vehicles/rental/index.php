@@ -98,22 +98,15 @@
 												else{
 													foreach($o_rent_list as $orl){
 														$act_stop = "";
-														$rent_status = "";
-														if($orl->estado_alquiler == 0){
+
+														if($orl->estado_alquiler == 0)
 															$act_stop = null;
-															$rent_status = "<span class=\"badge badge-sm bg-gradient-danger\">$e[0]</span>";
-														}
 														else if($orl->estado_alquiler > 0)
 															$act_stop = "<a href=\"./do/Stop.php?id_rhi=$orl->id_hst_alq\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Abortar alquiler\"><i class=\"material-icons opacity-10\">stop</i></a>";
 														
-														if($orl->estado_alquiler == 1)
-															$rent_status = "<span class=\"badge badge-sm bg-gradient-success\">$e[1]</span>";
-														else if($orl->estado_alquiler == 2)
-															$rent_status = "<span class=\"badge badge-sm bg-gradient-warning\">$e[2]</span>";
-														else if($orl->estado_alquiler == 3)
-															$rent_status = "<span class=\"badge badge-sm bg-gradient-danger\">$e[3]</span>";
-														
+														$rent_status = UVS_BuildBadge($orl->estado_alquiler);
 														$veh_year = "";
+														
 														if($orl->veh_yfb == 0) $veh_year = "Año desc.";
 														else $veh_year = $orl->veh_yfb;
 														
