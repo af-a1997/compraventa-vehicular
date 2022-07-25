@@ -1,39 +1,30 @@
 <?php
-	include "../../../../shared/Utils.Admin.SessionCheck.php";
+	include "../../../../../shared/Utils.Admin.SessionCheck.php";
+	include "../../../../../shared/Utils.Admin.Time.php";
+	include "../../../../../shared/Utils.Admin.POST_Chk.php";
 	
-	include "../../../../classes/Utils_ClassLoader.class.php";
+	include "../../../../../classes/Utils_ClassLoader.class.php";
 	
-	include "../../../../shared/Constant_Strings[A].php";
-	include "../../../../shared/Constant_Strings[G].php";
+	include "../../../../../shared/Constant_Strings[A].php";
+	include "../../../../../shared/Constant_Strings[G].php";
 	
-	$o_veh = new Vehicles();
+	$o_rvi = new Registered_Veh_Info();
 	
-	$o_veh->modelo = $_POST["fln_veh_model"];
-	$o_veh->unidades = $_POST["fln_veh_stock"];
-	
-	if($_POST["fln_veh_yfab"] == ""){
-		$o_veh->anho_fab = 0;
-	}
-	else{
-		$o_veh->anho_fab = $_POST["fln_veh_yfab"];
-	}
-	
-	$o_veh->puertas = $_POST["fln_veh_doors"];
-	$o_veh->transmision = $_POST["fln_veh_tr"];
-	$o_veh->combustible_tipo = $_POST["fln_veh_ft"];
-	$o_veh->combustible_capac = $_POST["fln_veh_fc"];
-	$o_veh->motor = $_POST["fln_veh_eng"];
-	$o_veh->marca = $_POST["fln_veh_brand"];
-	$o_veh->categorizacion = $_POST["fln_veh_type"];
-	
-	$r_add_veh = $o_veh->VEH_Add();
+	$o_rvi->ultima_act_info = $cdt;
+	POST_Chk("fln_rvi_color",$o_rvi->color);
+	POST_Chk("fln_rvi_lp",$o_rvi->matricula);
+	POST_Chk("fln_rvi_status_act",$o_rvi->estado_act);
+	POST_Chk("fln_rvi_dist",$o_rvi->kilometraje_act);
+	POST_Chk_RB("fln_rvi_used_flag",$o_rvi->usado);
+	$o_rvi->vehiculo_asociado = $_POST["fln_rvi_models"];
+
+	$r_add_rvi = $o_rvi->RVI_Add();
 ?>
 
 <html lang=es>
 	<head>
 		<?php
-			include "../../../../shared/html_head_setup.php";
-			include "../../../../shared/Imports.jQuery_UI.php";
+			include "../../../../../shared/html_head_setup.php";
 		?>
 		
 		<title>Panel de administrador - <?php echo a_n_veh; ?></title>
@@ -41,7 +32,7 @@
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
 		<!-- Sidebar -->
-		<?php include "../../../../shared/Snippets.Sidebar.php"; ?>
+		<?php include "../../../../../shared/Snippets.Sidebar.php"; ?>
 		
 		<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
 			<!-- Top bar conents -->
@@ -58,7 +49,7 @@
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
-							<?php include "../../../../shared/Snippets.Adm_Logout.php"; ?>
+							<?php include "../../../../../shared/Snippets.Adm_Logout.php"; ?>
 							
 							<!-- Hamburger menu that shows the navigation menu from the left in wide screens, when the display width is not big enough (most notably on phone screens). -->
 							
@@ -81,16 +72,16 @@
 			<br />
 			
 			<?php
-				if($r_add_veh){
-					echo "<p>Vehículo registrado, <a href=\"../\">pincha aquí para volver a la lista</a>.</p>";
+				if($r_add_rvi){
+					echo "<p>Registro añadido, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
 				}
 				else{
-					echo "<p>No se pudo registrar el vehículo, <a href=\"./\">pincha aquí para volver a intentarlo</a>.</p>";
+					echo "<p>No se pudo añadir el registro, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
 				}
 			?>
 		</main>
 	
-		<?php include "../../../../shared/Imports.Scripts.php"; ?>
+		<?php include "../../../../../shared/Imports.Scripts.php"; ?>
 		
 		<script>
 			$('#sidebar-choice-1').addClass("active bg-gradient-primary");

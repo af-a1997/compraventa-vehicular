@@ -110,8 +110,8 @@
 				
 				<p>Precio <?php echo g_snp_reqf ?>:</p>
 				<div class="input-group input-group-outline">
-					<input class=form-control style="width: 75%;" name=fln_veh_cost required />
-					<select id=id_brands name=fln_veh_cost_curr class=form-control style="width: 20%;" required>
+					<input class=form-control name=fln_veh_cost required />
+					<select id=id_brands name=fln_veh_cost_curr class=form-control required>
 						<option value="" selected>Selecciona una divisa</option>
 						<?php
 							foreach($ccy_list as $cl){

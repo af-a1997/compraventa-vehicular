@@ -44,7 +44,7 @@
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
-							<?php include "../../../shared/Snippets.Adm_Logout.php"; ?>
+							<?php include "../../../../shared/Snippets.Adm_Logout.php"; ?>
 							
 							<!-- Hamburger menu that shows the navigation menu from the left in wide screens, when the display width is not big enough (most notably on phone screens). -->
 							
@@ -65,14 +65,6 @@
 			</nav>
 			
 			<br />
-			
-			<?php
-				if(isset($_GET['msg']) && ($_GET['msg']) == "username_taken"){
-					echo "
-						<div class=\"alert alert-danger\" role=alert>El nombre de usuario ya fue tomado, vuelve a intentarlo.</div>
-					";
-				}
-			?>
 			
 			<p>En esta página podrás registrar nuevos vehículos.</p>
 			

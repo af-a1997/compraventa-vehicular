@@ -2,19 +2,20 @@
 	// Strings exclusive to administrators.
 	
 	const a_dsb = "Panel de administración";
+	const a_credits = "Agradecimientos";
+	const a_taxicab_cs = "Remises contratados";
 	
 	const a_mp = "Gestión de ";
 	const a_reg = "Registrar ";
 	
 	const a_artman = a_mp."artículos";
 	const a_climan = a_mp."clientela";
-	const a_credits = "Agradecimientos";
 	const a_haman = a_mp."vehículos alquilables";
 	const a_hvman = a_mp."alquileres";
-	const a_oman = "Gestionar otros";
+	const a_oman = a_mp."otros";
 	const a_purchase_history = "Historial de adquisiciones";
+	const a_regman = a_mp."registros";
 	const a_tcman = a_mp."remises";
-	const a_taxicab_cs = "Remises contratados";
 	const a_vehman = a_mp."vehículos";
 	
 	const a_o_brands = "Gestionar marcas";

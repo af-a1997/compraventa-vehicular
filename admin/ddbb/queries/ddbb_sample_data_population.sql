@@ -19,12 +19,15 @@ INSERT INTO marcas(nombre,descripcion) VALUES
 	("Citroën","N/A"),
 	("Fiat","N/A"),
 	("Ford","N/A"),
+	("Geely","N/A"),
 	("Honda","N/A"),
 	("Hyundai","N/A"),
 	("Jeep","N/A"),
+	("Jetour","N/A"),
 	("Kia","N/A"),
 	("Mercedes-Benz","N/A"),
 	("Mini","N/A"),
+	("Mitsubishi","N/A"),
 	("Nissan","N/A"),
 	("Renault","N/A"),
 	("Scania","N/A"),
@@ -32,6 +35,7 @@ INSERT INTO marcas(nombre,descripcion) VALUES
 	("Toyota","N/A"),
 	("Volkswagen","N/A"),
 	("Volvo","N/A")
+	("ZNA","N/A")
 ;
 
 INSERT INTO divisas(nombre,abr,simbolizacion,pos_sim) VALUES

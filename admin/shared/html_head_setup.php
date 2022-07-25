@@ -134,6 +134,17 @@
 	span.hidden_pwd:hover {
 		color: white;
 	}
+
+	/* Tutorial credit to W3Schools: https://www.w3schools.com/howto/howto_css_circles.asp - color will be specified in the element's style attribute, using [background-color]. */
+	span.colored_circle {
+		width: 16px;
+		height: 16px;
+		border-radius: 50%;
+		border: 2px solid white;
+		box-shadow: 0 0 5px black;
+		display: inline-block;
+		margin-right: 5px;
+	}
 </style>
 
 <!-- Font Awesome icons -->

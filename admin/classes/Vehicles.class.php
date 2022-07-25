@@ -70,7 +70,7 @@
 		
 		// List used for dropdown menu when registering acquisition and/or license plate.
 		public function VEH_ShowAllForDD(){
-			$sql_query_list_all_veh = "SELECT vehiculos.idno, vehiculos.modelo, marcas.nombre AS mno FROM vehiculos, marcas WHERE vehiculos.marca = marcas.idno;";
+			$sql_query_list_all_veh = "SELECT vehiculos.idno, vehiculos.modelo, vehiculos.anho_fab, marcas.nombre AS mno FROM vehiculos, marcas WHERE vehiculos.marca = marcas.idno;";
 			$rt_db = mysqli_query($this->conn, $sql_query_list_all_veh);
 			
 			$arr_list_veh_for_dd = null;
@@ -80,6 +80,7 @@
 				
 				$o->idno = $res["idno"];
 				$o->modelo = $res["modelo"];
+				$o->anho_fab = $res["anho_fab"];
 				$o->mno = $res["mno"];
 				
 				$arr_list_veh_for_dd[] = $o;
@@ -119,6 +120,7 @@
 			if($res){
 				$o = new Vehicles();
 				
+				// Base
 				$o->idno = $res["idno"];
 				$o->modelo = $res["modelo"];
 				$o->unidades = $res["unidades"];
@@ -130,6 +132,8 @@
 				$o->motor = $res["motor"];
 				$o->marca = $res["marca"];
 				$o->categorizacion = $res["categorizacion"];
+
+				// Joins
 				$o->mno = $res["mno"];
 				$o->tvo = $res["tvo"];
 				
