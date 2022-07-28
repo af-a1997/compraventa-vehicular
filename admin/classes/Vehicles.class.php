@@ -69,6 +69,23 @@
 		}
 		
 		// List used for dropdown menu when registering acquisition and/or license plate.
+		public function VEH_GetCountByVCAT($cat_no){
+			$sql_query_list_all_veh = "SELECT COUNT(categorizacion) AS total_veh_cat FROM vehiculos WHERE categorizacion = $cat_no;";
+			$rt_db = mysqli_query($this->conn, $sql_query_list_all_veh);
+			
+			$arr_list_vcat_count = null;
+			
+			while($res = mysqli_fetch_assoc($rt_db)){
+				$o = new Vehicles();
+				
+				$o->total_veh_cat = $res["total_veh_cat"];
+				
+				$arr_list_vcat_count[] = $o;
+			}
+			return $arr_list_vcat_count;
+		}
+		
+		// List used for dropdown menu when registering acquisition and/or license plate.
 		public function VEH_ShowAllForDD(){
 			$sql_query_list_all_veh = "SELECT vehiculos.idno, vehiculos.modelo, vehiculos.anho_fab, marcas.nombre AS mno FROM vehiculos, marcas WHERE vehiculos.marca = marcas.idno;";
 			$rt_db = mysqli_query($this->conn, $sql_query_list_all_veh);

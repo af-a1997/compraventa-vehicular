@@ -15,7 +15,7 @@
 	include "../../../../classes/Utils_ClassLoader.class.php";
 	
 	include "../../../../shared/Constant_Strings[A].php";
-	include "../../../../shared/Constant_Strings[G].php";
+	include "../../../../../shared/utils/Utils.Common_Strings.php";
 	
 	$o_cli = new Users();
 	$o_cli->nro_id_u = $_GET["id_cli"];

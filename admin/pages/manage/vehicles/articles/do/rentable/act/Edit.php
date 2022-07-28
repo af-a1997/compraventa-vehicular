@@ -10,7 +10,7 @@
 	include "../../../../../../../classes/Utils_ClassLoader.class.php";
 	
 	include "../../../../../../../shared/Constant_Strings[A].php";
-	include "../../../../../../../shared/Constant_Strings[G].php";
+	include "../../../../../../../../shared/utils/Utils.Common_Strings.php";
 	
 	$o_rnt = new Rentable();
 	$o_rvi = new Registered_Veh_Info();

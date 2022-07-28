@@ -6,7 +6,7 @@
 	include "../../../../../classes/Utils_ClassLoader.class.php";
 	
 	include "../../../../../shared/Constant_Strings[A].php";
-	include "../../../../../shared/Constant_Strings[G].php";
+	include "../../../../../../shared/utils/Utils.Common_Strings.php";
 	
 	$o_rhi = new Rented();
 	$o_rhi->id_hst_alq = $_GET["id_rhi"];

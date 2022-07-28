@@ -4,7 +4,7 @@
 	}
 	
 	include "../../admin/shared/Constant_Strings[A].php";
-	include "../../admin/shared/Constant_Strings[G].php";
+	include "../../shared/utils/Utils.Common_Strings.php";
 ?>
 
 <!DOCTYPE html>

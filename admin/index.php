@@ -13,7 +13,7 @@
 		<!-- Constant strings of text -->
 		<?php
 			include "./shared/Constant_Strings[A].php";
-			include "./shared/Constant_Strings[G].php";
+			include "../shared/utils/Utils.Common_Strings.php";
 			
 			include "./shared/Snippets.Sidebar.php";
 		?>

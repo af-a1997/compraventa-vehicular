@@ -6,7 +6,7 @@
 	include "../../../../classes/Utils_ClassLoader.class.php";
 	
 	include "../../../../shared/Constant_Strings[A].php";
-	include "../../../../shared/Constant_Strings[G].php";
+	include "../../../../../shared/utils/Utils.Common_Strings.php";
 	
 	$o_veh = new Vehicles();
 	$o_veh->idno = $_GET["id_veh"];

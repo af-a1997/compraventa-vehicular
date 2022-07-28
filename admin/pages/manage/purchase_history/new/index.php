@@ -4,7 +4,7 @@
 	include "../../../../shared/Utils.Admin.SessionCheck.php";
 	
 	include "../../../../shared/Constant_Strings[A].php";
-	include "../../../../shared/Constant_Strings[G].php";
+	include "../../../../../shared/utils/Utils.Common_Strings.php";
 	
 	include "../../../../classes/Utils_ClassLoader.class.php";
 	
