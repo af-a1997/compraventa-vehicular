@@ -55,6 +55,8 @@
 			<p>Bienvenido/a al panel de administración.</p>
 			
 			<p>Administra varias secciones del sitio desde el menú a la izquierda, o toca el menú hamburguesa si estás visitando este sitio desde un teléfono.</p>
+
+			<p>No olvides rellenar todos los campos al añadir/editar entradas de determinadas tablas ya que de otro modo el servidor devolverá una excepción y los cambios no se guardarán en la DDBB &mdash; he estado intentando hacer los campos opcionales, pero hasta ahora no he tenido suerte.</p>
 		</main>
 		
 		<?php include "./shared/Imports.Scripts.php"; ?>

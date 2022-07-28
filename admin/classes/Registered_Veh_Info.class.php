@@ -31,36 +31,7 @@
 		}
 		
 		public function RVI_Add(){
-			// TODO: This is a successful test for handling optional fields, this may be implemented later in other functions and sections, but for now it's a low priority.
-			$column_names = "ultima_act_info";
-			$column_values = "'$this->ultima_act_info'";
-
-			if("$this->color" != null){
-				$column_names .= ", color";
-				$column_values .= ", '$this->color'";
-			}
-			if("$this->matricula" != null){
-				$column_names .= ", matricula";
-				$column_values .= ", '$this->matricula'";
-			}
-			if("$this->estado_act" != null){
-				$column_names .= ", estado_act";
-				$column_values .= ", '$this->estado_act'";
-			}
-			if("$this->kilometraje_act" != null){
-				$column_names .= ", kilometraje_act";
-				$column_values .= ", '$this->kilometraje_act'";
-			}
-			if("$this->usado" != null){
-				$column_names .= ", usado";
-				$column_values .= ", '$this->usado'";
-			}
-
-			$column_names .= ", vehiculo_asociado";
-			$column_values .= ", $this->vehiculo_asociado";
-
-			$sql_query_rvi_add = "INSERT INTO $this->tbl (".$column_names.") VALUES (".$column_values.");";
-			echo $sql_query_rvi_add;
+			$sql_query_rvi_add = "INSERT INTO $this->tbl (ultima_act_info, color, matricula, estado_act, kilometraje_act, usado, vehiculo_asociado) VALUES ('$this->ultima_act_info', '$this->color', '$this->matricula', '$this->estado_act', $this->kilometraje_act, $this->usado, $this->vehiculo_asociado);";
 			
 			$r = mysqli_query($this->conn, $sql_query_rvi_add);
 			return $r;
@@ -168,14 +139,14 @@
 			return $rvi_r;
 		}
 		
-		public function RVI_EditOne(){
+		public function RVI_UpdateOne(){
 			$sql_query_upd_1_rvi = "UPDATE $this->tbl SET ultima_act_info='$this->ultima_act_info', color='$this->color', matricula='$this->matricula', estado_act='$this->estado_act', kilometraje_act=$this->kilometraje_act, usado=$this->usado, vehiculo_asociado=$this->vehiculo_asociado WHERE id_reg=$this->id_reg;";
 			$r = mysqli_query($this->conn, $sql_query_upd_1_rvi);
 			
 			return $r;
 		}
 		
-		public function RVI_DelOne(){
+		public function RVI_DeleteOne(){
 			$sql_query_del_1_rvi = "DELETE FROM $this->tbl WHERE id_reg=$this->id_reg";
 			$r = mysqli_query($this->conn, $sql_query_del_1_rvi);
 			

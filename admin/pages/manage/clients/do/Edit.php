@@ -124,8 +124,8 @@
 	
 		<?php include "../../../../shared/Imports.Scripts.php"; ?>
 
-		<script src="/admin/res/extras/jquery/mask/jquery.mask.min.js"></script>
-		<script src="/admin/res/extras/jquery/validation/jquery.validate.min.js"></script>
+		<script src="/shared/extras/jquery/mask/jquery.mask.min.js"></script>
+		<script src="/shared/extras/jquery/validation/jquery.validate.min.js"></script>
 
 		<script>
 			$('#sidebar-choice-2').addClass("active bg-gradient-primary");

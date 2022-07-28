@@ -63,7 +63,7 @@
 			
 			<br />
 			
-			<p>En esta página podrás registrar nuevos vehículos.</p>
+			<p>En esta página podrás crear registros identificadores de vehículos, con sus propiedades únicas como color y matrícula.</p>
 			
 			<p><?php echo g_snp_reqf ?> = Campos obligatorios.</p>
 			

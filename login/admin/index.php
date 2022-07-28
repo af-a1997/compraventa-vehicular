@@ -43,13 +43,13 @@
 				
 				<br />
 				
-				<button class="btn btn-success" type=submit><?php echo g_login; ?></button> o <a href="../../">volver al inicio</a>
+				<button class="btn btn-success" type=submit><?php echo g_login; ?></button> o <a href="/">volver al inicio</a>
 			</form>
 		</main>
 	
 		<?php include "../../admin/shared/Imports.Scripts.php"; ?>
 		
-		<script src="../../admin/res/extras/jquery/validation/jquery.validate.min.js"></script>
+		<script src="/shared/extras/jquery/validation/jquery.validate.min.js"></script>
 		<script>
 			$().ready(function(){
 				$("#id_form_adm_login").validate({

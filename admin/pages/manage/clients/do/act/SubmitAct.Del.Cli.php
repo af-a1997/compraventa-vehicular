@@ -26,19 +26,13 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
-							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/purchase_history/"><?php echo a_purchase_history; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_n_acq; ?></li>
+							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/clients/"><?php echo a_regman; ?></a></li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page">Eliminar</li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_n_acq; ?></h6>
+						<h6 class="font-weight-bolder mb-0">Eliminar</h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-						<div class="ms-md-auto pe-md-3 d-flex align-items-center">
-							<div class="input-group input-group-outline">
-								<label class="form-label">Buscar en el panel</label>
-								<input type="text" class="form-control">
-							</div>
-						</div>
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
 							<?php include "../../../../../shared/Snippets.Adm_Logout.php"; ?>
 							

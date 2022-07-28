@@ -5,6 +5,6 @@
 -->
 
 <!-- jQuery UI · stylesheets -->
-<link rel=stylesheet href="/admin/res/extras/jquery/ui/jquery-ui.min.css" />
-<link rel=stylesheet href="/admin/res/extras/jquery/ui/jquery-ui.structure.min.css" />
-<link rel=stylesheet href="/admin/res/extras/jquery/ui/jquery-ui.theme.min.css" />
+<link rel=stylesheet href="/shared/extras/jquery/ui/jquery-ui.min.css" />
+<link rel=stylesheet href="/shared/extras/jquery/ui/jquery-ui.structure.min.css" />
+<link rel=stylesheet href="/shared/extras/jquery/ui/jquery-ui.theme.min.css" />

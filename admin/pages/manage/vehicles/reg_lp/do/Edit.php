@@ -1,40 +1,37 @@
 <!DOCTYPE html>
 
 <?php
-	// The main admin cannot be edited from the website.
-	if($_GET["id_cli"] == 1){
-		header("Location:../?msg=err_main_admin_protected");
+	if(!$_GET["id_reg"]){
+		header("Location:../../");
 	}
 	
-	if(!$_GET["id_cli"]){
-		header("Location:../");
-	}
+	include "../../../../../shared/Utils.Admin.SessionCheck.php";
 	
-	include "../../../../shared/Utils.Admin.SessionCheck.php";
+	include "../../../../../classes/Utils_ClassLoader.class.php";
 	
-	include "../../../../classes/Utils_ClassLoader.class.php";
+	include "../../../../../shared/Constant_Strings[A].php";
+	include "../../../../../shared/Constant_Strings[G].php";
 	
-	include "../../../../shared/Constant_Strings[A].php";
-	include "../../../../shared/Constant_Strings[G].php";
+	$o_rvi = new Registered_Veh_info();
+	$o_veh = new Vehicles();
+	$o_rvi->id_reg = $_GET["id_reg"];
 	
-	$o_cli = new Users();
-	$o_cli->nro_id_u = $_GET["id_cli"];
-	
-	$o_cli_data_in = $o_cli->CLI_ShowOne();
+	$o_rvi_data_in = $o_rvi->RVI_ShowOne();
+	$o_veh_list = $o_veh->VEH_ShowAllForDD();
 ?>
 
 <html lang=es>
 	<head>
 		<?php
-			include "../../../../shared/html_head_setup.php";
+			include "../../../../../shared/html_head_setup.php";
 		?>
 		
-		<title>Panel de administrador - <?php echo a_vehman; ?></title>
+		<title>Panel de administrador - <?php echo a_regman; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
 		<!-- Sidebar -->
-		<?php include "../../../../shared/Snippets.Sidebar.php"; ?>
+		<?php include "../../../../../shared/Snippets.Sidebar.php"; ?>
 		
 		<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
 			<!-- Top bar conents -->
@@ -43,16 +40,16 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
-							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/clients/"><?php echo a_climan; ?></a></li>
+							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/vehicles/"><?php echo a_regman; ?></a></li>
 							<li class="breadcrumb-item text-sm text-white active" aria-current="page">Editar</li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0">Editar cliente</h6>
+						<h6 class="font-weight-bolder mb-0">Editar registro</h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						</div>
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
-							<?php include "../../../../shared/Snippets.Adm_Logout.php"; ?>
+							<?php include "../../../../../shared/Snippets.Adm_Logout.php"; ?>
 							
 							<!-- Hamburger menu that shows the navigation menu from the left in wide screens, when the display width is not big enough (most notably on phone screens). -->
 							
@@ -74,96 +71,108 @@
 			
 			<br />
 			
-			<form method=POST action="./act/SubmitAct.Edit.Cli.php">
-				<!-- Required to later fetch the UID in the action code via POST. -->
-				<input type=hidden name=fln_user_id value=<?php echo "\"$o_cli_data_in->nro_id_u\""; ?> />
-				<input type=hidden name=fln_user_site_role value=<?php echo "\"$o_cli_data_in->cargo_en_sitio\""; ?> />
+			<form method=POST action="./act/SubmitAct.Edit.RVI.php">
+				<input type=hidden name=fln_rvi_edit_id value=<?php echo "\"$o_rvi_data_in->id_reg\""; ?> />
+				<p>Color:</p>
+				<div class="input-group input-group-outline">
+					<input id=id_in_rgb class=form-control name=fln_rvi_edit_color data-jscolor="{preset: 'dark large', closeButton: true, closeText: 'Cerrar', required: false}" value=<?php echo "\"$o_rvi_data_in->color\""; ?>  />
+					<a href=# id=id_in_rgb_clear class="btn btn-fill btn-warning"><span class="material-icons opacity-10" title="Sin color">format_color_reset</span></a>
+				</div>
+				
+				<p>Matrícula:</p>
+				<div class="input-group input-group-outline">
+					<input id=id_field_lp class=form-control name=fln_rvi_edit_lp value=<?php echo "\"$o_rvi_data_in->matricula\""; ?>  />
+				</div>
+				
+				<p>Estado del vehículo <?php echo g_snp_reqf ?>:</p>
+				<div class="input-group input-group-outline">
+					<textarea class="form-control" name=fln_rvi_edit_status_act placeholder="Describa como se encuentra el vehículo actualmente."><?php echo "$o_rvi_data_in->estado_act"; ?></textarea>
+				</div>
 				
 				<div class="input-group input-group-outline">
-					<label class=form-label>Nombre(s) <?php echo g_snp_reqf ?></label>
-					<input class=form-control name=fln_user_name value=<?php echo "\"$o_cli_data_in->nombre\""; ?> />
+					<label class="form-label">Kilometraje <?php echo g_snp_reqf ?></label>
+					<input class="form-control" step=.01 min=0 name=fln_rvi_edit_dist type=number value=<?php echo "\"$o_rvi_data_in->kilometraje_act\""; ?> />
 				</div>
+				
+				<p>¿Es usado? <?php echo g_snp_reqf ?></p>
 				<div class="input-group input-group-outline">
-					<label class=form-label>Apellido(s) <?php echo g_snp_reqf ?></label>
-					<input class=form-control name=fln_user_surname value=<?php echo "\"$o_cli_data_in->apellidos\""; ?> />
+					<?php
+						if($o_rvi_data_in->usado == 1){
+							echo "
+								<input type=radio name=fln_rvi_edit_used_flag id=fln_acq_used_1 value=1 selected />
+								<label for=fln_acq_used_1>Sí</label> &emsp;
+								
+								<input type=radio name=fln_rvi_edit_used_flag id=fln_acq_used_0 value=0 />
+								<label for=fln_acq_used_0>No</label>
+							";
+						}
+						else{
+							echo "
+								<input type=radio name=fln_rvi_edit_used_flag id=fln_acq_used_1 value=1 />
+								<label for=fln_acq_used_1>Sí</label> &emsp;
+								
+								<input type=radio name=fln_rvi_edit_used_flag id=fln_acq_used_0 value=0 selected />
+								<label for=fln_acq_used_0>No</label>
+							";
+						}
+					?>
+					
 				</div>
+				
+				<p>Vehículo <?php echo g_snp_reqf ?>:</p>
 				<div class="input-group input-group-outline">
-					<label class=form-label>Nombre de usuario <?php echo g_snp_reqf ?></label>
-					<input class=form-control name=fln_user_un value=<?php echo "\"$o_cli_data_in->nombre_usuario\""; ?> />
-				</div>
-				<div class="input-group input-group-outline">
-					<label class=form-label>Clave <?php echo g_snp_reqf ?></label>
-					<input type=password class=form-control name=fln_user_pwd value=<?php echo "\"$o_cli_data_in->clave\""; ?> />
-				</div>
-				<div class="input-group input-group-outline">
-					<label class=form-label>C. I. <?php echo g_snp_reqf ?></label>
-					<input class=form-control name=fln_user_uyid value=<?php echo "\"$o_cli_data_in->cedula_identidad\""; ?> />
-				</div>
-				<div class="input-group input-group-outline">
-					<label class=form-label>Correo electrónico</label>
-					<input class=form-control name=fln_user_emailaddr value=<?php echo "\"$o_cli_data_in->email\""; ?> />
-				</div>
-				<div class="input-group input-group-outline">
-					<label class=form-label>Dirección de residencia</label>
-					<input class=form-control name=fln_user_houseloc value=<?php echo "\"$o_cli_data_in->residencia_actual\""; ?> />
-				</div>
-				<p>Teléfono celular:</p>
-				<div class="input-group input-group-outline">
-					<input class=form-control name=fln_user_phone_cel id=validate_format_phone_cel value=<?php echo "\"$o_cli_data_in->tel_cel\""; ?> />
-				</div>
-				<p>Teléfono fijo:</p>
-				<div class="input-group input-group-outline">
-					<input class=form-control name=fln_user_phone_home id=validate_format_phone_home value=<?php echo "\"$o_cli_data_in->tel_fijo\""; ?> />
+					<select id=id_sel_model_rvi name=fln_rvi_edit_assocveh class=form-control>
+						<?php
+							$yfb_str = "";
+
+							foreach($o_veh_list as $ovl){
+								if($ovl->anho_fab == 0) $yfb_str = "Año desc.";
+								else $yfb_str = $ovl->anho_fab;
+
+								if($ovl->idno == $o_rvi_data_in->vehiculo_asociado)
+									echo "<option value='$ovl->idno' selected>$ovl->mno $ovl->modelo ($yfb_str)</option>";
+
+								else
+									echo "<option value='$ovl->idno'>$ovl->mno $ovl->modelo ($yfb_str)</option>";
+							}
+						?>
+					</select>
 				</div>
 				
 				<br />
 				
-				<button class="btn btn-success" type=submit><i class="material-icons opacity-10">autorenew</i> Actualizar cliente</button>
+				<button class="btn btn-success" type=submit><i class="material-icons opacity-10">autorenew</i> Actualizar registro</button>
 			</form>
 		</main>
 	
-		<?php include "../../../../shared/Imports.Scripts.php"; ?>
+		<?php include "../../../../../shared/Imports.Scripts.php"; ?>
 
-		<script src="/admin/res/extras/jquery/mask/jquery.mask.min.js"></script>
-		<script src="/admin/res/extras/jquery/validation/jquery.validate.min.js"></script>
+		<script src="/shared/extras/jquery/mask/jquery.mask.min.js"></script>
+		<script src="/shared/extras/jquery/validation/jquery.validate.min.js"></script>
+		<script src="/shared/extras/jscolor/jscolor.min.js"></script>
 
 		<script>
-			$('#sidebar-choice-2').addClass("active bg-gradient-primary");
+			$('#sidebar-choice-1').addClass("active bg-gradient-primary");
 			
-			$("#validate_format_phone_cel").mask("000 000 000",{
-				placeholder: "09X XXX XXX"
+			$("#id_field_lp").mask("AAA 0000",{
+				placeholder: "AAA 0000"
 			});
-			$("#validate_format_phone_home").mask("0000 0000",{
-				placeholder: "XXXX XXXX"
+			$("#id_in_rgb").mask("ZZZZZZZ",{
+				translation: {
+					"Z": {
+						pattern: /[#0-9A-Fa-f]/
+					}
+				}
 			});
 				
-			$("#id_form_user_reg").validate({
+			$("#id_form_rvi_edit").validate({
 				rules:{
-					fln_user_name: {
+					fln_rvi_edit_models: {
 						required: true
-					},
-					fln_user_surname: {
-						required: true
-					},
-					fln_user_un: {
-						required: true
-					},
-					fln_user_pwd: {
-						required: true
-					},
-					fln_user_uyid: {
-						required: true
-					},
-					fln_user_email: {
-						email: true
 					}
 				},
 				messages:{
-					fln_user_name: "Nombre(s) requerido(s).",
-					fln_user_surname: "Apellido(s) requerido(s).",
-					fln_user_un: "Nombre de usuario requerido.",
-					fln_user_pwd: "Clave requerida.",
-					fln_user_uyid: "Cédula de Identidad requerida."
+					fln_rvi_edit_models: "Elija un modelo de vehículo.."
 				}
 			});
 		</script>

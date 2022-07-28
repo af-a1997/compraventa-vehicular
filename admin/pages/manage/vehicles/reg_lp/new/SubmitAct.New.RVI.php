@@ -1,7 +1,6 @@
 <?php
 	include "../../../../../shared/Utils.Admin.SessionCheck.php";
 	include "../../../../../shared/Utils.Admin.Time.php";
-	include "../../../../../shared/Utils.Admin.POST_Chk.php";
 	
 	include "../../../../../classes/Utils_ClassLoader.class.php";
 	
@@ -11,11 +10,15 @@
 	$o_rvi = new Registered_Veh_Info();
 	
 	$o_rvi->ultima_act_info = $cdt;
-	POST_Chk("fln_rvi_color",$o_rvi->color);
-	POST_Chk("fln_rvi_lp",$o_rvi->matricula);
-	POST_Chk("fln_rvi_status_act",$o_rvi->estado_act);
-	POST_Chk("fln_rvi_dist",$o_rvi->kilometraje_act);
-	POST_Chk_RB("fln_rvi_used_flag",$o_rvi->usado);
+	$o_rvi->color = $_POST["fln_rvi_color"];
+	$o_rvi->matricula = $_POST["fln_rvi_lp"];
+	$o_rvi->estado_act = $_POST["fln_rvi_status_act"];
+	$o_rvi->kilometraje_act = $_POST["fln_rvi_dist"];
+	
+	if(isset($_POST["fln_rvi_used_flag"]))
+		$o_rvi->usado = $_POST["fln_rvi_used_flag"];
+	else $o_rvi->usado = 2;
+
 	$o_rvi->vehiculo_asociado = $_POST["fln_rvi_models"];
 
 	$r_add_rvi = $o_rvi->RVI_Add();

@@ -1,42 +1,38 @@
 <?php
-	// The main admin cannot be edited from the website.
-	if(!$_POST["fln_user_id"]){
-		header("Location:../../");
+	if(!$_POST["fln_edit_rvi_id"]){
+		header("Location:../../../");
 	}
 	
-	if($_POST["fln_user_id"] == 1){
-		header("Location:../../?msg=err_main_admin_protected");
-	}
+	include "../../../../../../shared/Utils.Admin.SessionCheck.php";
+	include "../../../../../../shared/Utils.Admin.Time.php";
 	
-	include "../../../../../shared/Utils.Admin.SessionCheck.php";
+	include "../../../../../../classes/Utils_ClassLoader.class.php";
 	
-	include "../../../../../classes/Utils_ClassLoader.class.php";
+	include "../../../../../../shared/Constant_Strings[A].php";
+	include "../../../../../../shared/Constant_Strings[G].php";
 	
-	include "../../../../../shared/Constant_Strings[A].php";
-	include "../../../../../shared/Constant_Strings[G].php";
+	$o_rvi = new Registered_Veh_info();
 	
-	$o_veh = new Users();
+	$o_rvi->ultima_act_info = $cdt;
+	$o_rvi->id_reg = $_POST["fln_rvi_edit_id"];
+	$o_rvi->color = $_POST["fln_rvi_edit_color"];
+	$o_rvi->matricula = $_POST["fln_rvi_edit_lp"];
+	$o_rvi->estado_act = $_POST["fln_rvi_edit_status_act"];
+	$o_rvi->kilometraje_act = $_POST["fln_rvi_edit_dist"];
 	
-	$o_veh->nro_id_u = $_POST["fln_user_id"];
-	$o_veh->nombre = $_POST["fln_user_name"];
-	$o_veh->apellidos = $_POST["fln_user_surname"];
-	$o_veh->nombre_usuario = $_POST["fln_user_un"];
-	$o_veh->clave = $_POST["fln_user_pwd"];
-	$o_veh->cedula_identidad = $_POST["fln_user_uyid"];
-	$o_veh->email = $_POST["fln_user_emailaddr"];
-	$o_veh->residencia_actual = $_POST["fln_user_houseloc"];
-	$o_veh->tel_cel = $_POST["fln_user_phone_cel"];
-	$o_veh->tel_fijo = $_POST["fln_user_phone_home"];
-	$o_veh->cargo_en_sitio = $_POST["fln_user_site_role"];
+	if(isset($_POST["fln_rvi_edit_used_flag"]))
+		$o_rvi->usado = $_POST["fln_rvi_edit_used_flag"];
+	else $o_rvi->usado = 2;
+
+	$o_rvi->vehiculo_asociado = $_POST["fln_rvi_edit_assocveh"];
 	
-	$r_add_veh = $o_veh->CLI_UpdateOne();
+	$r_upd_rvi = $o_rvi->RVI_UpdateOne();
 ?>
 
 <html lang=es>
 	<head>
 		<?php
-			include "../../../../../shared/html_head_setup.php";
-			include "../../../../../shared/Imports.jQuery_UI.php";
+			include "../../../../../../shared/html_head_setup.php";
 		?>
 		
 		<title>Panel de administrador - Editar cliente</title>
@@ -44,7 +40,7 @@
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
 		<!-- Sidebar -->
-		<?php include "../../../../../shared/Snippets.Sidebar.php"; ?>
+		<?php include "../../../../../../shared/Snippets.Sidebar.php"; ?>
 		
 		<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
 			<!-- Top bar conents -->
@@ -60,14 +56,8 @@
 						<h6 class="font-weight-bolder mb-0">Editar cliente</h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-						<div class="ms-md-auto pe-md-3 d-flex align-items-center">
-							<div class="input-group input-group-outline">
-								<label class="form-label">Buscar en el panel</label>
-								<input type="text" class="form-control">
-							</div>
-						</div>
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
-							<?php include "../../../../../shared/Snippets.Adm_Logout.php"; ?>
+							<?php include "../../../../../../shared/Snippets.Adm_Logout.php"; ?>
 							
 							<!-- Hamburger menu that shows the navigation menu from the left in wide screens, when the display width is not big enough (most notably on phone screens). -->
 							
@@ -90,16 +80,16 @@
 			<br />
 			
 			<?php
-				if($r_add_veh){
-					echo "<p>Cliente actualizado, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
+				if($r_upd_rvi){
+					echo "<p>Registro actualizado, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
 				}
 				else{
-					echo "<p>No se pudo actualizar el cliente, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
+					echo "<p>No se pudo actualizar el registro, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
 				}
 			?>
 		</main>
 	
-		<?php include "../../../../../shared/Imports.Scripts.php"; ?>
+		<?php include "../../../../../../shared/Imports.Scripts.php"; ?>
 		
 		<script>
 			$('#sidebar-choice-2').addClass("active bg-gradient-primary");

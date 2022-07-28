@@ -174,7 +174,7 @@
 		<?php include "../../../../shared/Imports.Scripts.php"; ?>
 
 		<!-- jQuery UI · script -->
-		<script src="/admin/res/extras/jquery/ui/jquery-ui.min.js"></script>
+		<script src="/shared/extras/jquery/ui/jquery-ui.min.js"></script>
 
 		<script>
 			$('#sidebar-choice-1').addClass("active bg-gradient-primary");
