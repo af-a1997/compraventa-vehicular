@@ -17,9 +17,10 @@ CREATE USER IF NOT EXISTS "cmman_cli"@"localhost" IDENTIFIED BY "t@*%k77Sx#!T9t9
 -- Grants varying permissions to both users, according to their roles.
 GRANT ALL PRIVILEGES ON gestion_veh.* TO "cmman_admin"@"localhost";
 GRANT SELECT, UPDATE, INSERT, DELETE ON gestion_veh.a_vender TO "cmman_cli"@"localhost";
-GRANT SELECT ON gestion_veh.vehiculos TO "cmman_cli"@"localhost";
-GRANT SELECT ON gestion_veh.marcas TO "cmman_cli"@"localhost";
-GRANT SELECT ON gestion_veh.tipo_veh TO "cmman_cli"@"localhost";
 GRANT SELECT, UPDATE, INSERT, DELETE ON gestion_veh.registros TO "cmman_cli"@"localhost";
+GRANT SELECT ON gestion_veh.divisas TO "cmman_cli"@"localhost";
+GRANT SELECT ON gestion_veh.marcas TO "cmman_cli"@"localhost";
 GRANT SELECT ON gestion_veh.remises TO "cmman_cli"@"localhost";
+GRANT SELECT ON gestion_veh.tipo_veh TO "cmman_cli"@"localhost";
 GRANT SELECT ON gestion_veh.usuarios TO "cmman_cli"@"localhost";
+GRANT SELECT ON gestion_veh.vehiculos TO "cmman_cli"@"localhost";

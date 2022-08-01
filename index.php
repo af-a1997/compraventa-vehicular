@@ -29,7 +29,7 @@
                         <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
                             <?php
                                 foreach($o_cvcat_list as $ovl){
-                                    echo "<a href=\"./pages/browse/category.php?id_cat=$ovl->id_tipo\" class=\"nav-item nav-link\">$ovl->nombre</a>";
+                                    echo "<a href=\"./client/pages/browse/Category.php?id_cat=$ovl->id_tipo\" class=\"nav-item nav-link\">$ovl->nombre</a>";
                                 }
                             ?>
                         </div>

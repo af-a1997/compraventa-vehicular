@@ -22,7 +22,6 @@
 	<head>
 		<?php
 			include "../../../../../../../shared/html_head_setup.php";
-			include "../../../../../../../shared/Imports.jQuery_UI.php";
 		?>
 		
 		<title>Panel de administrador - <?php echo a_artman; ?></title>
@@ -72,10 +71,10 @@
 			
 			<?php
 				if($r_add_slb){
-					echo "<p>Vehículo disponibilizado para alquiler, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
+					echo "<p>Vehículo disponibilizado para vender, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
 				}
 				else{
-					echo "<p>No se pudo disponibilizar el vehículo para alquiler, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
+					echo "<p>No se pudo disponibilizar el vehículo para vender, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
 				}
 			?>
 		</main>

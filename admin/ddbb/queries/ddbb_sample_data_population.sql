@@ -34,7 +34,7 @@ INSERT INTO marcas(nombre,descripcion) VALUES
 	("Suzuki","N/A"),
 	("Toyota","N/A"),
 	("Volkswagen","N/A"),
-	("Volvo","N/A")
+	("Volvo","N/A"),
 	("ZNA","N/A")
 ;
 

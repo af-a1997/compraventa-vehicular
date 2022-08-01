@@ -65,7 +65,7 @@
 			
 			// If a client with this ID was found, return its info in an array, otherwise returns null content.
 			if($res){
-				$o = new Users();
+				$o = new Client();
 				
 				$o->nro_id_u = $res["nro_id_u"];
 				$o->nombre = $res["nombre"];

@@ -31,7 +31,7 @@
         }
 	
         public function ART_Add(){
-            $sql_query_adq_reg = "INSERT INTO $this->tbl (tiempo, precio, estado_adq, kilometraje_adq, divisa_precio, id_del_adquirido) VALUES ('$this->tiempo', $this->precio, '$this->estado_adq', $this->kilometraje_adq, $this->divisa_precio, $this->id_del_adquirido);";
+            $sql_query_adq_reg = "INSERT INTO $this->tbl (id_reg_veh, divisa_precio, valor_venta, momento_pub, detalles, vendedor) VALUES ($this->id_reg_veh, $this->divisa_precio, $this->valor_venta, '$this->momento_pub', '$this->detalles', $this->vendedor);";
             
             $r = mysqli_query($this->conn, $sql_query_adq_reg);
             
