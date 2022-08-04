@@ -1,6 +1,6 @@
 <?php
 	class Taxicabs{
-		// TODO: finish editing functions.
+		// TODO: finish editing functions, they were duped from [Vehicles] class.
 		
 		private $id_remise;
 		private $nombres;
@@ -51,7 +51,7 @@
 			$arr_list_veh = null;
 			
 			while($res = mysqli_fetch_assoc($rt_db)){
-				$o = new Vehicles();
+				$o = new Taxicabs();
 				
 				$o->idno = $res["idno"];
 				$o->modelo = $res["modelo"];
@@ -77,7 +77,7 @@
 			$arr_list_veh_for_dd = null;
 			
 			while($res = mysqli_fetch_assoc($rt_db)){
-				$o = new Vehicles();
+				$o = new Taxicabs();
 				
 				$o->idno = $res["idno"];
 				$o->modelo = $res["modelo"];
@@ -98,7 +98,7 @@
 			$res = mysqli_fetch_assoc($retorno);
 			
 			if($res){
-				$o = new Vehicles();
+				$o = new Taxicabs();
 				
 				$o->idno = $res["idno"];
 				$o->modelo = $res["modelo"];

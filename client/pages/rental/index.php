@@ -79,47 +79,46 @@
                 <div class="col-lg-9 col-md-12">
                     <div class="row pb-3">
                     <?php
-                        $printed = 0;
                         $year_fab = "";
                         $avail_flavor_text = "";
 
-                        foreach($o_crnt_list as $ocrntl){
-                            if($ocrntl->disponibilidad != 0){
-                                if($ocrntl->vyf == 0) $year_fab = "Año desc.";
-                                else $year_fab = $ocrntl->vyf;
-
-                                if($ocrntl->disponibilidad == 1){
-                                    $avail_flavor_text = "<span style=\"color: red;\">¡Último disponible!</span>";
-                                }
-                                else{
-                                    $avail_flavor_text = $ocrntl->disponibilidad." unidades disp.";
-                                }
+                        if($o_crnt_list != null){
+                            foreach($o_crnt_list as $ocrntl){
+                                if($ocrntl->disponibilidad != 0){
+                                    if($ocrntl->vyf == 0) $year_fab = "Año desc.";
+                                    else $year_fab = $ocrntl->vyf;
     
-                                echo "
-                                    <div class=\"col-lg-4 col-md-6 col-sm-12 pb-1\">
-                                        <div class=\"card product-item border-0 mb-4\">
-                                            <div class=\"card-body border-left border-right text-center p-0 pt-4 pb-3\">
-                                                <h6 class=\"text-truncate mb-3\">$ocrntl->bna $ocrntl->vmo ($year_fab)</h6>
-                                                <div class=\"d-flex justify-content-center\">
-                                                    <h6>$ocrntl->valor_diario_alq $ocrntl->cab</h6>
+                                    if($ocrntl->disponibilidad == 1){
+                                        $avail_flavor_text = "<span style=\"color: red;\">¡Último disponible!</span>";
+                                    }
+                                    else{
+                                        $avail_flavor_text = $ocrntl->disponibilidad." unidades disp.";
+                                    }
+        
+                                    echo "
+                                        <div class=\"col-lg-4 col-md-6 col-sm-12 pb-1\">
+                                            <div class=\"card product-item border-0 mb-4\">
+                                                <div class=\"card-body border-left border-right text-center p-0 pt-4 pb-3\">
+                                                    <h6 class=\"text-truncate mb-3\">$ocrntl->bna $ocrntl->vmo ($year_fab)</h6>
+                                                    <div class=\"d-flex justify-content-center\">
+                                                        <h6>$ocrntl->valor_diario_alq $ocrntl->cab</h6>
+                                                    </div>
+                                                    <div class=\"d-flex justify-content-center\">
+                                                    <h6>$avail_flavor_text</h6>
+                                                    </div>
                                                 </div>
-                                                <div class=\"d-flex justify-content-center\">
-                                                <h6>$avail_flavor_text</h6>
+                                                <div class=\"card-footer d-flex justify-content-between bg-light border\">
+                                                    <a href=\"./do/Details.php?id_rnt=$ocrntl->id_art_alq\" class=\"btn btn-sm text-dark p-0\"><i class=\"fas fa-eye text-primary mr-1\"></i>Detalles</a>
+                                                    <a href=\"./do/Rent.php?id_rnt=$ocrntl->id_art_alq\" class=\"btn btn-sm text-dark p-0\"><i class=\"fas fa-key text-primary mr-1\"></i>Alquilar</a>
                                                 </div>
-                                            </div>
-                                            <div class=\"card-footer d-flex justify-content-between bg-light border\">
-                                                <a href=\"./do/Details.php?id_rnt=$ocrntl->id_art_alq\" class=\"btn btn-sm text-dark p-0\"><i class=\"fas fa-eye text-primary mr-1\"></i>Detalles</a>
-                                                <a href=\"./do/Rent.php?id_rnt=$ocrntl->id_art_alq\" class=\"btn btn-sm text-dark p-0\"><i class=\"fas fa-key text-primary mr-1\"></i>Alquilar</a>
                                             </div>
                                         </div>
-                                    </div>
-                                ";
-    
-                                $printed++;
+                                    ";
+                                }
                             }
                         }
-                            
-                        if($printed == 0){
+                        
+                        else{
                             echo "<p style=\"text-align: center;\">No hay vehículos disponibles para alquilar.</p>";
                         }
                     ?>

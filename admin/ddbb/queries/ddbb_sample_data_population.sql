@@ -2,6 +2,33 @@
 
 USE gestion_veh;
 
+-- Empties tables and reset their auto increment values to assist with testing.
+DELETE FROM adquisiciones;
+DELETE FROM remises;
+DELETE FROM historial_alquiler;
+DELETE FROM seleccion_alquiler;
+DELETE FROM a_vender;
+DELETE FROM divisas;
+DELETE FROM registros;
+DELETE FROM usuarios;
+DELETE FROM puesto;
+DELETE FROM vehiculos;
+DELETE FROM tipo_veh;
+DELETE FROM marcas;
+
+ALTER TABLE a_vender AUTO_INCREMENT = 1;
+ALTER TABLE adquisiciones AUTO_INCREMENT = 1;
+ALTER TABLE divisas AUTO_INCREMENT = 1;
+ALTER TABLE historial_alquiler AUTO_INCREMENT = 1;
+ALTER TABLE marcas AUTO_INCREMENT = 1;
+ALTER TABLE puesto AUTO_INCREMENT = 1;
+ALTER TABLE registros AUTO_INCREMENT = 1;
+ALTER TABLE remises AUTO_INCREMENT = 1;
+ALTER TABLE seleccion_alquiler AUTO_INCREMENT = 1;
+ALTER TABLE tipo_veh AUTO_INCREMENT = 1;
+ALTER TABLE usuarios AUTO_INCREMENT = 1;
+ALTER TABLE vehiculos AUTO_INCREMENT = 1;
+
 INSERT INTO tipo_veh(nombre,descripcion) VALUES
 	("Automóvil","Auto normal."),
     ("Camioneta","Auto grande."),
@@ -69,7 +96,14 @@ INSERT INTO usuarios(nombre,apellidos,nombre_usuario,clave,cedula_identidad,emai
 	("Un tal","Fulano","fulano","12345678",12345678,"hola2@example.com","Placeholder","000000000","00000000",NOW(),2)
 ;
 
-INSERT INTO seleccion_alquiler(id_reg_veh, id_divisa, valor_diario_alq, disponibilidad) VALUES (1,2,1200,1);
+INSERT INTO seleccion_alquiler(id_reg_veh, id_divisa, valor_diario_alq, disponibilidad) VALUES
+	(1,2,1200,1)
+;
+
 INSERT INTO historial_alquiler(momento_alquilado, momento_devolucion, estado_alquiler, id_veh_alquilado, no_cli) VALUES
 	("2022-07-01 00:00:00",NOW(),2,1,1)
+;
+
+INSERT INTO remises(nombres,apellidos,cedula_identidad,tel_cel,tel_fijo,email,ubicacion_residencia,costo_d,costo_espera_h,divisa_precio,id_reg_veh) VALUES
+	("Testing", "Tester", 76543210, "+500", "+300", "hello3@example.com","Placeholder",1000,50,2,1)
 ;
