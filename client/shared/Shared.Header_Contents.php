@@ -3,7 +3,7 @@
     <!-- There's a top header at [/client/shared/Shared.Topbar.php] which may or may not be included later on. -->
     <div class="row align-items-center py-3 px-xl-5">
         <div class="col-lg-3 d-none d-lg-block">
-            <a href="" class="text-decoration-none">
+            <a href=/ class="text-decoration-none" title="Página inicial">
                 <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">C</span>ompraventa</h1>
             </a>
         </div>
