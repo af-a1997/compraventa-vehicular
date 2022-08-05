@@ -8,9 +8,10 @@
             </a>
         </div>
         <div class="col-lg-6 col-6 text-left">
-            <form action="/client/actions/Actions.search.php">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Buscar vehículos aquí">
+            <form action="/client/pages/directory/vehicles/do/Search.php" method=GET>
+                <div class=input-group>
+                    <input name=model_name class="form-control" placeholder="Buscar vehículos en el directorio (solo por modelo)">
+
                     <div class="input-group-append">
                         <span class="input-group-text bg-transparent text-primary">
                             <i class="fa fa-search"></i>

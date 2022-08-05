@@ -32,43 +32,12 @@
     </head>
 
     <body>
-        <?php include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.Header_Contents.php"; ?>
-
-        <div class="container-fluid py-5">
-            <div class="row border-top px-xl-5">
-                <div class="col-lg-12">
-                    <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-                        <a href="/" class="text-decoration-none d-block d-lg-none">
-                            <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">C</span>ompraventa</h1>
-                        </a>
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                            <div class="navbar-nav mr-auto py-0">
-                                <a href="/" class="nav-item nav-link">Inicio</a>
-                                <a href="/client/pages/articles" class="nav-item nav-link">En venta</a>
-                                <a href="/client/pages/rental" class="nav-item nav-link active">Para alquilar</a>
-                                <a href="/client/pages/rental/taxicab" class="nav-item nav-link">Remise</a>
-                            </div>
-                            <div class="navbar-nav ml-auto py-0">
-                                <?php
-                                    if(!isset($_SESSION["client_session"])){
-                                        echo "
-                                            <a href=\"/login/client/\" class=\"nav-item nav-link\">Iniciar sesión</a>
-                                            <a href=\"/client/pages/register/\" class=\"nav-item nav-link\">Registrarse</a>
-                                        ";
-                                    }
-                                    else{
-                                        echo "<a href=\"/login/client/act/Logout.php\" class=\"nav-item nav-link\">Cerrar sesión</a>";
-                                    }
-                                ?>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
+        <?php
+            include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.Header_Contents.php";
+            include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.Top_Links.php";
+            
+            outTopHeader(2);
+        ?>
 
         <div class="container-fluid pt-5">
             <div class="row px-xl-5">
@@ -99,16 +68,16 @@
                                 <div class="col-md-6">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item px-0">
+                                            <b>Marca:</b> <?php echo $o_crnt_info->bna; ?>
+                                        </li>
+                                        <li class="list-group-item px-0">
+                                            <b>Modelo:</b> <?php echo $o_crnt_info->vmo; ?>
+                                        </li>
+                                        <li class="list-group-item px-0">
+                                            <b>Año:</b> <?php echo $year_fab; ?>
+                                        </li>
+                                        <li class="list-group-item px-0">
                                             <b>Puertas:</b> <?php echo $o_crnt_info->vdo; ?>
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            <b>Transmisión:</b> <?php echo $transmission_naming; ?>
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            <b>Tipo de combustible:</b> <?php echo $o_crnt_info->vft; ?>
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            <b>Capacidad de tanque:</b> <?php echo $fuel_capacity_format; ?>
                                         </li>
                                     </ul> 
                                 </div>
@@ -118,13 +87,13 @@
                                             <b>Motor:</b> <?php echo $o_crnt_info->ven; ?>
                                         </li>
                                         <li class="list-group-item px-0">
-                                            <b>Marca:</b> <?php echo $o_crnt_info->bna; ?>
+                                            <b>Transmisión:</b> <?php echo $transmission_naming; ?>
                                         </li>
                                         <li class="list-group-item px-0">
-                                            <b>Modelo:</b> <?php echo $o_crnt_info->vmo; ?>
+                                            <b>Tipo de combustible:</b> <?php echo $o_crnt_info->vft; ?>
                                         </li>
                                         <li class="list-group-item px-0">
-                                            <b>Año:</b> <?php echo $year_fab; ?>
+                                            <b>Capacidad de tanque:</b> <?php echo $fuel_capacity_format; ?>
                                         </li>
                                     </ul> 
                                 </div>

@@ -3,6 +3,7 @@
         private $id_tipo;
         private $nombre;
         private $descripcion;
+        private $icono_fa;
         
         private $conn;
         private $tbl;
@@ -25,8 +26,9 @@
             return $this->$key = $value;
         }
 
+        // Lists categories for previews or lists of filters along with their icons, descriptions are displayed in the category's list of articles.
         public function CVCAT_ShowAllNoD(){
-            $sql_query_list_all_veh = "SELECT id_tipo, nombre FROM $this->tbl;";
+            $sql_query_list_all_veh = "SELECT id_tipo, nombre, icono_fa FROM $this->tbl;";
             $rt_db = mysqli_query($this->conn, $sql_query_list_all_veh);
             
             $arr_list_vcat = null;
@@ -36,6 +38,26 @@
                 
                 $o->id_tipo = $res["id_tipo"];
                 $o->nombre = $res["nombre"];
+                $o->icono_fa = $res["icono_fa"];
+                
+                $arr_list_vcat[] = $o;
+            }
+            return $arr_list_vcat;
+        }
+
+        public function CVCAT_ShowOne(){
+            $sql_query_list_all_veh = "SELECT * FROM $this->tbl;";
+            $rt_db = mysqli_query($this->conn, $sql_query_list_all_veh);
+            
+            $arr_list_vcat = null;
+            
+            while($res = mysqli_fetch_assoc($rt_db)){
+                $o = new C_VCAT();
+                
+                $o->id_tipo = $res["id_tipo"];
+                $o->nombre = $res["nombre"];
+                $o->descripcion = $res["descripcion"];
+                $o->icono_fa = $res["icono_fa"];
                 
                 $arr_list_vcat[] = $o;
             }

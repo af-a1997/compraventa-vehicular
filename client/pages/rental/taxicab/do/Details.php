@@ -74,7 +74,7 @@
                                         <li class="list-group-item px-0">
                                             <b>Teléfonos:</b> <?php echo "$o_ctxc_info->tel_cel"." "."$o_ctxc_info->tel_fijo"; ?>
                                         </li>
-                                    </ul> 
+                                    </ul>
                                 </div>
                                 <div class="col-md-6">
                                     <ul class="list-group list-group-flush">
@@ -90,7 +90,7 @@
                                         <li class="list-group-item px-0">
                                             <b>Costo espera por hora:</b> <?php echo "$o_ctxc_info->costo_espera_h"." "."$o_ctxc_info->cab"; ?>
                                         </li>
-                                    </ul> 
+                                    </ul>
                                 </div>
                             </div>
                         </div>

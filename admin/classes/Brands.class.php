@@ -53,6 +53,34 @@ class Brands{
 		return $arr_list_brand;
 	}
 	
+	public function BRAND_ShowAllWithVehStat(){
+		/*
+		 * This was quite harder to figure out than what I first thought, but it works now.
+		 * I didn't know that COUNT() returns a total of non-null values, which is <<<probably>>> why the other rows other than "BMW" (from the sample data) weren't showing up in the list.
+		 * With this, even brands with 0 vehicles registered will show up.
+		 * 
+		 * Credits to solution: https://stackoverflow.com/a/58572751 (user GMB from Stack Overflow).
+		 * */
+		$sql_query_list_all_vcat = "SELECT b.*, (SELECT COUNT(*) FROM vehiculos v WHERE v.marca = b.idno) AS vcc FROM $this->tbl b;";
+		
+		$rt_db = mysqli_query($this->conn, $sql_query_list_all_vcat);
+		
+		$arr_list_brand = null;
+		
+		while($res = mysqli_fetch_assoc($rt_db)){
+			$o = new Veh_Cat();
+			
+			$o->idno = $res["idno"];
+			$o->nombre = $res["nombre"];
+			$o->descripcion = $res["descripcion"];
+			$o->url_img = $res["url_img"];
+			$o->vcc = $res["vcc"];
+			
+			$arr_list_brand[] = $o;
+		}
+		return $arr_list_brand;
+	}
+	
 	public function BRAND_ShowOne(){
 		$sql_query_list_1brand ="SELECT * FROM $this->tbl WHERE idno=$this->idno";
 		$ret_consult = mysqli_query($this->conn, $sql_query_list_1brand);

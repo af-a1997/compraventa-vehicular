@@ -22,8 +22,13 @@
 
     <body>
         <?php include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.Header_Contents.php"; ?>
+        <!--
+            Won't include [Shared.Top_Links.php] and run the function (for now at least), because there are a few unique elements mixed in-between, most notably the category menu. So...
 
-        <!-- Navbar Start -->
+            TODO: try to find a fix for this later.
+        -->
+
+        <!-- Navbar start -->
         <div class="container-fluid mb-5">
             <div class="row border-top px-xl-5">
                 <div class="col-lg-3 d-none d-lg-block">
@@ -81,12 +86,12 @@
                 </div>
             </div>
         </div>
-        <!-- Navbar End -->
+        <!-- Navbar end -->
 
         <!-- Shop start -->
         <div class="container-fluid pt-5">
             <div class="row px-xl-5">
-                <!-- Shop sidebar Start -->
+                <!-- Shop sidebar start -->
                 <div class="col-lg-3 col-md-12">
                     <div class="border-bottom mb-4 pb-4">
                         <h5 class="font-weight-semi-bold mb-4">Filtrar por precios</h5>
@@ -102,9 +107,9 @@
                         <i style="color: red;">No implementado</i>
                     </div>
                 </div>
-                <!-- Shop sidebar End -->
+                <!-- Shop sidebar end -->
 
-                <!-- Shop Product Start -->
+                <!-- Shop products start -->
                 <div class="col-lg-9 col-md-12">
                     <div class="row pb-3">
                         <!--

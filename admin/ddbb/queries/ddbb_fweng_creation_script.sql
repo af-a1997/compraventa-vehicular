@@ -42,6 +42,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `gestion_veh`.`tipo_veh` (
   `id_tipo` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(30) NOT NULL,
+  `icono_fa` VARCHAR(100) NOT NULL COMMENT 'Ícono utilizado en algunas secciones del sitio. Definir SOLAMENTE clase de Font Awesome. Consultar: https://fontawesome.com/search?m=free&s=solid',
   `descripcion` LONGTEXT NULL,
   PRIMARY KEY (`id_tipo`))
 ENGINE = InnoDB;

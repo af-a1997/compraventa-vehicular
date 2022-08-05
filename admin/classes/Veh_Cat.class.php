@@ -4,6 +4,7 @@ class Veh_Cat{
 	private $id_tipo;
 	private $nombre;
 	private $descripcion;
+	private $icono_fa;
 	
 	private $conn;
 	private $tbl;
@@ -27,14 +28,14 @@ class Veh_Cat{
 	}
 	
 	public function VCAT_Add(){
-		$sql_query_veh_reg = "INSERT INTO $this->tbl (nombre, descripcion) VALUES ('$this->nombre', '$this->descripcion');";
+		$sql_query_veh_reg = "INSERT INTO $this->tbl (nombre, descripcion, icono_fa) VALUES ('$this->nombre', '$this->descripcion', '$this->icono_fa');";
 		
 		$r = mysqli_query($this->conn, $sql_query_veh_reg);
 		return $r;
 	}
 	
 	public function VCAT_ShowAll(){
-		$sql_query_list_all_vcat = "SELECT * FROM $this->tbl;";
+		$sql_query_list_all_vcat = "SELECT * FROM $this->tbl";
 		$rt_db = mysqli_query($this->conn, $sql_query_list_all_vcat);
 		
 		$arr_list_vcat = null;
@@ -45,6 +46,7 @@ class Veh_Cat{
 			$o->id_tipo = $res["id_tipo"];
 			$o->nombre = $res["nombre"];
 			$o->descripcion = $res["descripcion"];
+			$o->icono_fa = $res["icono_fa"];
 			
 			$arr_list_vcat[] = $o;
 		}
@@ -63,6 +65,7 @@ class Veh_Cat{
 			$o->id_tipo = $res["id_tipo"];
 			$o->nombre = $res["nombre"];
 			$o->descripcion = $res["descripcion"];
+			$o->icono_fa = $res["icono_fa"];
 			
 			$vcat_info_r = $o;
 		}
@@ -73,7 +76,7 @@ class Veh_Cat{
 	}
 	
 	public function VCAT_UpdateOne(){
-		$sql_query_upd_1vcat = "UPDATE $this->tbl SET nombre='$this->nombre', descripcion='$this->descripcion' WHERE id_tipo=$this->id_tipo";
+		$sql_query_upd_1vcat = "UPDATE $this->tbl SET nombre='$this->nombre', descripcion='$this->descripcion', icono_fa='$this->icono_fa' WHERE id_tipo=$this->id_tipo";
 		$r = mysqli_query($this->conn, $sql_query_upd_1vcat);
 		
 		return $r;

@@ -29,11 +29,11 @@ ALTER TABLE tipo_veh AUTO_INCREMENT = 1;
 ALTER TABLE usuarios AUTO_INCREMENT = 1;
 ALTER TABLE vehiculos AUTO_INCREMENT = 1;
 
-INSERT INTO tipo_veh(nombre,descripcion) VALUES
-	("Automóvil","Auto normal."),
-    ("Camioneta","Auto grande."),
-    ("Camión","Vehículo enorme de carga profesional/mediana."),
-    ("Moto","Una bici a chorro.")
+INSERT INTO tipo_veh(nombre,icono_fa,descripcion) VALUES
+	("Automóvil","fa-car","Auto normal."),
+    ("Camioneta","fa-van-shuttle","Auto grande."),
+    ("Camión","fa-truck","Vehículo enorme de carga profesional/mediana."),
+    ("Moto","fa-motorcycle","Una bici a chorro.")
 ;
 
 INSERT INTO marcas(nombre,descripcion) VALUES

@@ -33,21 +33,83 @@
 			return $this->$key = $value;
 		}
 
+		public function CVEH_ShowAllForList(){
+			$sql_query_list_sqr_veh = "SELECT $this->tbl.*, marcas.nombre AS bna, tipo_veh.nombre AS vty FROM $this->tbl INNER JOIN marcas ON $this->tbl.marca = marcas.idno INNER JOIN tipo_veh ON $this->tbl.categorizacion = tipo_veh.id_tipo;";
+			$rt_db = mysqli_query($this->conn, $sql_query_list_sqr_veh);
+			
+			$arr_list_veh = null;
+			
+			while($res = mysqli_fetch_assoc($rt_db)){
+				$o = new C_Vehicles();
+				
+				// Base
+				$o->idno = $res["idno"];
+				$o->modelo = $res["modelo"];
+				$o->unidades = $res["unidades"];
+				$o->anho_fab = $res["anho_fab"];
+				$o->puertas = $res["puertas"];
+				$o->transmision = $res["transmision"];
+				$o->combustible_tipo = $res["combustible_tipo"];
+				$o->combustible_capac = $res["combustible_capac"];
+				$o->motor = $res["motor"];
+				$o->marca = $res["marca"];
+				$o->categorizacion = $res["categorizacion"];
+				
+				// Joins
+				$o->bna = $res["bna"];
+				$o->bna = $res["vty"];
+				
+				$arr_list_veh[] = $o;
+			}
+			return $arr_list_veh;
+		}
+
+		public function CVEH_Search($search_param = ""){
+			$sql_query_list_sqr_veh = "SELECT $this->tbl.*, marcas.nombre AS bna, tipo_veh.nombre AS vty FROM $this->tbl INNER JOIN marcas ON $this->tbl.marca = marcas.idno INNER JOIN tipo_veh ON $this->tbl.categorizacion = tipo_veh.id_tipo WHERE $this->tbl.modelo LIKE '%".$search_param."%';";
+			$rt_db = mysqli_query($this->conn, $sql_query_list_sqr_veh);
+			
+			$arr_list_veh = null;
+			
+			while($res = mysqli_fetch_assoc($rt_db)){
+				$o = new C_Vehicles();
+				
+				// Base
+				$o->idno = $res["idno"];
+				$o->modelo = $res["modelo"];
+				$o->unidades = $res["unidades"];
+				$o->anho_fab = $res["anho_fab"];
+				$o->puertas = $res["puertas"];
+				$o->transmision = $res["transmision"];
+				$o->combustible_tipo = $res["combustible_tipo"];
+				$o->combustible_capac = $res["combustible_capac"];
+				$o->motor = $res["motor"];
+				$o->marca = $res["marca"];
+				$o->categorizacion = $res["categorizacion"];
+				
+				// Joins
+				$o->bna = $res["bna"];
+				$o->vty = $res["vty"];
+				
+				$arr_list_veh[] = $o;
+			}
+			return $arr_list_veh;
+		}
+
         // List used for dropdown menu when registering acquisition and/or license plate.
         public function CVEH_GetCountByVCAT($cat_no){
-            $sql_query_list_all_veh = "SELECT COUNT(categorizacion) AS total_veh_cat FROM vehiculos WHERE categorizacion = $cat_no;";
-            $rt_db = mysqli_query($this->conn, $sql_query_list_all_veh);
+            $sql_query_list_sqr_veh = "SELECT COUNT(categorizacion) AS total_veh_cat FROM vehiculos WHERE categorizacion = $cat_no;";
+            $rt_db = mysqli_query($this->conn, $sql_query_list_sqr_veh);
             
-            $arr_list_vcat_count = null;
+            $obt_arts_on_vcat_count = null;
             
             while($res = mysqli_fetch_assoc($rt_db)){
                 $o = new C_Vehicles();
                 
                 $o->total_veh_cat = $res["total_veh_cat"];
                 
-                $arr_list_vcat_count[] = $o;
+                $obt_arts_on_vcat_count = $o;
             }
-            return $arr_list_vcat_count;
+            return $obt_arts_on_vcat_count;
         }
     }
 ?>

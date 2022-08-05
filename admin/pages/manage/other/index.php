@@ -1,8 +1,20 @@
 <!DOCTYPE html>
 
 <?php
+	include "../../../shared/Utils.Admin.SessionCheck.php";
+	
 	include "../../../shared/Constant_Strings[A].php";
 	include "../../../../shared/utils/Utils.Common_Strings.php";
+	
+	include "../../../classes/Utils_ClassLoader.class.php";
+
+	$o_vcat = new Veh_Cat();
+	$o_brn = new Brands();
+	$o_ccy = new Currencies();
+
+	$o_vcat_list = $o_vcat->VCAT_ShowAll();
+	$o_brn_list = $o_brn->BRAND_ShowAllWithVehStat();
+	$o_ccy_list = $o_ccy->CCY_ShowAll();
 ?>
 
 <html lang="es">
@@ -30,7 +42,7 @@
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
-							<?php include "../../../../shared/Snippets.Adm_Logout.php"; ?>
+							<?php include "../../../shared/Snippets.Adm_Logout.php"; ?>
 							
 							<!-- Hamburger menu that shows the navigation menu from the left in wide screens, when the display width is not big enough (most notably on phone screens). -->
 							
@@ -65,27 +77,32 @@
 									<table class="table align-items-center mb-0">
 										<thead>
 											<tr>
-												<th class="text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Identificador</th>
+												<th class="text-uppercase text-white opacity-8 text-xxs font-weight-bolder" style="width: 60px;">Identificador</th>
 												<th class="text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Nombre</th>
-												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Acciones</th>
+												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder" style="width: 60px;">Acciones</th>
 											</tr>
 										</thead>
-										<!-- TODO: create server-side loop structure to generate rows per car registered in the database. -->
 										<tbody>
-											<tr>
-												<td class="align-middle text-center text-sm">1</td>
-												<td class="align-middle text-center text-sm">Automóvil</td>
-												<td>
-													<a href="javascript:;" class="text-white opacity-8 font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Renombrar"><i class="material-icons opacity-10">title</i></a>
-													<a href="javascript:;" class="text-white opacity-8 font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Eliminar"><i class="material-icons opacity-10">delete</i></a>
-												</td>
-											</tr>
+											<?php
+												foreach($o_vcat_list as $vcat_e){
+													echo "
+														<tr>
+															<td class=\"align-middle text-center text-sm\">$vcat_e->id_tipo</td>
+															<td class=\"text-sm\">$vcat_e->nombre</td>
+															<td>
+																<a href=\"./do/brn/Rename.php?id_vcat=$vcat_e->id_tipo\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=tooltip data-original-title=\"Renombrar\"><i class=\"material-icons opacity-10\">title</i></a>
+																<a href=\"./do/brn/Delete.php?id_vcat=$vcat_e->id_tipo\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=tooltip data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
+															</td>
+														</tr>
+													";
+												}
+											?>
 										</tbody>
 									</table>
 								</div>
 							</div>
 			
-							<button class="btn btn-success"><i class="material-icons opacity-10">playlist_add_check</i> Nueva categoría</button>
+							<button id=id_btn_new_vcat class="btn btn-success"><i class="material-icons opacity-10">playlist_add_check</i> Nueva categoría</button>
 						</div>
 					</div>
 				</div>
@@ -111,31 +128,46 @@
 												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Acciones</th>
 											</tr>
 										</thead>
-										<!-- TODO: create server-side loop structure to generate rows per car registered in the database. -->
 										<tbody>
-											<tr>
-												<td>
-													<div class="d-flex px-2 py-1">
-														<div><img src="../../../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1"></div>
-														<div class="d-flex flex-column justify-content-center">
-															<h6 class="mb-0 text-sm">BMW</h6>
-															<p class="text-xs text-white opacity-8 mb-0">1 veh. registrado</p>
-														</div>
-													</div>
-												</td>
-												<td class="align-middle text-center text-sm">N/A</td>
-												<td>
-													<a href="javascript:;" class="text-white opacity-8 font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Listar vehículos registrados de esta marca"><i class="material-icons opacity-10">zoom_in</i></a>
-													<a href="javascript:;" class="text-white opacity-8 font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Editar"><i class="material-icons opacity-10">edit</i></a>
-													<a href="javascript:;" class="text-white opacity-8 font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Eliminar"><i class="material-icons opacity-10">delete</i></a>
-												</td>
-											</tr>
+											<?php
+												$fv_reg_veh_by_brn = "";
+
+												foreach($o_brn_list as $be){
+													if($be->vcc == 0)
+														$fv_reg_veh_by_brn = "No hay vehículos registrados de esta marca.";
+													else if($be->vcc == 1)
+														$fv_reg_veh_by_brn = "Solo hay un vehículo registrado para esta marca.";
+													else if($be->vcc > 1)
+														$fv_reg_veh_by_brn = $be->vcc_2." vehículos registrados.";
+													
+
+													echo "
+														<tr>
+															<td>
+																<div class=\"d-flex px-2 py-1\">
+																	<div><img src=\"$be->url_img\" class=\"avatar avatar-sm me-3 border-radius-lg\"></div>
+																	<div class=\"d-flex flex-column justify-content-center\">
+																		<h6 class=\"mb-0 text-sm\">$be->nombre</h6>
+																		<p class=\"text-xs text-white opacity-8 mb-0\">$fv_reg_veh_by_brn</p>
+																	</div>
+																</div>
+															</td>
+															<td class=\"align-middle text-center text-sm\">$be->descripcion</td>
+															<td>
+																<a href=\"./do/brn/List_By_Brand.php?id_brn=$be->idno\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Listar vehículos registrados de esta marca\"><i class=\"material-icons opacity-10\">zoom_in</i></a>
+																<a href=\"./do/brn/Edit.php?id_brn=$be->idno\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
+																<a href=\"./do/brn/Delete.php?id_brn=$be->idno\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
+															</td>
+														</tr>
+													";
+												}
+											?>
 										</tbody>
 									</table>
 								</div>
 							</div>
 			
-							<button class="btn btn-success"><i class="material-icons opacity-10">extension</i> Registrar marca</button>
+							<button id=id_btn_new_brn class="btn btn-success"><i class="material-icons opacity-10">extension</i> Registrar marca</button>
 						</div>
 					</div>
 				</div>
@@ -161,37 +193,50 @@
 												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Acciones</th>
 											</tr>
 										</thead>
-										<!-- TODO: create server-side loop structure to generate rows per car registered in the database. -->
 										<tbody>
-											<tr>
-												<td>
-													<div class="d-flex px-2 py-1">
-														<!-- <div><img src="../../../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1"></div> -->
-														<div class="d-flex flex-column justify-content-center">
-															<h6 class="mb-0 text-sm">Peso Uruguayo</h6>
-															<p class="text-xs text-white opacity-8 mb-0">UYU</p>
-														</div>
-													</div>
-												</td>
-												<td>
-													<div class="d-flex px-2 py-1">
-														<div class="d-flex flex-column justify-content-center">
-															<h6 class="mb-0 text-sm">$U</h6>
-															<p class="text-xs text-white opacity-8 mb-0">Después del número</p>
-														</div>
-													</div>
-												</td>
-												<td>
-													<a href="javascript:;" class="text-white opacity-8 font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Editar"><i class="material-icons opacity-10">edit</i></a>
-													<a href="javascript:;" class="text-white opacity-8 font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Eliminar"><i class="material-icons opacity-10">delete</i></a>
-												</td>
-											</tr>
+											<?php
+												if($o_ccy_list != null){
+													$symbol_placement = "";
+
+													foreach($o_ccy_list as $oce){
+														if($oce->pos_sim == 0) $symbol_placement = "Antes del número";
+														else if($oce->pos_sim == 1) $symbol_placement = "Después del número";
+														else $symbol_placement = "Antes o después del número";
+
+														echo "
+															<tr>
+																<td>
+																	<div class=\"d-flex px-2 py-1\">
+																		<div class=\"d-flex flex-column justify-content-center\">
+																			<h6 class=\"mb-0 text-sm\">$oce->nombre</h6>
+																			<p class=\"text-xs text-white opacity-8 mb-0\">$oce->abr</p>
+																		</div>
+																	</div>
+																</td>
+																<td>
+																	<div class=\"d-flex px-2 py-1\">
+																		<div class=\"d-flex flex-column justify-content-center\">
+																			<h6 class=\"mb-0 text-sm\">$oce->simbolizacion</h6>
+																			<p class=\"text-xs text-white opacity-8 mb-0\">$symbol_placement</p>
+																		</div>
+																	</div>
+																</td>
+																<td>
+																	<a href=\"./do/ccy/Edit.php?id_ccy=$oce->id_moneda\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
+																	<a href=\"./do/ccy/Delete.php?id_ccy=$oce->id_moneda\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
+																</td>
+															</tr>
+														";
+													}
+												}
+												else echo "<tr><td colspan=3>No hay divisas registradas</td></tr>";
+											?>
 										</tbody>
 									</table>
 								</div>
 							</div>
 			
-							<button class="btn btn-success"><i class="material-icons opacity-10">card_membership</i> Nueva divisa</button>
+							<button id=id_btn_new_ccy class="btn btn-success"><i class="material-icons opacity-10">card_membership</i> Nueva divisa</button>
 						</div>
 					</div>
 				</div>
