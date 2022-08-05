@@ -28,7 +28,8 @@ class Brands{
 	}
 	
 	public function BRAND_Add(){
-		$sql_query_brand_reg = "INSERT INTO $this->tbl (nombre, descripcion, url_img) VALUES ('$this->nombre', '$this->descripcion', '$this->url_img');";
+		$sql_query_brand_reg = "INSERT INTO $this->tbl (nombre, descripcion, url_img) VALUES ('$this->nombre', \"$this->descripcion\", '$this->url_img');";
+		echo $sql_query_brand_reg;
 		
 		$r = mysqli_query($this->conn, $sql_query_brand_reg);
 		return $r;

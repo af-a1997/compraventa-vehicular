@@ -161,8 +161,8 @@
 	
 		<?php include "../../../../../shared/Imports.Scripts.php"; ?>
 
-		<script src="/admin/res/extras/jquery/ui/jquery-ui.min.js"></script>
-		<script src="/admin/res/extras/jquery/ui.dtpick/jquery.datetimepicker.full.min.js"></script>
+		<script src="/shared/extras/jquery/ui/jquery-ui.min.js"></script>
+		<script src="/shared/extras/jquery/ui.dtpick/jquery.datetimepicker.full.min.js"></script>
 
 		<script>
 			$('#sidebar-choice-5').addClass("active bg-gradient-primary");

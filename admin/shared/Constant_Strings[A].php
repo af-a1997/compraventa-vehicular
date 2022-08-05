@@ -25,6 +25,7 @@
 	const a_n_acq = a_reg."adquisición de vehículo";
 	const a_n_cli = a_reg."cliente";
 	const a_n_veh = a_reg."vehículo";
+	const a_n_brn = a_reg."marca";
 
 	const a_ss_sellable = "Artículos disponibles para vender";
 	const a_ss_rentable = "Vehículos disponibles para alquilar";

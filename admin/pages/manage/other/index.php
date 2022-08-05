@@ -124,8 +124,7 @@
 										<thead>
 											<tr>
 												<th class="text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Nombre</th>
-												<th class="text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Descripción</th>
-												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Acciones</th>
+												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder" style="width: 120px;">Acciones</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -139,21 +138,19 @@
 														$fv_reg_veh_by_brn = "Solo hay un vehículo registrado para esta marca.";
 													else if($be->vcc > 1)
 														$fv_reg_veh_by_brn = $be->vcc_2." vehículos registrados.";
-													
 
 													echo "
 														<tr>
 															<td>
 																<div class=\"d-flex px-2 py-1\">
-																	<div><img src=\"$be->url_img\" class=\"avatar avatar-sm me-3 border-radius-lg\"></div>
+																	<div><a href=\"/user_uploads/brand_logos/$be->url_img\" target=_blank><img src=\"/user_uploads/brand_logos/$be->url_img\" class=\"avatar avatar-sm me-3 border-radius-lg\"></a></div>
 																	<div class=\"d-flex flex-column justify-content-center\">
 																		<h6 class=\"mb-0 text-sm\">$be->nombre</h6>
 																		<p class=\"text-xs text-white opacity-8 mb-0\">$fv_reg_veh_by_brn</p>
 																	</div>
 																</div>
 															</td>
-															<td class=\"align-middle text-center text-sm\">$be->descripcion</td>
-															<td>
+															<td class=\"align-middle text-center\">
 																<a href=\"./do/brn/List_By_Brand.php?id_brn=$be->idno\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Listar vehículos registrados de esta marca\"><i class=\"material-icons opacity-10\">zoom_in</i></a>
 																<a href=\"./do/brn/Edit.php?id_brn=$be->idno\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
 																<a href=\"./do/brn/Delete.php?id_brn=$be->idno\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
@@ -247,6 +244,10 @@
 
 		<script>
 			$('#sidebar-choice-8').addClass("active bg-gradient-primary");
+			
+			$("#id_btn_new_brn").click(function(){
+				location.href = "./new/Brand.php";
+			});
 		</script>
 	</body>
 </html>
