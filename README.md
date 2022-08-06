@@ -6,6 +6,14 @@ Trabajo de conclusión de curso para concretar la carrera **[Informática para I
 
 Se trata de un sitio web relativamente simple, proyectado para proveer servicios de compra y venta de vehículos de toda clase, con panel de administrador para gestionar artículos, categorías y tal.
 
+La documentación se definirá aquí debido a que las wikis no están disponibles para repositorios privados de usuarios gratuitos.
+
+## Modelo DDBB
+
+![EER_sistema_automoviles.mwb.png](admin/ddbb/model/EER_sistema_automoviles.mwb.png?raw=true)
+
+El modelo se encuentra en `/admin/ddbb/models/` tanto en imagen como archivo de modelo de [MySQL Workbench](https://www.mysql.com/products/workbench/).
+
 ## Implementaciones
 
 > :warning: No finalizado
