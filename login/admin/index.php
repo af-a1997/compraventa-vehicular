@@ -11,10 +11,7 @@
 
 <html lang=es>
 	<head>
-		<?php
-			include "../../admin/shared/html_head_setup.php";
-			include "../../admin/shared/Imports.jQuery_UI.php";
-		?>
+		<?php include "../../admin/shared/html_head_setup.php"; ?>
 		
 		<title>Panel de administrador - <?php echo g_login; ?></title>
 	</head>

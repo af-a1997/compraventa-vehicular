@@ -23,7 +23,7 @@
 	<head>
 		<?php include "../../../../../shared/html_head_setup.php"; ?>
 		
-		<title>Panel de administrador - <?php echo a_d_brn." ".$o_brn->nombre; ?></title>
+		<title>Panel de administrador - <?php echo a_d_brn.$o_brn->nombre; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -41,7 +41,7 @@
 							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_d_brn; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_d_brn; ?></h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_d_brn.$o_brn->nombre; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">

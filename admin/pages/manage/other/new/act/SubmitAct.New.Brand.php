@@ -6,10 +6,6 @@
 	include "../../../../../shared/Constant_Strings[A].php";
 	include "../../../../../../shared/utils/Utils.Common_Strings.php";
 	
-	include "../../../../../shared/Utils.Admin.Time.php";
-
-	$credentials = mysqli_connect("localhost","cmman_admin","#V!c2bMr69xo!8%A","gestion_veh") or die ("Hubo un fallo al conectarse a la BBDD, conexión abortada.");
-	
 	$o_brn = new Brands();
 	
 	$o_brn->nombre = $_POST["fln_brn_name"];
@@ -33,10 +29,7 @@
 
 <html lang=es>
 	<head>
-		<?php
-			include "../../../../../shared/html_head_setup.php";
-			include "../../../../../shared/Imports.jQuery_UI.php";
-		?>
+		<?php include "../../../../../shared/html_head_setup.php"; ?>
 		
 		<title>Panel de administrador - <?php echo a_n_brn; ?></title>
 	</head>

@@ -60,10 +60,7 @@
 
 <html lang=es>
 	<head>
-		<?php
-			include "../../../../shared/html_head_setup.php";
-			include "../../../../shared/Imports.jQuery_UI.php";
-		?>
+		<?php include "../../../../shared/html_head_setup.php"; ?>
 		
 		<title>Panel de administrador - <?php echo a_n_cli; ?></title>
 	</head>

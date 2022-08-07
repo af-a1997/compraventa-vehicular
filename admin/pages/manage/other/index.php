@@ -88,10 +88,11 @@
 													echo "
 														<tr>
 															<td class=\"align-middle text-center text-sm\">$vcat_e->id_tipo</td>
-															<td class=\"text-sm\">$vcat_e->nombre</td>
-															<td>
-																<a href=\"./do/brn/Rename.php?id_vcat=$vcat_e->id_tipo\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=tooltip data-original-title=\"Renombrar\"><i class=\"material-icons opacity-10\">title</i></a>
-																<a href=\"./do/brn/Delete.php?id_vcat=$vcat_e->id_tipo\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=tooltip data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
+															<td class=\"text-sm\"><i class=\"fas $vcat_e->icono_fa\"></i> $vcat_e->nombre</td>
+															<td class=\"align-middle text-center\">
+																<a href=\"./do/vcat/Details.php?id_vcat=$vcat_e->id_tipo\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
+																<a href=\"./do/vcat/Edit.php?id_vcat=$vcat_e->id_tipo\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=tooltip data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
+																<a href=\"./do/vcat/Delete.php?id_vcat=$vcat_e->id_tipo\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=tooltip data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
 															</td>
 														</tr>
 													";
@@ -248,6 +249,9 @@
 			
 			$("#id_btn_new_brn").click(function(){
 				location.href = "./new/Brand.php";
+			});
+			$("#id_btn_new_vcat").click(function(){
+				location.href = "./new/VCAT.php";
 			});
 		</script>
 	</body>

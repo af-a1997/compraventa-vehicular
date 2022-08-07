@@ -78,16 +78,18 @@ El modelo se encuentra en `/admin/ddbb/models/` tanto en imagen como archivo de 
    - [ ] Agregar
    - [ ] Editar
    - [ ] Eliminar
- - [ ] Gestión de marcas
+ - [X] Gestión de marcas
    - [X] Listar
+   - [X] Detalles
    - [X] Agregar
-   - [ ] Editar
-   - [ ] Eliminar
- - [ ] Gestión de categorías de vehículos
+   - [X] Editar
+   - [X] Eliminar
+ - [X] Gestión de categorías de vehículos
    - [X] Listar
-   - [ ] Agregar
-   - [ ] Editar
-   - [ ] Eliminar
+   - [X] Detalles
+   - [X] Agregar
+   - [X] Editar
+   - [X] Eliminar
  - [ ] Auto-configuración de BBDD inicial
 
 ### Cliente
@@ -113,22 +115,27 @@ El modelo se encuentra en `/admin/ddbb/models/` tanto en imagen como archivo de 
  - [ ] Sesiones
  - [ ] Gestión de perfil
  - [ ] Publicación de servicios
+   - [ ] Editar
+   - [ ] Suspender
+   - [ ] Eliminar
  - [ ] Gestión de contrato con cliente
 
 ## Configuración
 
-1) Instala [XAMPP](https://www.apachefriends.org/download.html).
+1) Instala y ejecuta [XAMPP](https://www.apachefriends.org/download.html).
 2) Corre el servidor Apache y el servicio MySQL.
 3) Copia los archivos del proyecto al `htdocs` donde se encuentra, normalmente en `C:\xampp\htdocs`
 4) Mediante PMA desde el navegador (accede a `http://localhost/phpmyadmin`) haz las importaciones de los archivos SQL en `/admin/ddbb/queries/`, en este órden:
     1) **`ddbb_fweng_creation_script.sql`:** crea la base de datos y su estructura.
     2) **`ddbb_sample_data_population.sql`:** agrega datos de muestra, ayuda a realizar pruebas.
     3) **`ddbb_users_creation.sql`:** crea los usuarios en el SGBD para cada rol en el sistema.
-5) Accede a `http://localhost/` para visitar la sección del cliente, o `http://localhost/admin/` para visitar la sección del administrador.
-6) Necesitarás credenciales de acceso para visitar la mayoría de los apartados en el sitio:
-    * Administrador:
-        * **Usuario:** `admin`
-        * **Clave:** `12345678`
+5) Desde cualquier navegador, accede a `http://localhost/` para visitar la sección del cliente, o `http://localhost/admin/` para visitar la sección del administrador.
+6) Necesitarás credenciales de acceso para visitar la mayoría de los apartados en el sitio, según si visitas el lado del cliente o del administrado:
     * Cliente:
         * **Usuario:** `fulano`
         * **Clave:** `12345678`
+    * Administrador:
+        * **Usuario:** `admin`
+        * **Clave:** `12345678`
+
+> :warning: **Nota:** sesiones de cliente no funcionan.
