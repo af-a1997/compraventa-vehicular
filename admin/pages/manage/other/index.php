@@ -124,7 +124,7 @@
 										<thead>
 											<tr>
 												<th class="text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Nombre</th>
-												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder" style="width: 120px;">Acciones</th>
+												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder" style="width: 140px;">Acciones</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -151,6 +151,7 @@
 																</div>
 															</td>
 															<td class=\"align-middle text-center\">
+																<a href=\"./do/brn/Details.php?id_brn=$be->idno\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
 																<a href=\"./do/brn/List_By_Brand.php?id_brn=$be->idno\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Listar vehículos registrados de esta marca\"><i class=\"material-icons opacity-10\">zoom_in</i></a>
 																<a href=\"./do/brn/Edit.php?id_brn=$be->idno\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
 																<a href=\"./do/brn/Delete.php?id_brn=$be->idno\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>

@@ -84,10 +84,10 @@
 			
 			<?php
 				if($r_add_brn){
-					echo "<p>Marca registrada, <a href=\"../\">pincha aquí para ir a la lista</a>.</p>";
+					echo "<p>Marca registrada, <a href=\"../../\">pincha aquí para ir a la lista</a>.</p>";
 				}
 				else{
-					echo "<p>No se pudo registrar esta marca, <a href=\"./\">pincha aquí para volver a intentarlo</a>.</p>";
+					echo "<p>No se pudo registrar esta marca, <a href=\"../Brand.php\">pincha aquí para volver a intentarlo</a>.</p>";
 				}
 			?>
 		</main>

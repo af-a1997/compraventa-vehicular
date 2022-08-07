@@ -9,7 +9,6 @@
 	<head>
 		<?php
 			include "../../../../../shared/html_head_setup.php";
-			include "../../../../../shared/Imports.jQuery_UI.php";
 		?>
 		
 		<title>Panel de administrador - <?php echo a_n_acq; ?></title>

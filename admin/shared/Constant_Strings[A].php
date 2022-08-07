@@ -6,7 +6,11 @@
 	const a_taxicab_cs = "Remises contratados";
 	
 	const a_mp = "Gestión de ";
+	const a_dtl = "Detalles de ";
+	const a_lof = "Lista de ";
 	const a_reg = "Registrar ";
+	const a_upd = "Editar ";
+	const a_del = "Eliminar ";
 	
 	const a_artman = a_mp."artículos";
 	const a_climan = a_mp."clientela";
@@ -26,6 +30,15 @@
 	const a_n_cli = a_reg."cliente";
 	const a_n_veh = a_reg."vehículo";
 	const a_n_brn = a_reg."marca";
+
+	const a_d_brn = a_dtl."la marca";
+
+	const a_l_vbb_all = a_lof."vehículos por marca";
+	const a_l_vbb_one = a_lof."vehículos por la marca ";
+
+	const a_r_brn = a_del." la marca ";
+
+	const a_u_brn = a_upd."datos de la marca ";
 
 	const a_ss_sellable = "Artículos disponibles para vender";
 	const a_ss_rentable = "Vehículos disponibles para alquilar";

@@ -83,7 +83,7 @@ class Brands{
 	}
 	
 	public function BRAND_ShowOne(){
-		$sql_query_list_1brand ="SELECT * FROM $this->tbl WHERE idno=$this->idno";
+		$sql_query_list_1brand ="SELECT b.*, (SELECT COUNT(*) FROM vehiculos v WHERE v.marca = b.idno) AS vcc FROM $this->tbl b WHERE idno=$this->idno";
 		$ret_consult = mysqli_query($this->conn, $sql_query_list_1brand);
 		
 		$res = mysqli_fetch_assoc($ret_consult);
@@ -95,17 +95,23 @@ class Brands{
 			$o->nombre = $res["nombre"];
 			$o->descripcion = $res["descripcion"];
 			$o->url_img = $res["url_img"];
+			$o->vcc = $res["vcc"];
 			
 			$brand_info_r = $o;
 		}
 		else{
 			$brand_info_r = null;
 		}
-		return $vcat_info_r;
+		return $brand_info_r;
 	}
 	
-	public function BRAND_UpdateOne(){
-		$sql_query_upd_1brand = "UPDATE $this->tbl SET nombre='$this->nombre', descripcion='$this->descripcion', url_img='$this->url_img' WHERE idno=$this->idno";
+	public function BRAND_UpdateOne($with_logo = false){
+		$attach_logo = "";
+		if($with_logo == true)
+			$attach_logo = ", url_img='$this->url_img'";
+
+		$sql_query_upd_1brand = "UPDATE $this->tbl SET nombre=\"$this->nombre\", descripcion=\"$this->descripcion\"".$attach_logo." WHERE idno=$this->idno";
+
 		$r = mysqli_query($this->conn, $sql_query_upd_1brand);
 		
 		return $r;

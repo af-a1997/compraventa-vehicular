@@ -8,11 +8,29 @@ Se trata de un sitio web relativamente simple, proyectado para proveer servicios
 
 La documentación se definirá aquí debido a que las wikis no están disponibles para repositorios privados de usuarios gratuitos.
 
-## Modelo DDBB
+## Modelo BBDD
 
 ![EER_sistema_automoviles.mwb.png](admin/ddbb/model/EER_sistema_automoviles.mwb.png?raw=true)
 
-El modelo se encuentra en `/admin/ddbb/models/` tanto en imagen como archivo de modelo de [MySQL Workbench](https://www.mysql.com/products/workbench/).
+El modelo se encuentra en `/admin/ddbb/models/` tanto en imagen como archivo de modelo de [MySQL Workbench](https://www.mysql.com/products/workbench/), el mismo describe de manera gráfica como se estructura la base de datos y las conexiones entre cada tabla.
+
+### Explicación de tablas
+
+* **`vehiculos`:** Contiene el listado de vehículos existentes con sus propiedades comunes como marca y modelo, NO son instancias únicas con matrícula y color.
+* **`tipo_veh`:** Contiene una lista de tipos/categorías de vehículo, tales como automóviles y camiones.
+* **`marcas`:** Contiene fabricantes de vehículos con sus descripciones y nombres de archivos a imagenes de sus logotipos en el servidor.
+* **`registros`:** Contiene instancias únicas de vehículos, con propiedades únicas como matrícula y color.
+* **`adquisiciones`:** Contiene un historial de compras de vehículos realizadas por la empresa.
+* **`divisas`:** Contiene las diferentes monedas utilizadas en el mundo.
+* **`remises`:** Contiene una lista de remiseros, son propietarios de vehículos alquilables, se les contrata para manejar por tí.
+* **`reg_contrato_remise`:** Contiene una lista de remises previamente contratados o con contrato activo.
+* **`imagenes_cat_remise`:** Contiene imagenes de los vehículos que poseen los remiseros.
+* **`a_vender`:** Contiene una lista de vehículos disponibles para vender.
+* **`ventas`:** Contiene una lista de compras ya realizadas.
+* **`seleccion_alquiler`:** Contiene una lista de vehículos disponibles para alquilar.
+* **`historial_alquiler`:** Contiene una lista de vehículos previamente alquilados o con contrato activo.
+* **`usuarios`:** Contiene una lista de miembros del sitio, tanto administradores como clientes y remises.
+* **`puesto`:** Contiene definiciones de roles de usuario en el sitio.
 
 ## Implementaciones
 
@@ -103,9 +121,9 @@ El modelo se encuentra en `/admin/ddbb/models/` tanto en imagen como archivo de 
 2) Corre el servidor Apache y el servicio MySQL.
 3) Copia los archivos del proyecto al `htdocs` donde se encuentra, normalmente en `C:\xampp\htdocs`
 4) Mediante PMA desde el navegador (accede a `http://localhost/phpmyadmin`) haz las importaciones de los archivos SQL en `/admin/ddbb/queries/`, en este órden:
-    1) **`ddbb_fweng_creation_script.sql`**: crea la base de datos y su estructura.
-    2) **`ddbb_sample_data_population.sql`**: agrega datos de muestra, ayuda a realizar pruebas.
-    3) **`ddbb_users_creation.sql`**: crea los usuarios en el SGBD para cada rol en el sistema.
+    1) **`ddbb_fweng_creation_script.sql`:** crea la base de datos y su estructura.
+    2) **`ddbb_sample_data_population.sql`:** agrega datos de muestra, ayuda a realizar pruebas.
+    3) **`ddbb_users_creation.sql`:** crea los usuarios en el SGBD para cada rol en el sistema.
 5) Accede a `http://localhost/` para visitar la sección del cliente, o `http://localhost/admin/` para visitar la sección del administrador.
 6) Necesitarás credenciales de acceso para visitar la mayoría de los apartados en el sitio:
     * Administrador:

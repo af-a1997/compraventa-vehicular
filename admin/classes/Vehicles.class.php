@@ -68,6 +68,33 @@
 			return $arr_list_veh;
 		}
 		
+		public function VEH_ShowAllByBrand($brand_id){
+			$sql_query_list_veh_by_bid = "SELECT $this->tbl.* FROM $this->tbl INNER JOIN marcas ON $this->tbl.marca = marcas.idno WHERE $this->tbl.marca = $brand_id;";
+			$rt_db = mysqli_query($this->conn, $sql_query_list_veh_by_bid);
+			
+			$arr_list_veh = null;
+			
+			while($res = mysqli_fetch_assoc($rt_db)){
+				$o = new Vehicles();
+				
+				// Base
+				$o->idno = $res["idno"];
+				$o->modelo = $res["modelo"];
+				$o->unidades = $res["unidades"];
+				$o->anho_fab = $res["anho_fab"];
+				$o->puertas = $res["puertas"];
+				$o->transmision = $res["transmision"];
+				$o->combustible_tipo = $res["combustible_tipo"];
+				$o->combustible_capac = $res["combustible_capac"];
+				$o->motor = $res["motor"];
+				$o->marca = $res["marca"];
+				$o->categorizacion = $res["categorizacion"];
+				
+				$arr_list_veh[] = $o;
+			}
+			return $arr_list_veh;
+		}
+		
 		// List used for dropdown menu when registering acquisition and/or license plate.
 		public function VEH_GetCountByVCAT($cat_no){
 			$sql_query_list_all_veh = "SELECT COUNT(categorizacion) AS total_veh_cat FROM vehiculos WHERE categorizacion = $cat_no;";
