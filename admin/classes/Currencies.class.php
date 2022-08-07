@@ -85,8 +85,8 @@ class Currencies{
 		return $r;
 	}
 	
-	public function CCY_DelOne(){
-		$sql_query_del_1ccy = "DELETE FROM $this->tbl WHERE id_reg=$this->id_reg";
+	public function CCY_DeleteOne(){
+		$sql_query_del_1ccy = "DELETE FROM $this->tbl WHERE id_moneda=$this->id_moneda";
 		$r = mysqli_query($this->conn, $sql_query_del_1ccy);
 		
 		return $r;

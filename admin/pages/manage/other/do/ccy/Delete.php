@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <?php
-	if(!$_GET["id_brn"]){
+	if(!$_GET["id_ccy"]){
 		header("Location:../");
 	}
 	
@@ -12,16 +12,16 @@
 	include "../../../../../shared/Constant_Strings[A].php";
 	include "../../../../../../shared/utils/Utils.Common_Strings.php";
 
-    $o_brn = new Brands();
-    $o_brn->idno = $_GET["id_brn"];
-    $o_brn_info = $o_brn->BRAND_ShowOne();
+    $o_ccy = new Currencies();
+    $o_ccy->id_moneda = $_GET["id_ccy"];
+    $o_ccy_info = $o_ccy->CCY_ShowOne();
 ?>
 
 <html lang="es">
 	<head>
 		<?php include "../../../../../shared/html_head_setup.php"; ?>
 		
-		<title>Panel de administrador - <?php echo a_r_brn.$o_brn_info->nombre; ?></title>
+		<title>Panel de administrador - <?php echo a_r_ccy.$o_ccy_info->nombre; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -36,10 +36,10 @@
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
 							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/other/"><?php echo a_oman; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_r_brn; ?></li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_r_ccy; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_r_brn.$o_brn_info->nombre; ?></h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_r_ccy.$o_ccy_info->nombre; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
@@ -63,15 +63,16 @@
 				</div>
 			</nav>
 			
-			<p>¿Seguro que quieres eliminar la marca &laquo;<?php echo $o_brn_info->nombre; ?>&raquo;? <u>Esta acción no se puede deshacer</u>.</p>
+			<p>¿Seguro que quieres eliminar la divisa &laquo;<?php echo $o_ccy_info->nombre; ?>&raquo;? <u>Esta acción no se puede deshacer</u>.</p>
 			
 			<input type=checkbox id=id_del_confirm name=n_del_confirm />
 			<label for=n_del_confirm>Consiento que esta acción es irreversible y deseo proceder</label>
 			
 			<br />
 			
-            <form method=POST action="./act/SubmitAct.Del.Brn.php">
-                <input type=hidden name=fln_brn_id value=<?php echo $o_brn_info->idno; ?>>
+            <form method=POST action="./act/SubmitAct.Del.CCY.php">
+                <input type=hidden name=fln_ccy_id value=<?php echo $o_ccy_info->id_moneda; ?>>
+
                 <button type=submit class="btn btn-danger disabled" id=id_del_y name=n_del_n disabled><i class="material-icons opacity-10">delete</i> Sí</button>
                 <a href="../../" class="btn btn-success" id=id_del_n name=n_del_n><i class="material-icons opacity-10">undo</i> No</a>
             </form>

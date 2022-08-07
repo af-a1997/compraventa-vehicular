@@ -63,7 +63,7 @@
 				</div>
 			</nav>
 			
-			<p>¿Seguro que quieres eliminar la categoría <?php echo $o_vcat_info->nombre; ?>? <u>Esta acción no se puede deshacer</u>.</p>
+			<p>¿Seguro que quieres eliminar la categoría &laquo;<?php echo $o_vcat_info->nombre; ?>&raquo;? <u>Esta acción no se puede deshacer</u>.</p>
 			
 			<input type=checkbox id=id_del_confirm name=n_del_confirm />
 			<label for=n_del_confirm>Consiento que esta acción es irreversible y deseo proceder</label>

@@ -1,5 +1,5 @@
 <?php
-	if(!$_POST["fln_vcat_id"]){
+	if(!$_POST["fln_ccy_id"]){
 		header("Location:../../../");
 	}
 	
@@ -10,10 +10,18 @@
 	include "../../../../../../shared/Constant_Strings[A].php";
 	include "../../../../../../../shared/utils/Utils.Common_Strings.php";
 	
-	$o_vcat = new Veh_Cat();
-	$o_vcat->id_tipo = $_POST["fln_vcat_id"];
-    $o_vcat_get_info = $o_vcat->VCAT_ShowOne();
-    $o_vcat_dispinfo = array("$o_vcat_get_info->id_tipo","$o_vcat_get_info->nombre");
+	$o_ccy = new Currencies();
+	$o_ccy->id_moneda = $_POST["fln_ccy_id"];
+    $o_ccy_get_info = $o_ccy->CCY_ShowOne();
+	
+	$o_ccy->nombre = $_POST["fln_ccy_name"];
+	$o_ccy->abr = $_POST["fln_ccy_abr"];
+	$o_ccy->simbolizacion = $_POST["fln_ccy_symbol"];
+	$o_ccy->pos_sim = $_POST["fln_ccy_symbol_pos"];
+	
+    $o_ccy_dispinfo = array("$o_ccy->id_moneda","$o_ccy->nombre");
+    
+	$r_upd_ccy = $o_ccy->CCY_EditOne();
 ?>
 
 <html lang=es>
@@ -22,7 +30,7 @@
 			include "../../../../../../shared/html_head_setup.php";
 		?>
 		
-		<title>Panel de administrador - <?php echo a_r_vcat.$o_vcat_dispinfo[1]; ?></title>
+		<title>Panel de administrador - <?php echo a_u_ccy.$o_ccy_dispinfo[1]; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -35,12 +43,12 @@
 				<div class="container-fluid py-1 px-3">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
+							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;"><?php echo a_dsb; ?></a></li>
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/pages/manage/other"><?php echo a_oman; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_r_vcat.$o_vcat_dispinfo[1]; ?></li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_u_ccy.$o_ccy_dispinfo[1]; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_r_vcat.$o_vcat_dispinfo[1]; ?></h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_u_ccy.$o_ccy_dispinfo[1]; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
@@ -67,17 +75,12 @@
 			<br />
 			
 			<?php
-				if($_POST['fln_vcat_id']){
-					$r_vcat_del = $o_vcat->VCAT_DeleteOne();
-
-					if($r_vcat_del){
-						echo "<p>Categoría &laquo;".$o_vcat_dispinfo[1]."&raquo; eliminada, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
-					}
-					else{
-						echo "<p>No se pudo eliminar la categoría, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
-					}
+				if($r_upd_ccy){
+					echo "<p>Divisa &laquo;".$o_ccy_dispinfo[1]."&raquo; actualizada, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
 				}
-				else echo "<p>No se especificó una ID válida de categoría a eliminar, <a href=\"../../../\">pincha aquí para volver a la lista</a>.";
+				else{
+					echo "<p>No se pudo actualizar esta categoría, <a href=\"../Edit.php?id_vcat=$o_ccy_dispinfo[0]\">pincha aquí para volver a intentarlo</a>.</p>";
+				}
 			?>
 		</main>
 	

@@ -189,7 +189,7 @@
 											<tr>
 												<th class="text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Nombre</th>
 												<th class="text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Simbolización</th>
-												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Acciones</th>
+												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder" style="width: 120px;">Acciones</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -220,7 +220,8 @@
 																		</div>
 																	</div>
 																</td>
-																<td>
+																<td class=\"align-middle text-center\">
+																	<a href=\"./do/ccy/Details.php?id_ccy=$oce->id_moneda\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
 																	<a href=\"./do/ccy/Edit.php?id_ccy=$oce->id_moneda\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
 																	<a href=\"./do/ccy/Delete.php?id_ccy=$oce->id_moneda\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
 																</td>
@@ -252,6 +253,9 @@
 			});
 			$("#id_btn_new_vcat").click(function(){
 				location.href = "./new/VCAT.php";
+			});
+			$("#id_btn_new_ccy").click(function(){
+				location.href = "./new/Currency.php";
 			});
 		</script>
 	</body>

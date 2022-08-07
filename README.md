@@ -73,11 +73,12 @@ El modelo se encuentra en `/admin/ddbb/models/` tanto en imagen como archivo de 
    - [ ] Agregar
    - [ ] Editar
    - [ ] Eliminar
- - [ ] Gestión de divisas
+ - [X] Gestión de divisas
    - [X] Listar
-   - [ ] Agregar
-   - [ ] Editar
-   - [ ] Eliminar
+   - [X] Detalles
+   - [X] Agregar
+   - [X] Editar
+   - [X] Eliminar
  - [X] Gestión de marcas
    - [X] Listar
    - [X] Detalles

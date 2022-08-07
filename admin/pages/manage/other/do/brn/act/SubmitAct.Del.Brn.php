@@ -22,7 +22,7 @@
 			include "../../../../../../shared/html_head_setup.php";
 		?>
 		
-		<title>Panel de administrador - <?php echo a_u_brn.$o_brn_dispinfo[1]; ?></title>
+		<title>Panel de administrador - <?php echo a_r_brn.$o_brn_dispinfo[1]; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -37,10 +37,10 @@
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;"><?php echo a_dsb; ?></a></li>
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/pages/manage/other"><?php echo a_oman; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_u_brn.$o_brn_dispinfo[1]; ?></li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_r_brn.$o_brn_dispinfo[1]; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_u_brn.$o_brn_dispinfo[1]; ?></h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_r_brn.$o_brn_dispinfo[1]; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
