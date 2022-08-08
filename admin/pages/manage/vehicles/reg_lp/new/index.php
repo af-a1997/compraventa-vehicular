@@ -19,7 +19,7 @@
 			include "../../../../../shared/html_head_setup.php";
 		?>
 		
-		<title>Panel de administrador - <?php echo a_n_veh; ?></title>
+		<title><?php echo a_dsb; ?> - <?php echo a_n_veh; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -155,6 +155,10 @@
 					messages:{
 						fln_rvi_models: "Seleccione el vehículo asociado a este registro."
 					}
+				});
+
+				$("#id_in_rgb_clear").click(function(){
+					$("#id_in_rgb").val(null);
 				});
 			});
 		</script>

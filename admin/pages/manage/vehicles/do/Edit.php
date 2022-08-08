@@ -26,7 +26,7 @@
 			include "../../../../shared/Imports.jQuery_UI.php";
 		?>
 		
-		<title>Panel de administrador - <?php echo a_vehman; ?></title>
+		<title><?php echo a_dsb; ?> - <?php echo a_vehman; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">

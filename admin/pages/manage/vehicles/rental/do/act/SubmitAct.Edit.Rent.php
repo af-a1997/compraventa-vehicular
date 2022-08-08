@@ -25,7 +25,7 @@
 			include "../../../../../../shared/Imports.jQuery_UI.php";
 		?>
 		
-		<title>Panel de administrador - Editar vehículo</title>
+		<title><?php echo a_dsb; ?> - Editar vehículo</title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">

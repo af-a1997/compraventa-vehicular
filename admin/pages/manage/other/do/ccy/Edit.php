@@ -27,7 +27,7 @@
 
 		<link rel=stylesheet href="/shared/extras/jquery/selectboxit/jquery.selectBoxIt.css" />
 		
-		<title>Panel de administrador - <?php echo a_u_ccy.$o_ccy_data_in->nombre; ?></title>
+		<title><?php echo a_dsb; ?> - <?php echo a_u_ccy.$o_ccy_data_in->nombre; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">

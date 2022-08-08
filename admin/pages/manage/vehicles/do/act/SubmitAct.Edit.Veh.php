@@ -9,17 +9,19 @@
 	$o_veh = new Vehicles();
 	
 	$o_veh->idno = $_POST["fln_veh_id"];
+
+	$o_veh_info = $o_veh->VEH_ShowOne();
+	if($o_veh_info->anho_fab == 0)
+		$year_fab = "Año desc.";
+
+	else
+		$year_fab = $o_veh_info->anho_fab;
+	
+	$full_model = "$o_veh_info->mno $o_veh_info->modelo ($year_fab)";
 	
 	$o_veh->modelo = $_POST["fln_veh_model"];
 	$o_veh->unidades = $_POST["fln_veh_stock"];
-	
-	if($_POST["fln_veh_yfab"] == ""){
-		$o_veh->anho_fab = 0;
-	}
-	else{
-		$o_veh->anho_fab = $_POST["fln_veh_yfab"];
-	}
-	
+	$o_veh->anho_fab = $_POST["fln_veh_yfab"];	// If it's "0", year is treated as unknown.
 	$o_veh->puertas = $_POST["fln_veh_doors"];
 	$o_veh->transmision = $_POST["fln_veh_tr"];
 	$o_veh->combustible_tipo = $_POST["fln_veh_ft"];
@@ -37,7 +39,7 @@
 			include "../../../../../shared/html_head_setup.php";
 		?>
 		
-		<title>Panel de administrador - Editar vehículo</title>
+		<title><?php echo a_dsb; ?> - Editar vehículo</title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -83,7 +85,7 @@
 			
 			<?php
 				if($r_add_veh){
-					echo "<p>Vehículo actualizado, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
+					echo "<p>Vehículo &laquo;".$full_model."&raquo; actualizado, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
 				}
 				else{
 					echo "<p>No se pudo actualizar el vehículo, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";

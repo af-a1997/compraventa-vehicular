@@ -43,7 +43,8 @@
 	const a_r_brn = a_del." la marca ";
 	const a_r_vcat = a_del." la categoría ";
 	const a_r_ccy = a_del." la divisa ";
-
+	const a_r_veh = a_del." el vehículo ";
+	
 	const a_u_brn = a_upd."datos de la marca ";
 	const a_u_vcat = a_upd."la categoría ";
 	const a_u_ccy = a_upd."la divisa ";

@@ -13,7 +13,7 @@
 	<head>
 		<?php include "../../admin/shared/html_head_setup.php"; ?>
 		
-		<title>Panel de administrador - <?php echo g_login; ?></title>
+		<title><?php echo a_dsb; ?> - <?php echo g_login; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">

@@ -11,7 +11,7 @@
 	<head>
 		<?php include "../../../../../shared/html_head_setup.php"; ?>
 		
-		<title>Panel de administrador - Eliminar registro de alquiler</title>
+		<title><?php echo a_dsb; ?> - Eliminar registro de alquiler</title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">

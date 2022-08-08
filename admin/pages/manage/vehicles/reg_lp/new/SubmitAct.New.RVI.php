@@ -1,6 +1,7 @@
 <?php
 	include "../../../../../shared/Utils.Admin.SessionCheck.php";
 	include "../../../../../shared/Utils.Admin.Time.php";
+	include "../../../../../shared/Utils.Admin.BTL.php";
 	
 	include "../../../../../classes/Utils_ClassLoader.class.php";
 	
@@ -30,7 +31,7 @@
 			include "../../../../../shared/html_head_setup.php";
 		?>
 		
-		<title>Panel de administrador - <?php echo a_n_veh; ?></title>
+		<title><?php echo a_dsb; ?> - <?php echo a_n_veh; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -75,11 +76,13 @@
 			<br />
 			
 			<?php
+				$link_act_all = BTL_Gen(0,2);
+
 				if($r_add_rvi){
-					echo "<p>Registro añadido, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
+					echo "<p>Registro añadido".$link_act_all."</p>";
 				}
 				else{
-					echo "<p>No se pudo añadir el registro, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
+					echo "<p>No se pudo añadir el registro".$link_act_all."</p>";
 				}
 			?>
 		</main>

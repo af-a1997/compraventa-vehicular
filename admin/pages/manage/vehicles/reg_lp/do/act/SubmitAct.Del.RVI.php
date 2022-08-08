@@ -1,5 +1,8 @@
 <?php
+	include "../../../../../../shared/Utils.Admin.SessionCheck.php";
 	include "../../../../../../classes/Utils_ClassLoader.class.php";
+
+	include "../../../../../../shared/Utils.Admin.BTL.php";
 	
 	include "../../../../../../shared/Constant_Strings[A].php";
 	include "../../../../../../../shared/utils/Utils.Common_Strings.php";
@@ -7,12 +10,9 @@
 
 <html lang=es>
 	<head>
-		<?php
-			include "../../../../../../shared/html_head_setup.php";
-			include "../../../../../../shared/Imports.jQuery_UI.php";
-		?>
+		<?php include "../../../../../../shared/html_head_setup.php"; ?>
 		
-		<title>Panel de administrador - <?php echo a_regman; ?></title>
+		<title><?php echo a_dsb; ?> - <?php echo a_regman; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -59,18 +59,18 @@
 			<?php
 				if($_GET['id_reg']){
 					$id_2del = $_GET['id_reg'];
+					$link_act_all = BTL_Gen(0,3);
 					
 					$o_rvi = new Registered_Veh_info();
 					$o_rvi->id_reg = $id_2del;
-					
 
 					$r_rvi_del = $o_rvi->RVI_DeleteOne();
 	
 					if($r_rvi_del){
-						echo "<p>Registro eliminado, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
+						echo "<p>Registro &laquo;".$id_2del."&raquo; eliminado".$link_act_all."</p>";
 					}
 					else{
-						echo "<p>No se pudo eliminar el registro, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
+						echo "<p>No se pudo eliminar el registro &laquo;".$id_2del."&raquo;".$link_act_all."</p>";
 					}
 				}
 				else echo "<p>No se especificó una ID válida de registro a eliminar.";

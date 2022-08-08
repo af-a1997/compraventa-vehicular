@@ -38,7 +38,7 @@
 			include "../../../../../shared/html_head_setup.php";
 		?>
 		
-		<title>Panel de administrador - Editar cliente</title>
+		<title><?php echo a_dsb; ?> - Editar cliente</title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">

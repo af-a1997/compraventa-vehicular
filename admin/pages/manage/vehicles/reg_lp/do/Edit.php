@@ -26,7 +26,7 @@
 			include "../../../../../shared/html_head_setup.php";
 		?>
 		
-		<title>Panel de administrador - <?php echo a_regman; ?></title>
+		<title><?php echo a_dsb; ?> - <?php echo a_regman; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -167,13 +167,15 @@
 				
 			$("#id_form_rvi_edit").validate({
 				rules:{
-					fln_rvi_edit_models: {
-						required: true
-					}
+					fln_rvi_edit_models: "required"
 				},
 				messages:{
 					fln_rvi_edit_models: "Elija un modelo de vehículo.."
 				}
+			});
+
+			$("#id_in_rgb_clear").click(function(){
+				$("#id_in_rgb").val(null);
 			});
 		</script>
 	</body>

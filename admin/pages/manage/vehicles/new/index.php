@@ -22,7 +22,7 @@
 			include "../../../../shared/Imports.jQuery_UI.php";
 		?>
 		
-		<title>Panel de administrador - <?php echo a_n_veh; ?></title>
+		<title><?php echo a_dsb; ?> - <?php echo a_n_veh; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -105,7 +105,7 @@
 					<label class=form-label>Año de fabricación</label>
 					<input class=form-control id=id_veh_yfab name=fln_veh_yfab />
 					
-					<button class="btn btn-warning" id=id_veh_yfab_unknown name=fln_veh_yfab_unknown>Año desconocido</button>
+					<a class="btn btn-warning" id=id_yfab_unk href=#>Año desconocido</a>
 				</div>
 				<div class="input-group input-group-outline">
 					<label class=form-label>Puertas</label>
@@ -146,11 +146,11 @@
 		<script>
 			$('#sidebar-choice-1').addClass("active bg-gradient-primary");
 			
-			$('#id_veh_yfab_unknown').click(function(){
-				$('#id_veh_yfab').val(null);
-			});
-			
 			$().ready(function(){
+				$('#id_yfab_unk').click(function(){
+					$('#id_veh_yfab').val("0");
+				});
+				
 				// Masks
 				$("#id_veh_yfab").mask("0000");
 				$("#validate_format_phone_cel").mask("000 000 000",{
@@ -164,15 +164,9 @@
 				
 				$("#id_form_veh_reg").validate({
 					rules:{
-						fln_veh_type: {
-							required: true
-						},
-						fln_veh_brand: {
-							required: true
-						},
-						fln_veh_model: {
-							required: true
-						}
+						fln_veh_type: "required",
+						fln_veh_brand: "required",
+						fln_veh_model: "required"
 					},
 					messages:{
 						fln_veh_type: "Especifique el tipo de vehículo.",

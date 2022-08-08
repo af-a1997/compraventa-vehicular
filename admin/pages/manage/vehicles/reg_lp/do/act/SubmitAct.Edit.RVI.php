@@ -1,10 +1,11 @@
 <?php
-	if(!$_POST["fln_edit_rvi_id"]){
+	if(!$_POST["fln_rvi_edit_id"]){
 		header("Location:../../../");
 	}
 	
 	include "../../../../../../shared/Utils.Admin.SessionCheck.php";
 	include "../../../../../../shared/Utils.Admin.Time.php";
+	include "../../../../../../shared/Utils.Admin.BTL.php";
 	
 	include "../../../../../../classes/Utils_ClassLoader.class.php";
 	
@@ -12,9 +13,12 @@
 	include "../../../../../../../shared/utils/Utils.Common_Strings.php";
 	
 	$o_rvi = new Registered_Veh_info();
+	$o_rvi->id_reg = $_POST["fln_rvi_edit_id"];
+	$o_rvi_info = $o_rvi->RVI_ShowOne();
+
+	$lp = $o_rvi_info->matricula;
 	
 	$o_rvi->ultima_act_info = $cdt;
-	$o_rvi->id_reg = $_POST["fln_rvi_edit_id"];
 	$o_rvi->color = $_POST["fln_rvi_edit_color"];
 	$o_rvi->matricula = $_POST["fln_rvi_edit_lp"];
 	$o_rvi->estado_act = $_POST["fln_rvi_edit_status_act"];
@@ -35,7 +39,7 @@
 			include "../../../../../../shared/html_head_setup.php";
 		?>
 		
-		<title>Panel de administrador - Editar cliente</title>
+		<title><?php echo a_dsb; ?> - Editar cliente</title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -80,11 +84,13 @@
 			<br />
 			
 			<?php
+				$link_act_all = BTL_Gen(0,2);
+
 				if($r_upd_rvi){
-					echo "<p>Registro actualizado, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
+					echo "<p>Registro &laquo;".$lp."&raquo; actualizado".$link_act_all."</p>";
 				}
 				else{
-					echo "<p>No se pudo actualizar el registro, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
+					echo "<p>No se pudo actualizar el registro".$link_act_all."</p>";
 				}
 			?>
 		</main>

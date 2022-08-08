@@ -27,7 +27,7 @@
 	<head>
 		<?php include "../../../../../shared/html_head_setup.php"; ?>
 		
-		<title>Panel de administrador - <?php echo a_n_vcat; ?></title>
+		<title><?php echo a_dsb; ?> - <?php echo a_n_vcat; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">

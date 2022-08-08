@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 
-<?php include "./shared/Utils.Admin.SessionCheck.php"; ?>
+<?php
+	include "./shared/Utils.Admin.SessionCheck.php";
+	include "./shared/Constant_Strings[A].php";
+	include "../shared/utils/Utils.Common_Strings.php";
+?>
 
 <html lang=es>
 	<head>
 		<?php include "./shared/html_head_setup.php"; ?>
 		
-		<title>Panel de administrador - Inicio</title>
+		<title><?php echo a_dsb; ?> - Inicio</title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
-		<!-- Constant strings of text -->
-		<?php
-			include "./shared/Constant_Strings[A].php";
-			include "../shared/utils/Utils.Common_Strings.php";
-			
-			include "./shared/Snippets.Sidebar.php";
-		?>
+		<?php include "./shared/Snippets.Sidebar.php"; ?>
 
 		<main class="main-content border-radius-lg">
 			<!-- Top bar conents -->

@@ -10,7 +10,7 @@
 	<head>
 		<?php include "../../../../../../../shared/html_head_setup.php"; ?>
 		
-		<title>Panel de administrador - Eliminar vehículo</title>
+		<title><?php echo a_dsb; ?> - Eliminar vehículo</title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">

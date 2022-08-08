@@ -1,5 +1,6 @@
 <?php
 	include "../../../../shared/Utils.Admin.SessionCheck.php";
+	include "../../../../shared/Utils.Admin.BTL.php";
 	
 	include "../../../../classes/Utils_ClassLoader.class.php";
 	
@@ -31,12 +32,9 @@
 
 <html lang=es>
 	<head>
-		<?php
-			include "../../../../shared/html_head_setup.php";
-			include "../../../../shared/Imports.jQuery_UI.php";
-		?>
+		<?php include "../../../../shared/html_head_setup.php"; ?>
 		
-		<title>Panel de administrador - <?php echo a_n_veh; ?></title>
+		<title><?php echo a_dsb; ?> - <?php echo a_n_veh; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -81,11 +79,14 @@
 			<br />
 			
 			<?php
+				$link_act_0 = BTL_Gen(0,1);
+				$link_act_1 = BTL_Gen(1,-1);
+
 				if($r_add_veh){
-					echo "<p>Vehículo registrado, <a href=\"../\">pincha aquí para volver a la lista</a>.</p>";
+					echo "<p>Vehículo registrado".$link_act_0."</p>";
 				}
 				else{
-					echo "<p>No se pudo registrar el vehículo, <a href=\"./\">pincha aquí para volver a intentarlo</a>.</p>";
+					echo "<p>No se pudo registrar el vehículo".$link_act_1."</p>";
 				}
 			?>
 		</main>
