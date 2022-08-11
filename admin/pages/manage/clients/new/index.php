@@ -11,7 +11,7 @@
 	<head>
 		<?php include "../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_n_cli; ?></title>
+		<title><?php echo a_dsb." - ".a_n_cli; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -67,7 +67,7 @@
 			
 			<p><?php echo g_snp_reqf ?> = Campos obligatorios.</p>
 			
-			<form id=id_form_user_reg method=POST action="./SubmitAct.New.Client.php">
+			<form id=id_form_user_reg method=POST action="./SubmitAct.New.Cli.php">
 				<div class="input-group input-group-outline">
 					<label class=form-label>Nombre(s) <?php echo g_snp_reqf ?></label>
 					<input class=form-control name=fln_user_name />
@@ -86,7 +86,7 @@
 				</div>
 				<div class="input-group input-group-outline">
 					<label class=form-label>C. I. <?php echo g_snp_reqf ?></label>
-					<input class=form-control name=fln_user_uyid />
+					<input class=form-control name=fln_user_uyid id=validate_format_pid />
 				</div>
 				<div class="input-group input-group-outline">
 					<label class=form-label>Correo electrónico</label>
@@ -108,6 +108,7 @@
 				<br />
 				
 				<button class="btn btn-success" type=submit><i class="material-icons opacity-10">person_add</i> Registrar usuario</button>
+				<a href="../" class="btn btn-danger"><i class="material-icons opacity-10">clear</i> Cancelar</a>
 			</form>
 		</main>
 	
@@ -119,46 +120,28 @@
 		<script>
 			$('#sidebar-choice-2').addClass("active bg-gradient-primary");
 			
-			$().ready(function(){
-				// Masks
-				$("#validate_format_phone_cel").mask("000 000 000",{
-					placeholder: "09X XXX XXX"
-				});
-				$("#validate_format_phone_home").mask("0000 0000",{
-					placeholder: "XXXX XXXX"
-				});
-				
-				// Validation
-				
-				$("#id_form_user_reg").validate({
-					rules:{
-						fln_user_name: {
-							required: true
-						},
-						fln_user_surname: {
-							required: true
-						},
-						fln_user_un: {
-							required: true
-						},
-						fln_user_pwd: {
-							required: true
-						},
-						fln_user_uyid: {
-							required: true
-						},
-						fln_user_email: {
-							email: true
-						}
-					},
-					messages:{
-						fln_user_name: "Nombre(s) requerido(s).",
-						fln_user_surname: "Apellido(s) requerido(s).",
-						fln_user_un: "Nombre de usuario requerido.",
-						fln_user_pwd: "Clave requerida.",
-						fln_user_uyid: "Cédula de Identidad requerida."
-					}
-				});
+			// Masks
+			$("#validate_format_pid").mask("0.000.000-0",{ placeholder: "1.234.567-8" });
+			$("#validate_format_phone_cel").mask("000 000 000",{ placeholder: "09X XXX XXX" });
+			$("#validate_format_phone_home").mask("0000 0000",{ placeholder: "XXXX XXXX" });
+			
+			// Validation
+			$("#id_form_user_reg").validate({
+				rules:{
+					fln_user_name: "required",
+					fln_user_surname: "required",
+					fln_user_un: "required",
+					fln_user_pwd: "required",
+					fln_user_uyid: "required",
+					fln_user_email: { email: true }
+				},
+				messages:{
+					fln_user_name: "Nombre(s) requerido(s).",
+					fln_user_surname: "Apellido(s) requerido(s).",
+					fln_user_un: "Nombre de usuario requerido.",
+					fln_user_pwd: "Clave requerida.",
+					fln_user_uyid: "Cédula de Identidad requerida."
+				}
 			});
 		</script>
 	</body>

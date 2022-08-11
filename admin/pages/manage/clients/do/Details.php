@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 
 <?php
+	if(!isset($_GET["id_cli"]))
+		header("Location:../");
+
 	include "../../../../shared/Utils.Admin.SessionCheck.php";
 	
 	include "../../../../classes/Utils_ClassLoader.class.php";
@@ -12,14 +15,16 @@
 	
 	$o_user->nro_id_u = $_GET["id_cli"];
 	
-	$o_user_details = $o_user->CLI_ShowOne();
+	$o_cli_info = $o_user->CLI_ShowOne();
+
+	$full_name = $o_cli_info->nombre." ".$o_cli_info->apellidos;
 ?>
 
 <html lang=es>
 	<head>
 		<?php include "../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_vehman; ?></title>
+		<title><?php echo a_dsb." - ".a_d_cli.$full_name; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -34,10 +39,10 @@
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="../"><?php echo a_climan; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page">Detalles</li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_d_cli; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0">Detalles del cliente</h6>
+						<h6 class="font-weight-bolder mb-0"><?php a_d_cli.$o_cli_info->nombre; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
@@ -75,22 +80,24 @@
 								<?php
 									echo "
 										<ul class=ul_style_elem_details>
-											<li><b>Nombre(s):</b> $o_user_details->nombre</li>
-											<li><b>Apellido(s):</b> $o_user_details->apellidos</li>
-											<li><b>Nombre de usuario:</b> $o_user_details->nombre_usuario</li>
-											<li><b>Clave:</b> <span class=hidden_pwd>$o_user_details->clave</span></li>
-											<li><b>C. I.:</b> $o_user_details->cedula_identidad</li>
-											<li><b>Correo electrónico:</b> $o_user_details->email</li>
-											<li><b>Dirección de residencia:</b> $o_user_details->residencia_actual</li>
-											<li><b>Teléfono celular:</b> $o_user_details->tel_cel</li>
-											<li><b>Teléfono fijo:</b> $o_user_details->tel_fijo</li>
-											<li><b>Fecha de registro:</b> $o_user_details->momento_registro</li>
+											<li><b>Nombre(s):</b> $o_cli_info->nombre</li>
+											<li><b>Apellido(s):</b> $o_cli_info->apellidos</li>
+											<li><b>Nombre de usuario:</b> $o_cli_info->nombre_usuario</li>
+											<li><b>Clave:</b> <span class=hidden_pwd>$o_cli_info->clave</span></li>
+											<li><b>C. I.:</b> $o_cli_info->cedula_identidad</li>
+											<li><b>Correo electrónico:</b> $o_cli_info->email</li>
+											<li><b>Dirección de residencia:</b> $o_cli_info->residencia_actual</li>
+											<li><b>Teléfono celular:</b> $o_cli_info->tel_cel</li>
+											<li><b>Teléfono fijo:</b> $o_cli_info->tel_fijo</li>
+											<li><b>Fecha de registro:</b> $o_cli_info->momento_registro</li>
 										</ul>
 									";
 								?>
 							</div>
 			
 							<button id=id_btn_head_back class="btn btn-success"><i class="material-icons opacity-10">arrow_back</i> Volver a la lista</button>
+							<button id=id_btn_edit class="btn btn-warning"><i class="material-icons opacity-10">edit</i> Editar</button>
+							<button id=id_btn_del class="btn btn-danger"><i class="material-icons opacity-10">delete</i> Eliminar</button>
 						</div>
 					</div>
 				</div>
@@ -108,5 +115,17 @@
 				location.href = "../";
 			});
 		</script>
+		<?php
+			echo "
+				<script>
+					$(\"#id_btn_edit\").click(function(){
+						location.href = \"./Edit.php?id_cli=".$_GET["id_cli"]."\";
+					});
+					$(\"#id_btn_del\").click(function(){
+						location.href = \"./Delete.php?id_cli=".$_GET["id_cli"]."\";
+					});
+				</script>
+			";
+		?>
 	</body>
 </html>

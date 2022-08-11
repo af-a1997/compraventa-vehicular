@@ -86,7 +86,7 @@
                 <input type=hidden name=fln_veh_id value=<?php echo $o_veh_info->idno; ?>>
 
                 <button type=submit class="btn btn-danger disabled" id=id_del_y name=n_del_n disabled><i class="material-icons opacity-10">delete</i> Sí</button>
-                <a href="../../" class="btn btn-success" id=id_del_n name=n_del_n><i class="material-icons opacity-10">undo</i> No</a>
+                <a href="../" class="btn btn-success" id=id_del_n name=n_del_n><i class="material-icons opacity-10">undo</i> No</a>
             </form>
 		</main>
 	
@@ -108,10 +108,6 @@
 					$('#id_del_y').prop('disabled', true);
 					$('#id_del_y').addClass('disabled');
 				}
-			});
-			
-			$("#id_del_n").click(function(){
-				location.href = "../";
 			});
 		</script>
 	</body>

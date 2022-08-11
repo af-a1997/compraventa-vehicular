@@ -26,7 +26,7 @@
 			include "../../../../../shared/html_head_setup.php";
 		?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_regman; ?></title>
+		<title><?php echo a_dsb." - ".a_u_reg.$o_rvi->id_reg; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -41,10 +41,10 @@
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
 							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/vehicles/"><?php echo a_regman; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page">Editar</li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_u_reg; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0">Editar registro</h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_u_reg.$o_rvi_data_in->id_reg; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						</div>
@@ -99,7 +99,7 @@
 					<?php
 						if($o_rvi_data_in->usado == 1){
 							echo "
-								<input type=radio name=fln_rvi_edit_used_flag id=fln_acq_used_1 value=1 selected />
+								<input type=radio name=fln_rvi_edit_used_flag id=fln_acq_used_1 value=1 checked />
 								<label for=fln_acq_used_1>Sí</label> &emsp;
 								
 								<input type=radio name=fln_rvi_edit_used_flag id=fln_acq_used_0 value=0 />
@@ -111,7 +111,7 @@
 								<input type=radio name=fln_rvi_edit_used_flag id=fln_acq_used_1 value=1 />
 								<label for=fln_acq_used_1>Sí</label> &emsp;
 								
-								<input type=radio name=fln_rvi_edit_used_flag id=fln_acq_used_0 value=0 selected />
+								<input type=radio name=fln_rvi_edit_used_flag id=fln_acq_used_0 value=0 checked />
 								<label for=fln_acq_used_0>No</label>
 							";
 						}

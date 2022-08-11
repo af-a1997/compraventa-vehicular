@@ -33,7 +33,7 @@
 			include "../../../../../shared/html_head_setup.php";
 		?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_r_veh.$old_veh_details; ?></title>
+		<title><?php echo a_dsb." - ".a_r_veh.$old_veh_details; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -78,18 +78,15 @@
 			<br />
 			
 			<?php
-				if($_POST['fln_veh_id']){
-					$r_veh_del = $o_veh->VEH_DeleteOne();
-					$link_act_all = BTL_Gen(0,2);
-	
-					if($r_veh_del){
-						echo "<p>Vehículo &laquo;".$old_veh_details."&raquo; eliminado".$link_act_all."</p>";
-					}
-					else{
-						echo "<p>No se pudo eliminar el vehículo".$link_act_all."</p>";
-					}
+				$r_veh_del = $o_veh->VEH_DeleteOne();
+				$link_act_all = BTL_Gen(0,2);
+
+				if($r_veh_del){
+					echo "<p>Vehículo &laquo;".$old_veh_details."&raquo; eliminado".$link_act_all."</p>";
 				}
-				else echo "<p>No se especificó una ID válida de vehículo a eliminar, <a href=\"../../../\">pincha aquí para volver a la lista</a>.";
+				else{
+					echo "<p>No se pudo eliminar el vehículo".$link_act_all."</p>";
+				}
 			?>
 		</main>
 	

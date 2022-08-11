@@ -97,8 +97,8 @@ INSERT INTO puesto(nombre,descripcion) VALUES
 ;
 
 INSERT INTO usuarios(nombre,apellidos,nombre_usuario,clave,cedula_identidad,email,residencia_actual,tel_cel,tel_fijo,momento_registro,cargo_en_sitio) VALUES
-	("Administrador","Principal","admin","12345678",01234567,"hola@example.com","Placeholder","000000000","00000000",NOW(),1),
-	("Un tal","Fulano","fulano","12345678",12345678,"hola2@example.com","Placeholder","000000000","00000000",NOW(),2)
+	("Administrador","Principal","admin","12345678","0.123.456-7","hola@example.com","Placeholder","000000000","00000000",NOW(),1),
+	("Un tal","Fulano","fulano","12345678","1.234.567-8","hola2@example.com","Placeholder","000000000","00000000",NOW(),2)
 ;
 
 INSERT INTO seleccion_alquiler(id_reg_veh, id_divisa, valor_diario_alq, disponibilidad) VALUES
@@ -106,9 +106,9 @@ INSERT INTO seleccion_alquiler(id_reg_veh, id_divisa, valor_diario_alq, disponib
 ;
 
 INSERT INTO historial_alquiler(momento_alquilado, momento_devolucion, estado_alquiler, id_veh_alquilado, no_cli) VALUES
-	("2022-07-01 00:00:00",NOW(),2,1,1)
+	("2022-07-01 00:00:00",NOW(),1,1,1)
 ;
 
 INSERT INTO remises(nombres,apellidos,cedula_identidad,tel_cel,tel_fijo,email,ubicacion_residencia,costo_d,costo_espera_h,divisa_precio,id_reg_veh) VALUES
-	("Testing", "Tester", 76543210, "+500", "+300", "hello3@example.com","Placeholder",1000,50,2,1)
+	("Testing", "Tester", "7.654.321-0", "500", "300", "hello3@example.com","Placeholder",1000,50,2,1)
 ;

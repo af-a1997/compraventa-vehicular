@@ -1,68 +1,63 @@
 <?php
 	include "../../../../shared/Utils.Admin.SessionCheck.php";
+	include "../../../../shared/Utils.Admin.BTL.php";
+	include "../../../../shared/Utils.Admin.Time.php";
 	
 	include "../../../../classes/Utils_ClassLoader.class.php";
 	
 	include "../../../../shared/Constant_Strings[A].php";
 	include "../../../../../shared/utils/Utils.Common_Strings.php";
-	
-	include "../../../../shared/Utils.Admin.Time.php";
 
 	$credentials = mysqli_connect("localhost","cmman_admin","#V!c2bMr69xo!8%A","gestion_veh") or die ("Hubo un fallo al conectarse a la BBDD, conexión abortada.");
 	
-	$o_users = new Users();
+	$o_cli = new Users();
 	
-	$o_users->nombre = $_POST["fln_user_name"];
-	$o_users->apellidos = $_POST["fln_user_surname"];
-	$o_users->nombre_usuario = $_POST["fln_user_un"];
-	$o_users->clave = $_POST["fln_user_pwd"];
-	$o_users->cedula_identidad = $_POST["fln_user_uyid"];
+	$o_cli->nombre = $_POST["fln_user_name"];
+	$o_cli->apellidos = $_POST["fln_user_surname"];
+	$o_cli->nombre_usuario = $_POST["fln_user_un"];
+	$o_cli->clave = $_POST["fln_user_pwd"];
+	$o_cli->cedula_identidad = $_POST["fln_user_uyid"];
 	
 	// Fields that are optional, if they're empty, send them with null info, if this isn't done, an error will appear instead.
-	if(!$_POST["fln_user_emailaddr"]){
-		$o_users->email = null;
-	}
-	else{
-		$o_users->email = $_POST["fln_user_emailaddr"];
-	}
-	if(!$_POST["fln_user_houseloc"]){
-		$o_users->residencia_actual = null;
-	}
-	else{
-		$o_users->residencia_actual = $_POST["fln_user_houseloc"];
-	}
-	if(!$_POST["fln_user_phone_cel"]){
-		$o_users->tel_cel = null;
-	}
-	else{
-		$o_users->tel_cel = $_POST["fln_user_phone_cel"];
-	}
-	if(!$_POST["fln_user_phone_home"]){
-		$o_users->tel_fijo = null;
-	}
-	else{
-		$o_users->tel_fijo = $_POST["fln_user_phone_home"];
-	}
+	if(!$_POST["fln_user_emailaddr"])
+		$o_cli->email = null;
+	else
+		$o_cli->email = $_POST["fln_user_emailaddr"];
+	
+	if(!$_POST["fln_user_houseloc"])
+		$o_cli->residencia_actual = null;
+	else
+		$o_cli->residencia_actual = $_POST["fln_user_houseloc"];
+	
+	if(!$_POST["fln_user_phone_cel"])
+		$o_cli->tel_cel = null;
+	else
+		$o_cli->tel_cel = $_POST["fln_user_phone_cel"];
+	
+	if(!$_POST["fln_user_phone_home"])
+		$o_cli->tel_fijo = null;
+	else
+		$o_cli->tel_fijo = $_POST["fln_user_phone_home"];
 	
 	// Add the rest of the parameters.
-	$o_users->momento_registro = $cdt;
-	$o_users->cargo_en_sitio = 2;
+	$o_cli->momento_registro = $cdt;
+	$o_cli->cargo_en_sitio = 2;
 	
 	// Checks if the username was taken, if yes, returns an error, otherwise proceeds to register the user.
-	$check_username_avail = $o_users->CLI_VerifyUsernameAvail($o_users->nombre_usuario);
-	if($check_username_avail == true){
+	$check_username_avail = $o_cli->CLI_VerifyUsernameAvail($o_cli->nombre_usuario);
+	if($check_username_avail == true)
 		header("Location:./?msg=username_taken");
-	}
-	else{
-		$r_add_cli = $o_users->CLI_Add();
-	}
+	else
+		$r_add_cli = $o_cli->CLI_Add();
+	
+	$full_name = $o_cli->nombre." ".$o_cli->apellidos;
 ?>
 
 <html lang=es>
 	<head>
 		<?php include "../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_n_cli; ?></title>
+		<title><?php echo a_dsb." - ".a_n_cli.$full_name; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -107,12 +102,13 @@
 			<br />
 			
 			<?php
-				if($r_add_cli){
-					echo "<p>Usuario registrado, <a href=\"../\">pincha aquí para ir a la lista</a>.</p>";
-				}
-				else{
-					echo "<p>No se pudo registrar al usuario, <a href=\"./\">pincha aquí para volver a intentarlo</a>.</p>";
-				}
+				$link_act_0 = BTL_Gen(0,1);
+				$link_act_1 = BTL_Gen(1,-1);
+
+				if($r_add_cli)
+					echo "<p>Cliente &laquo;".$full_name."&raquo; registrado".$link_act_0."</p>";
+				else
+					echo "<p>No se pudo registrar al cliente".$link_act_1."</p>";
 			?>
 		</main>
 	

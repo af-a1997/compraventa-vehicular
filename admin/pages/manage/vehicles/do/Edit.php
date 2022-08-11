@@ -17,6 +17,14 @@
 	$o_veh_data_in = $o_veh->VEH_ShowOne();
 	$o_vcat_list = $o_vcat->VCAT_ShowAll();
 	$o_brands_list = $o_brands->BRAND_ShowAll();
+	
+	$year_fab = "";
+	if($o_veh_data_in->anho_fab == 0)
+		$year_fab = "Año desc.";
+
+	else
+		$year_fab = $o_veh_data_in->anho_fab;
+	$full_model = "$o_veh_data_in->mno $o_veh_data_in->modelo ($year_fab)";
 ?>
 
 <html lang=es>
@@ -26,7 +34,7 @@
 			include "../../../../shared/Imports.jQuery_UI.php";
 		?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_vehman; ?></title>
+		<title><?php echo a_dsb." - ".a_u_veh.$full_model; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -41,10 +49,10 @@
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
 							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/vehicles/"><?php echo a_vehman; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page">Editar</li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_u_veh; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0">Editar vehículo</h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_dsb." - ".a_u_veh.$full_model; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						</div>
@@ -114,7 +122,7 @@
 					<label class=form-label>Año de fabricación</label>
 					<input class=form-control id=id_veh_yfab name=fln_veh_yfab value=<?php echo "\"$o_veh_data_in->anho_fab\""; ?> />
 					
-					<button class="btn btn-warning" id=id_veh_yfab_unknown name=fln_veh_yfab_unknown>Año desconocido</button>
+					<a class="btn btn-warning" id=id_yfab_unk href=#>Año desconocido</a>
 				</div>
 				<div class="input-group input-group-outline">
 					<label class=form-label>Puertas</label>
@@ -168,19 +176,25 @@
 				<br />
 				
 				<button class="btn btn-success" type=submit><i class="material-icons opacity-10">autorenew</i> Actualizar vehículo</button>
+				<a href="../" class="btn btn-danger"><i class="material-icons opacity-10">clear</i> Cancelar</a>
 			</form>
 		</main>
 	
 		<?php include "../../../../shared/Imports.Scripts.php"; ?>
 
-		<!-- jQuery UI · script -->
 		<script src="/shared/extras/jquery/ui/jquery-ui.min.js"></script>
+		<script src="/shared/extras/jquery/validation/jquery.validate.min.js"></script>
 
 		<script>
 			$('#sidebar-choice-1').addClass("active bg-gradient-primary");
+
+			// Assigns value "0" to fabrication year field, in the case it is not known.
+			$('#id_yfab_unk').click(function(){
+				$('#id_veh_yfab').val("0");
+			});
 			
 			// To make jQuery UI's datepicker pick only years. Code from: https://stackoverflow.com/questions/13528623/jquery-ui-datepicker-to-show-year-only
-			$('#id_veh_faby').datepicker({
+			$('#id_veh_yfab').datepicker({
                 changeYear: true,
                 dateFormat: 'yy',
                 onClose: function(dateText, inst) { 
@@ -188,15 +202,28 @@
                     $(this).datepicker('setDate', new Date(year, 1));
                 },
                 showButtonPanel: true,
-				yearRange: "c-100:c+100"
+				yearRange: "1800:c+0"
 			});
-			
-			$("#id_veh_faby").focus(function(){
+			$("#id_veh_yfab").focus(function(){
 				$(".ui-datepicker-month").hide();
 				$(".ui-datepicker-calendar").css("visibility", "hidden");
 			});
 			
 			// Code to show only year in datepicker ends here.
+			
+			// Validation
+			$("#id_form_veh_reg").validate({
+				rules:{
+					fln_veh_type: "required",
+					fln_veh_brand: "required",
+					fln_veh_model: "required"
+				},
+				messages:{
+					fln_veh_type: "Especifique el tipo de vehículo.",
+					fln_veh_brand: "Especifique la marca del vehículo.",
+					fln_veh_model: "Especifique el modelo del vehículo."
+				}
+			});
 		</script>
 	</body>
 </html>

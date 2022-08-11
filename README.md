@@ -65,9 +65,14 @@ El modelo se encuentra en `/admin/ddbb/models/` tanto en imagen como archivo de 
  - [X] Gestión de alquilables: vehículos disponibles para alquiler.
    - [X] Listar
    - [X] Detalles
-   - [X] Detener contrato
    - [X] Editar
    - [X] Eliminar
+ - [X] Gestión de alquileres: vehículos previamente alquilados o actualmento alquilados y posiblemente en uso.
+   - [X] Listar
+   - [X] Detalles
+   - [X] :arrow_right: Editar: cabe mencionar que aquí se alterna el estado de contrato, y en base a eso se establece si la instancia de alquiler puede borrarse o no.
+   - [X] Eliminar
+   - [X] Verificar estado de contrato
  - [ ] Gestión de remises
    - [X] Listar
    - [ ] Agregar

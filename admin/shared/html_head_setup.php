@@ -145,6 +145,44 @@
 		display: inline-block;
 		margin-right: 5px;
 	}
+
+	/* ID selectors have the highest specificity over the ones used in the template stylesheet files, which is why I'm going to use IDs to add a calendar icon for datepicker fields, and list them all here. Read more about specificity here: < https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity > */
+	input#id_veh_yfab, input#id_acq_timestamp, input#id_field_rent_start, input#id_field_rent_end {
+		background: transparent url("/shared/img/icons/stock_calendar-view-year(gnome-2.10.1).png") center right/16px 16px no-repeat;
+		cursor: pointer;
+	}
+	input#id_field_rgb {
+		cursor: pointer;
+	}
+	input#id_field_rgb::placeholder {
+		text-transform: uppercase;
+		color: #eee;
+		font-weight: bold;
+		font-style: italic;
+	}
+	/* Placeholder styling: < https://www.samanthaming.com/tidbits/57-styling-css-placeholder/ > */
+
+	div.danger_area {
+		border: 1px solid #FF2727;
+		border-radius: 15px;
+		padding: 25px;
+		margin: 25px;
+		color: #FFC0C0;
+
+		/* Background gradient code generated with: < https://cssgradient.io/ > */
+		background: rgb(61,0,0);
+		background: -moz-linear-gradient(315deg, rgba(61,0,0,1) 0%, rgba(185,0,0,1) 100%);
+		background: -webkit-linear-gradient(315deg, rgba(61,0,0,1) 0%, rgba(185,0,0,1) 100%);
+		background: linear-gradient(315deg, rgba(61,0,0,1) 0%, rgba(185,0,0,1) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3d0000",endColorstr="#b90000",GradientType=1);
+	}
+	div.danger_area div.danger_area_title {
+		text-transform: uppercase;
+		font-size: 16px;
+		border-bottom: 3px solid #FF8C8C;
+		color: #FF8C8C;
+		margin-bottom: 15px;
+	}
 </style>
 
 <!-- Font Awesome icons -->

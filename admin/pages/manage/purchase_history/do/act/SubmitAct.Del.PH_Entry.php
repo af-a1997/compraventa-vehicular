@@ -1,29 +1,34 @@
 <?php
-	if(!$_GET['id_adq']){
-		header("location:./");
+	if(!$_POST['fln_acq_id']){
+		header("location:../../");
 	}
 	
-	include "../../../classes/Utils_ClassLoader.class.php";
+	include "../../../../../shared/Utils.Admin.SessionCheck.php";
+	include "../../../../../shared/Utils.Admin.BTL.php";
 	
-	include "../../../shared/Constant_Strings[A].php";
-	include "../../../../shared/utils/Utils.Common_Strings.php";
+	include "../../../../../classes/Utils_ClassLoader.class.php";
 	
-	include "../../../shared/Utils.Admin.Time.php";
+	include "../../../../../shared/Constant_Strings[A].php";
+	include "../../../../../../shared/utils/Utils.Common_Strings.php";
+
+	$o_acq = new Acquired_Veh();
+	$o_acq->id_adq = $_POST['fln_acq_id'];
+
+	$o_acq_info = $o_acq->ACQ_ShowOne();
 ?>
 
 <html lang=es>
 	<head>
 		<?php
-			include "../../../shared/html_head_setup.php";
-			include "../../../shared/Imports.jQuery_UI.php";
+			include "../../../../../shared/html_head_setup.php";
 		?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_n_acq; ?></title>
+		<title><?php echo a_dsb." - ".a_r_acq.$_POST['fln_acq_id']; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
 		<!-- Sidebar -->
-		<?php include "../../../shared/Snippets.Sidebar.php"; ?>
+		<?php include "../../../../../shared/Snippets.Sidebar.php"; ?>
 		
 		<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
 			<!-- Top bar conents -->
@@ -32,15 +37,15 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
-							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/purchase_history/"><?php echo a_purchase_history; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_n_acq; ?></li>
+							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../../"><?php echo a_phman; ?></a></li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_r_veh; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_n_acq; ?></h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_r_veh.$old_veh_details; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
-							<?php include "../../../shared/Snippets.Adm_Logout.php"; ?>
+							<?php include "../../../../../shared/Snippets.Adm_Logout.php"; ?>
 							
 							<!-- Hamburger menu that shows the navigation menu from the left in wide screens, when the display width is not big enough (most notably on phone screens). -->
 							
@@ -63,26 +68,18 @@
 			<br />
 			
 			<?php
-				if($_GET['id_adq']){
-					$id_2del = $_GET['id_adq'];
-					
-					$o_acq = new Acquired_Veh();
-					$o_acq->id_adq = $id_2del;
-					
-					$r_act_del = $o_acq->ACQ_DelOne();
-	
-					if($r_act_del){
-						echo "<p>Registro de compra eliminada, <a href=\"./\">pincha aquí para volver a la lista</a>.</p>";
-					}
-					else{
-						echo "<p>No se pudo registrar la compra, <a href=\"./\">pincha aquí para volver a la lista</a>.</p>";
-					}
-				}
-				else echo "<p>No se especificó una ID válida de registro de compra a eliminar.";
+				$r_acq_del = $o_acq->VEH_DeleteOne();
+				$link_act_0 = BTL_Gen(0,2);
+				$link_act_1 = BTL_Gen(1,1,"Delete.php?id_adq=".$_POST['fln_acq_id']);
+
+				if($r_acq_del)
+					echo "<p>Registro <span class=\"color: red;\">".$_POST['fln_acq_id']."</span> eliminado".$link_act_0."</p>";
+				else
+					echo "<p>No se pudo eliminar el registro <span class=\"color: red;\">".$_POST['fln_acq_id']."</span>".$link_act_1."</p>";
 			?>
 		</main>
 	
-		<?php include "../../../shared/Imports.Scripts.php"; ?>
+		<?php include "../../../../../shared/Imports.Scripts.php"; ?>
 		
 		<script>
 			$('#sidebar-choice-6').addClass("active bg-gradient-primary");

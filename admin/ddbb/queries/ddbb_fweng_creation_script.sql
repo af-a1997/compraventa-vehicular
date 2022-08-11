@@ -4,21 +4,15 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
--- -----------------------------------------------------
--- Schema gestion_veh
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema gestion_veh
--- -----------------------------------------------------
-
 /*
-	-> Forward engineered query had to be modified to take out INDEX declarations, because of a supposed syntaxis error with INDEX elements in CREATE TABLE statements, for some reason it's like MariaDB is being used even though phpMyAdmin (and even the script here) are set to use InnoDB as per defaults (and this was checked in PMA's config too).
-	
-	-> Also, I added a DROP DATABASE statement to re-create the database, backup *all* the data in this database before running this again.
-	
-	-> Only run when testing, diagnosing or to repair potentially broken relations, tables, etc. by re-creating the database, again, make sure to backup data before running this.
-*/
+ * Modified version of the forward-enginereed code from MySQL Workbench EER model.
+ *
+ * Just added a DROP DATABASE clause to assist with re-creating it. Make sure to backup any data you may need and created after adding the example data from [ddb_sample_data_population.sql], you can edit that file to include such data.
+ */
+
+-- -----------------------------------------------------
+-- Schema gestion_veh
+-- -----------------------------------------------------
 DROP DATABASE IF EXISTS gestion_veh;
 
 CREATE SCHEMA IF NOT EXISTS `gestion_veh` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
@@ -143,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `gestion_veh`.`remises` (
   `id_remise` INT NOT NULL AUTO_INCREMENT,
   `nombres` VARCHAR(100) NOT NULL,
   `apellidos` VARCHAR(100) NOT NULL,
-  `cedula_identidad` INT NOT NULL,
+  `cedula_identidad` VARCHAR(11) NOT NULL,
   `tel_cel` VARCHAR(20) NULL,
   `tel_fijo` VARCHAR(20) NULL,
   `email` VARCHAR(100) NULL,
@@ -209,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `gestion_veh`.`usuarios` (
   `apellidos` VARCHAR(100) NOT NULL,
   `nombre_usuario` VARCHAR(50) NOT NULL,
   `clave` VARCHAR(100) NOT NULL,
-  `cedula_identidad` INT NOT NULL,
+  `cedula_identidad` VARCHAR(11) NOT NULL,
   `email` VARCHAR(100) NULL,
   `residencia_actual` VARCHAR(100) NULL,
   `tel_cel` VARCHAR(20) NULL,

@@ -1,63 +1,28 @@
+<!DOCTYPE html>
+
 <?php
+	if(!$_GET["id_adq"]){
+		header("Location:../");
+	}
+	
 	include "../../../../shared/Utils.Admin.SessionCheck.php";
-	include "../../../../shared/Utils.Admin.BTL.php";
 	
 	include "../../../../classes/Utils_ClassLoader.class.php";
-	
+
 	include "../../../../shared/Constant_Strings[A].php";
 	include "../../../../../shared/utils/Utils.Common_Strings.php";
-	
-	include "../../../../shared/Utils.Admin.Time.php";
 
-	$credentials = mysqli_connect("localhost","cmman_admin","#V!c2bMr69xo!8%A","gestion_veh") or die ("Hubo un fallo al conectarse a la BBDD, conexión abortada.");
-	
-	$o_rvi = new Registered_Veh_Info();
 	$o_acq = new Acquired_Veh();
+	$o_acq->id_adq = $_GET["id_adq"];
 
-	if($_POST["fln_acq_timestamp"] == null)
-		$o_rvi->ultima_act_info = $cdt;
-	else
-		$o_rvi->ultima_act_info = $_POST["fln_acq_timestamp"];
-	
-	if(!$_POST["fln_veh_color"])
-		$o_rvi->color = null;
-	else
-		$o_rvi->color = $_POST["fln_veh_color"];
-	
-	if(!$_POST["fln_veh_lp"])
-		$o_rvi->matricula = null;
-	
-	else
-		$o_rvi->matricula = $_POST["fln_veh_lp"];
-	
-	$o_rvi->matricula = $_POST["fln_veh_lp"];
-	$o_rvi->estado_act = $_POST["fln_veh_status_acq"];
-	$o_rvi->kilometraje_act = $_POST["fln_acq_dist"];
-	$o_rvi->usado = $_POST["fln_acq_used"];
-	$o_rvi->vehiculo_asociado = $_POST["fln_veh_models"];
-	
-	$r_add_rvi = $o_rvi->RVI_Add();
-	
-	$r_rvi_id = mysqli_query($credentials, "SELECT id_reg FROM registros ORDER BY id_reg DESC LIMIT 1;")->fetch_object()->id_reg;
-	
-	$o_acq->tiempo = $cdt;
-	$o_acq->precio = $_POST["fln_veh_cost"];
-	$o_acq->estado_adq = $_POST["fln_veh_status_acq"];
-	$o_acq->kilometraje_adq = $_POST["fln_acq_dist"];
-	$o_acq->divisa_precio = $_POST["fln_veh_cost_curr"];
-	$o_acq->id_del_adquirido = $r_rvi_id;
-	
-	$r_add_acq = $o_acq->ACQ_Add();
+	$o_acq_info = $o_acq->ACQ_ShowOne();
 ?>
 
 <html lang=es>
 	<head>
-		<?php
-			include "../../../../shared/html_head_setup.php";
-			include "../../../../shared/Imports.jQuery_UI.php";
-		?>
+		<?php include "../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_n_acq; ?></title>
+		<title><?php echo a_dsb; ?> - <?php echo a_r_acq.$_GET["id_adq"]; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -72,10 +37,10 @@
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
 							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../"><?php echo a_phman; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_n_acq; ?></li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_r_acq; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_n_acq; ?></h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_r_acq.$_GET["id_adq"]; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
@@ -99,26 +64,40 @@
 				</div>
 			</nav>
 			
+			<p>¿Seguro que quieres eliminar el registro de adquisición número <span style="color: #faa;"><?php echo $_GET["id_adq"]; ?></span>? <u>Esta acción no se puede deshacer</u>.</p>
+			
+			<input type=checkbox id=id_del_confirm name=n_del_confirm />
+			<label for=n_del_confirm>Consiento que esta acción es irreversible y deseo proceder</label>
+			
 			<br />
 			
-			<?php
-				$link_act_0 = BTL_Gen(0,2);
-				$link_act_1 = BTL_Gen(2,2,"vehicles/","registros");
-				$link_act_2 = BTL_Gen(1,-1);
+            <form method=POST action="./act/SubmitAct.Del.PH_Entry.php">
+                <input type=hidden name=fln_acq_id value=<?php echo $o_acq_info->id_adq; ?> />
 
-				if($r_add_rvi && $r_add_acq)
-					echo "<p>Compra registrada".$link_act_0.".</p>";
-				else if($r_add_rvi)
-					echo "<p>Se guardó el registro de matrícula, pero no la compra".$link_act_1."</p>";
-				else
-					echo "<p>No se pudo registrar la compra".$link_act_2."</p>";
-			?>
+                <button type=submit class="btn btn-danger disabled" id=id_del_y name=n_del_n disabled><i class="material-icons opacity-10">delete</i> Sí</button>
+                <a href="../" class="btn btn-success" id=id_del_n name=n_del_n><i class="material-icons opacity-10">undo</i> No</a>
+            </form>
 		</main>
 	
 		<?php include "../../../../shared/Imports.Scripts.php"; ?>
-		
+
 		<script>
 			$('#sidebar-choice-6').addClass("active bg-gradient-primary");
+			
+			// Ensures checkbox is unchecked when page is reloaded normally.
+			$('#id_del_confirm').prop('checked', false);
+			
+			// To make the [yes] button of the prompt available when the confirmation checkbox is enabled, this helps preventing accidental deletion of records.
+			$('#id_del_confirm').change(function(){
+				if(this.checked){
+					$('#id_del_y').prop('disabled', false);
+					$('#id_del_y').removeClass('disabled');
+				}
+				else{
+					$('#id_del_y').prop('disabled', true);
+					$('#id_del_y').addClass('disabled');
+				}
+			});
 		</script>
 	</body>
 </html>

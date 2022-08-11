@@ -1,5 +1,6 @@
 <?php
 	include "../../../../../shared/Utils.Admin.SessionCheck.php";
+	include "../../../../../shared/Utils.Admin.BTL.php";
 	
 	include "../../../../../classes/Utils_ClassLoader.class.php";
 	
@@ -35,11 +36,9 @@
 
 <html lang=es>
 	<head>
-		<?php
-			include "../../../../../shared/html_head_setup.php";
-		?>
+		<?php include "../../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - Editar vehículo</title>
+		<title><?php echo a_dsb." - ".a_u_veh.$full_model; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -54,10 +53,10 @@
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
 							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../"><?php echo a_vehman; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page">Editar</li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_u_veh; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0">Editar vehículo</h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_u_veh.$full_model; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
@@ -84,11 +83,14 @@
 			<br />
 			
 			<?php
+				$link_act_0 = BTL_Gen(0,2);
+				$link_act_1 = BTL_Gen(1,1,"Edit.php?id_veh=".$_POST["fln_veh_id"]);
+
 				if($r_add_veh){
-					echo "<p>Vehículo &laquo;".$full_model."&raquo; actualizado, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
+					echo "<p>Vehículo &laquo;".$full_model."&raquo; actualizado".$link_act_0."</p>";
 				}
 				else{
-					echo "<p>No se pudo actualizar el vehículo, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
+					echo "<p>No se pudo actualizar el vehículo".$link_act_1."</p>";
 				}
 			?>
 		</main>

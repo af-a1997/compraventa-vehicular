@@ -9,17 +9,27 @@
 		header("Location:../");
 	}
 	
-	include "../../../../../../shared/Utils.Admin.SessionCheck.php";
+	include "../../../../shared/Utils.Admin.SessionCheck.php";
+	
+	include "../../../../classes/Utils_ClassLoader.class.php";
 	
 	include "../../../../shared/Constant_Strings[A].php";
 	include "../../../../../shared/utils/Utils.Common_Strings.php";
+
+	$o_cli = new Users();
+	
+	$o_cli->nro_id_u = $_GET["id_cli"];
+
+	$o_cli_info = $o_cli->CLI_ShowOne();
+
+	$full_name = $o_cli_info->nombre." ".$o_cli_info->apellidos;
 ?>
 
 <html lang="es">
 	<head>
 		<?php include "../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - Eliminar cliente</title>
+		<title><?php echo a_dsb." - ".a_d_cli.$full_name; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -33,11 +43,11 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
-							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/clients/"><?php echo a_climan; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page">Eliminar</li>
+							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../"><?php echo a_climan; ?></a></li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_d_cli; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0">Eliminar cliente</h6>
+						<h6 class="font-weight-bolder mb-0"><?php a_d_cli.$full_name ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
@@ -61,21 +71,25 @@
 				</div>
 			</nav>
 			
-			<p>¿Seguro que quieres eliminar este cliente? Esta acción no se puede deshacer.</p>
+			<p>¿Seguro que quieres eliminar el cliente &laquo;<?php echo $full_name; ?>&raquo;? <u>Esta acción no se puede deshacer</u>.</p>
 			
 			<input type=checkbox id=id_del_confirm name=n_del_confirm />
 			<label for=n_del_confirm>Consiento que esta acción es irreversible y deseo proceder</label>
 			
 			<br />
 			
-			<button class="btn btn-danger disabled" id=id_del_y name=n_del_n disabled><i class="material-icons opacity-10">delete</i> Sí</button>
-			<button class="btn btn-success" id=id_del_n name=n_del_n><i class="material-icons opacity-10">undo</i> No</button>
+            <form method=POST action="./act/SubmitAct.Del.CLI.php">
+                <input type=hidden name=fln_cli_id value=<?php echo $o_cli_info->nro_id_u; ?> />
+
+                <button type=submit class="btn btn-danger disabled" id=id_del_y name=n_del_n disabled><i class="material-icons opacity-10">delete</i> Sí</button>
+                <a href="../" class="btn btn-success" id=id_del_n name=n_del_n><i class="material-icons opacity-10">undo</i> No</a>
+            </form>
 		</main>
 	
 		<?php include "../../../../shared/Imports.Scripts.php"; ?>
 
 		<script>
-			$('#sidebar-choice-1').addClass("active bg-gradient-primary");
+			$('#sidebar-choice-2').addClass("active bg-gradient-primary");
 			
 			// Ensures checkbox is unchecked when page is reloaded normally.
 			$('#id_del_confirm').prop('checked', false);
@@ -91,18 +105,6 @@
 					$('#id_del_y').addClass('disabled');
 				}
 			});
-			
-			$("#id_del_n").click(function(){
-				location.href = "../";
-			});
 		</script>
-		
-		<?php echo "
-			<script>
-				$(\"#id_del_y\").click(function(){
-					location.href = \"./act/SubmitAct.Del.Cli.php?id_cli=".$_GET["id_cli"]."\";
-				});
-			</script>";
-		?>
 	</body>
 </html>

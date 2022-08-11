@@ -104,7 +104,7 @@
 				<div class="input-group input-group-outline">
 					<select class=form-control name=fln_rnt_availst>
 						<?php
-							include "../../../../../../../../shared/utils/Utils.Veh_Statuses.php";
+							include "../../../../../../../../shared/utils/Utils.RHI_VehSt.php";
 							
 							while($x < $em){
 								if($x == $o_rnt_data_in->disponibilidad)

@@ -22,7 +22,7 @@
 			include "../../../../shared/Imports.jQuery_UI.php";
 		?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_n_veh; ?></title>
+		<title><?php echo a_dsb." - ".a_n_veh; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -74,7 +74,7 @@
 				<p>Tipo<?php echo g_snp_reqf ?>:</p>
 				<div class="input-group input-group-outline">
 					<select class=form-control name=fln_veh_type>
-						<option value="" selected>Selecciona un tipo de vehículo...</option>
+						<option value="" selected>Selecciona el tipo de vehículo...</option>
 						<?php
 							foreach($o_vcat_list as $vcatl){
 								echo "<option value='$vcatl->id_tipo'>$vcatl->nombre</option>";
@@ -135,45 +135,54 @@
 				<br />
 				
 				<button class="btn btn-success" type=submit><i class="material-icons opacity-10">add_box</i> Registrar vehículo</button>
+				<a href="../" class="btn btn-danger"><i class="material-icons opacity-10">clear</i> Cancelar</a>
 			</form>
 		</main>
 	
 		<?php include "../../../../shared/Imports.Scripts.php"; ?>
 
-		<script src="/shared/extras/jquery/mask/jquery.mask.min.js"></script>
+		<script src="/shared/extras/jquery/ui/jquery-ui.min.js"></script>
 		<script src="/shared/extras/jquery/validation/jquery.validate.min.js"></script>
 		
 		<script>
 			$('#sidebar-choice-1').addClass("active bg-gradient-primary");
+
+			// Assigns value "0" to fabrication year field, in the case it is not known.
+			$('#id_yfab_unk').click(function(){
+				$('#id_veh_yfab').val("0");
+			});
+
+			// To make jQuery UI's datepicker pick only years. Code from: https://stackoverflow.com/questions/13528623/jquery-ui-datepicker-to-show-year-only
+			$('#id_veh_yfab').datepicker({
+				changeYear: true,
+				dateFormat: 'yy',
+				onClose: function(dateText, inst) { 
+					var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+					$(this).datepicker('setDate', new Date(year, 1));
+				},
+				showButtonPanel: true,
+				yearRange: "1800:c+0"
+			});
 			
-			$().ready(function(){
-				$('#id_yfab_unk').click(function(){
-					$('#id_veh_yfab').val("0");
-				});
-				
-				// Masks
-				$("#id_veh_yfab").mask("0000");
-				$("#validate_format_phone_cel").mask("000 000 000",{
-					placeholder: "09X XXX XXX"
-				});
-				$("#validate_format_phone_home").mask("0000 0000",{
-					placeholder: "XXXX XXXX"
-				});
-				
-				// Validation
-				
-				$("#id_form_veh_reg").validate({
-					rules:{
-						fln_veh_type: "required",
-						fln_veh_brand: "required",
-						fln_veh_model: "required"
-					},
-					messages:{
-						fln_veh_type: "Especifique el tipo de vehículo.",
-						fln_veh_brand: "Especifique la marca del vehículo.",
-						fln_veh_model: "Especifique el modelo del vehículo."
-					}
-				});
+			$("#id_veh_yfab").focus(function(){
+				$(".ui-datepicker-month").hide();
+				$(".ui-datepicker-calendar").css("visibility", "hidden");
+			});
+			
+			// Code to show only year in datepicker ends here.
+			
+			// Validation
+			$("#id_form_veh_reg").validate({
+				rules:{
+					fln_veh_type: "required",
+					fln_veh_brand: "required",
+					fln_veh_model: "required"
+				},
+				messages:{
+					fln_veh_type: "Especifique el tipo de vehículo.",
+					fln_veh_brand: "Especifique la marca del vehículo.",
+					fln_veh_model: "Especifique el modelo del vehículo."
+				}
 			});
 		</script>
 	</body>

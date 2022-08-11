@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-
 <?php
+	if(!$_POST['fln_acq_fwo_confirmation'] && $_POST['fln_acq_fwo_confirmation'] != 1)
+		header("location:../../");
+	
 	include "../../../../../shared/Utils.Admin.SessionCheck.php";
+	include "../../../../../shared/Utils.Admin.BTL.php";
 	
 	include "../../../../../classes/Utils_ClassLoader.class.php";
 	
 	include "../../../../../shared/Constant_Strings[A].php";
 	include "../../../../../../shared/utils/Utils.Common_Strings.php";
-	
-	$o_rhi = new Rented();
-	$o_rhi->id_hst_alq = $_GET["id_rhi"];
-	$o_rhi->estado_alquiler = 0; // Statuses described in [/shared/utils/Utils.Veh_Statuses.php]
-	
-	$o_rhi_sw_status = $o_rhi->RHI_StopRental();
 ?>
 
 <html lang=es>
@@ -21,7 +17,7 @@
 			include "../../../../../shared/html_head_setup.php";
 		?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_hvman; ?></title>
+		<title><?php echo a_dsb." - ".a_w_acq; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -35,23 +31,15 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
-							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/vehicles/"><?php echo a_vehman; ?></a></li>
-							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/vehicles/rental/"><?php echo a_hvman; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page">Detener</li>
+							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../../"><?php echo a_phman; ?></a></li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_r_veh; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0">Abortar alquiler</h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_r_veh; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-						</div>
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
-							<li class="nav-item d-flex align-items-center">
-								<a href="/login/admin/act/Logout.php" class="nav-link text-body font-weight-bold px-0">
-									<i class="fa fa-user me-sm-1"></i>
-
-									<span class="d-sm-inline d-none"><?php echo g_logout; ?></span>
-								</a>
-							</li>
+							<?php include "../../../../../shared/Snippets.Adm_Logout.php"; ?>
 							
 							<!-- Hamburger menu that shows the navigation menu from the left in wide screens, when the display width is not big enough (most notably on phone screens). -->
 							
@@ -74,18 +62,24 @@
 			<br />
 			
 			<?php
-				if($o_rhi_sw_status)
-					echo "<p>Proceso de alquiler abortado, <a href=\"../\">pincha aquí para volver a la lista</a>.</p>";
-				
+				$o_acq = new Acquired_Veh();
+
+				$o_acq_fwo = $o_acq->ACQ_DeleteAll();
+
+				$link_act_0 = BTL_Gen(0,2);
+				$link_act_1 = BTL_Gen(1,1,"Delete_All.php");
+
+				if($o_acq_fwo)
+					echo "<p>El registro de adquisiciones ha sido limpiado".$link_act_0."</p>";
 				else
-					echo "<p>Proceso de alquiler no pudo ser abortado, <a href=\"../\">pincha aquí para volver a la lista</a>.</p>";
+					echo "<p>No se pudo limpiar el registro de adquisiciones".$link_act_1."</p>";
 			?>
 		</main>
 	
 		<?php include "../../../../../shared/Imports.Scripts.php"; ?>
-
+		
 		<script>
-			$('#sidebar-choice-5').addClass("active bg-gradient-primary");
+			$('#sidebar-choice-6').addClass("active bg-gradient-primary");
 		</script>
 	</body>
 </html>

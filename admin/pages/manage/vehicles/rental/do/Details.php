@@ -7,6 +7,7 @@
 	
 	include "../../../../../shared/Constant_Strings[A].php";
 	include "../../../../../../shared/utils/Utils.Common_Strings.php";
+	include "../../../../../../shared/utils/Utils.RHI_VehSt.php";
 	
 	$o_rhi = new Rented();
 	
@@ -19,7 +20,7 @@
 	<head>
 		<?php include "../../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_hvman; ?></title>
+		<title><?php echo a_dsb." - ".a_d_rhi."&laquo;".$_GET["id_rhi"]."&raquo;"; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -41,13 +42,7 @@
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
-							<li class="nav-item d-flex align-items-center">
-								<a href="/login/admin/act/Logout.php" class="nav-link text-body font-weight-bold px-0">
-									<i class="fa fa-user me-sm-1"></i>
-
-									<span class="d-sm-inline d-none"><?php echo g_logout; ?></span>
-								</a>
-							</li>
+							<?php include "../../../../../shared/Snippets.Adm_Logout.php"; ?>
 							
 							<!-- Hamburger menu that shows the navigation menu from the left in wide screens, when the display width is not big enough (most notably on phone screens). -->
 							
@@ -83,26 +78,27 @@
 									if($o_rhi_details->veh_yfb == 0) $veh_year = "Año desc.";
 									else $veh_year = $o_rhi_details->veh_yfb;
 									
-									$rent_status = "";
-									if($o_rhi_details->estado_alquiler == 0)
-										$rent_status = "<span class=\"badge badge-sm bg-gradient-danger\">Abortado</span>";
-									else if($orl->estado_alquiler == 1)
-										$rent_status = "<span class=\"badge badge-sm bg-gradient-success\">En uso</span>";
+									$rent_status = URV_GenStBadge($o_rhi_details->estado_alquiler);
 													
 									echo "
 										<ul class=ul_style_elem_details>
-											<li><b>Vehículo:</b> $o_rhi_details->bnd_name $o_rhi_details->veh_mod ($veh_year)</li>
+											<li><b>Vehículo:</b> <a href=\"../../do/Details.php?id_rhi=$o_rhi_details->veh_id\">$o_rhi_details->bnd_name $o_rhi_details->veh_mod ($veh_year)</a></li>
+											<li><b>Arrendador:</b> <a href=\"../../../clients/do/Details.php?id_cli=$o_rhi_details->uid\">$o_rhi_details->uun</a></li>
 											<li><b>Estado de alquiler:</b> $rent_status</li>
 											<li><b>Alquilado:</b> $o_rhi_details->momento_alquilado</li>
 											<li><b>Devolución:</b> $o_rhi_details->momento_devolucion</li>
 											<li><b>Pago diario:</b> $o_rhi_details->ren_cost $o_rhi_details->coin</li>
-											<li><b>Información del cliente:</b> <a href=\"../../../clients/do/Details.php?id_cli=$o_rhi_details->uid\">$o_rhi_details->uun</a></li>
 										</ul>
 									";
 								?>
 							</div>
 			
 							<button id=id_btn_head_back class="btn btn-success"><i class="material-icons opacity-10">arrow_back</i> Volver a la lista</button>
+							<button id=id_btn_edit class="btn btn-warning"><i class="material-icons opacity-10">edit</i> Editar</button>
+							<?php
+								if($o_rhi_details->estado_alquiler >= 4)
+									echo "<button id=id_btn_del class=\"btn btn-danger\"><i class=\"material-icons opacity-10\">delete</i> Eliminar</button>";
+							?>
 						</div>
 					</div>
 				</div>
@@ -120,5 +116,17 @@
 				location.href = "../";
 			});
 		</script>
+		<?php
+			echo "
+				<script>
+					$(\"#id_btn_edit\").click(function(){
+						location.href = \"./Edit.php?id_rhi=".$_GET["id_rhi"]."\";
+					});
+					$(\"#id_btn_del\").click(function(){
+						location.href = \"./Delete.php?id_rhi=".$_GET["id_rhi"]."\";
+					});
+				</script>
+			";
+		?>
 	</body>
 </html>

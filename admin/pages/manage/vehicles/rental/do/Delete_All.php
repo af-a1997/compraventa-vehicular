@@ -1,31 +1,21 @@
-<?php
-	if(!isset($_GET["id_rhi"]))
-		header("Location:../");
+<!DOCTYPE html>
 
+<?php
 	include "../../../../../shared/Utils.Admin.SessionCheck.php";
 	
 	include "../../../../../classes/Utils_ClassLoader.class.php";
 
-	$o_rhi = new Rented();
-	$o_rhi->id_hst_alq = $_GET["id_rhi"];
-
-	$o_rhi_info = $o_rhi->RHI_ShowOne();
-
-	// All vehicles that are rented cannot be deleted.
-	if($o_rhi_info->estado_alquiler < 4)
-		header("Location:../?msg=err_rental_active");
-	
 	include "../../../../../shared/Constant_Strings[A].php";
 	include "../../../../../../shared/utils/Utils.Common_Strings.php";
-?>
 
-<!DOCTYPE html>
+	$o_rnt = new Rented();
+?>
 
 <html lang=es>
 	<head>
 		<?php include "../../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb." - ".a_r_rhi."&laquo;".$_GET["id_rhi"]."&raquo;"; ?></title>
+		<title><?php echo a_dsb." - ".a_w_rhi; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -39,12 +29,11 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
-							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../../"><?php echo a_vehman; ?></a></li>
 							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../"><?php echo a_hvman; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_r_rhi; ?></li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_w_rhi; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_r_rhi.$_GET["id_rhi"]; ?></h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_w_rhi; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
@@ -67,20 +56,24 @@
 					</div>
 				</div>
 			</nav>
-			
-			<p>¿Seguro que quieres eliminar el registro de alquiler número <span style="color: #faa;"><?php echo $_GET["id_rhi"]; ?></span>? <u>Esta acción no se puede deshacer</u>.</p>
-			
-			<input type=checkbox id=id_del_confirm name=n_del_confirm />
-			<label for=n_del_confirm>Consiento que esta acción es irreversible y deseo proceder</label>
-			
-			<br />
-			
-            <form method=POST action="./act/SubmitAct.Del.RHI.php">
-                <input type=hidden name=fln_rhi_id value=<?php echo $o_rhi_info->id_rhi; ?> />
 
-                <button type=submit class="btn btn-danger disabled" id=id_del_y name=n_del_n disabled><i class="material-icons opacity-10">delete</i> Sí</button>
-                <a href="../" class="btn btn-success" id=id_del_n name=n_del_n><i class="material-icons opacity-10">undo</i> No</a>
-            </form>
+			<div class="alert alert-warning" role=alert><b>Nota:</b> esta acción solo eliminará las entradas que tengan instancias de alquiler inactivas.</div>
+
+            <div class=danger_area>
+                <div class=danger_area_title>Eliminación total</div>
+
+                <p>Estás por vaciar el historial de vehículos alquilados, ¿seguro/a que deseas proceder?</p>
+
+                <input type=checkbox id=id_del_confirm name=n_del_confirm />
+                <label for=n_del_confirm>Consiento que esta acción es irreversible y deseo proceder</label>
+
+                <form method=POST action="./act/SubmitAct.FWo.RHI.php">
+                    <input type=hidden name=fln_rhi_fwo_confirmation value=1 />
+
+                    <button type=submit class="btn btn-danger disabled" id=id_del_y name=n_del_n disabled><i class="material-icons opacity-10">delete</i> Sí</button>
+                    <a href="../" class="btn btn-success" id=id_del_n name=n_del_n><i class="material-icons opacity-10">undo</i> No</a>
+                </form>
+            </div>
 		</main>
 	
 		<?php include "../../../../../shared/Imports.Scripts.php"; ?>
@@ -88,8 +81,10 @@
 		<script>
 			$('#sidebar-choice-5').addClass("active bg-gradient-primary");
 			
+			// Ensures checkbox is unchecked when page is reloaded normally.
 			$('#id_del_confirm').prop('checked', false);
 			
+			// To make the [yes] button of the prompt available when the confirmation checkbox is enabled, this helps preventing accidental deletion of records.
 			$('#id_del_confirm').change(function(){
 				if(this.checked){
 					$('#id_del_y').prop('disabled', false);
@@ -99,10 +94,6 @@
 					$('#id_del_y').prop('disabled', true);
 					$('#id_del_y').addClass('disabled');
 				}
-			});
-			
-			$("#id_del_n").click(function(){
-				location.href = "../";
 			});
 		</script>
 	</body>

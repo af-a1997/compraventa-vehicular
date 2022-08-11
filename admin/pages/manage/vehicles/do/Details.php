@@ -14,13 +14,21 @@
 	$o_veh->idno = $_GET["id_veh"];
 	
 	$o_veh_details = $o_veh->VEH_ShowOne();
+
+	if($o_veh_details->anho_fab == 0)
+		$year_fab = "Año desc.";
+
+	else
+		$year_fab = $o_veh_details->anho_fab;
+	
+	$full_model = "$o_veh_details->mno $o_veh_details->modelo ($year_fab)";
 ?>
 
 <html lang="es">
 	<head>
 		<?php include "../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_vehman; ?></title>
+		<title><?php echo a_dsb." - ".a_d_veh.$full_model; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -35,10 +43,10 @@
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="../"><?php echo a_vehman; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page">Detalles</li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_d_veh; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_vehman; ?></h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_d_veh.$full_model; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
@@ -64,15 +72,11 @@
 			
 			<?php
 				$units_text = "";
-				$veh_year = "";
 				$transmission_to_text = "";
 				
 				if($o_veh_details->unidades == 0) $units_text = "<span class=\"badge badge-sm bg-gradient-danger\">Sin stock</span>";
 				else if($o_veh_details->unidades == 1) $units_text = "<span class=\"badge badge-sm bg-gradient-warning\">1 unidad</span>";
 				else if($o_veh_details->unidades > 1) $units_text = "<span class=\"badge badge-sm bg-gradient-success\">".$o_veh_details->unidades." unidades</span>";
-				
-				if($o_veh_details->anho_fab == 0) $veh_year = "Año desc.";
-				else $veh_year = $o_veh_details->anho_fab;
 				
 				if($o_veh_details->transmision == 0) $transmission_to_text = "Manual";
 				else $transmission_to_text = "Automática";
@@ -85,13 +89,14 @@
 						<div class="card my-4">
 							<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
 								<div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-									<h6 class="text-white text-capitalize ps-3">Detalles del <u><?php echo "$o_veh_details->mno $o_veh_details->modelo ($veh_year)"; ?></u></h6>
+									<h6 class="text-white text-capitalize ps-3">Detalles del <u><?php echo "$o_veh_details->mno $o_veh_details->modelo ($year_fab)"; ?></u></h6>
 								</div>
 							</div>
 							<div class="card-body px-0 pb-2" style="text-align: left;">
 								<?php
 									echo "
 										<ul class=ul_style_elem_details>
+											<li><b>Fabricante:</b> <a href=\"../../other/do/brn/List_By_Brand.php?id_brn=$o_veh_details->marca\">$o_veh_details->mno</a></li>
 											<li><b>Stock:</b> $units_text</li>
 											<li><b>Total de puertas:</b> $o_veh_details->puertas</li>
 											<li><b>Transmisión:</b> $transmission_to_text</li>
@@ -105,6 +110,8 @@
 							</div>
 			
 							<button id=id_btn_head_back class="btn btn-success"><i class="material-icons opacity-10">arrow_back</i> Volver a la lista</button>
+							<button id=id_btn_edit class="btn btn-warning"><i class="material-icons opacity-10">edit</i> Editar</button>
+							<button id=id_btn_del class="btn btn-danger"><i class="material-icons opacity-10">delete</i> Eliminar</button>
 						</div>
 					</div>
 				</div>
@@ -122,5 +129,17 @@
 				location.href = "../";
 			});
 		</script>
+		<?php
+			echo "
+				<script>
+					$(\"#id_btn_edit\").click(function(){
+						location.href = \"./Edit.php?id_veh=".$_GET["id_veh"]."\";
+					});
+					$(\"#id_btn_del\").click(function(){
+						location.href = \"./Delete.php?id_veh=".$_GET["id_veh"]."\";
+					});
+				</script>
+			";
+		?>
 	</body>
 </html>

@@ -115,7 +115,14 @@ class Acquired_Veh{
 		return $r;
 	}
 	
-	public function ACQ_DelOne(){
+	public function ACQ_DeleteAll(){
+		$sql_query_del_all_acq = "DELETE FROM $this->tbl";
+		$r = mysqli_query($this->conn, $sql_query_del_all_acq);
+		
+		return $r;
+	}
+	
+	public function ACQ_DeleteOne(){
 		$sql_query_del_1_acq = "DELETE FROM $this->tbl WHERE id_adq=$this->id_adq";
 		$r = mysqli_query($this->conn, $sql_query_del_1_acq);
 		

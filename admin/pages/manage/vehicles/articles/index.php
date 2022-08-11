@@ -84,7 +84,7 @@
 										</thead>
 										<tbody>
 											<?php
-												include "../../../../../shared/utils/Utils.Veh_Statuses.php";
+												include "../../../../../shared/utils/Utils.RHI_VehSt.php";
 
 												$vfb_str = "";
 
@@ -94,7 +94,7 @@
 														if($orl->vfb == 0) $vfb_str = "Año desc.";
 														else $vfb_str = $orl->vfb;
 														
-														$avail = UVS_BuildBadge($orl->disponibilidad);
+														$avail = URV_GenStBadge($orl->disponibilidad);
 	
 														echo "
 															<tr>

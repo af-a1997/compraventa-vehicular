@@ -61,7 +61,7 @@
 			<?php
 				if(isset($_GET['msg']) && ($_GET['msg']) == "err_main_admin_protected"){
 					echo "
-						<div class=\"alert alert-danger\" role=alert>Si has visto este mensaje, es porque estabas tratanto de editar al administrador principal ingresando su ID en la URL, esto no es posible.</div>
+						<div class=\"alert alert-danger\" role=alert>Si has visto este mensaje, es porque estabas tratanto de editar al administrador principal, esta acción no es posible.</div>
 					";
 				}
 			?>

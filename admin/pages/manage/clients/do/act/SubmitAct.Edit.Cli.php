@@ -9,36 +9,39 @@
 	}
 	
 	include "../../../../../shared/Utils.Admin.SessionCheck.php";
+	include "../../../../../shared/Utils.Admin.BTL.php";
 	
 	include "../../../../../classes/Utils_ClassLoader.class.php";
 	
 	include "../../../../../shared/Constant_Strings[A].php";
 	include "../../../../../../shared/utils/Utils.Common_Strings.php";
 	
-	$o_veh = new Users();
+	$o_cli = new Users();
+
+	$o_cli->nro_id_u = $_POST["fln_user_id"];
+
+	$o_cli_info = $o_cli->CLI_ShowOne();
+	$full_name = $o_cli_info->nombre." ".$o_cli_info->apellidos;
 	
-	$o_veh->nro_id_u = $_POST["fln_user_id"];
-	$o_veh->nombre = $_POST["fln_user_name"];
-	$o_veh->apellidos = $_POST["fln_user_surname"];
-	$o_veh->nombre_usuario = $_POST["fln_user_un"];
-	$o_veh->clave = $_POST["fln_user_pwd"];
-	$o_veh->cedula_identidad = $_POST["fln_user_uyid"];
-	$o_veh->email = $_POST["fln_user_emailaddr"];
-	$o_veh->residencia_actual = $_POST["fln_user_houseloc"];
-	$o_veh->tel_cel = $_POST["fln_user_phone_cel"];
-	$o_veh->tel_fijo = $_POST["fln_user_phone_home"];
-	$o_veh->cargo_en_sitio = $_POST["fln_user_site_role"];
+	$o_cli->nombre = $_POST["fln_user_name"];
+	$o_cli->apellidos = $_POST["fln_user_surname"];
+	$o_cli->nombre_usuario = $_POST["fln_user_un"];
+	$o_cli->clave = $_POST["fln_user_pwd"];
+	$o_cli->cedula_identidad = $_POST["fln_user_uyid"];
+	$o_cli->email = $_POST["fln_user_emailaddr"];
+	$o_cli->residencia_actual = $_POST["fln_user_houseloc"];
+	$o_cli->tel_cel = $_POST["fln_user_phone_cel"];
+	$o_cli->tel_fijo = $_POST["fln_user_phone_home"];
+	$o_cli->cargo_en_sitio = $_POST["fln_user_site_role"];
 	
-	$r_add_veh = $o_veh->CLI_UpdateOne();
+	$r_upd_cli = $o_cli->CLI_UpdateOne();
 ?>
 
 <html lang=es>
 	<head>
-		<?php
-			include "../../../../../shared/html_head_setup.php";
-		?>
+		<?php include "../../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - Editar cliente</title>
+		<title><?php echo a_dsb." - ".a_u_cli.$full_name; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -53,10 +56,10 @@
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
 							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../"><?php echo a_climan; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page">Editar</li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_u_cli; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0">Editar cliente</h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_u_cli.$full_name; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
@@ -83,12 +86,10 @@
 			<br />
 			
 			<?php
-				if($r_add_veh){
+				if($r_upd_cli)
 					echo "<p>Cliente actualizado, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
-				}
-				else{
+				else
 					echo "<p>No se pudo actualizar el cliente, <a href=\"../../\">pincha aquí para volver a la lista</a>.</p>";
-				}
 			?>
 		</main>
 	

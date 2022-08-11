@@ -21,15 +21,15 @@
 	$o_cli->nro_id_u = $_GET["id_cli"];
 	
 	$o_cli_data_in = $o_cli->CLI_ShowOne();
+
+	$full_name = $o_cli_data_in->nombre." ".$o_cli_data_in->apellidos;
 ?>
 
 <html lang=es>
 	<head>
-		<?php
-			include "../../../../shared/html_head_setup.php";
-		?>
+		<?php include "../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_vehman; ?></title>
+		<title><?php echo a_dsb." - ".a_u_cli.$full_name; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -44,10 +44,10 @@
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
 							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/clients/"><?php echo a_climan; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page">Editar</li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_u_cli; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0">Editar cliente</h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_u_cli.$full_name; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						</div>
@@ -97,7 +97,7 @@
 				</div>
 				<div class="input-group input-group-outline">
 					<label class=form-label>C. I. <?php echo g_snp_reqf ?></label>
-					<input class=form-control name=fln_user_uyid value=<?php echo "\"$o_cli_data_in->cedula_identidad\""; ?> />
+					<input class=form-control name=fln_user_uyid id=validate_format_pid value=<?php echo "\"$o_cli_data_in->cedula_identidad\""; ?> />
 				</div>
 				<div class="input-group input-group-outline">
 					<label class=form-label>Correo electrónico</label>
@@ -119,6 +119,7 @@
 				<br />
 				
 				<button class="btn btn-success" type=submit><i class="material-icons opacity-10">autorenew</i> Actualizar cliente</button>
+				<a href="../" class="btn btn-danger"><i class="material-icons opacity-10">clear</i> Cancelar</a>
 			</form>
 		</main>
 	
@@ -130,33 +131,18 @@
 		<script>
 			$('#sidebar-choice-2').addClass("active bg-gradient-primary");
 			
-			$("#validate_format_phone_cel").mask("000 000 000",{
-				placeholder: "09X XXX XXX"
-			});
-			$("#validate_format_phone_home").mask("0000 0000",{
-				placeholder: "XXXX XXXX"
-			});
+			$("#validate_format_pid").mask("0.000.000-0",{ placeholder: "1.234.567-8" });
+			$("#validate_format_phone_cel").mask("000 000 000",{ placeholder: "09X XXX XXX" });
+			$("#validate_format_phone_home").mask("0000 0000",{ placeholder: "XXXX XXXX" });
 				
 			$("#id_form_user_reg").validate({
 				rules:{
-					fln_user_name: {
-						required: true
-					},
-					fln_user_surname: {
-						required: true
-					},
-					fln_user_un: {
-						required: true
-					},
-					fln_user_pwd: {
-						required: true
-					},
-					fln_user_uyid: {
-						required: true
-					},
-					fln_user_email: {
-						email: true
-					}
+					fln_user_name: "required",
+					fln_user_surname: "required",
+					fln_user_un: "required",
+					fln_user_pwd: "required",
+					fln_user_uyid: "required",
+					fln_user_email: "required"
 				},
 				messages:{
 					fln_user_name: "Nombre(s) requerido(s).",

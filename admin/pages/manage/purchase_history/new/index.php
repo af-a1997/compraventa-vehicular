@@ -24,7 +24,9 @@
 			include "../../../../shared/Imports.jQuery_UI.php";
 		?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_n_acq; ?></title>
+		<link rel=stylesheet href="/shared/extras/jquery/ui.dtpick/jquery.datetimepicker.min.css" />
+		
+		<title><?php echo a_dsb." - ".a_n_acq; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -38,7 +40,7 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
-							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/purchase_history/"><?php echo a_purchase_history; ?></a></li>
+							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../"><?php echo a_phman; ?></a></li>
 							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_n_acq; ?></li>
 						</ol>
 						
@@ -72,10 +74,10 @@
 			
 			<p><?php echo g_snp_reqf ?> = Campos obligatorios.</p>
 			
-			<form id=id_form_acqreg method=POST action="./SubmitAct.New.Acq.php">
+			<form id=id_form_acq_reg method=POST action="./SubmitAct.New.Acq.php">
 				<p>Color:</p>
 				<div class="input-group input-group-outline">
-					<input class="form-control" name=fln_veh_color data-jscolor="{preset: 'dark large', closeButton: true, closeText: 'Cerrar', required: false}" />
+					<input id=id_field_rgb class="form-control" name=fln_veh_color data-jscolor="{preset: 'dark large', closeButton: true, closeText: 'Cerrar', required: false}" placeholder="Elija el color" />
 				</div>
 				
 				<p>Matrícula:</p>
@@ -85,18 +87,18 @@
 				
 				<p>Estado del vehículo <?php echo g_snp_reqf ?>:</p>
 				<div class="input-group input-group-outline">
-					<textarea class="form-control" name=fln_veh_status_acq placeholder="Describa como se encontraba el vehículo al momento de su adquisición." required></textarea>
+					<textarea class="form-control" name=fln_veh_status_acq placeholder="Describa como se encontraba el vehículo al momento de su adquisición."></textarea>
 				</div>
 				
 				<div class="input-group input-group-outline">
 					<label class="form-label">Kilometraje <?php echo g_snp_reqf ?></label>
-					<input class="form-control" step=.01 min=0 name=fln_acq_dist type=number required />
+					<input class="form-control" step=.01 min=0 name=fln_acq_dist type=number />
 				</div>
 				
 				<p>¿Es usado? <?php echo g_snp_reqf ?></p>
 				<div class="input-group input-group-outline">
 					<input type=radio name=fln_acq_used id=fln_acq_used_1 value=1 />
-					<label for=fln_acq_used_1 required>Sí</label> &emsp;
+					<label for=fln_acq_used_1>Sí</label> &emsp;
 					
 					<input type=radio name=fln_acq_used id=fln_acq_used_0 value=0 />
 					<label for=fln_acq_used_0>No</label>
@@ -104,8 +106,8 @@
 				
 				<p>Precio <?php echo g_snp_reqf ?>:</p>
 				<div class="input-group input-group-outline">
-					<input class=form-control name=fln_veh_cost required />
-					<select id=id_brands name=fln_veh_cost_curr class=form-control required>
+					<input class=form-control name=fln_veh_cost />
+					<select class=form-control name=fln_veh_cost_curr />
 						<option value="" selected>Selecciona una divisa</option>
 						<?php
 							foreach($ccy_list as $cl){
@@ -117,7 +119,7 @@
 				
 				<p>Vehículo <?php echo g_snp_reqf ?>:</p>
 				<div class="input-group input-group-outline">
-					<select id=id_brands name=fln_veh_models class=form-control required>
+					<select name=fln_veh_models class=form-control>
 						<option value="" selected>Selecciona un vehículo</option>
 						<?php
 							foreach($veh_list as $vl){
@@ -127,24 +129,63 @@
 					</select>
 				</div>
 				
+				<p>Fecha y hora de adquisición <?php echo g_snp_reqf ?>:</p>
+				<div class="input-group input-group-outline">
+					<input id=id_acq_timestamp class=form-control name=fln_acq_timestamp />
+					
+					<a class="btn btn-warning" id=id_acq_now href=#>Ahora</a>
+				</div>
+				
 				<br />
 				
-				<button class="btn btn-success" type=submit>Registrar compra</button>
+				<button class="btn btn-success" type=submit><i class="material-icons opacity-10">more_time</i> Registrar adquisición</button>
 			</form>
 		</main>
 	
 		<?php include "../../../../shared/Imports.Scripts.php"; ?>
 
-		<script src="/shared/extras/jscolor/jscolor.min.js"></script>
+		<script src="/shared/extras/jquery/ui/jquery-ui.min.js"></script>
+		<script src="/shared/extras/jquery/ui.dtpick/jquery.datetimepicker.full.min.js"></script>
 		<script src="/shared/extras/jquery/mask/jquery.mask.min.js"></script>
+		<script src="/shared/extras/jquery/validation/jquery.validate.min.js"></script>
+		<script src="/shared/extras/jscolor/jscolor.min.js"></script>
 		
 		<script>
 			$('#sidebar-choice-6').addClass("active bg-gradient-primary");
+
+			$('#id_acq_now').click(function(){
+				$('#id_acq_timestamp').val(null);
+			});
 			
-			$(document).ready(function(){
-				$("#id_field_lp").mask("AAA 0000",{
-					placeholder: "ABC 1234"
-				});
+			$('#id_acq_timestamp').datetimepicker({
+                changeYear: true,
+				format: "Y-m-d H:i:s",
+				mask: true,
+				scrollTime: true,
+				theme: "dark",
+				todayButton: true,
+				yearRange: "1800:c+0"
+			});
+			
+			$("#id_field_lp").mask("AAA 0000",{ placeholder: "ABC 1234" });
+			
+			$("#id_form_acq_reg").validate({
+				rules:{
+					fln_veh_status_acq: "required",
+					fln_acq_dist: "required",
+					fln_acq_used: "required",
+					fln_veh_cost: "required",
+					fln_veh_cost_curr: "required",
+					fln_veh_models: "required"
+				},
+				messages:{
+					fln_veh_status_acq: "Describa el estado del vehículo cuando fue adquirido.",
+					fln_acq_dist: "Ingrese el kilometraje.",
+					fln_acq_used: "Indique si el vehículo es usado.",
+					fln_veh_cost: "Ingrese el costo",
+					fln_veh_cost_curr: "Elija la divisa del costo",
+					fln_veh_models: "Busque el vehículo adquirido"
+				}
 			});
 		</script>
 	</body>

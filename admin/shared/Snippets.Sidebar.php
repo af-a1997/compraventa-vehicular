@@ -75,7 +75,7 @@
 					<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 						<i class="material-icons opacity-10">history</i>
 					</div>
-					<span class="nav-link-text ms-1"><?php echo a_purchase_history; ?></span>
+					<span class="nav-link-text ms-1"><?php echo a_phman; ?></span>
 				</a>
 			</li>
 		</ul>

@@ -94,7 +94,7 @@
 					<select class=form-control name=fln_rnt_availst>
 						<option value="" selected>Selecciona el estado...</option>
 						<?php
-							include "../../../../../../../../shared/utils/Utils.Veh_Statuses.php";
+							include "../../../../../../../../shared/utils/Utils.RHI_VehSt.php";
 							
 							while($x < $em){
 								echo "<option value=$x>$e[$x]</option>";

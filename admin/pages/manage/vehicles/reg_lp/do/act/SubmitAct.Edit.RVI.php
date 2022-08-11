@@ -39,7 +39,7 @@
 			include "../../../../../../shared/html_head_setup.php";
 		?>
 		
-		<title><?php echo a_dsb; ?> - Editar cliente</title>
+		<title><?php echo a_dsb." - ".a_u_reg.$o_rvi->id_reg; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -84,7 +84,7 @@
 			<br />
 			
 			<?php
-				$link_act_all = BTL_Gen(0,2);
+				$link_act_all = BTL_Gen(0,3);
 
 				if($r_upd_rvi){
 					echo "<p>Registro &laquo;".$lp."&raquo; actualizado".$link_act_all."</p>";

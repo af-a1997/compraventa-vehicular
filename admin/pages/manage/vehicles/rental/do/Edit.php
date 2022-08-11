@@ -7,6 +7,7 @@
 	
 	include "../../../../../shared/Constant_Strings[A].php";
 	include "../../../../../../shared/utils/Utils.Common_Strings.php";
+	include "../../../../../../shared/utils/Utils.RHI_VehSt.php";
 	
 	$o_rhi = new Rented();
 	$o_rhi->id_hst_alq = $_GET["id_rhi"];
@@ -28,9 +29,9 @@
 			include "../../../../../shared/Imports.jQuery_UI.php";
 		?>
 		
-		<link rel=stylesheet href="/admin/res/extras/jquery/ui.dtpick/jquery.datetimepicker.min.css" />
+		<link rel=stylesheet href="/shared/extras/jquery/ui.dtpick/jquery.datetimepicker.min.css" />
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_vehman; ?></title>
+		<title><?php echo a_dsb." - ".a_u_rhi; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -54,13 +55,7 @@
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						</div>
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
-							<li class="nav-item d-flex align-items-center">
-								<a href="/login/admin/act/Logout.php" class="nav-link text-body font-weight-bold px-0">
-									<i class="fa fa-user me-sm-1"></i>
-
-									<span class="d-sm-inline d-none"><?php echo g_logout; ?></span>
-								</a>
-							</li>
+							<?php include "../../../../../shared/Snippets.Adm_Logout.php"; ?>
 							
 							<!-- Hamburger menu that shows the navigation menu from the left in wide screens, when the display width is not big enough (most notably on phone screens). -->
 							
@@ -87,20 +82,18 @@
 				
 				<div class="input-group input-group-outline">
 					<label class=form-label>Inicio del alquiler <?php echo g_snp_reqf ?></label>
-					<input class=form-control name=fln_rent_start id=id_field_rent_start value=<?php echo "\"$o_rhi_data_in->momento_alquilado\""; ?> style=<?php echo g_snp_cal; ?> />
+					<input class=form-control name=fln_rent_start id=id_field_rent_start value=<?php echo "\"$o_rhi_data_in->momento_alquilado\""; ?> />
 				</div>
 				
 				<div class="input-group input-group-outline">
 					<label class=form-label>Fin del alquiler <?php echo g_snp_reqf ?></label>
-					<input class=form-control name=fln_rent_end id=id_field_rent_end value=<?php echo "\"$o_rhi_data_in->momento_devolucion\""; ?> style=<?php echo g_snp_cal; ?> />
+					<input class=form-control name=fln_rent_end id=id_field_rent_end value=<?php echo "\"$o_rhi_data_in->momento_devolucion\""; ?> />
 				</div>
 			
 				<p>Estado de alquiler<?php echo g_snp_reqf ?>:</p>
 				<div class="input-group input-group-outline">
 					<select class=form-control name=fln_rent_status>
 						<?php
-							include "../../../../../../shared/utils/Utils.Veh_Statuses.php";
-							
 							while($x < $em){
 								if($o_rhi_data_in->estado_alquiler == $x)
 									echo "<option value=$x selected>$e[$x]</option>";
@@ -174,7 +167,7 @@
 				scrollTime: true,
 				theme: "dark",
 				todayButton: true,
-				yearRange: "c-100:c+100"
+				yearRange: "c-100:c+0"
 			});
 			$('#id_field_rent_end').datetimepicker({
                 changeYear: true,
@@ -183,7 +176,7 @@
 				scrollTime: true,
 				theme: "dark",
 				todayButton: true,
-				yearRange: "c-100:c+100"
+				yearRange: "c-100:c+0"
 			});
 		</script>
 	</body>

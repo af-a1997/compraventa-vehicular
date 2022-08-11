@@ -96,7 +96,7 @@
 		}
 		
 		public function RHI_ShowOne(){
-			$sql_query_list_1rhi_select = "SELECT historial_alquiler.*, registros.matricula AS reg_lp, vehiculos.modelo AS veh_mod, vehiculos.anho_fab AS veh_yfb, marcas.nombre AS bnd_name, seleccion_alquiler.valor_diario_alq AS ren_cost, divisas.abr AS coin, usuarios.nro_id_u AS uid, usuarios.nombre_usuario AS uun FROM historial_alquiler ";
+			$sql_query_list_1rhi_select = "SELECT historial_alquiler.*, registros.matricula AS reg_lp, vehiculos.idno AS veh_id, vehiculos.modelo AS veh_mod, vehiculos.anho_fab AS veh_yfb, marcas.nombre AS bnd_name, seleccion_alquiler.valor_diario_alq AS ren_cost, divisas.abr AS coin, usuarios.nro_id_u AS uid, usuarios.nombre_usuario AS uun FROM historial_alquiler ";
 			
 			$sql_query_list_1rhi_join = "INNER JOIN seleccion_alquiler ON historial_alquiler.id_veh_alquilado = seleccion_alquiler.id_art_alq INNER JOIN registros ON seleccion_alquiler.id_reg_veh = registros.id_reg INNER JOIN vehiculos ON registros.vehiculo_asociado = vehiculos.idno INNER JOIN marcas ON vehiculos.marca = marcas.idno INNER JOIN divisas ON seleccion_alquiler.id_divisa = divisas.id_moneda INNER JOIN usuarios ON historial_alquiler.no_cli = usuarios.nro_id_u ";
 			
@@ -121,6 +121,7 @@
 				
 				// Aliases for items on other tables
 				$o->reg_lp = $res["reg_lp"];
+				$o->veh_id = $res["veh_id"];
 				$o->veh_mod = $res["veh_mod"];
 				$o->veh_yfb = $res["veh_yfb"];
 				$o->bnd_name = $res["bnd_name"];
@@ -144,13 +145,14 @@
 			return $r;
 		}
 		
-		public function RHI_StopRental(){
-			$sql_query_upd_1rhi = "UPDATE $this->tbl SET estado_alquiler=$this->estado_alquiler WHERE id_hst_alq=$this->id_hst_alq";
-			$r = mysqli_query($this->conn, $sql_query_upd_1rhi);
+		public function RHI_DeleteAll(){
+			$sql_query_del_all_rhi = "DELETE FROM $this->tbl WHERE estado_alquiler >= 4;";
+			$r = mysqli_query($this->conn, $sql_query_del_all_rhi);
 			
 			return $r;
 		}
 		
+		// Deletion of inactive entries for this function is handled in PHP, while I find deletion of multiple records is best done in the database query itself.
 		public function RHI_DeleteOne(){
 			$sql_query_del_1rhi = "DELETE FROM $this->tbl WHERE id_hst_alq=$this->id_hst_alq;";
 			$r = mysqli_query($this->conn, $sql_query_del_1rhi);

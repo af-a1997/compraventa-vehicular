@@ -13,7 +13,7 @@
 	<head>
 		<?php include "../../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - Eliminar registro</title>
+		<title><?php echo a_dsb." - ".a_r_reg.$_GET['id_reg']; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">

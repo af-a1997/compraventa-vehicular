@@ -20,7 +20,7 @@
      * Finally, in case you're wondering, "BTL" is not "battle", it's an acronym I made up, for "Back To List". :)
      * "Gen" is just short for "generate".
      */
-    function BTL_Gen($action_param = 0, $up_dir_count = 0, $file_pointer = ""){
+    function BTL_Gen($action_param = 0, $up_dir_count = 0, $file_pointer = "", $section_param = ""){
         $up_dir_str = "";
         $act_str = "";
 
@@ -36,6 +36,8 @@
             $act_str = "volver a la lista";
         else if($action_param == 1)
             $act_str = "volver a intentarlo";
+        else if($action_param == 2)
+            $act_str = "ir a la lista de ".$section_param;
 
         if($up_dir_count == 0 && $file_pointer == "")
             return ".";
