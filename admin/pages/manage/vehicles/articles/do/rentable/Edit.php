@@ -2,15 +2,15 @@
 
 <?php
 	if(!$_GET["id_rnt"]){
-		header("Location:../../../");
+		header("Location:../../");
 	}
 
-	include "../../../../../../../shared/Utils.Admin.SessionCheck.php";
+	include "../../../../../../shared/Utils.Admin.SessionCheck.php";
 	
-	include "../../../../../../../classes/Utils_ClassLoader.class.php";
+	include "../../../../../../classes/Utils_ClassLoader.class.php";
 	
-	include "../../../../../../../shared/Constant_Strings[A].php";
-	include "../../../../../../../../shared/utils/Utils.Common_Strings.php";
+	include "../../../../../../shared/Constant_Strings[A].php";
+	include "../../../../../../../shared/utils/Utils.Common_Strings.php";
 	
 	$o_rnt = new Rentable();
 	$o_rvi = new Registered_Veh_Info();
@@ -25,16 +25,14 @@
 
 <html lang=es>
 	<head>
-		<?php
-			include "../../../../../../../shared/html_head_setup.php";
-		?>
+		<?php include "../../../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_vehman; ?></title>
+		<title><?php echo a_dsb." - ".a_u_rnt; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
 		<!-- Sidebar -->
-		<?php include "../../../../../../../shared/Snippets.Sidebar.php"; ?>
+		<?php include "../../../../../../shared/Snippets.Sidebar.php"; ?>
 		
 		<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
 			<!-- Top bar conents -->
@@ -53,7 +51,7 @@
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						</div>
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
-							<?php include "../../../../../../../shared/Snippets.Adm_Logout.php"; ?>
+							<?php include "../../../../../../shared/Snippets.Adm_Logout.php"; ?>
 							
 							<!-- Hamburger menu that shows the navigation menu from the left in wide screens, when the display width is not big enough (most notably on phone screens). -->
 							
@@ -75,12 +73,12 @@
 			
 			<br />
 			
-			<p><?php echo g_snp_reqf ?> = Todos los campos son obligatorios.</p>
+			<p><?php echo g_snp_reqf; ?> = Todos los campos son obligatorios.</p>
 			
-			<form id=id_form_rnt_upd method=POST action="./SubmitAct.Edit.Rnt.php">
+			<form id=id_form_rnt_upd method=POST action="./act/SubmitAct.Edit.Rnt.php">
 				<input type=hidden name=fln_rnt_id value=<?php echo "\"$o_rnt_data_in->id_art_alq\""; ?> />
 
-				<p>Vehículo a disponibilizar para alquiler<?php echo g_snp_reqf ?>:</p>
+				<p>Vehículo a disponibilizar para alquiler<?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<select class=form-control name=fln_rnt_reg>
 						<?php
@@ -100,11 +98,11 @@
 					</select>
 				</div>
 
-				<p>Estado de disponibilidad<?php echo g_snp_reqf ?>:</p>
+				<p>Estado de disponibilidad<?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<select class=form-control name=fln_rnt_availst>
 						<?php
-							include "../../../../../../../../shared/utils/Utils.RHI_VehSt.php";
+							include "../../../../../../../shared/utils/Utils.RHI_VehSt.php";
 							
 							while($x < $em){
 								if($x == $o_rnt_data_in->disponibilidad)
@@ -118,7 +116,7 @@
 					</select>
 				</div>
 
-				<p>Cuota diaria<?php echo g_snp_reqf ?>:</p>
+				<p>Cuota diaria<?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<input type=number step=.01 min=0 class=form-control name=fln_rnt_dcost value=<?php echo "\"$o_rnt_data_in->valor_diario_alq\""; ?> />
 					<select id=id_sel_dcost_curr class=form-control name=fln_rnt_dcost_curr>
@@ -137,10 +135,11 @@
 				<br />
 				
 				<button class="btn btn-success" type=submit><i class="material-icons opacity-10">autorenew</i> Actualizar alquilable</button>
+				<a href="../" class="btn btn-danger"><i class="material-icons opacity-10">clear</i> Cancelar</a>
 			</form>
 		</main>
 	
-		<?php include "../../../../../../../shared/Imports.Scripts.php"; ?>
+		<?php include "../../../../../../shared/Imports.Scripts.php"; ?>
 
 		<script>
 			$('#sidebar-choice-4').addClass("active bg-gradient-primary");

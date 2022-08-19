@@ -10,7 +10,7 @@
 	<head>
 		<?php include "../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_taxicab_cs; ?></title>
+		<title><?php echo a_dsb; ?> - <?php echo a_txc_con; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -24,10 +24,10 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;"><?php echo a_dsb; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_taxicab_cs; ?></li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_txc_con; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_taxicab_cs; ?></h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_txc_con; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
@@ -64,7 +64,7 @@
 						<div class="card my-4">
 							<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
 								<div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-									<h6 class="text-white text-capitalize ps-3"><?php echo a_taxicab_cs; ?></h6>
+									<h6 class="text-white text-capitalize ps-3"><?php echo a_txc_con; ?></h6>
 								</div>
 							</div>
 							<div class="card-body px-0 pb-2">

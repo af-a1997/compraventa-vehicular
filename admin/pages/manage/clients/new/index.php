@@ -65,27 +65,27 @@
 			
 			<p>En esta página podrás registrar nuevos clientes.</p>
 			
-			<p><?php echo g_snp_reqf ?> = Campos obligatorios.</p>
+			<p><?php echo g_snp_reqf; ?> = Campos obligatorios.</p>
 			
 			<form id=id_form_user_reg method=POST action="./SubmitAct.New.Cli.php">
 				<div class="input-group input-group-outline">
-					<label class=form-label>Nombre(s) <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Nombre(s) <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_user_name />
 				</div>
 				<div class="input-group input-group-outline">
-					<label class=form-label>Apellido(s) <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Apellido(s) <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_user_surname />
 				</div>
 				<div class="input-group input-group-outline">
-					<label class=form-label>Nombre de usuario <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Nombre de usuario <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_user_un />
 				</div>
 				<div class="input-group input-group-outline">
-					<label class=form-label>Clave <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Clave <?php echo g_snp_reqf; ?></label>
 					<input type=password class=form-control name=fln_user_pwd />
 				</div>
 				<div class="input-group input-group-outline">
-					<label class=form-label>C. I. <?php echo g_snp_reqf ?></label>
+					<label class=form-label>C. I. <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_user_uyid id=validate_format_pid />
 				</div>
 				<div class="input-group input-group-outline">

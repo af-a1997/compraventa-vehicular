@@ -10,20 +10,18 @@
 	
 	$o_rvi = new Registered_Veh_Info();
 	$o_ccy = new Currencies();
-	$o_usr = new Users();
+	$o_sll = new Users();
 	
 	$o_rvi_list = $o_rvi->RVI_ShowAllForDD();
 	$o_ccy_list = $o_ccy->CCY_ShowAll();
-	$o_usr_list = $o_usr->CLI_ShowAllForDD();
+	$o_sll_list = $o_sll->CLI_ShowAllForDD();
 ?>
 
 <html lang=es>
 	<head>
-		<?php
-			include "../../../../../../../shared/html_head_setup.php";
-		?>
+		<?php include "../../../../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_artman; ?></title>
+		<title><?php echo a_dsb." - ".a_n_slb; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -37,12 +35,12 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
-							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/vehicles/"><?php echo a_vehman; ?></a></li>
+							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../../../../"><?php echo a_vehman; ?></a></li>
 							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../../../"><?php echo a_artman; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page">Añadir vendible</li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_n_slb; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_artman; ?></h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_n_slb; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
@@ -70,10 +68,10 @@
 			
 			<p>En esta página podrás registrar nuevos vehículos para vender por parte de un usuario.</p>
 			
-			<p><?php echo g_snp_reqf ?> = Todos los campos son obligatorios.</p>
+			<p><?php echo g_snp_reqf; ?> = Todos los campos son obligatorios.</p>
 			
-			<form id=id_form_veh_reg method=POST action="./SubmitAct.New.Slb.php">
-				<p>Vehículo a disponibilizar para la venta<?php echo g_snp_reqf ?>:</p>
+			<form id=id_form_veh_reg method=POST action="../act/SubmitAct.New.Slb.php">
+				<p>Vehículo a disponibilizar para la venta<?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<select class=form-control name=fln_slb_reg>
 						<option value="" selected>Selecciona un vehículo registrado...</option>
@@ -90,10 +88,18 @@
 					</select>
 				</div>
 
-				<p>Costo al contado<?php echo g_snp_reqf ?>:</p>
+				<br />
+				<div class="alert alert-warning" role=alert>Si el vehículo a vender no está registrado con su matrícula, <a href="../../../../reg_lp/new/">primero debes agregarlo aquí</a>.</div>
+
+				<p>Detalles<?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
-					<input type=number step=.01 min=0 class=form-control name=fln_slb_dcost />
-					<select id=id_brands class=form-control name=fln_slb_dcost_curr>
+					<textarea class=form-control name=fln_slb_details></textarea>
+				</div>
+
+				<p>Costo al contado<?php echo g_snp_reqf; ?>:</p>
+				<div class="input-group input-group-outline">
+					<input type=number step=.01 min=0 class=form-control name=fln_slb_cost />
+					<select id=id_brands class=form-control name=fln_slb_cost_curr>
 						<option value="" selected>Selecciona una divisa...</option>
 						<?php
 							foreach($o_ccy_list as $cl){
@@ -103,18 +109,13 @@
 					</select>
 				</div>
 
-				<p>Detalles/descripción sobre el artículo<?php echo g_snp_reqf ?>:</p>
-				<div class="input-group input-group-outline">
-					<textarea class=form-control name=fln_slb_details></textarea>
-				</div>
-
-				<p>Vendedor<?php echo g_snp_reqf ?>:</p>
+				<p>Vendedor<?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<select id=id_brands class=form-control name=fln_slb_seller>
-						<option value="" selected>Selecciona un vendedor...</option>
+						<option value="" selected>Selecciona el vendedor...</option>
 						<?php
-							foreach($o_usr_list as $oul){
-								echo "<option value='$oul->nro_id_u'>$oul->nombre $oul->apellidos ($oul->nombre_usuario)</option>";
+							foreach($o_sll_list as $oul){
+								echo "<option value=$oul->nro_id_u>$oul->nombre $oul->apellidos ($oul->nombre_usuario)</option>";
 							}
 						?>
 					</select>
@@ -123,12 +124,12 @@
 				<br />
 				
 				<button class="btn btn-success" type=submit><i class="material-icons opacity-10">add_box</i> Registrar vendible</button>
+				<a href="../../../" class="btn btn-danger"><i class="material-icons opacity-10">clear</i> Cancelar</a>
 			</form>
 		</main>
 	
 		<?php include "../../../../../../../shared/Imports.Scripts.php"; ?>
 
-		<script src="/shared/extras/jquery/mask/jquery.mask.min.js"></script>
 		<script src="/shared/extras/jquery/validation/jquery.validate.min.js"></script>
 		
 		<script>
@@ -138,40 +139,20 @@
 				$('#id_veh_yfab').val(null);
 			});
 			
-			$().ready(function(){
-				// Masks
-				$("#id_veh_yfab").mask("0000");
-				$("#validate_format_phone_cel").mask("000 000 000",{
-					placeholder: "09X XXX XXX"
-				});
-				$("#validate_format_phone_home").mask("0000 0000",{
-					placeholder: "XXXX XXXX"
-				});
-				
-				// Validation
-				
-				$("#id_form_veh_reg").validate({
-					rules:{
-						fln_slb_reg: {
-							required: true
-						},
-						fln_slb_availst: {
-							required: true
-						},
-						fln_slb_dcost: {
-							required: true
-						},
-						fln_slb_cost_curr: {
-							required: true
-						}
-					},
-					messages:{
-						fln_slb_reg: "Especifique el vehículo registrado.",
-						fln_slb_availst: "Especifique el estado de disponiblidad.",
-						fln_slb_dcost: "Especifique el costo diario del alquiler.",
-						fln_slb_cost_curr: "Especifique la moneda del costo diario."
-					}
-				});
+			// Validation
+			$("#id_form_veh_reg").validate({
+				rules:{
+					fln_slb_reg: "required",
+					fln_slb_availst: "required",
+					fln_slb_dcost: "required",
+					fln_slb_cost_curr: "required"
+				},
+				messages:{
+					fln_slb_reg: "Especifique el vehículo registrado.",
+					fln_slb_availst: "Especifique el estado de disponiblidad.",
+					fln_slb_dcost: "Especifique el costo diario del alquiler.",
+					fln_slb_cost_curr: "Especifique la moneda del costo diario."
+				}
 			});
 		</script>
 	</body>

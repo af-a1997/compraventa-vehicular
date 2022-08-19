@@ -1,22 +1,34 @@
 <?php
-	if(!$_GET['id_rnt']){
+	if(!isset($_POST["fln_rnt_id_del"]))
 		header("location:../../../");
-	}
+	
+	include "../../../../../../../shared/Utils.Admin.SessionCheck.php";
+	include "../../../../../../../shared/Utils.Admin.BTL.php";
 	
 	include "../../../../../../../classes/Utils_ClassLoader.class.php";
 	
 	include "../../../../../../../shared/Constant_Strings[A].php";
 	include "../../../../../../../../shared/utils/Utils.Common_Strings.php";
+
+	$o_rnt = new Rentable();
+	$o_rnt->id_art_alq = $_POST["fln_rnt_id_del"];
+
+	$o_rnt_info = $o_rnt->RNT_ShowOne();
+
+	if($o_rnt_info->vfb == 0)
+		$year_fab = "Año desc.";
+
+	else
+		$year_fab = $o_rnt_info->vfb;
+	
+	$full_model = "$o_rnt_info->bno $o_rnt_info->vmo ($year_fab)";
 ?>
 
 <html lang=es>
 	<head>
-		<?php
-			include "../../../../../../../shared/html_head_setup.php";
-			include "../../../../../../../shared/Imports.jQuery_UI.php";
-		?>
+		<?php include "../../../../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_n_acq; ?></title>
+		<title><?php echo a_dsb." - ".a_r_rnt.$full_model; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -30,21 +42,15 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
-							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/purchase_history/"><?php echo a_phman; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_n_acq; ?></li>
+							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../../../"><?php echo a_artman; ?></a></li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_r_rnt; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_n_acq; ?></h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_r_rnt.$full_model; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
-							<li class="nav-item d-flex align-items-center">
-								<a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
-									<i class="fa fa-user me-sm-1"></i>
-
-									<span class="d-sm-inline d-none"><?php echo g_login; ?></span>
-								</a>
-							</li>
+							<?php include "../../../../../../../shared/Snippets.Adm_Logout.php"; ?>
 							
 							<!-- Hamburger menu that shows the navigation menu from the left in wide screens, when the display width is not big enough (most notably on phone screens). -->
 							
@@ -67,29 +73,23 @@
 			<br />
 			
 			<?php
-				if($_GET['id_rnt']){
-					$id_2del = $_GET['id_rnt'];
-					
-					$o_rnt = new Rentable();
-					$o_rnt->id_art_alq = $id_2del;
-					
-					$r_rnt_del = $o_rnt->RNT_DeleteOne();
-	
-					if($r_rnt_del){
-						echo "<p>Artículo alquilable eliminado, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
-					}
-					else{
-						echo "<p>No se pudo eliminar el artículo alquilable, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
-					}
-				}
-				else echo "<p>No se especificó una ID válida de artículo alquilable a eliminar.";
+				$link_act_0 = BTL_Gen(0,3);
+				$link_act_1 = BTL_Gen(1,1,"Delete.php?id_rnt=".$o_rnt_info->id_art_alq);
+
+				$r_rnt_del = $o_rnt->RNT_DeleteOne();
+
+				if($r_rnt_del)
+					echo "<p>Vehículo alquilable &laquo;".$full_model."&raquo; eliminado".$link_act_0."</p>";
+				
+				else
+					echo "<p>No se pudo eliminar el vehículo alquilable".$link_act_0."</p>";
 			?>
 		</main>
 	
 		<?php include "../../../../../../../shared/Imports.Scripts.php"; ?>
 		
 		<script>
-			$('#sidebar-choice-1').addClass("active bg-gradient-primary");
+			$('#sidebar-choice-4').addClass("active bg-gradient-primary");
 		</script>
 	</body>
 </html>

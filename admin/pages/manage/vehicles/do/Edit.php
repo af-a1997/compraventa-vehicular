@@ -82,7 +82,7 @@
 			<form method=POST action="./act/SubmitAct.Edit.Veh.php">
 				<input type=hidden name=fln_veh_id value=<?php echo "\"$o_veh_data_in->idno\""; ?> />
 			
-				<p>Tipo<?php echo g_snp_reqf ?>:</p>
+				<p>Tipo<?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<select class=form-control name=fln_veh_type>
 						<?php
@@ -96,7 +96,7 @@
 						?>
 					</select>
 				</div>
-				<p>Marca<?php echo g_snp_reqf ?>:</p>
+				<p>Marca<?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<select class=form-control name=fln_veh_brand>
 						<?php
@@ -111,7 +111,7 @@
 					</select>
 				</div>
 				<div class="input-group input-group-outline">
-					<label class=form-label>Modelo <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Modelo <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_veh_model value=<?php echo "\"$o_veh_data_in->modelo\""; ?> />
 				</div>
 				<div class="input-group input-group-outline">

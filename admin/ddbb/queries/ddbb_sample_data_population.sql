@@ -1,5 +1,7 @@
 -- This query file only inserts example records for testing purposes, the table and database creation query file must be run first before they can be populated.
 
+-- IMPORTANT! I just said it but friendly reminder that certain data used here comes from various public sources and is merely used for testing and illustration purposes.
+
 USE gestion_veh;
 
 -- Empties tables and reset their auto increment values to assist with testing.
@@ -44,7 +46,7 @@ INSERT INTO marcas(nombre,descripcion,url_img) VALUES
 	("BMW","Bayerische Motoren Werke AG, commonly referred to as BMW (German pronunciation: [ˌbeːʔɛmˈveː]), is a German multinational manufacturer of luxury vehicles and motorcycles headquartered in Munich, Bavaria, Germany. The corporation was founded in 1916 as a manufacturer of aircraft engines, which it produced from 1917 until 1918 and again from 1933 to 1945.","BMW_logo_(gray).svg"),
 	("Changan","Chang'an Automobile Co., Ltd. is a Chinese state-owned automobile manufacturer headquartered in Jiangbei, Chongqing. Founded in 1862, it is currently the fourth largest of the “Big Four” state-owned car manufacturers of China, namely: SAIC Motor, FAW Group, Dongfeng Motor Corporation, and Changan Automobile, with car sales of 5.37 million, 3.50 million, 3.28 million and 2.30 million in 2021 respectively.","Changan_Automobile_Logo.svg"),
 	("Chevrolet","Chevrolet (/ˌʃɛvrəˈleɪ/ SHEV-rə-LAY), colloquially referred to as Chevy and formally the Chevrolet Motor Division of General Motors Company, is an American automobile division of the American manufacturer General Motors (GM). Louis Chevrolet (1878–1941) and ousted General Motors founder William C. Durant (1861–1947) started the company on November 3, 1911 as the Chevrolet Motor Car Company.","Chevrolet_(logo).svg"),
-	("Chery Automobile","Chery Automobile Co. Ltd., trading as Chery and sometimes known by the pinyin transcription of its Chinese name, Qirui (奇瑞), is a Chinese state-owned automobile manufacturer headquartered in Wuhu, Anhui, China. Founded in 1997, it is currently the ninth largest automobile manufacturer in China, with 0.959 million sales in 2021.","Chery_logo.png"),
+	("Chery","Chery Automobile Co. Ltd., trading as Chery and sometimes known by the pinyin transcription of its Chinese name, Qirui (奇瑞), is a Chinese state-owned automobile manufacturer headquartered in Wuhu, Anhui, China. Founded in 1997, it is currently the ninth largest automobile manufacturer in China, with 0.959 million sales in 2021.","Chery_logo.png"),
 	("Citroën","Citroën (French pronunciation: ​[sitʁɔɛn]) is a French automobile brand. The 'Automobiles Citroën' manufacturing company was founded in March 1919 by André Citroën. Citroën is owned by Stellantis since 2021 and previously was part of the PSA Group after Peugeot acquired 89.95% share in 1976.","Citroën_2021.svg"),
 	("Daihatsu","Daihatsu Motor Co., Ltd. (ダイハツ工業株式会社, Daihatsu Kōgyō Kabushiki-gaisha), commonly known as Daihatsu, is a Japanese automobile manufacturer and one of the oldest surviving Japanese internal combustion engine manufacturers. The company's headquarters are located in Ikeda, Osaka Prefecture.","Daihatsu_motor_co_logo.png"),
 	("DFM","Dongfeng Motor Corporation Ltd. is a Chinese state-owned automobile manufacturer headquartered in Wuhan, Hubei. Founded in 1969, it is currently the third largest of the &quot;Big Four&quot; state-owned car manufacturers of China, namely: SAIC Motor, FAW Group, Dongfeng Motor Corporation, and Changan Automobile, with car sales of 5.37 million, 3.50 million, 3.28 million and 2.30 million in 2021 respectively.","DFM_logo.png"),
@@ -69,6 +71,40 @@ INSERT INTO marcas(nombre,descripcion,url_img) VALUES
 	("Volkswagen","Volkswagen (German: [ˈfɔlksˌvaːɡn̩]; shortened to VW [faʊˈveː]) is a German motor vehicle manufacturer headquartered in Wolfsburg, Lower Saxony, Germany. Founded in 1937 by the German Labour Front, known for their iconic Beetle, it is the flagship brand of the Volkswagen Group, the largest car maker by worldwide sales in 2016 and 2017.","Volkswagen_logo_2019.svg"),
 	("Volvo","Volvo Cars (Swedish: Volvo personvagnar; stylized as VOLVO) is a Swedish multinational manufacturer of luxury vehicles headquartered in Torslanda, Gothenburg. The company manufactures SUVs, station wagons, and sedans. The company's main marketing arguments are safety and its Swedish heritage and design.","Volvo-Iron-Mark-Black.svg")
 ;
+/*
+ * IDs reference:
+ * 
+ * 1 = Alfa Romeo
+ * 2 = Asia
+ * 3 = Audi
+ * 4 = BMW
+ * 5 = Changan
+ * 6 = Chevrolet
+ * 7 = Chery
+ * 8 = Citroën
+ * 9 = Daihatsu
+ * 10 = DFM
+ * 11 = FAW
+ * 12 = Fiat
+ * 13 = Ford
+ * 14 = Geely
+ * 15 = Honda
+ * 16 = Hyundai
+ * 17 = Jeep
+ * 18 = Kia
+ * 19 = Mercedes-Benz
+ * 20 = Mini
+ * 21 = Mitsubishi
+ * 22 = Nissan
+ * 23 = Opel
+ * 24 = Peugeot
+ * 25 = Renault
+ * 26 = Scania
+ * 27 = Suzuki
+ * 28 = Toyota
+ * 29 = Volkswagen
+ * 30 = Volvo
+ */
 
 INSERT INTO divisas(nombre,abr,simbolizacion,pos_sim) VALUES
 	("Dólar Estadounidense","USD","$",0),
@@ -77,23 +113,28 @@ INSERT INTO divisas(nombre,abr,simbolizacion,pos_sim) VALUES
 	("Euro","EUR","€",0)
 ;
 
- -- Sample from: https://auto.mercadolibre.com.uy/MLU-613038325-bmw-x3-2013-30-x3-xdrive-35i-executive-306cv-_JM (BMW X3)
+ -- Samples from various articles in Mercado Libre.
 INSERT INTO vehiculos(modelo,unidades,anho_fab,puertas,transmision,combustible_tipo,combustible_capac,motor,marca,categorizacion) VALUES
-	("X3",1,2013,5,"Automática","Nafta",67.0,"3.0",4,1)
+	("X3",1,2013,5,"Automática","Nafta",67.0,"3.0",4,1),
+	("CR-V",2,2013,5,"Automática","Nafta",67.0,"2.4",15,1),
+	("Corolla",2,0,5,"Manual","Diesel",67.0,"2.0",28,1)
 ;
 	
+-- Taxicab sample (ID=3) from: < https://www.facebook.com/Remisesmalvin/photos/4494945903897778 >, with data from a random article in Mercado Libre: < https://auto.mercadolibre.com.uy/MLU-615626290-toyota-corolla-6000-y-cuotas-en-pesos-18-2010-impecable-_JM >
 INSERT INTO registros(color,ultima_act_info,matricula,estado_act,kilometraje_act,vehiculo_asociado) VALUES
-	("#7D8F9B","2022-07-03 01:05:00","SBS1474","Impecable, muy cuidada.",262000.0,1)
+	("#7D8F9B","2022-07-03 01:05:00","SBS 1474","Impecable, muy cuidada.",262000.0,1),
+	("#7D8F9B","2022-08-11 23:05:00","LKA 2368","Excelente estado.",115500.0,2),
+	("#2D2D2D","2022-08-14 15:20:00","SRE 0033","Como nuevo.",117000.0,3)
 ;
 
- -- 28300 USD
 INSERT INTO adquisiciones(tiempo,precio,estado_adq,kilometraje_adq,divisa_precio,id_del_adquirido) VALUES
-	("2022-06-29 14:34:20",28300.0,"Impecable, muy cuidada.",262000.0,1,1)
+	("2022-06-29 14:34:20",28300.0,"Impecable, muy cuidada.",262000.0,1,1),
+	("2022-08-11 23:05:00",27890.0,"Impecable, muy cuidada.",115500.0,1,2)
 ;
 
 INSERT INTO puesto(nombre,descripcion) VALUES
-	("Administrador","Gestiona el sitio."),
-	("Cliente","Potenciales compradores/vendedores.")
+	("Administrador","O webmasters, gestionan todos los aspectos internos y externos del sitio, así como velan por la confiabilidad del mismo y moderan contenido."),
+	("Cliente","Potenciales compradores/vendedores o arrendadores de vehículos.")
 ;
 
 INSERT INTO usuarios(nombre,apellidos,nombre_usuario,clave,cedula_identidad,email,residencia_actual,tel_cel,tel_fijo,momento_registro,cargo_en_sitio) VALUES
@@ -110,5 +151,5 @@ INSERT INTO historial_alquiler(momento_alquilado, momento_devolucion, estado_alq
 ;
 
 INSERT INTO remises(nombres,apellidos,cedula_identidad,tel_cel,tel_fijo,email,ubicacion_residencia,costo_d,costo_espera_h,divisa_precio,id_reg_veh) VALUES
-	("Testing", "Tester", "7.654.321-0", "500", "300", "hello3@example.com","Placeholder",1000,50,2,1)
+	("Testing", "Tester", "7.654.321-0", "500", "300", "hello3@example.com","Placeholder",1000,50,2,3)
 ;

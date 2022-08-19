@@ -1,16 +1,27 @@
-<!DOCTYPE html>
-
-<!-- Constant strings of text -->
 <?php
+	include "../../../../../../../shared/Utils.Admin.SessionCheck.php";
+	include "../../../../../../../shared/Utils.Admin.BTL.php";
+	
+	include "../../../../../../../classes/Utils_ClassLoader.class.php";
+	
 	include "../../../../../../../shared/Constant_Strings[A].php";
 	include "../../../../../../../../shared/utils/Utils.Common_Strings.php";
+	
+	$o_rnt = new Rentable();
+	
+	$o_rnt->id_reg_veh = $_POST["fln_rnt_reg"];
+	$o_rnt->id_divisa = $_POST["fln_rnt_dcost_curr"];
+	$o_rnt->valor_diario_alq = $_POST["fln_rnt_dcost"];
+	$o_rnt->disponibilidad = $_POST["fln_rnt_availst"];
+	
+	$r_add_rnt = $o_rnt->RNT_Add();
 ?>
 
 <html lang=es>
 	<head>
 		<?php include "../../../../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - Eliminar vehículo</title>
+		<title><?php echo a_dsb." - ".a_n_rnt; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -26,10 +37,10 @@
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
 							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/vehicles/"><?php echo a_vehman; ?></a></li>
 							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../../../"><?php echo a_haman; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page">Eliminar</li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_n_rnt; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0">Eliminar vehículo alquilable</h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_n_rnt; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
@@ -53,46 +64,23 @@
 				</div>
 			</nav>
 			
-			<p>¿Seguro que quieres eliminar este artículo de alquiler? Esta acción no se puede deshacer.</p>
-			
-			<input type=checkbox id=id_del_confirm name=n_del_confirm />
-			<label for=n_del_confirm>Consiento que esta acción es irreversible y deseo proceder</label>
-			
 			<br />
 			
-			<button class="btn btn-danger disabled" id=id_del_y name=n_del_n disabled><i class="material-icons opacity-10">delete</i> Sí</button>
-			<button class="btn btn-success" id=id_del_n name=n_del_n><i class="material-icons opacity-10">undo</i> No</button>
+			<?php
+				$link_act_0 = BTL_Gen(0,3);
+				$link_act_1 = BTL_Gen(1,1,"new/");
+
+				if($r_add_rnt)
+					echo "<p>Vehículo disponibilizado para alquiler".$link_act_0."</p>";
+				else
+					echo "<p>No se pudo disponibilizar el vehículo para alquiler".$link_act_1."</p>";
+			?>
 		</main>
 	
 		<?php include "../../../../../../../shared/Imports.Scripts.php"; ?>
-
+		
 		<script>
 			$('#sidebar-choice-4').addClass("active bg-gradient-primary");
-			
-			$('#id_del_confirm').prop('checked', false);
-			
-			$('#id_del_confirm').change(function(){
-				if(this.checked){
-					$('#id_del_y').prop('disabled', false);
-					$('#id_del_y').removeClass('disabled');
-				}
-				else{
-					$('#id_del_y').prop('disabled', true);
-					$('#id_del_y').addClass('disabled');
-				}
-			});
-			
-			$("#id_del_n").click(function(){
-				location.href = "../../../";
-			});
 		</script>
-		
-		<?php echo "
-			<script>
-				$(\"#id_del_y\").click(function(){
-					location.href = \"./SubmitAct.Del.Rnt.php?id_rnt=".$_GET["id_rnt"]."\";
-				});
-			</script>";
-		?>
 	</body>
 </html>

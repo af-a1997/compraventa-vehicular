@@ -84,17 +84,17 @@
 					<input id=id_field_lp class=form-control name=fln_rvi_edit_lp value=<?php echo "\"$o_rvi_data_in->matricula\""; ?>  />
 				</div>
 				
-				<p>Estado del vehículo <?php echo g_snp_reqf ?>:</p>
+				<p>Estado del vehículo <?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<textarea class="form-control" name=fln_rvi_edit_status_act placeholder="Describa como se encuentra el vehículo actualmente."><?php echo "$o_rvi_data_in->estado_act"; ?></textarea>
 				</div>
 				
 				<div class="input-group input-group-outline">
-					<label class="form-label">Kilometraje <?php echo g_snp_reqf ?></label>
+					<label class="form-label">Kilometraje <?php echo g_snp_reqf; ?></label>
 					<input class="form-control" step=.01 min=0 name=fln_rvi_edit_dist type=number value=<?php echo "\"$o_rvi_data_in->kilometraje_act\""; ?> />
 				</div>
 				
-				<p>¿Es usado? <?php echo g_snp_reqf ?></p>
+				<p>¿Es usado? <?php echo g_snp_reqf; ?></p>
 				<div class="input-group input-group-outline">
 					<?php
 						if($o_rvi_data_in->usado == 1){
@@ -119,7 +119,7 @@
 					
 				</div>
 				
-				<p>Vehículo <?php echo g_snp_reqf ?>:</p>
+				<p>Vehículo <?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<select id=id_sel_model_rvi name=fln_rvi_edit_assocveh class=form-control>
 						<?php

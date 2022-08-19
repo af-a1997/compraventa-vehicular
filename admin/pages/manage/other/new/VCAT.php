@@ -68,20 +68,20 @@
 			
 			<p>Ingresa los datos de la categoría que deseas registrar.</p>
 			
-			<p><?php echo g_snp_reqf ?> = Campos obligatorios.</p>
+			<p><?php echo g_snp_reqf; ?> = Campos obligatorios.</p>
 			
 			<form id=id_form_vcat_reg method=POST action="./act/SubmitAct.New.VCAT.php">
 				<div class="input-group input-group-outline">
-					<label class=form-label>Nombre <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Nombre <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_vcat_name />
 				</div>
-				<p><br />Descripción <?php echo g_snp_reqf ?>:</p>
+				<p><br />Descripción <?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<textarea class=form-control name=fln_vcat_desc></textarea>
 				</div>
 
 				<div class="input-group input-group-outline" style="margin-top: 15px;">
-					<span>Ícono <?php echo g_snp_reqf ?>:&ensp;</span>
+					<span>Ícono <?php echo g_snp_reqf; ?>:&ensp;</span>
 					<select id=id_dd_vcat_icon name=fln_vcat_icon>
 						<option value="" data-iconurl="/shared/img/icons/stock_right(gnome-2.10.1).png">Seleccionar...</option>
 						<?php

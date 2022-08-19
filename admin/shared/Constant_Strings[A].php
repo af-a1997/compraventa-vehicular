@@ -4,7 +4,7 @@
 	// Misc
 	const a_dsb = "Panel de administración";
 	const a_credits = "Agradecimientos";
-	const a_taxicab_cs = "Remises contratados";
+	const a_txc_con = "Remises contratados";
 	
 	// Prefixes for sections and breadcrumbs
 	const a_mp = "Gestión de ";
@@ -35,6 +35,8 @@
 	const a_n_brn = a_reg."marca";
 	const a_n_ccy = a_reg."divisa";
 	const a_n_cli = a_reg."cliente";
+	const a_n_rnt = a_reg."veh. rentable";
+	const a_n_slb = a_reg."veh. para vender";
 	const a_n_vcat = a_reg."categoría";
 	const a_n_veh = a_reg."vehículo";
 
@@ -43,6 +45,8 @@
 	const a_d_ccy = a_dtl."la divisa ";
 	const a_d_cli = a_dtl."el cliente ";
 	const a_d_rhi = a_dtl."el alquiler ";
+	const a_d_rnt = a_dtl."el veh. alquilable ";
+	const a_d_slb = a_dtl."el veh. en venta ";
 	const a_d_vcat = a_dtl."la categoría ";
 	const a_d_veh = a_dtl."el vehículo ";
 	
@@ -51,7 +55,9 @@
 	const a_u_ccy = a_upd."la divisa ";
 	const a_u_cli = a_upd."el cliente ";
 	const a_u_reg = a_upd."el registro ";
+	const a_u_rnt = a_upd."el vehículo rentable ";
 	const a_u_rhi = a_upd."la instancia de alquiler ";
+	const a_u_slb = a_upd."el veh. en venta ";
 	const a_u_veh = a_upd."el vehículo ";
 	const a_u_vcat = a_upd."la categoría ";
 
@@ -62,6 +68,8 @@
 	const a_r_ccy = a_del."la divisa ";
 	const a_r_reg = a_del."el registro ";
 	const a_r_rhi = a_del."la instancia de alquiler ";
+	const a_r_rnt = a_del."el veh. rentable ";
+	const a_r_slb = a_del."el veh. en venta ";
 	const a_r_vcat = a_del."la categoría ";
 	const a_r_veh = a_del."el vehículo ";
 	

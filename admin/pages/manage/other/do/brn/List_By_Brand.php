@@ -25,7 +25,7 @@
 	<head>
 		<?php include "../../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_l_vbb_one.$o_brn_info->nombre; ?></title>
+		<title><?php echo a_dsb." - ".a_l_vbb_one.$o_brn_info->nombre; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -114,7 +114,7 @@
 														";
 													}
 												}
-												else echo "<tr><td colspan=2>No hay vehículos registrados de esta marca</td></tr>";
+												else echo "<tr><td class=\"align-middle text-center text-sm\" colspan=2><i class=\"material-icons opacity-10\">disabled_by_default</i> No se registraron vehículos por $o_brn_info->nombre</td></tr>";
 											?>
 										</tbody>
 									</table>

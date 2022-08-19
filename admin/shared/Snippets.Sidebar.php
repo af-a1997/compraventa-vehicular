@@ -85,7 +85,7 @@
 					<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 						<i class="material-icons opacity-10">gavel</i>
 					</div>
-					<span class="nav-link-text ms-1"><?php echo a_taxicab_cs; ?></span>
+					<span class="nav-link-text ms-1"><?php echo a_txc_con; ?></span>
 				</a>
 			</li>
 		</ul>

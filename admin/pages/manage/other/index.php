@@ -229,7 +229,7 @@
 														";
 													}
 												}
-												else echo "<tr><td colspan=3>No hay divisas registradas</td></tr>";
+												else echo "<tr><td class=\"align-middle text-center text-sm\" colspan=3><i class=\"material-icons opacity-10\">disabled_by_default</i> No hay divisas registradas</td></tr>";
 											?>
 										</tbody>
 									</table>

@@ -65,7 +65,7 @@
 			
 			<p>En esta página podrás crear registros identificadores de vehículos, con sus propiedades únicas como color y matrícula.</p>
 			
-			<p><?php echo g_snp_reqf ?> = Campos obligatorios.</p>
+			<p><?php echo g_snp_reqf; ?> = Campos obligatorios.</p>
 			
 			<form id=id_form_rvi_reg method=POST action="./SubmitAct.New.RVI.php">
 				<p>Color:</p>
@@ -79,17 +79,17 @@
 					<input id=id_field_lp class=form-control name=fln_rvi_lp />
 				</div>
 				
-				<p>Estado del vehículo <?php echo g_snp_reqf ?>:</p>
+				<p>Estado del vehículo <?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<textarea class="form-control" name=fln_rvi_status_act placeholder="Describa como se encuentra el vehículo actualmente."></textarea>
 				</div>
 				
 				<div class="input-group input-group-outline">
-					<label class="form-label">Kilometraje <?php echo g_snp_reqf ?></label>
+					<label class="form-label">Kilometraje <?php echo g_snp_reqf; ?></label>
 					<input class="form-control" step=.01 min=0 name=fln_rvi_dist type=number />
 				</div>
 				
-				<p>¿Es usado? <?php echo g_snp_reqf ?></p>
+				<p>¿Es usado? <?php echo g_snp_reqf; ?></p>
 				<div class="input-group input-group-outline">
 					<input type=radio name=fln_rvi_used_flag id=fln_acq_used_1 value=1 />
 					<label for=fln_acq_used_1>Sí</label> &emsp;
@@ -98,7 +98,7 @@
 					<label for=fln_acq_used_0>No</label>
 				</div>
 				
-				<p>Vehículo <?php echo g_snp_reqf ?>:</p>
+				<p>Vehículo <?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<select id=id_brands name=fln_rvi_models class=form-control>
 						<option value="" selected>Selecciona un vehículo</option>

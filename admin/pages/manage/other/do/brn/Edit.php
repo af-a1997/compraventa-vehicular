@@ -69,16 +69,16 @@
 			
 			<p>Acá podés editar los datos de la marca &laquo;<?php echo $o_brn_data_in->nombre; ?>&raquo;.</p>
 			
-			<p><?php echo g_snp_reqf ?> = Campos obligatorios.</p>
+			<p><?php echo g_snp_reqf; ?> = Campos obligatorios.</p>
 			
 			<form id=id_form_brn_edit method=POST action="./act/SubmitAct.Edit.Brn.php">
 				<input type=hidden name=fln_brn_id value=<?php echo "$o_brn_data_in->idno"; ?> />
 				
 				<div class="input-group input-group-outline">
-					<label class=form-label>Nombre <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Nombre <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_brn_name value=<?php echo "\"$o_brn_data_in->nombre\""; ?> />
 				</div>
-				<p><br />Descripción <?php echo g_snp_reqf ?>:</p>
+				<p><br />Descripción <?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<textarea class=form-control name=fln_brn_desc><?php echo "$o_brn_data_in->descripcion"; ?></textarea>
 				</div>

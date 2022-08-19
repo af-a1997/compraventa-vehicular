@@ -112,7 +112,7 @@
 		}
 		
 		public function RNT_ShowOne(){
-			$sql_query_list_1rnt = "SELECT * FROM $this->tbl WHERE id_art_alq=$this->id_art_alq;";
+			$sql_query_list_1rnt = "SELECT $this->tbl.*, vehiculos.idno AS vid, vehiculos.modelo AS vmo, vehiculos.anho_fab AS vfb, marcas.nombre AS bno, divisas.abr AS cab FROM $this->tbl INNER JOIN registros ON $this->tbl.id_reg_veh = registros.id_reg INNER JOIN vehiculos ON registros.vehiculo_asociado = vehiculos.idno INNER JOIN marcas ON vehiculos.marca = marcas.idno INNER JOIN divisas ON $this->tbl.id_divisa = divisas.id_moneda WHERE id_art_alq=$this->id_art_alq;";
 			
 			$ret_rnt_info = mysqli_query($this->conn, $sql_query_list_1rnt);
 			
@@ -121,11 +121,19 @@
 			if($res){
 				$o = new Rentable();
 				
+				// Base
 				$o->id_art_alq = $res["id_art_alq"];
 				$o->id_reg_veh = $res["id_reg_veh"];
 				$o->id_divisa = $res["id_divisa"];
 				$o->valor_diario_alq = $res["valor_diario_alq"];
 				$o->disponibilidad = $res["disponibilidad"];
+
+				// Joins
+				$o->vid = $res["vid"];
+				$o->vmo = $res["vmo"];
+				$o->vfb = $res["vfb"];
+				$o->bno = $res["bno"];
+				$o->cab = $res["cab"];
 				
 				$arranged_rnt_info = $o;
 			}

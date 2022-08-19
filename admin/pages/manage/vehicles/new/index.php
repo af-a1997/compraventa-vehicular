@@ -68,10 +68,10 @@
 			
 			<p>En esta página podrás registrar nuevos vehículos.</p>
 			
-			<p><?php echo g_snp_reqf ?> = Campos obligatorios.</p>
+			<p><?php echo g_snp_reqf; ?> = Campos obligatorios.</p>
 			
 			<form id=id_form_veh_reg method=POST action="./SubmitAct.New.Veh.php">
-				<p>Tipo<?php echo g_snp_reqf ?>:</p>
+				<p>Tipo<?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<select class=form-control name=fln_veh_type>
 						<option value="" selected>Selecciona el tipo de vehículo...</option>
@@ -82,7 +82,7 @@
 						?>
 					</select>
 				</div>
-				<p>Marca<?php echo g_snp_reqf ?>:</p>
+				<p>Marca<?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<select class=form-control name=fln_veh_brand>
 						<option value="" selected>Selecciona la marca del fabricante...</option>
@@ -94,7 +94,7 @@
 					</select>
 				</div>
 				<div class="input-group input-group-outline">
-					<label class=form-label>Modelo <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Modelo <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_veh_model />
 				</div>
 				<div class="input-group input-group-outline">

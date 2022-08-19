@@ -81,16 +81,16 @@
 				<input type=hidden name=fln_rent_id value=<?php echo "\"$o_rhi_data_in->id_hst_alq\""; ?> />
 				
 				<div class="input-group input-group-outline">
-					<label class=form-label>Inicio del alquiler <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Inicio del alquiler <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_rent_start id=id_field_rent_start value=<?php echo "\"$o_rhi_data_in->momento_alquilado\""; ?> />
 				</div>
 				
 				<div class="input-group input-group-outline">
-					<label class=form-label>Fin del alquiler <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Fin del alquiler <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_rent_end id=id_field_rent_end value=<?php echo "\"$o_rhi_data_in->momento_devolucion\""; ?> />
 				</div>
 			
-				<p>Estado de alquiler<?php echo g_snp_reqf ?>:</p>
+				<p>Estado de alquiler<?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<select class=form-control name=fln_rent_status>
 						<?php
@@ -107,7 +107,7 @@
 					</select>
 				</div>
 			
-				<p>Vehiculo rentado<?php echo g_snp_reqf ?>:</p>
+				<p>Vehiculo rentado<?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					
 					<select class=form-control name=fln_rent_veh>
@@ -131,7 +131,7 @@
 					</select>
 				</div>
 			
-				<p>Usuario que alquiló<?php echo g_snp_reqf ?>:</p>
+				<p>Usuario que alquiló<?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<select class=form-control name=fln_rent_cli>
 						<?php

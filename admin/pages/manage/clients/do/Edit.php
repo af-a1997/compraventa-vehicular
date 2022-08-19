@@ -80,23 +80,23 @@
 				<input type=hidden name=fln_user_site_role value=<?php echo "\"$o_cli_data_in->cargo_en_sitio\""; ?> />
 				
 				<div class="input-group input-group-outline">
-					<label class=form-label>Nombre(s) <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Nombre(s) <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_user_name value=<?php echo "\"$o_cli_data_in->nombre\""; ?> />
 				</div>
 				<div class="input-group input-group-outline">
-					<label class=form-label>Apellido(s) <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Apellido(s) <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_user_surname value=<?php echo "\"$o_cli_data_in->apellidos\""; ?> />
 				</div>
 				<div class="input-group input-group-outline">
-					<label class=form-label>Nombre de usuario <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Nombre de usuario <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_user_un value=<?php echo "\"$o_cli_data_in->nombre_usuario\""; ?> />
 				</div>
 				<div class="input-group input-group-outline">
-					<label class=form-label>Clave <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Clave <?php echo g_snp_reqf; ?></label>
 					<input type=password class=form-control name=fln_user_pwd value=<?php echo "\"$o_cli_data_in->clave\""; ?> />
 				</div>
 				<div class="input-group input-group-outline">
-					<label class=form-label>C. I. <?php echo g_snp_reqf ?></label>
+					<label class=form-label>C. I. <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_user_uyid id=validate_format_pid value=<?php echo "\"$o_cli_data_in->cedula_identidad\""; ?> />
 				</div>
 				<div class="input-group input-group-outline">

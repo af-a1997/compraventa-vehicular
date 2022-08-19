@@ -1,29 +1,43 @@
 <?php
+	if(!isset($_POST['fln_slb_id']))
+		header("location:../../../");
+	
 	include "../../../../../../../shared/Utils.Admin.SessionCheck.php";
+	include "../../../../../../../shared/Utils.Admin.BTL.php";
 	
 	include "../../../../../../../classes/Utils_ClassLoader.class.php";
 	
 	include "../../../../../../../shared/Constant_Strings[A].php";
 	include "../../../../../../../../shared/utils/Utils.Common_Strings.php";
 	
-	$o_rnt = new Rentable();
+	$o_slb = new Sellable();
 	
-	$o_rnt->id_art_alq = $_POST["fln_rnt_id"];
-	$o_rnt->id_reg_veh = $_POST["fln_rnt_reg"];
-	$o_rnt->id_divisa = $_POST["fln_rnt_dcost_curr"];
-	$o_rnt->valor_diario_alq = $_POST["fln_rnt_dcost"];
-	$o_rnt->disponibilidad = $_POST["fln_rnt_availst"];
+	$o_slb->id_art_venta = $_POST["fln_slb_id"];
+
+	$o_slb_info = $o_slb->ART_ShowOne();
+
+	$o_slb->id_reg_veh = $_POST["fln_slb_reg"];
+	$o_slb->valor_venta = $_POST["fln_slb_cost"];
+	$o_slb->divisa_precio = $_POST["fln_slb_cost_curr"];
+	$o_slb->detalles = $_POST["fln_slb_details"];
+	$o_slb->vendedor = $_POST["fln_slb_seller"];
 	
-	$r_upd_rnt = $o_rnt->RNT_UpdateOne();
+	$r_upd_slb = $o_slb->ART_UpdateOne();
+
+	if($o_slb_info->vfb == 0)
+		$year_fab = "Año desc.";
+
+	else
+		$year_fab = $o_slb_info->vfb;
+	
+	$full_model = "$o_slb_info->bno $o_slb_info->vmo ($year_fab)";
 ?>
 
 <html lang=es>
 	<head>
-		<?php
-			include "../../../../../../../shared/html_head_setup.php";
-		?>
+		<?php include "../../../../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_haman; ?></title>
+		<title><?php echo a_dsb." - ".a_u_slb.$full_model; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -39,10 +53,10 @@
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
 							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="/admin/pages/manage/vehicles/"><?php echo a_vehman; ?></a></li>
 							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../../../"><?php echo a_haman; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page">Editar</li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_u_slb; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0">Editar vehículo alquilable</h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_u_slb.$full_model; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
@@ -69,12 +83,12 @@
 			<br />
 			
 			<?php
-				if($r_upd_rnt){
-					echo "<p>Vehículo alquilable actualizado, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
-				}
-				else{
-					echo "<p>No se pudo actualizar el vehículo alquilable, <a href=\"../../../\">pincha aquí para volver a la lista</a>.</p>";
-				}
+				$link_act_all = BTL_Gen(0,3);
+
+				if($r_upd_slb)
+					echo "<p>Vehículo en venta &laquo;".$full_model."&raquo; actualizado".$link_act_all."</p>";
+				else
+					echo "<p>No se pudo actualizar el vehículo en venta".$link_act_all."</p>";
 			?>
 		</main>
 	

@@ -1,7 +1,5 @@
 <?php
 	class Taxicabs{
-		// TODO: finish editing functions, they were duped from [Vehicles] class.
-		
 		private $id_remise;
 		private $nombres;
 		private $apellidos;
@@ -37,7 +35,7 @@
 		}
 		
 		public function TXC_Add(){
-			$sql_query_veh_reg = "INSERT INTO $this->tbl (modelo, unidades, anho_fab, puertas, transmision, combustible_tipo, combustible_capac, motor, marca, categorizacion) VALUES ('$this->modelo', $this->unidades, $this->anho_fab, $this->puertas, $this->transmision, '$this->combustible_tipo', $this->combustible_capac, '$this->motor', $this->marca, $this->categorizacion);";
+			$sql_query_veh_reg = "INSERT INTO $this->tbl (nombres, apellidos, cedula_identidad, tel_cel, tel_fijo, email, ubicacion_residencia, costo_d, costo_espera_h, divisa_precio, id_reg_veh) VALUES ('$this->nombres', '$this->apellidos', '$this->cedula_identidad', '$this->tel_cel', '$this->tel_fijo', '$this->email', $this->ubicacion_residencia, $this->costo_d, $this->costo_espera_h, $this->divisa_precio, $this->id_reg_veh);";
 			
 			$r = mysqli_query($this->conn, $sql_query_veh_reg);
 			
@@ -48,46 +46,54 @@
 			$sql_query_list_all_veh = "SELECT * FROM $this->tbl;";
 			$rt_db = mysqli_query($this->conn, $sql_query_list_all_veh);
 			
-			$arr_list_veh = null;
+			$arr_list_txc = null;
 			
 			while($res = mysqli_fetch_assoc($rt_db)){
 				$o = new Taxicabs();
 				
-				$o->idno = $res["idno"];
-				$o->modelo = $res["modelo"];
-				$o->unidades = $res["unidades"];
-				$o->anho_fab = $res["anho_fab"];
-				$o->puertas = $res["puertas"];
-				$o->transmision = $res["transmision"];
-				$o->combustible_tipo = $res["combustible_tipo"];
-				$o->combustible_capac = $res["combustible_capac"];
-				$o->motor = $res["motor"];
-				$o->marca = $res["marca"];
-				$o->categorizacion = $res["categorizacion"];
+				$o->id_remise = $res["id_remise"];
+				$o->nombres = $res["nombres"];
+				$o->apellidos = $res["apellidos"];
+				$o->cedula_identidad = $res["cedula_identidad"];
+				$o->tel_cel = $res["tel_cel"];
+				$o->tel_fijo = $res["tel_fijo"];
+				$o->email = $res["email"];
+				$o->ubicacion_residencia = $res["ubicacion_residencia"];
+				$o->costo_d = $res["costo_d"];
+				$o->costo_espera_h = $res["costo_espera_h"];
+				$o->divisa_precio = $res["divisa_precio"];
+				$o->id_reg_veh = $res["id_reg_veh"];
 				
-				$arr_list_veh[] = $o;
+				$arr_list_txc[] = $o;
 			}
-			return $arr_list_veh;
+			return $arr_list_txc;
 		}
 		
 		public function TXC_ShowAllForList(){
-			$sql_query_list_all_veh = "SELECT vehiculos.idno, vehiculos.modelo, vehiculos.unidades, vehiculos.anho_fab, marcas.nombre AS mno FROM vehiculos, marcas WHERE vehiculos.marca = marcas.idno;";
+			$sql_query_list_all_veh = "SELECT $this->tbl.* FROM $this->tbl;";
 			$rt_db = mysqli_query($this->conn, $sql_query_list_all_veh);
 			
-			$arr_list_veh_for_dd = null;
+			$arr_list_txc_for_list = null;
 			
 			while($res = mysqli_fetch_assoc($rt_db)){
 				$o = new Taxicabs();
 				
-				$o->idno = $res["idno"];
-				$o->modelo = $res["modelo"];
-				$o->unidades = $res["unidades"];
-				$o->anho_fab = $res["anho_fab"];
-				$o->mno = $res["mno"];
+				$o->id_remise = $res["id_remise"];
+				$o->nombres = $res["nombres"];
+				$o->apellidos = $res["apellidos"];
+				$o->cedula_identidad = $res["cedula_identidad"];
+				$o->tel_cel = $res["tel_cel"];
+				$o->tel_fijo = $res["tel_fijo"];
+				$o->email = $res["email"];
+				$o->ubicacion_residencia = $res["ubicacion_residencia"];
+				$o->costo_d = $res["costo_d"];
+				$o->costo_espera_h = $res["costo_espera_h"];
+				$o->divisa_precio = $res["divisa_precio"];
+				$o->id_reg_veh = $res["id_reg_veh"];
 				
-				$arr_list_veh_for_dd[] = $o;
+				$arr_list_txc_for_list[] = $o;
 			}
-			return $arr_list_veh_for_dd;
+			return $arr_list_txc_for_list;
 		}
 		
 		public function TXC_ShowOne(){

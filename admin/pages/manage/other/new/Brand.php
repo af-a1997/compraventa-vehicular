@@ -55,19 +55,19 @@
 			
 			<p>Ingresa los datos de la marca que deseas registrar.</p>
 			
-			<p><?php echo g_snp_reqf ?> = Campos obligatorios.</p>
+			<p><?php echo g_snp_reqf; ?> = Campos obligatorios.</p>
 			
 			<form id=id_form_brn_reg method=POST action="./act/SubmitAct.New.Brand.php" enctype="multipart/form-data">
 				<div class="input-group input-group-outline">
-					<label class=form-label>Nombre <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Nombre <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_brn_name />
 				</div>
-				<p><br />Descripción <?php echo g_snp_reqf ?>:</p>
+				<p><br />Descripción <?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<textarea class=form-control name=fln_brn_desc></textarea>
 				</div>
 
-				<p><br />Logotipo <?php echo g_snp_reqf ?>:</p>
+				<p><br />Logotipo <?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<input type=file name=fln_brn_logo accept="image/*" />
 				</div>

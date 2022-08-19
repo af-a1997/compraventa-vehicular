@@ -72,22 +72,22 @@
 			
 			<p>Acá podés editar los datos de la marca &laquo;<?php echo $o_vcat_data_in->nombre; ?>&raquo;.</p>
 			
-			<p><?php echo g_snp_reqf ?> = Campos obligatorios.</p>
+			<p><?php echo g_snp_reqf; ?> = Campos obligatorios.</p>
 			
 			<form id=id_form_vcat_edit method=POST action="./act/SubmitAct.Edit.VCAT.php">
 				<input type=hidden name=fln_vcat_id value=<?php echo "$o_vcat_data_in->id_tipo"; ?> />
 				
 				<div class="input-group input-group-outline">
-					<label class=form-label>Nombre <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Nombre <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_vcat_name value=<?php echo "\"$o_vcat_data_in->nombre\""; ?> />
 				</div>
-				<p><br />Descripción <?php echo g_snp_reqf ?>:</p>
+				<p><br />Descripción <?php echo g_snp_reqf; ?>:</p>
 				<div class="input-group input-group-outline">
 					<textarea class=form-control name=fln_vcat_desc><?php echo "$o_vcat_data_in->descripcion"; ?></textarea>
 				</div>
 
 				<div class="input-group input-group-outline" style="margin-top: 15px;">
-					<span>Ícono <?php echo g_snp_reqf ?>:&ensp;</span>
+					<span>Ícono <?php echo g_snp_reqf; ?>:&ensp;</span>
 					<select id=id_dd_vcat_icon name=fln_vcat_icon>
 						<?php
 							include "../../../../../../shared/utils/Utils.VCAT_Icons.php";

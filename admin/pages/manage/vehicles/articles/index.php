@@ -61,7 +61,7 @@
 				</div>
 			</nav>
 			
-			<!-- Vehicles that can be sold. -->
+			<!-- Vehicles that can be rented. -->
 			<div class="container-fluid py-4">
 				<div class="row">
 					<div class="col-12">
@@ -109,16 +109,15 @@
 																<td class=\"align-middle text-center text-sm\">$avail</td>
 																<td class=\"align-middle text-center text-sm\">$orl->valor_diario_alq $orl->cab</td>
 																<td class=\"align-middle text-center\">
-																	<a href=\"./do/rentable/act/Details.php?id_rnt=$orl->id_art_alq\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
-																	<a href=\"./do/rentable/act/Edit.php?id_rnt=$orl->id_art_alq\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
-																	<a href=\"./do/rentable/act/Delete.php?id_rnt=$orl->id_art_alq\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
+																	<a href=\"./do/rentable/Details.php?id_rnt=$orl->id_art_alq\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
+																	<a href=\"./do/rentable/Edit.php?id_rnt=$orl->id_art_alq\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
+																	<a href=\"./do/rentable/Delete.php?id_rnt=$orl->id_art_alq\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
 																</td>
 															</tr>
 														";
 													}
 												}
-												else
-													echo "<tr><td colspan=4 class=\"align-middle text-center text-sm\">No hay vehículos en venta</td></tr>";
+												else echo "<tr><td class=\"align-middle text-center text-sm\" colspan=4><i class=\"material-icons opacity-10\">disabled_by_default</i> No hay vehículos para alquilar</td></tr>";
 											?>
 										</tbody>
 									</table>
@@ -128,7 +127,7 @@
 					</div>
 				</div>
 
-				<!-- Vehicls that can be rented. -->
+				<!-- Vehicles that can be sold. -->
 				<div class="row">
 					<div class="col-12">
 						<div class="card my-4">
@@ -173,16 +172,15 @@
 																<td class=\"align-middle text-center text-sm\">$oal->valor_venta $oal->cab</td>
 																<td></td>
 																<td class=\"align-middle text-center\">
-																	<a href=\"./do/sellable/act/Delete.php?id_rnt=$oal->id_art_venta\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
-																	<a href=\"./do/sellable/act/Delete.php?id_rnt=$oal->id_art_venta\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
-																	<a href=\"./do/sellable/act/Delete.php?id_rnt=$oal->id_art_venta\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
+																	<a href=\"./do/sellable/Details.php?id_slb=$oal->id_art_venta\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
+																	<a href=\"./do/sellable/Edit.php?id_slb=$oal->id_art_venta\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
+																	<a href=\"./do/sellable/Delete.php?id_slb=$oal->id_art_venta\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
 																</td>
 															</tr>
 														";
 													}
 												}
-												else
-													echo "<tr><td colspan=5 class=\"align-middle text-center text-sm\">No hay vehículos alquilables</td></tr>";
+												else echo "<tr><td class=\"align-middle text-center text-sm\" colspan=5><i class=\"material-icons opacity-10\">disabled_by_default</i> No hay vehículos en venta</td></tr>";
 											?>
 										</tbody>
 									</table>
@@ -192,7 +190,7 @@
 					</div>
 				</div>
 
-				<!-- Vehicls that can be rented. -->
+				<!-- Add commands. -->
 				<div class="row">
 					<div class="col-12">
 						<div class="card my-4">

@@ -55,21 +55,21 @@
 			
 			<p>Ingresa los datos de la divisa que deseas registrar.</p>
 			
-			<p><?php echo g_snp_reqf ?> = Campos obligatorios.</p>
+			<p><?php echo g_snp_reqf; ?> = Campos obligatorios.</p>
 			
 			<form id=id_form_ccy_reg method=POST action="./act/SubmitAct.New.CCY.php">
 				<div class="input-group input-group-outline">
-					<label class=form-label>Nombre <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Nombre <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_ccy_name />
 				</div>
 				<div class="input-group input-group-outline">
-					<label class=form-label>Nomenclatura ISO 4217 <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Nomenclatura ISO 4217 <?php echo g_snp_reqf; ?></label>
 					<input id=id_field_abr class=form-control name=fln_ccy_abr />
 				</div>
 				<div class="alert alert-warning" role=alert>Esta es una abreviatura de 3 letras correspondiente a la divisa, más información <a href="https://en.wikipedia.org/wiki/ISO_4217#Alpha_codes" target=_blank>en este artículo</a><br/><br/>Ingrese la abreviatura en letra mayúscula.</div>
 				<br/>
 				<div class="input-group input-group-outline">
-					<label class=form-label>Simbolización <?php echo g_snp_reqf ?></label>
+					<label class=form-label>Simbolización <?php echo g_snp_reqf; ?></label>
 					<input id=id_field_symbol class=form-control name=fln_ccy_symbol />
 				</div>
 				<p>Posición del símbolo:</p>

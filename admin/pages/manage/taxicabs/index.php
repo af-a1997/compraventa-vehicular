@@ -1,15 +1,23 @@
-<!DOCTYPE html>
-
 <?php
+	include "../../../shared/Utils.Admin.SessionCheck.php";
+	
 	include "../../../shared/Constant_Strings[A].php";
 	include "../../../../shared/utils/Utils.Common_Strings.php";
+	
+	include "../../../classes/Utils_ClassLoader.class.php";
+
+	$o_txc = new Taxicabs();
+
+	$o_txc_list = $o_txc->TXC_ShowAllForList();
 ?>
+
+<!DOCTYPE html>
 
 <html lang=es>
 	<head>
 		<?php include "../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo a_tcman; ?></title>
+		<title><?php echo a_dsb." - ".a_tcman; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -68,42 +76,44 @@
 												<th class="text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Nombre completo</th>
 												<th class="text-uppercase text-white opacity-8 text-xxs font-weight-bolder ps-2">Celular</th>
 												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">T. fijo</th>
-												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Cédula de Identidad</th>
 												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Residencia</th>
 												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Tarifa</th>
 												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Acciones</th>
 											</tr>
 										</thead>
-										<!-- TODO: create server-side loop structure to generate rows per taxicab registered in the database. -->
 										<tbody>
-											<tr>
-												<td>
-													<div class="d-flex px-2 py-1">
-														<div><img src="../../../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1"></div>
-														<div class="d-flex flex-column justify-content-center">
-															<h6 class="mb-0 text-sm">Nombre</h6>
-															<p class="text-xs text-white opacity-8 mb-0">Apellido</p>
-														</div>
-													</div>
-												</td>
-												<td class="align-middle text-center text-sm">091234567</td>
-												<td class="align-middle text-center text-sm">03540000</td>
-												<td class="align-middle text-center text-sm">12345678</td>
-												<td>
-													<p class="text-xs font-weight-bold mb-0">Calle S/N</p>
-													<p class="text-xs text-white opacity-8 mb-0">123</p>
-												</td>
-												<td class=text-sm>
-													<ul style="list-style-type: none;">
-														<li><b>Por KM:</b> 50 $U</li>
-														<li><b>Espera en H:</b> 550 $U</li>
-													</ul>
-												</td>
-												<td class="align-middle text-center">
-													<a href="javascript:;" class="text-white opacity-8 font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Editar"><i class="material-icons opacity-10">edit</i></a>
-													<a href="javascript:;" class="text-white opacity-8 font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Eliminar"><i class="material-icons opacity-10">delete</i></a>
-												</td>
-											</tr>
+											<?php
+												if($o_txc_list != null){
+													foreach($o_txc_list as $otl){
+														echo "
+															<tr>
+																<td>
+																	<div class=\"d-flex px-2 py-1\">
+																		<div class=\"d-flex flex-column justify-content-center\">
+																			<h6 class=\"mb-0 text-sm\">$otl->nombres</h6>
+																			<p class=\"text-xs text-white opacity-8 mb-0\">$otl->apellidos</p>
+																		</div>
+																	</div>
+																</td>
+																<td class=\"align-middle text-center text-sm\"><a href=\"tel:+$otl->tel_cel\">+$otl->tel_cel</a></td>
+																<td class=\"align-middle text-center text-sm\"><a href=\"tel:+$otl->tel_fijo\">+$otl->tel_fijo</a></td>
+																<td class=\"align-middle text-center text-sm\">$otl->ubicacion_residencia</td>
+																<td class=text-sm>
+																	<ul style=\"list-style-type: none;\">
+																		<li><b>Por KM:</b> $otl->costo_d</li>
+																		<li><b>Espera en H:</b> $otl->costo_espera_h</li>
+																	</ul>
+																</td>
+																<td class=\"align-middle text-center\">
+																	<a href=\"./do/Details.php?id_txc=$otl->id_remise\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
+																	<a href=\"./do/Edit.php?id_txc=$otl->id_remise\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
+																	<a href=\"./do/Delete.php?id_txc=$otl->id_remise\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
+																</td>
+															</tr>
+														";
+													}
+												}
+											?>
 										</tbody>
 									</table>
 								</div>

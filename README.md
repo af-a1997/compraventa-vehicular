@@ -1,4 +1,4 @@
-> :warning: This project is only in Spanish for now, but I may add English language later as well. There are some code comments in English though.
+> :warning: This project is only in Spanish for now, but I may add English language later as well. There are some code comments in English though, because this should help you learn how to do certain stuff.
 
 # Sistema de compraventa de automóviles
 
@@ -7,6 +7,8 @@ Trabajo de conclusión de curso para concretar la carrera **[Informática para I
 Se trata de un sitio web relativamente simple, proyectado para proveer servicios de compra y venta de vehículos de toda clase, con panel de administrador para gestionar artículos, categorías y tal.
 
 La documentación se definirá aquí debido a que las wikis no están disponibles para repositorios privados de usuarios gratuitos.
+
+> :warning: Desplazarse hacia el final para instrucciones de uso y claves de acceso.
 
 ## Modelo BBDD
 
@@ -27,12 +29,14 @@ El modelo se encuentra en `/admin/ddbb/models/` tanto en imagen como archivo de 
 * **`imagenes_cat_remise`:** Contiene imagenes de los vehículos que poseen los remiseros.
 * **`a_vender`:** Contiene una lista de vehículos disponibles para vender.
 * **`ventas`:** Contiene una lista de compras ya realizadas.
+* **`imagenes_cat_venta`:** Contiene imagenes de los vehículos que están a la venta.
 * **`seleccion_alquiler`:** Contiene una lista de vehículos disponibles para alquilar.
 * **`historial_alquiler`:** Contiene una lista de vehículos previamente alquilados o con contrato activo.
+* **`imagenes_cat_alq`:** Contiene imagenes de los vehículos que están para alquilar.
 * **`usuarios`:** Contiene una lista de miembros del sitio, tanto administradores como clientes y remises.
 * **`puesto`:** Contiene definiciones de roles de usuario en el sitio.
 
-## Implementaciones
+## Implementaciones de alta prioridad
 
 > :warning: No finalizado
 
@@ -96,13 +100,15 @@ El modelo se encuentra en `/admin/ddbb/models/` tanto en imagen como archivo de 
    - [X] Agregar
    - [X] Editar
    - [X] Eliminar
- - [ ] Auto-configuración de BBDD inicial
 
 ### Cliente
 
+> :arrow_right: **Nota:** transacciones serán simulaciones básicas.
+
  - [ ] Sesiones
- - [ ] Gestión de perfil
- - [ ] Ver perfiles de otros usuarios
+ - [ ] Perfiles
+   - [ ] Ver perfiles de otros usuarios
+   - [ ] Editar perfil personal
  - [X] Base de datos de vehículos
    - [X] Búsqueda
    - [X] Detalles
@@ -119,12 +125,32 @@ El modelo se encuentra en `/admin/ddbb/models/` tanto en imagen como archivo de 
 ### Remises
 
  - [ ] Sesiones
- - [ ] Gestión de perfil
- - [ ] Publicación de servicios
+ - [ ] Perfiles
+   - [ ] Ver perfiles de otros usuarios
+   - [ ] Editar perfil personal
+ - [ ] Publicación/gestión de servicios
+   - [ ] Publicar
    - [ ] Editar
    - [ ] Suspender
    - [ ] Eliminar
  - [ ] Gestión de contrato con cliente
+
+## Otras implementaciones y ajustes de menor prioridad
+
+> :orange_circle: Estas características no son tan urgentes de implementar, ya que se busca primero implementar las características clave del sitio, pero se plantea hacer varios añadidos y ajustes luego de implementar los elementos esenciales descritos en la sección anterior. No están en órden específico.
+
+ - [ ] Auto-configuración de BBDD inicial.
+ - [ ] Refinar sistema de alquileres, de tal modo que el estado de disponibilidad provenga de la tabla `registros`.
+ - [ ] Manejar intento de eliminación de entradas que están siendo referenciadas en otras tablas.
+   - [ ] Gatillos en base a determinados eventos, como puede ser el eliminar un artículo alquilable, lo que resulta en la eliminación de instancias de alquiler relacionadas.
+ - [ ] Funcionalidades varias que puedan requerir de AJAX **(¡pero debo aprender primero!)**.
+   - [ ] Búsqueda/órden de elementos en menús desplegables de formularios, como cuando se va a elegir una instancia de vehículo registrado.
+   - [ ] Aparición de entradas nuevas en el panel de administrador sin tener que recargar el sitio.
+ - [ ] Formato de precios usando símbolos y posición, como se ilustra en el gestor de divisas al agregar/editar una divisa.
+ - [ ] Verificar partes con código repetido/reutilizable, y realizar ajustes en base a ello.
+ - [ ] Suspensión/baneo de usuarios: es un impedimiento de acceso temporal o permanente, normalmente dado por conductas inapropiadas y/o en contra de los términos de uso del sistema.
+ - [ ] Estandarizar nombrado de llaves de objetos utilizadas en consultas con cláusulas `JOIN`, esto significa que hay diferentes nombres para la misma información en diferentes clases; por ejemplo "bno" y "bna" para obtener la marca del vehículo en dos clases distintas. Esto va a reducir posibles confusiones y permitir reutilizar algo de código.
+ - [ ] Añadir *tooltips* o "bocadillos", son cajas de texto que aparecen al mantener el ratón sobre un elemento para describir su funcionalidad (normalmente un botón/ícono).
 
 ## Configuración
 
