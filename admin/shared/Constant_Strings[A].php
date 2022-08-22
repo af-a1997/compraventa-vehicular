@@ -17,6 +17,7 @@
 	// Top level section names
 	const a_artman = a_mp."artículos";
 	const a_climan = a_mp."clientela";
+	const a_conman = "Gestionar remises contratados";
 	const a_haman = a_mp."vehículos alquilables";
 	const a_hvman = a_mp."alquileres";
 	const a_oman = a_mp."otros";
@@ -37,6 +38,7 @@
 	const a_n_cli = a_reg."cliente";
 	const a_n_rnt = a_reg."veh. rentable";
 	const a_n_slb = a_reg."veh. para vender";
+	const a_n_txc = a_reg."remise";
 	const a_n_vcat = a_reg."categoría";
 	const a_n_veh = a_reg."vehículo";
 
@@ -47,6 +49,7 @@
 	const a_d_rhi = a_dtl."el alquiler ";
 	const a_d_rnt = a_dtl."el veh. alquilable ";
 	const a_d_slb = a_dtl."el veh. en venta ";
+	const a_d_txc = a_dtl."el remise ";
 	const a_d_vcat = a_dtl."la categoría ";
 	const a_d_veh = a_dtl."el vehículo ";
 	
@@ -58,6 +61,7 @@
 	const a_u_rnt = a_upd."el vehículo rentable ";
 	const a_u_rhi = a_upd."la instancia de alquiler ";
 	const a_u_slb = a_upd."el veh. en venta ";
+	const a_u_txc = a_upd."el remise ";
 	const a_u_veh = a_upd."el vehículo ";
 	const a_u_vcat = a_upd."la categoría ";
 
@@ -70,6 +74,7 @@
 	const a_r_rhi = a_del."la instancia de alquiler ";
 	const a_r_rnt = a_del."el veh. rentable ";
 	const a_r_slb = a_del."el veh. en venta ";
+	const a_r_txc = a_del."el remise ";
 	const a_r_vcat = a_del."la categoría ";
 	const a_r_veh = a_del."el vehículo ";
 	

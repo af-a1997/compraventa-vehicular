@@ -2,9 +2,9 @@
 	if(!isset($_POST["fln_cli_id"]))
 		header("Location:../../");
 	
-	if($_POST["fln_cli_id"] == 1){
+	// Admin cannot be deleted, and doing so from the database could cause issues, so it's not recommended. In the website, this is prevented with a redirection. Just in case, I also handled that further below, but isn't needed.
+	if($_POST["fln_cli_id"] == 1)
 		header("Location:../?msg=err_main_admin_protected");
-	}
 
 	include "../../../../../shared/Utils.Admin.SessionCheck.php";
 	include "../../../../../shared/Utils.Admin.BTL.php";
@@ -91,7 +91,7 @@
 		<?php include "../../../../../shared/Imports.Scripts.php"; ?>
 		
 		<script>
-			$('#sidebar-choice-1').addClass("active bg-gradient-primary");
+			$('#sidebar-choice-2').addClass("active bg-gradient-primary");
 		</script>
 	</body>
 </html>

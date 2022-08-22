@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 
 <?php
-	if(!$_GET["id_rnt"]){
+	if(!isset($_GET["id_rnt"]))
 		header("Location:../../");
-	}
 
 	include "../../../../../../shared/Utils.Admin.SessionCheck.php";
 	

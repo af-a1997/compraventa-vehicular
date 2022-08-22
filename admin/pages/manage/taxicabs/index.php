@@ -74,9 +74,7 @@
 										<thead>
 											<tr>
 												<th class="text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Nombre completo</th>
-												<th class="text-uppercase text-white opacity-8 text-xxs font-weight-bolder ps-2">Celular</th>
-												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">T. fijo</th>
-												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Residencia</th>
+												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">ID reg. vehículo</th>
 												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Tarifa</th>
 												<th class="text-center text-uppercase text-white opacity-8 text-xxs font-weight-bolder">Acciones</th>
 											</tr>
@@ -95,13 +93,11 @@
 																		</div>
 																	</div>
 																</td>
-																<td class=\"align-middle text-center text-sm\"><a href=\"tel:+$otl->tel_cel\">+$otl->tel_cel</a></td>
-																<td class=\"align-middle text-center text-sm\"><a href=\"tel:+$otl->tel_fijo\">+$otl->tel_fijo</a></td>
-																<td class=\"align-middle text-center text-sm\">$otl->ubicacion_residencia</td>
+																<td class=\"align-middle text-center text-sm\"><a href=\"../vehicles/reg_lp/do/Details.php?id_reg=$otl->id_reg_veh\">$otl->id_reg_veh</a></td>
 																<td class=text-sm>
 																	<ul style=\"list-style-type: none;\">
-																		<li><b>Por KM:</b> $otl->costo_d</li>
-																		<li><b>Espera en H:</b> $otl->costo_espera_h</li>
+																		<li><b>Por KM:</b> $otl->costo_d $otl->cab</li>
+																		<li><b>Espera en H:</b> $otl->costo_espera_h $otl->cab</li>
 																	</ul>
 																</td>
 																<td class=\"align-middle text-center\">
@@ -113,13 +109,15 @@
 														";
 													}
 												}
+												else echo "<tr><td class=\"align-middle text-center text-sm\" colspan=4><i class=\"material-icons opacity-10\">disabled_by_default</i> No hay remiseros registrados</td></tr>";
 											?>
 										</tbody>
 									</table>
 								</div>
 							</div>
 			
-							<button class="btn btn-success"><i class="material-icons opacity-10">add_road</i> Nuevo remise</button>
+							<button id=id_btn_new_txc class="btn btn-success"><i class="material-icons opacity-10">add_road</i> <?php echo a_n_txc; ?></button>
+							<button id=id_btn_go_tcon class="btn btn-secondary"><i class="material-icons opacity-10">open_in_new</i> <?php echo a_conman; ?></button>
 						</div>
 					</div>
 				</div>
@@ -130,6 +128,13 @@
 
 		<script>
 			$('#sidebar-choice-3').addClass("active bg-gradient-primary");
+
+			$("#id_btn_new_txc").click(function(){
+				location.href = "./new";
+			});
+			$("#id_btn_go_tcon").click(function(){
+				location.href = "./contracts";
+			});
 		</script>
 	</body>
 </html>

@@ -150,6 +150,6 @@ INSERT INTO historial_alquiler(momento_alquilado, momento_devolucion, estado_alq
 	("2022-07-01 00:00:00",NOW(),1,1,1)
 ;
 
-INSERT INTO remises(nombres,apellidos,cedula_identidad,tel_cel,tel_fijo,email,ubicacion_residencia,costo_d,costo_espera_h,divisa_precio,id_reg_veh) VALUES
-	("Testing", "Tester", "7.654.321-0", "500", "300", "hello3@example.com","Placeholder",1000,50,2,3)
+INSERT INTO remises(nombres,apellidos,cedula_identidad,tel_cel,tel_fijo,email,clave,ubicacion_residencia,costo_d,costo_espera_h,divisa_precio,id_reg_veh) VALUES
+	("Testing", "Tester", "7.654.321-0", "500", "300", "hello3@example.com","12345678","Placeholder",1000,50,2,3)
 ;

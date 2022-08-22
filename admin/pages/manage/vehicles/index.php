@@ -151,43 +151,46 @@
 										</thead>
 										<tbody>
 											<?php
-												foreach($o_rvi_list as $orl){
-													$units_text = "";
-													$lp_text = "";
-													$veh_year = "";
-													$distance = "";
-													$color_tag = GEN_ColorTag($orl->color);
-													
-													if($orl->kilometraje_act == null) $distance = "N/A";
-													else $distance = $orl->kilometraje_act." km.";
-													
-													if($orl->vfb == 0) $veh_year = "Año desc.";
-													else $veh_year = $orl->vfb;
-													
-													if($orl->matricula == 0) $lp_text = "N/A";
-													else $lp_text = $orl->matricula;
-													
-													echo "
-														<tr>
-															<td>
-																<div class=\"d-flex px-2 py-1\">
-																	<div class=\"d-flex flex-column justify-content-center\">
-																		<h6 class=\"mb-0 text-sm\">$orl->bna</h6>
-																		<p class=\"text-xs text-white opacity-8 mb-0\">$orl->vmo ($veh_year)</p>
+												if($o_rvi_list != null){
+													foreach($o_rvi_list as $orl){
+														$units_text = "";
+														$lp_text = "";
+														$veh_year = "";
+														$distance = "";
+														$color_tag = GEN_ColorTag($orl->color);
+														
+														if($orl->kilometraje_act == null) $distance = "N/A";
+														else $distance = $orl->kilometraje_act." km.";
+														
+														if($orl->vfb == 0) $veh_year = "Año desc.";
+														else $veh_year = $orl->vfb;
+														
+														if($orl->matricula == 0) $lp_text = "N/A";
+														else $lp_text = $orl->matricula;
+														
+														echo "
+															<tr>
+																<td>
+																	<div class=\"d-flex px-2 py-1\">
+																		<div class=\"d-flex flex-column justify-content-center\">
+																			<h6 class=\"mb-0 text-sm\">$orl->bna</h6>
+																			<p class=\"text-xs text-white opacity-8 mb-0\">$orl->vmo ($veh_year)</p>
+																		</div>
 																	</div>
-																</div>
-															</td>
-															<td class=\"align-middle text-center text-sm\">$lp_text</td>
-															<td class=\"align-middle text-center text-sm\">$color_tag</td>
-															<td class=\"align-middle text-center text-sm\">$distance</td>
-															<td class=\"align-middle text-center\">
-																<a href=\"./reg_lp/do/Details.php?id_reg=$orl->id_reg\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=tooltip data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
-																<a href=\"./reg_lp/do/Edit.php?id_reg=$orl->id_reg\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=tooltip data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
-																<a href=\"./reg_lp/do/Delete.php?id_reg=$orl->id_reg\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=tooltip data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
-															</td>
-														</tr>
-													";
+																</td>
+																<td class=\"align-middle text-center text-sm\">$lp_text</td>
+																<td class=\"align-middle text-center text-sm\">$color_tag</td>
+																<td class=\"align-middle text-center text-sm\">$distance</td>
+																<td class=\"align-middle text-center\">
+																	<a href=\"./reg_lp/do/Details.php?id_reg=$orl->id_reg\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=tooltip data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
+																	<a href=\"./reg_lp/do/Edit.php?id_reg=$orl->id_reg\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=tooltip data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
+																	<a href=\"./reg_lp/do/Delete.php?id_reg=$orl->id_reg\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=tooltip data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
+																</td>
+															</tr>
+														";
+													}
 												}
+												else echo "<tr><td class=\"align-middle text-center text-sm\" colspan=5><i class=\"material-icons opacity-10\">disabled_by_default</i> No hay vehículos registrados</td></tr>";
 											?>
 										</tbody>
 									</table>

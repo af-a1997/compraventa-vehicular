@@ -1,10 +1,6 @@
 <?php
-	if(!isset($_POST["fln_user_id"]))
+	if(!isset($_POST["fln_txc_id"]))
 		header("Location:../../");
-	
-	// The main admin cannot be edited from the website, this may be done from the database however.
-	if($_POST["fln_user_id"] == 1)
-		header("Location:../../?msg=err_main_admin_protected");
 	
 	include "../../../../../shared/Utils.Admin.SessionCheck.php";
 	include "../../../../../shared/Utils.Admin.BTL.php";
@@ -14,32 +10,34 @@
 	include "../../../../../shared/Constant_Strings[A].php";
 	include "../../../../../../shared/utils/Utils.Common_Strings.php";
 	
-	$o_cli = new Users();
+	$o_txc = new Taxicabs();
 
-	$o_cli->nro_id_u = $_POST["fln_user_id"];
+	$o_txc->id_remise = $_POST["fln_txc_id"];
 
-	$o_cli_info = $o_cli->CLI_ShowOne();
-	$full_name = $o_cli_info->nombre." ".$o_cli_info->apellidos;
+	$o_txc_info = $o_txc->TXC_ShowOne();
+	$full_name = $o_txc_info->nombres." ".$o_txc_info->apellidos;
 	
-	$o_cli->nombre = $_POST["fln_user_name"];
-	$o_cli->apellidos = $_POST["fln_user_surname"];
-	$o_cli->nombre_usuario = $_POST["fln_user_un"];
-	$o_cli->clave = $_POST["fln_user_pwd"];
-	$o_cli->cedula_identidad = $_POST["fln_user_uyid"];
-	$o_cli->email = $_POST["fln_user_emailaddr"];
-	$o_cli->residencia_actual = $_POST["fln_user_houseloc"];
-	$o_cli->tel_cel = $_POST["fln_user_phone_cel"];
-	$o_cli->tel_fijo = $_POST["fln_user_phone_home"];
-	$o_cli->cargo_en_sitio = $_POST["fln_user_site_role"];
+	$o_txc->nombres = $_POST["fln_txc_name"];
+	$o_txc->apellidos = $_POST["fln_txc_surname"];
+	$o_txc->cedula_identidad = $_POST["fln_txc_uyid"];
+	$o_txc->email = $_POST["fln_txc_emailaddr"];
+	$o_txc->clave = $_POST["fln_txc_pwd"];
+	$o_txc->ubicacion_residencia = $_POST["fln_txc_houseloc"];
+	$o_txc->tel_cel = $_POST["fln_txc_phone_cel"];
+	$o_txc->tel_fijo = $_POST["fln_txc_phone_home"];
+	$o_txc->costo_d = $_POST["fln_txc_cost_daily"];
+	$o_txc->costo_espera_h = $_POST["fln_txc_cost_hwait"];
+	$o_txc->divisa_precio = $_POST["fln_txc_cost_curr"];
+	$o_txc->id_reg_veh = $_POST["fln_txc_reg"];
 	
-	$r_upd_cli = $o_cli->CLI_UpdateOne();
+	$r_upd_txc = $o_txc->TXC_UpdateOne();
 ?>
 
 <html lang=es>
 	<head>
 		<?php include "../../../../../shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb." - ".a_u_cli.$full_name; ?></title>
+		<title><?php echo a_dsb." - ".a_u_txc.$full_name; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
@@ -53,11 +51,11 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 							<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin/"><?php echo a_dsb; ?></a></li>
-							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../"><?php echo a_climan; ?></a></li>
-							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_u_cli; ?></li>
+							<li class="breadcrumb-item text-sm" aria-current="page"><a class="opacity-5 text-white" href="../../"><?php echo a_tcman; ?></a></li>
+							<li class="breadcrumb-item text-sm text-white active" aria-current="page"><?php echo a_u_txc; ?></li>
 						</ol>
 						
-						<h6 class="font-weight-bolder mb-0"><?php echo a_u_cli.$full_name; ?></h6>
+						<h6 class="font-weight-bolder mb-0"><?php echo a_u_txc.$full_name; ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 						<ul class="navbar-nav justify-content-end ms-md-auto pe-md-3 d-flex align-items-center">
@@ -85,19 +83,19 @@
 			
 			<?php
 				$link_act_0 = BTL_Gen(0,2);
-				$link_act_1 = BTL_Gen(1,1,"Edit.php?id_cli=".$_POST["fln_user_id"]);
+				$link_act_1 = BTL_Gen(1,1,"Edit.php?id_txc=".$_POST["fln_txc_id"]);
 
-				if($r_upd_cli)
-					echo "<p>Cliente &laquo;".$full_name."&raquo; actualizado".$link_act_0."</p>";
+				if($r_upd_txc)
+					echo "<p>Remise &laquo;".$full_name."&raquo; actualizado".$link_act_0."</p>";
 				else
-					echo "<p>No se pudo actualizar el cliente".$link_act_1."</p>";
+					echo "<p>No se pudo actualizar el remise".$link_act_1."</p>";
 			?>
 		</main>
 	
 		<?php include "../../../../../shared/Imports.Scripts.php"; ?>
 		
 		<script>
-			$('#sidebar-choice-2').addClass("active bg-gradient-primary");
+			$('#sidebar-choice-3').addClass("active bg-gradient-primary");
 		</script>
 	</body>
 </html>

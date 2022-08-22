@@ -1,8 +1,16 @@
 <?php
 	include "../../../../shared/Utils.Admin.SessionCheck.php";
 	
+	include "../../../../classes/Utils_ClassLoader.class.php";
+	
 	include "../../../../shared/Constant_Strings[A].php";
 	include "../../../../../shared/utils/Utils.Common_Strings.php";
+
+	$o_rvi = new Registered_Veh_Info();
+	$o_ccy = new Currencies();
+	
+	$o_rvi_list = $o_rvi->RVI_ShowAllForDD();
+	$o_ccy_list = $o_ccy->CCY_ShowAll();
 ?>
 
 <!DOCTYPE html>
@@ -55,59 +63,76 @@
 			
 			<br />
 			
-			<?php
-				if(isset($_GET['msg']) && ($_GET['msg']) == "username_taken"){
-					echo "
-						<div class=\"alert alert-danger\" role=alert>El nombre de usuario ya fue tomado, vuelve a intentarlo.</div>
-					";
-				}
-			?>
-			
-			<p>En esta página podrás registrar nuevos clientes.</p>
+			<p>En esta página podrás registrar nuevos remises.</p>
 			
 			<p><?php echo g_snp_reqf; ?> = Campos obligatorios.</p>
 			
-			<form id=id_form_user_reg method=POST action="./SubmitAct.New.Cli.php">
+			<form id=id_form_txc_reg method=POST action="../do/act/SubmitAct.New.TXC.php">
 				<div class="input-group input-group-outline">
 					<label class=form-label>Nombre(s) <?php echo g_snp_reqf; ?></label>
-					<input class=form-control name=fln_user_name />
+					<input class=form-control name=fln_txc_name />
 				</div>
 				<div class="input-group input-group-outline">
 					<label class=form-label>Apellido(s) <?php echo g_snp_reqf; ?></label>
-					<input class=form-control name=fln_user_surname />
+					<input class=form-control name=fln_txc_surname />
 				</div>
 				<div class="input-group input-group-outline">
-					<label class=form-label>Nombre de usuario <?php echo g_snp_reqf; ?></label>
-					<input class=form-control name=fln_user_un />
+					<label class=form-label>Cédula de Identidad <?php echo g_snp_reqf; ?></label>
+					<input class=form-control name=fln_txc_uyid id=validate_format_uypid />
+				</div>
+				<div class="input-group input-group-outline">
+					<label class=form-label>Correo electrónico<?php echo g_snp_reqf; ?></label>
+					<input class=form-control name=fln_txc_emailaddr />
 				</div>
 				<div class="input-group input-group-outline">
 					<label class=form-label>Clave <?php echo g_snp_reqf; ?></label>
-					<input type=password class=form-control name=fln_user_pwd />
-				</div>
-				<div class="input-group input-group-outline">
-					<label class=form-label>C. I. <?php echo g_snp_reqf; ?></label>
-					<input class=form-control name=fln_user_uyid id=validate_format_pid />
-				</div>
-				<div class="input-group input-group-outline">
-					<label class=form-label>Correo electrónico</label>
-					<input class=form-control name=fln_user_emailaddr />
+					<input type=password class=form-control name=fln_txc_pwd />
 				</div>
 				<div class="input-group input-group-outline">
 					<label class=form-label>Dirección de residencia</label>
-					<input class=form-control name=fln_user_houseloc />
+					<input class=form-control name=fln_txc_houseloc />
 				</div>
 				<p>Teléfono celular:</p>
 				<div class="input-group input-group-outline">
-					<input class=form-control name=fln_user_phone_cel id=validate_format_phone_cel />
+					<input class=form-control name=fln_txc_phone_cel id=validate_format_phone_cel />
 				</div>
 				<p>Teléfono fijo:</p>
 				<div class="input-group input-group-outline">
-					<input class=form-control name=fln_user_phone_home id=validate_format_phone_home />
+					<input class=form-control name=fln_txc_phone_home id=validate_format_phone_home />
+				</div>
+				<p>Cuota <?php echo g_snp_reqf; ?>:</p>
+				<div class="input-group input-group-outline">
+					<input class=form-control name=fln_txc_cost_daily type=number step=.01 /> / día &emsp;
+					<input class=form-control name=fln_txc_cost_hwait type=number step=.01 /> / h (espera) &emsp;
+
+					<select class=form-control name=fln_txc_cost_curr>
+						<option value="" selected>Seleccione la divisa para ambos valores...</option>
+						<?php
+							foreach($o_ccy_list as $cl)
+								echo "<option value=\"$cl->id_moneda\">$cl->nombre</option>";
+						?>
+					</select>
+				</div>
+				<p>Vehículo propietario <?php echo g_snp_reqf; ?>:</p>
+				<div class="input-group input-group-outline">
+					<select class=form-control name=fln_txc_reg>
+						<option value="" selected>Seleccione el vehículo...</option>
+						<?php
+							$vfb_str = "";
+
+							foreach($o_rvi_list as $orl){
+								if($orl->vfb == 0) $vfb_str = "Año desc.";
+								else $vfb_str = $orl->vfb;
+
+								echo "<option value='$orl->id_reg'>$orl->bna $orl->vmo ($vfb_str) - Matrícula: $orl->matricula</option>";
+							}
+						?>
+					</select>
 				</div>
 				
 				<br />
 				
-				<button class="btn btn-success" type=submit><i class="material-icons opacity-10">person_add</i> Registrar usuario</button>
+				<button class="btn btn-success" type=submit><i class="material-icons opacity-10">add_road</i> <?php echo a_n_txc; ?></button>
 				<a href="../" class="btn btn-danger"><i class="material-icons opacity-10">clear</i> Cancelar</a>
 			</form>
 		</main>
@@ -118,29 +143,34 @@
 		<script src="/shared/extras/jquery/validation/jquery.validate.min.js"></script>
 		
 		<script>
-			$('#sidebar-choice-2').addClass("active bg-gradient-primary");
+			$('#sidebar-choice-3').addClass("active bg-gradient-primary");
 			
 			// Masks
-			$("#validate_format_pid").mask("0.000.000-0",{ placeholder: "1.234.567-8" });
+			$("#validate_format_uypid").mask("0.000.000-0",{ placeholder: "1.234.567-8" });
 			$("#validate_format_phone_cel").mask("000 000 000",{ placeholder: "09X XXX XXX" });
 			$("#validate_format_phone_home").mask("0000 0000",{ placeholder: "XXXX XXXX" });
 			
 			// Validation
-			$("#id_form_user_reg").validate({
+			$("#id_form_txc_reg").validate({
 				rules:{
-					fln_user_name: "required",
-					fln_user_surname: "required",
-					fln_user_un: "required",
-					fln_user_pwd: "required",
-					fln_user_uyid: "required",
-					fln_user_email: { email: true }
+					fln_txc_name: "required",
+					fln_txc_surname: "required",
+					fln_txc_pwd: "required",
+					fln_txc_uyid: "required",
+					fln_txc_email: "required",
+					fln_txc_pwd: "required",
+					fln_txc_cost_daily: "required",
+					fln_txc_cost_hwait: "required"
 				},
 				messages:{
-					fln_user_name: "Nombre(s) requerido(s).",
-					fln_user_surname: "Apellido(s) requerido(s).",
-					fln_user_un: "Nombre de usuario requerido.",
-					fln_user_pwd: "Clave requerida.",
-					fln_user_uyid: "Cédula de Identidad requerida."
+					fln_txc_name: "Nombre(s) requerido(s).",
+					fln_txc_surname: "Apellido(s) requerido(s).",
+					fln_txc_pwd: "Clave requerida.",
+					fln_txc_uyid: "Cédula de Identidad requerida.",
+					fln_txc_email: "E-mail requerido.",
+					fln_txc_pwd: "Cédula de Identidad requerida.",
+					fln_txc_cost_daily: "Ingrese la cuota diaria",
+					fln_txc_cost_hwait: "Ingrese el costo de espera por hora"
 				}
 			});
 		</script>
