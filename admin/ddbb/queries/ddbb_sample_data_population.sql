@@ -6,6 +6,7 @@ USE gestion_veh;
 
 -- Empties tables and reset their auto increment values to assist with testing.
 DELETE FROM adquisiciones;
+DELETE FROM reg_contrato_remises;
 DELETE FROM remises;
 DELETE FROM historial_alquiler;
 DELETE FROM seleccion_alquiler;
@@ -24,6 +25,7 @@ ALTER TABLE divisas AUTO_INCREMENT = 1;
 ALTER TABLE historial_alquiler AUTO_INCREMENT = 1;
 ALTER TABLE marcas AUTO_INCREMENT = 1;
 ALTER TABLE puesto AUTO_INCREMENT = 1;
+ALTER TABLE reg_contrato_remises AUTO_INCREMENT = 1;
 ALTER TABLE registros AUTO_INCREMENT = 1;
 ALTER TABLE remises AUTO_INCREMENT = 1;
 ALTER TABLE seleccion_alquiler AUTO_INCREMENT = 1;
@@ -152,4 +154,12 @@ INSERT INTO historial_alquiler(momento_alquilado, momento_devolucion, estado_alq
 
 INSERT INTO remises(nombres,apellidos,cedula_identidad,tel_cel,tel_fijo,email,clave,ubicacion_residencia,costo_d,costo_espera_h,divisa_precio,id_reg_veh) VALUES
 	("Testing", "Tester", "7.654.321-0", "500", "300", "hello3@example.com","12345678","Placeholder",1000,50,2,3)
+;
+
+ -- Register two contracts, the first is finished, while the second is active, and 
+INSERT INTO reg_contrato_remises(tiempo_inicio,tiempo_fin,pago_diario_contrato,pago_horario_contrato,pago_total,remisero,contratador,divisa_cuotas) VALUES
+	("2022-08-18 10:00:00", "2022-08-21 10:00:00", 1000.00, 30.00, 3600.00,1,2,2)
+;
+INSERT INTO reg_contrato_remises(tiempo_inicio,pago_diario_contrato,pago_horario_contrato,pago_total,remisero,contratador,divisa_cuotas) VALUES
+	(NOW(), 900.00, 25.00, 2200.00,1,2,2)
 ;

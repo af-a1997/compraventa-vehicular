@@ -5,6 +5,7 @@
 	const a_dsb = "Panel de administración";
 	const a_credits = "Agradecimientos";
 	const a_txc_con = "Remises contratados";
+	const a_s_con = "Detener contrato con remise";
 	
 	// Prefixes for sections and breadcrumbs
 	const a_mp = "Gestión de ";
@@ -46,6 +47,7 @@
 	const a_d_brn = a_dtl."la marca ";
 	const a_d_ccy = a_dtl."la divisa ";
 	const a_d_cli = a_dtl."el cliente ";
+	const a_d_con = a_dtl."el contrato con remise ";
 	const a_d_rhi = a_dtl."el alquiler ";
 	const a_d_rnt = a_dtl."el veh. alquilable ";
 	const a_d_slb = a_dtl."el veh. en venta ";
@@ -80,6 +82,7 @@
 	
 	// Full table wipeout sections
 	const a_w_acq = a_del."todas las entradas de adquisiciones";
+	const a_w_con = a_del."contratos con remises";
 	const a_w_rhi = a_del."historial de alquileres";
 
 	// List vehicles by brand

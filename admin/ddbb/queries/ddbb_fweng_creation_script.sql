@@ -303,9 +303,12 @@ CREATE TABLE IF NOT EXISTS `gestion_veh`.`reg_contrato_remises` (
   `id_entrada_reg` INT NOT NULL AUTO_INCREMENT,
   `tiempo_inicio` DATETIME NULL,
   `tiempo_fin` DATETIME NULL,
-  `pago_diario_contrato` DOUBLE NULL,
+  `pago_diario_contrato` DOUBLE NULL COMMENT 'La cuota diaria que el contratador pagó en el momento del contrato, ya que pueden aplicar descuentos y/o el precio puede variar durante el tiempo.',
+  `pago_horario_contrato` DOUBLE NULL COMMENT 'La cuota de espera por hora que el contratador pagó en el momento del contrato, ya que pueden aplicar descuentos y/o el precio puede variar durante el tiempo.',
+  `pago_total` INT NOT NULL,
   `remisero` INT NOT NULL,
   `contratador` INT NOT NULL,
+  `divisa_cuotas` INT NOT NULL,
   PRIMARY KEY (`id_entrada_reg`, `remisero`, `contratador`),
   CONSTRAINT `fk_reg_contrato_remises_remises1`
     FOREIGN KEY (`remisero`)
@@ -315,6 +318,11 @@ CREATE TABLE IF NOT EXISTS `gestion_veh`.`reg_contrato_remises` (
   CONSTRAINT `fk_reg_contrato_remises_clientes1`
     FOREIGN KEY (`contratador`)
     REFERENCES `gestion_veh`.`usuarios` (`nro_id_u`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_reg_contrato_remises_divisas1`
+    FOREIGN KEY (`divisa_cuotas`)
+    REFERENCES `gestion_veh`.`divisas` (`id_moneda`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <?php
 	if(!isset($_GET["id_txc"]))
 		header("Location:../");
@@ -19,6 +17,8 @@
 
 	$full_name = $o_txc_info->nombres." ".$o_txc_info->apellidos;
 ?>
+
+<!DOCTYPE html>
 
 <html lang=es>
 	<head>

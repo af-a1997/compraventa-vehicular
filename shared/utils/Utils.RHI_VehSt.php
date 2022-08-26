@@ -8,6 +8,8 @@
 	 * 
 	 * Please note that the column with the status bit is a TINYINT, so there's a hard limit on how many statuses can you create, but 6 will certainly be enough.
 	 * ALSO, THIS IS IMPORTANT, but ensure the "RHI" entries deletion will work as intended after adding more statuses (or removing some) then adjust code accordingly. For now code was made assuming it's left as-is.
+	 * 
+	 * Statuses from array: temprary suspension, in use, under repairs, lost, available, archived entry (non-manageable).
 	 */
 	$e = array("Susp. temp.", "En uso", "En reparaciones", "Extraviado", "Disponible", "Ent. arch.");
 	$em = sizeof($e); // Not used here but is used in some pages where this snippet is included, to make it easy to add/remove statuses just from this file.

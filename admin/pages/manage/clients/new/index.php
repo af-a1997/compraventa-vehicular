@@ -67,7 +67,7 @@
 			
 			<p><?php echo g_snp_reqf; ?> = Campos obligatorios.</p>
 			
-			<form id=id_form_user_reg method=POST action="./SubmitAct.New.Cli.php">
+			<form id=id_form_user_reg method=POST action="../do/act/SubmitAct.New.Cli.php">
 				<div class="input-group input-group-outline">
 					<label class=form-label>Nombre(s) <?php echo g_snp_reqf; ?></label>
 					<input class=form-control name=fln_user_name />
@@ -86,7 +86,7 @@
 				</div>
 				<div class="input-group input-group-outline">
 					<label class=form-label>C. I. <?php echo g_snp_reqf; ?></label>
-					<input class=form-control name=fln_user_uyid id=validate_format_pid />
+					<input class=form-control name=fln_user_uyid id=validate_format_uypid />
 				</div>
 				<div class="input-group input-group-outline">
 					<label class=form-label>Correo electrónico</label>
@@ -121,7 +121,7 @@
 			$('#sidebar-choice-2').addClass("active bg-gradient-primary");
 			
 			// Masks
-			$("#validate_format_pid").mask("0.000.000-0",{ placeholder: "1.234.567-8" });
+			$("#validate_format_uypid").mask("0.000.000-0",{ placeholder: "1.234.567-8" });
 			$("#validate_format_phone_cel").mask("000 000 000",{ placeholder: "09X XXX XXX" });
 			$("#validate_format_phone_home").mask("0000 0000",{ placeholder: "XXXX XXXX" });
 			
