@@ -56,7 +56,7 @@
 			return $ret_compare_result;
 		}
 
-		public function PUBCLI_ShowTherInfo(){
+		public function PUBCLI_ShowTheirInfo(){
 			$sql_query_list_1_cli ="SELECT * FROM $this->tbl WHERE nro_id_u=$this->nro_id_u";
 			
 			$retorno = mysqli_query($this->conn, $sql_query_list_1_cli);
@@ -95,8 +95,9 @@
 			return $r;
 		}
 		
-		public function PUBCLI_Login_Check(){
-			$sql_query_find_cli ="SELECT * FROM $this->tbl WHERE nombre_usuario='$this->nombre_usuario' AND clave='$this->clave' AND cargo_en_sitio=2;";
+		public function PUBCLI_LoginDataCheck(){
+			$sql_query_find_cli = "SELECT nro_id_u, nombre_usuario, clave, cargo_en_sitio FROM $this->tbl WHERE nombre_usuario='$this->nombre_usuario' AND clave='$this->clave' AND cargo_en_sitio=2;";
+			
 			$r_cli_find = mysqli_query($this->conn, $sql_query_find_cli);
 			
 			$res = mysqli_fetch_assoc($r_cli_find);
@@ -105,11 +106,12 @@
 				$o = new Client();
 				
 				$o->nro_id_u = $res["nro_id_u"];
+				$o->nombre_usuario = $res["nombre_usuario"];
+
 				$r_cli_tk = $o;
 			}
-			else{
-				$r_cli_tk = null;
-			}
+			else $r_cli_tk = null;
+
 			return $r_cli_tk;
 		}
 	}

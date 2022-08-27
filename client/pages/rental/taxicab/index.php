@@ -1,5 +1,7 @@
 <?php
+    include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.CliSessionChecker.php";
     include $_SERVER["DOCUMENT_ROOT"]."/client/classes/Utils.CliClassLoader.class.php";
+    include $_SERVER["DOCUMENT_ROOT"]."/shared/utils/Utils.Common_Strings.php";
 
     $o_ctxc = new C_Taxicabs();
 
@@ -12,7 +14,7 @@
     <head>
         <?php include  $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.Head_Data_Setup.php"; ?>
 
-        <title>Remises - Compraventa de vehículos</title>
+        <title>Remises - <?php echo g_sn; ?></title>
     </head>
 
     <body>

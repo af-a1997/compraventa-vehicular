@@ -12,7 +12,7 @@
 	$o_users->clave = mysqli_real_escape_string($credentials,strip_tags($_POST['fln_adm_pwd']));
 	// TODO: enclose password in hash() function to be decided later for an extra layer of security in case of DDBB leak, but passwords need to be turned into hashes first, and hash type needs to be decided first (used across ALL the system).
 	
-	$r_login_check = $o_users->ADM_Login_Check();
+	$r_login_check = $o_users->ADM_LoginDataCheck();
 	
 	if($r_login_check){
 		$_SESSION["admin_id"] = $r_login_check->nro_id_u;
@@ -22,6 +22,6 @@
 		header("Location:../../../admin/");
 	}
 	else{
-		header("Location:../?msg=invalid_credentials");
+		header("Location:../?msg=err_invalid_credentials");
 	}
 ?>

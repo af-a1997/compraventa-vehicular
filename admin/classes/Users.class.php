@@ -191,9 +191,10 @@
 		}
 		
 		// Function required to find an admin, used to check the credentials the user is inputting are valid.
-		public function ADM_Login_Check(){
-			$sql_find_admin ="SELECT * FROM $this->tbl WHERE nombre_usuario='$this->nombre_usuario' AND clave='$this->clave' AND cargo_en_sitio=1;";
-			$r_adm_find = mysqli_query($this->conn, $sql_find_admin);
+		public function ADM_LoginDataCheck(){
+			$sql_query_find_admin = "SELECT nro_id_u, nombre_usuario, clave, cargo_en_sitio FROM $this->tbl WHERE nombre_usuario='$this->nombre_usuario' AND clave='$this->clave' AND cargo_en_sitio=1;";
+
+			$r_adm_find = mysqli_query($this->conn, $sql_query_find_admin);
 			
 			$res = mysqli_fetch_assoc($r_adm_find);
 			
@@ -202,11 +203,12 @@
 				$o = new Users();
 				
 				$o->nro_id_u = $res["nro_id_u"];
+				$o->nombre_usuario = $res["nombre_usuario"];
+
 				$r_adm_tk = $o;
 			}
-			else{
-				$r_adm_tk = null;
-			}
+			else $r_adm_tk = null;
+
 			return $r_adm_tk;
 		}
 	}

@@ -1,16 +1,10 @@
 <?php
-    if(!isset($_GET["model_name"])){
+    if(!isset($_GET["model_name"]))
         header($_SERVER["DOCUMENT_ROOT"]);
-
-        echo "
-            <script>
-                window.onload = function(){
-                    alert(\"Acción inesperada, el usuario es regresado al inicio.\");
-                }
-            </script>
-        ";
-    }
+    
+    include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.CliSessionChecker.php";
     include $_SERVER["DOCUMENT_ROOT"]."/client/classes/Utils.CliClassLoader.class.php";
+    include $_SERVER["DOCUMENT_ROOT"]."/shared/utils/Utils.Common_Strings.php";
 
     $o_cveh = new C_Vehicles();
 
@@ -23,7 +17,7 @@
     <head>
         <?php include  $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.Head_Data_Setup.php"; ?>
 
-        <title>Vehículos alquilables - Compraventa de vehículos</title>
+        <title>Vehículos alquilables - <?php echo g_sn; ?></title>
     </head>
 
     <body>

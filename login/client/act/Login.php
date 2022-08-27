@@ -11,7 +11,7 @@
 	$o_client->clave = mysqli_real_escape_string($credentials,strip_tags($_POST['fln_cli_pwd']));
 	// TODO: enclose password in hash() function to be decided later for an extra layer of security in case of DDBB leak, but passwords need to be turned into hashes first, and hash type needs to be decided first (used across ALL the system).
 	
-	$r_login_check = $o_client->PUBCLI_Login_Check();
+	$r_login_check = $o_client->PUBCLI_LoginDataCheck();
 	
 	if($r_login_check){
 		$_SESSION["client_id"] = $r_login_check->nro_id_u;
@@ -20,7 +20,5 @@
 		
 		header("Location:../../../");
 	}
-	else{
-		header("Location:../?msg=invalid_credentials");
-	}
+	else header("Location:../?msg=err_invalid_credentials");
 ?>

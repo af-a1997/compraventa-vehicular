@@ -1,8 +1,10 @@
 <?php
-    if(!isset($_GET["id_txc"])){
+    if(!isset($_GET["id_txc"]))
         header($_SERVER["DOCUMENT_ROOT"]);
-    }
+    
+    include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.CliSessionChecker.php";
     include $_SERVER["DOCUMENT_ROOT"]."/client/classes/Utils.CliClassLoader.class.php";
+    include $_SERVER["DOCUMENT_ROOT"]."/shared/utils/Utils.Common_Strings.php";
 
     $o_ctxc = new C_Taxicabs();
     $o_ctxc->id_remise = $_GET["id_txc"];
@@ -28,7 +30,7 @@
     <head>
         <?php include  $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.Head_Data_Setup.php"; ?>
 
-        <title>Detalles del remise <?php echo "$o_ctxc_info->nombres $o_ctxc_info->apellidos"; ?> - Compraventa de vehículos</title>
+        <title>Detalles del remise <?php echo "$o_ctxc_info->nombres $o_ctxc_info->apellidos - ".g_sn; ?></title>
     </head>
 
     <body>

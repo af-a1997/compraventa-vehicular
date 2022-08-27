@@ -13,13 +13,13 @@
 	<head>
 		<?php include "../../admin/shared/html_head_setup.php"; ?>
 		
-		<title><?php echo a_dsb; ?> - <?php echo g_login; ?></title>
+		<title><?php echo a_dsb." - ".g_login; ?></title>
 	</head>
 
 	<body class="g-sidenav-show bg-gray-600 dark-version">
 		<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
 			<?php
-				if(isset($_GET['msg']) && ($_GET['msg']) == "invalid_credentials"){
+				if(isset($_GET['msg']) && ($_GET['msg']) == "err_invalid_credentials"){
 					echo "
 						<div class=\"alert alert-danger\" role=alert>Credenciales inválidas, asegúrate que has ingresado tu nombre de usuario y clave correctamente.</div>
 					";
@@ -51,12 +51,8 @@
 			$().ready(function(){
 				$("#id_form_adm_login").validate({
 					rules:{
-						fln_adm_un: {
-							required: true
-						},
-						fln_adm_pwd: {
-							required: true
-						}
+						fln_adm_un: "required",
+						fln_adm_pwd: "required"
 					},
 					messages:{
 						fln_adm_un: "Ingresa tu nombre de usuario.",

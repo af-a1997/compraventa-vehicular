@@ -1,8 +1,10 @@
 <?php
-    if(!isset($_GET["id_art"])){
+    if(!isset($_GET["id_art"]))
         header($_SERVER["DOCUMENT_ROOT"]);
-    }
+    
+    include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.CliSessionChecker.php";
     include $_SERVER["DOCUMENT_ROOT"]."/client/classes/Utils.CliClassLoader.class.php";
+    include $_SERVER["DOCUMENT_ROOT"]."/shared/utils/Utils.Common_Strings.php";
 
     $o_csl = new C_Sellable();
     $o_csl->id_art_venta = $_GET["id_art"];
@@ -28,7 +30,7 @@
     <head>
         <?php include  $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.Head_Data_Setup.php"; ?>
 
-        <title>Detalles del <?php echo "$o_csl_info->bna $o_csl_info->vmo ($year_fab)"; ?> - Compraventa de vehículos</title>
+        <title>Detalles del <?php echo "$o_csl_info->bna $o_csl_info->vmo ($year_fab) - ".g_sn; ?></title>
     </head>
 
     <body>

@@ -1,8 +1,10 @@
 <?php
-    if(!isset($_GET["id_art"])){
+    if(!isset($_GET["id_art"]))
         header($_SERVER["DOCUMENT_ROOT"]);
-    }
+    
+    include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.CliSessionChecker.php";
     include $_SERVER["DOCUMENT_ROOT"]."/client/classes/Utils.CliClassLoader.class.php";
+    include $_SERVER["DOCUMENT_ROOT"]."/shared/utils/Utils.Common_Strings.php";
 
     $o_crnt = new C_Rentable();
 
@@ -15,7 +17,7 @@
     <head>
         <?php include  $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.Head_Data_Setup.php"; ?>
 
-        <title>Vehículos alquilables - Compraventa de vehículos</title>
+        <title>Vehículos alquilables - <?php echo g_sn; ?></title>
     </head>
 
     <body>

@@ -15,7 +15,11 @@
             ";
 
         else
-            $account_top_links = "<a href=\"/login/client/act/Logout.php\" class=\"nav-item nav-link\">Cerrar sesión</a>";
+            $account_top_links = "
+                <a href=\"/client/profile/\" class=\"nav-item nav-link\"><i class=\"fas fa-user\"></i> ".$_SESSION["client_un"]."</a>
+                <a href=\"/client/profile/edit/\" class=\"nav-item nav-link\"><i class=\"fa-solid fa-pen\"></i></a>
+                <a href=\"/login/client/act/Logout.php\" class=\"nav-item nav-link\"><i class=\"fa-solid fa-arrow-right-from-bracket\"></i></a>
+            ";
 
         echo "
             <div class=\"container-fluid py-5\">

@@ -1,8 +1,10 @@
 <?php
-    if(!isset($_GET["id_cat"])){
+    if(!isset($_GET["id_cat"]))
         header($_SERVER["DOCUMENT_ROOT"]);
-    }
+    
+    include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.CliSessionChecker.php";
     include $_SERVER["DOCUMENT_ROOT"]."/client/classes/Utils.CliClassLoader.class.php";
+    include $_SERVER["DOCUMENT_ROOT"]."/shared/utils/Utils.Common_Strings.php";
 
     $o_cvcat = new C_VCAT();
     $o_cveh = new C_Vehicles();
@@ -17,7 +19,7 @@
     <head>
         <?php include  $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.Head_Data_Setup.php"; ?>
 
-        <title>Lista de <?php echo $_GET["id_cat"]; ?> - Compraventa de vehículos</title>
+        <title>Lista de <?php echo $_GET["id_cat"]." - ".g_sn; ?></title>
     </head>
 
     <body>

@@ -1,17 +1,20 @@
 <?php
+    include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.CliSessionChecker.php";
     include $_SERVER["DOCUMENT_ROOT"]."/client/classes/Utils.CliClassLoader.class.php";
+    include $_SERVER["DOCUMENT_ROOT"]."/shared/utils/Utils.Common_Strings.php";
 
     $o_cvcat = new C_VCAT();
     $o_cveh = new C_Vehicles();
     $o_cvcat_list = $o_cvcat->CVCAT_ShowAllNoD();
 ?>
+
 <!DOCTYPE html>
 
 <html lang=es>
     <head>
         <?php include "./client/shared/Shared.Head_Data_Setup.php"; ?>
 
-        <title>Compraventa de vehículos</title>
+        <title><?php echo g_sn; ?></title>
     </head>
 
     <body>

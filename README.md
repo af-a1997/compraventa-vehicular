@@ -77,11 +77,16 @@ El modelo se encuentra en `/admin/ddbb/models/` tanto en imagen como archivo de 
    - [X] :arrow_right: Editar: cabe mencionar que aquí se alterna el estado de contrato, y en base a eso se establece si la instancia de alquiler puede borrarse o no.
    - [X] Eliminar
    - [X] Verificar estado de contrato
- - [ ] Gestión de remises
+ - [X] Gestión de remises
    - [X] Listar
-   - [ ] Agregar
-   - [ ] Editar
-   - [ ] Eliminar
+   - [X] Agregar
+   - [X] Editar
+   - [X] Eliminar
+ - [X] Gestión de contratos con remises
+   - [X] Listar
+   - [X] Detalles
+   - [X] Detener activos
+   - [X] Eliminar finalizados
  - [X] Gestión de divisas
    - [X] Listar
    - [X] Detalles
@@ -151,6 +156,8 @@ El modelo se encuentra en `/admin/ddbb/models/` tanto en imagen como archivo de 
  - [ ] Suspensión/baneo de usuarios: es un impedimiento de acceso temporal o permanente, normalmente dado por conductas inapropiadas y/o en contra de los términos de uso del sistema.
  - [ ] Estandarizar nombrado de llaves de objetos utilizadas en consultas con cláusulas `JOIN`, esto significa que hay diferentes nombres para la misma información en diferentes clases; por ejemplo "bno" y "bna" para obtener la marca del vehículo en dos clases distintas. Esto va a reducir posibles confusiones y permitir reutilizar algo de código.
  - [ ] Añadir *tooltips* o "bocadillos", son cajas de texto que aparecen al mantener el ratón sobre un elemento para describir su funcionalidad (normalmente un botón/ícono).
+ - [ ] Agregar distinción de nombre de usuario y/o clave incorrectos para ayudar al usuario/admin a identificar qué dato ingresó mal (al iniciar sesión).
+ - [ ] Manejo de *cookies* para mantener sesión activa en el dispositivo **(¡pero debo aprender primero!)**.
 
 ## Configuración
 
