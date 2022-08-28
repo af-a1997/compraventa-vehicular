@@ -5,6 +5,7 @@
 
     $o_cvcat = new C_VCAT();
     $o_cveh = new C_Vehicles();
+    
     $o_cvcat_list = $o_cvcat->CVCAT_ShowAllNoD();
 ?>
 
@@ -58,25 +59,28 @@
 
         <!-- Categories start -->
         <div class="container-fluid pt-5">
-            <h2>Explorá las categorías disponibles</h2>
+            <h2>Explorá nuestro directorio</h2>
+            <p>Este directorio ofrece información sobre cada vehículo en un directorio, accede a una de las categorías a continuación para listar los vehículos de cada categoría, o accede a una de las opciones arriba para buscar artículos en venta, vehículos para alquilar y/o remises.</p>
 
             <div class="row px-xl-5 pb-3">
                 <?php
-                    foreach($o_cvcat_list as $ovl2){
-                        $count_entries = $o_cveh->CVEH_GetCountByVCAT($ovl2->id_tipo);
+                    if($o_cvcat_list != null)
+                        foreach($o_cvcat_list as $ovl2){
+                            $count_entries = $o_cveh->CVEH_GetCountByVCAT($ovl2->id_tipo);
 
-                        echo "
-                            <div class=\"col-lg-4 col-md-6 pb-1\">
-                                <div class=\"cat-item d-flex flex-column border mb-4\" style=\"padding: 30px;\">
-                                    <p class=\"text-right\">$count_entries->total_veh_cat</p>
-                                    <a href=\"./pages/browse/category.php?id_cat=$ovl2->id_tipo\" class=\"cat-img position-relative overflow-hidden mb-3\">
-                                        <i class=\"fas $ovl2->icono_fa\" style=\"font-size: 64px;\"></i>
-                                    </a>
-                                    <h5 class=\"font-weight-semi-bold m-0\">$ovl2->nombre</h5>
+                            echo "
+                                <div class=\"col-lg-4 col-md-6 pb-1\">
+                                    <div class=\"cat-item d-flex flex-column border mb-4\" style=\"padding: 30px;\">
+                                        <p class=\"text-right\">$count_entries->total_veh_cat</p>
+                                        <a href=\"client/pages/browse/Category.php?id_cat=$ovl2->id_tipo\" class=\"cat-img position-relative overflow-hidden mb-3\">
+                                            <i class=\"fas $ovl2->icono_fa\" style=\"font-size: 64px;\"></i>
+                                        </a>
+                                        <h5 class=\"font-weight-semi-bold m-0\">$ovl2->nombre</h5>
+                                    </div>
                                 </div>
-                            </div>
-                        ";
-                    }
+                            ";
+                        }
+                    else echo "<p>No hay categorías registradas</p>";
                 ?>
             </div>
         </div>

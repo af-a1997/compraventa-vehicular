@@ -26,22 +26,30 @@
 				}
 			?>
 			
-			<p><?php echo g_login; ?> para acceder al panel de administración.</p>
-			
-			<form id=id_form_adm_login method=POST action="./act/Login.php">
-				<div class="input-group input-group-outline">
-					<label class=form-label>Usuario</label>
-					<input class=form-control name=fln_adm_un />
+			<div class="container-fluid py-4">
+				<div class="row">
+					<div class="col-6">
+						<p><?php echo g_login; ?> para acceder al panel de administración.</p>
+
+						<form id=id_form_adm_login method=POST action="./act/Login.php">
+							<div class="input-group input-group-outline">
+								<label class=form-label for=fln_adm_un>Usuario</label>
+								<input class=form-control name=fln_adm_un />
+							</div>
+							<div class="input-group input-group-outline">
+								<label class=form-label for=fln_adm_pwd>Clave</label>
+								<input type=password class=form-control name=fln_adm_pwd />
+							</div>
+							
+							<br />
+							
+							<button class="btn btn-success" type=submit><span class="material-icons">login</span> <?php echo g_login; ?></button>
+							<button class="btn btn-danger" type=reset><span class="material-icons">backspace</span> Reiniciar</button>
+							<a class="btn btn-warning" href="/"><span class="material-icons">close</span> Cancelar</a>
+						</form>
+					</div>
 				</div>
-				<div class="input-group input-group-outline">
-					<label class=form-label>Clave</label>
-					<input type=password class=form-control name=fln_adm_pwd />
-				</div>
-				
-				<br />
-				
-				<button class="btn btn-success" type=submit><?php echo g_login; ?></button> o <a href="/">volver al inicio</a>
-			</form>
+			</div>
 		</main>
 	
 		<?php include "../../admin/shared/Imports.Scripts.php"; ?>

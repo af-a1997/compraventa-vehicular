@@ -22,6 +22,7 @@
                     <h5 class="font-weight-bold text-dark mb-4">Enlaces rápidos</h5>
                     <div class="d-flex flex-column justify-content-start">
                         <a class="text-dark mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Inicio</a>
+                        <a class="text-dark mb-2" href="/login/admin/"><i class="fa fa-angle-right mr-2"></i>Administración</a>
                     </div>
                 </div>
             </div>
@@ -30,15 +31,17 @@
     <div class="row border-top border-light mx-xl-5 py-4">
         <div class="col-md-6 px-xl-0">
             <p class="mb-md-0 text-center text-md-left text-dark">
-                &copy; <a class="text-dark font-weight-semi-bold" href="#">Compraventa</a>.
+                &copy; <a class="text-dark font-weight-semi-bold" href="#"><?php echo g_sn; ?></a>.
                 <br />
                 
                 Plantilla Bootstrap diseñada por <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a><br />
                 Distribuída por <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
             </p>
         </div>
+        <!--
         <div class="col-md-6 px-xl-0 text-center text-md-right">
             <img class="img-fluid" src="img/payments.png" alt="">
         </div>
+        -->
     </div>
 </div>

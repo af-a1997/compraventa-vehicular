@@ -30,7 +30,7 @@
         }
 
 		public function CSL_ListAllPub(){
-			$sql_query_filter_veh = "SELECT $this->tbl.*, divisas.abr AS cab, vehiculos.modelo AS vmo, vehiculos.anho_fab AS vyf, vehiculos.categorizacion AS vca, marcas.nombre AS bna FROM $this->tbl INNER JOIN divisas ON $this->tbl.divisa_precio = divisas.id_moneda INNER JOIN registros ON $this->tbl.id_reg_veh = registros.id_reg INNER JOIN vehiculos ON registros.vehiculo_asociado = vehiculos.idno INNER JOIN marcas ON vehiculos.marca = marcas.idno;";
+			$sql_query_filter_veh = "SELECT $this->tbl.*, divisas.simbolizacion AS csy, divisas.pos_sim AS cpo, vehiculos.modelo AS vmo, vehiculos.anho_fab AS vyf, vehiculos.categorizacion AS vca, marcas.nombre AS bna FROM $this->tbl INNER JOIN divisas ON $this->tbl.divisa_precio = divisas.id_moneda INNER JOIN registros ON $this->tbl.id_reg_veh = registros.id_reg INNER JOIN vehiculos ON registros.vehiculo_asociado = vehiculos.idno INNER JOIN marcas ON vehiculos.marca = marcas.idno;";
 			$rt_db = mysqli_query($this->conn, $sql_query_filter_veh);
 
 			$arr_list_pubveh = null;
@@ -48,7 +48,8 @@
                 $o->vendedor = $res["vendedor"];
 
                 // Joins
-                $o->cab = $res["cab"];  // <--- Currency short name.
+                $o->csy = $res["csy"];  // <--- Currency's symbol.
+                $o->cpo = $res["cpo"];  // <--- Currency's symbol position.
                 $o->vmo = $res["vmo"];  // <--- Vehicle model.
                 $o->vyf = $res["vyf"];  // <--- Vehicle year of fabrication.
                 $o->vca = $res["vca"];  // <--- Vehicle category.

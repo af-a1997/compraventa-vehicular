@@ -33,8 +33,8 @@
 			return $this->$key = $value;
 		}
 
-		public function CVEH_ShowAllForList(){
-			$sql_query_list_sqr_veh = "SELECT $this->tbl.*, marcas.nombre AS bna, tipo_veh.nombre AS vty FROM $this->tbl INNER JOIN marcas ON $this->tbl.marca = marcas.idno INNER JOIN tipo_veh ON $this->tbl.categorizacion = tipo_veh.id_tipo;";
+		public function CVEH_ShowAllOfCat(){
+			$sql_query_list_sqr_veh = "SELECT $this->tbl.*, marcas.nombre AS bna FROM $this->tbl INNER JOIN marcas ON $this->tbl.marca = marcas.idno WHERE categorizacion = $this->categorizacion;";
 			$rt_db = mysqli_query($this->conn, $sql_query_list_sqr_veh);
 			
 			$arr_list_veh = null;
@@ -57,7 +57,6 @@
 				
 				// Joins
 				$o->bna = $res["bna"];
-				$o->bna = $res["vty"];
 				
 				$arr_list_veh[] = $o;
 			}

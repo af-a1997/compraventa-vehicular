@@ -6,3 +6,11 @@
 
 <!-- Template JavaScript -->
 <script src="/client/shared/template_files/js/main.js"></script>
+
+<!-- Extracted from [./template_files/mail/contact.js] to make tabs work again, since the rest of the contents in it won't be used (not for now at least). -->
+<script>
+    $("a[data-toggle=\"tab\"]").click(function (e) {
+        e.preventDefault();
+        $(this).tab("show");
+    });
+</script>

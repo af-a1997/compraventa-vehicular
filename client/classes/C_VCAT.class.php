@@ -46,7 +46,7 @@
         }
 
         public function CVCAT_ShowOne(){
-            $sql_query_list_all_veh = "SELECT * FROM $this->tbl;";
+            $sql_query_list_all_veh = "SELECT * FROM $this->tbl WHERE id_tipo = $this->id_tipo;";
             $rt_db = mysqli_query($this->conn, $sql_query_list_all_veh);
             
             $arr_list_vcat = null;
@@ -59,7 +59,7 @@
                 $o->descripcion = $res["descripcion"];
                 $o->icono_fa = $res["icono_fa"];
                 
-                $arr_list_vcat[] = $o;
+                $arr_list_vcat = $o;
             }
             return $arr_list_vcat;
         }

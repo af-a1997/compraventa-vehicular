@@ -34,7 +34,12 @@
     </head>
 
     <body>
-        <?php include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.Header_Contents.php"; ?>
+        <?php
+            include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.Header_Contents.php";
+            include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.Top_Links.php";
+
+            outTopHeader(1);
+        ?>
 
         <div class="container-fluid py-5">
             <div class="row px-xl-5">

@@ -111,14 +111,14 @@ El modelo se encuentra en `/admin/ddbb/models/` tanto en imagen como archivo de 
 > :arrow_right: **Nota:** transacciones serán simulaciones básicas.
 
  - [X] Sesiones
- - [ ] Perfiles
-   - [ ] Ver perfiles de otros usuarios
-   - [ ] Editar perfil personal
+ - [X] Perfiles
+   - [X] Ver perfiles de otros usuarios
+   - [X] Editar perfil personal
  - [X] Base de datos de vehículos
    - [X] Búsqueda
    - [X] Detalles
    - [ ] Disponibilidad de venta/alquiler o contrato con remise.
- - [ ] Artículos en venta
+ - [X] Artículos en venta
    - [X] Listar
    - [X] Detalles
    - [ ] Comprar
