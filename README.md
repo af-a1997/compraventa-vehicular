@@ -110,7 +110,7 @@ El modelo se encuentra en `/admin/ddbb/models/` tanto en imagen como archivo de 
 
 > :arrow_right: **Nota:** transacciones serán simulaciones básicas.
 
- - [ ] Sesiones
+ - [X] Sesiones
  - [ ] Perfiles
    - [ ] Ver perfiles de otros usuarios
    - [ ] Editar perfil personal
@@ -176,5 +176,3 @@ El modelo se encuentra en `/admin/ddbb/models/` tanto en imagen como archivo de 
     * Administrador:
         * **Usuario:** `admin`
         * **Clave:** `12345678`
-
-> :warning: **Nota:** sesiones de cliente no funcionan.

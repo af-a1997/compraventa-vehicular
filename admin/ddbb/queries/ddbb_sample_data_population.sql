@@ -140,8 +140,9 @@ INSERT INTO puesto(nombre,descripcion) VALUES
 ;
 
 INSERT INTO usuarios(nombre,apellidos,nombre_usuario,clave,cedula_identidad,email,residencia_actual,tel_cel,tel_fijo,momento_registro,cargo_en_sitio) VALUES
-	("Administrador","Principal","admin","12345678","0.123.456-7","hola@example.com","Placeholder","000000000","00000000",NOW(),1),
-	("Un tal","Fulano","fulano","12345678","1.234.567-8","hola2@example.com","Placeholder","000000000","00000000",NOW(),2)
+	("Administrador","Principal","admin","12345678","0.123.456-7","hola@example.com","Placeholder","099000000","00000000",NOW(),1),
+	("Un tal","Fulano","fulano","12345678","1.234.567-8","hola2@example.com","Placeholder","098000001","00000001",NOW(),2),
+	("Otro","Que prueba","hhh","12345678","1.000.000-0","hola3@example.com","Placeholder","097000002","00000002",NOW(),2)
 ;
 
 INSERT INTO seleccion_alquiler(id_reg_veh, id_divisa, valor_diario_alq, disponibilidad) VALUES

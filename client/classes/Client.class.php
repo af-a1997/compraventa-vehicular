@@ -45,12 +45,8 @@
 				$un_entries[] = $un_entry;
 			
 			foreach($un_entries as $c){
-				if($c[0] == $compare_param){
-					return $ret_compare_result = true;
-				}
-				else{
-					$ret_compare_result = false;
-				}
+				if($c[0] == $compare_param) return $ret_compare_result = true;
+				else $ret_compare_result = false;
 			}
 			
 			return $ret_compare_result;
@@ -82,15 +78,46 @@
 				
 				$cli_info_r = $o;
 			}
-			else{
-				$cli_info_r = null;
-			}
+			else $cli_info_r = null;
+			
 			return $cli_info_r;
 		}
 		
 		public function PUBCLI_EditTheirInfo(){
-			$sql_query_upd_1u = "UPDATE $this->tbl SET nombre='$this->nombre', apellidos='$this->apellidos', nombre_usuario='$this->nombre_usuario', clave='$this->clave', cedula_identidad=$this->cedula_identidad, email='$this->email', residencia_actual='$this->residencia_actual', tel_cel='$this->tel_cel', tel_fijo='$this->tel_fijo', cargo_en_sitio=$this->cargo_en_sitio WHERE nro_id_u=$this->nro_id_u";
+			$sql_query_upd_1u = "UPDATE $this->tbl SET nombre='$this->nombre', apellidos='$this->apellidos', cedula_identidad='$this->cedula_identidad', email='$this->email', residencia_actual='$this->residencia_actual', tel_cel='$this->tel_cel', tel_fijo='$this->tel_fijo' WHERE nro_id_u=$this->nro_id_u;";
+			
 			$r = mysqli_query($this->conn, $sql_query_upd_1u);
+			
+			return $r;
+		}
+		
+		// I feel it's best to edit access credentials separately, since username availability needs to be checked, and also, change session data to reflect the new username. Old password also needs to be verified.
+		public function PUBCLI_AlterAccessCredentials($changing_username = false){
+			if($changing_username == true)
+				$username_availability = PUBCLI_VerifyUsernameAvail($this->nombre_usuario);
+			
+			$r = null;
+			$got_old_pwd = false;
+
+			$old_pwd = mysqli_query($this->conn, "SELECT clave FROM $this->tbl WHERE nro_id_u = $this->nro_id_u;");
+
+			if($old_pwd == $this->clave)
+				$got_old_pwd = true;
+
+			if($username_availability == true && $got_old_pwd == true){
+				$sql_query_upd_1u_ac = "UPDATE $this->tbl SET nombre_usuario='$this->nombre_usuario', clave='$this->clave' WHERE nro_id_u=$this->nro_id_u";
+				$r = mysqli_query($this->conn, $sql_query_upd_ac);
+
+				$_SESSION["client_id"] = $this->nombre_usuario;
+			}
+			
+			if($changing_username == false && $got_old_pwd == true){
+				$sql_query_upd_1u_ac = "UPDATE $this->tbl SET clave='$this->clave' WHERE nro_id_u=$this->nro_id_u";
+				$r = mysqli_query($this->conn, $sql_query_upd_ac);
+			}
+
+			if($got_old_pwd == false)
+				$r = "err_wrong_old_pwd";
 			
 			return $r;
 		}

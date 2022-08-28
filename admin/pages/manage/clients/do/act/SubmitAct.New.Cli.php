@@ -17,8 +17,8 @@
 	$o_cli->cedula_identidad = $_POST["fln_user_uyid"];
 	$o_cli->email = $_POST["fln_user_emailaddr"];
 	$o_cli->residencia_actual = $_POST["fln_user_houseloc"];
-	$o_cli->tel_cel = $_POST["fln_user_phone_cel"];
-	$o_cli->tel_fijo = $_POST["fln_user_phone_home"];
+	$o_cli->tel_cel = str_replace(' ', '', $_POST["fln_user_phone_cel"]);
+	$o_cli->tel_fijo = str_replace(' ', '', $_POST["fln_user_phone_home"]);
 	$o_cli->momento_registro = $cdt;
 	$o_cli->cargo_en_sitio = 2;
 	

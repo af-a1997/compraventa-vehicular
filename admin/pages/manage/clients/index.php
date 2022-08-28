@@ -96,24 +96,24 @@
 												
 													<div><img src=\"../../../assets/img/team-2.jpg\" class=\"avatar avatar-sm me-3 border-radius-lg\" alt=\"user1\"></div>
 												*/
-												foreach($cli_list as $o){
-													if($o->nro_id_u == 1){
+												foreach($cli_list as $cli_e){
+													if($cli_e->nro_id_u == 1){
 														echo "
 															<tr>
 																<td>
 																	<div class=\"d-flex px-2 py-1\">
 																		<div class=\"d-flex flex-column justify-content-center\">
-																			<h6 class=\"mb-0 text-sm\">$o->nombre</h6>
-																			<p class=\"text-xs text-white opacity-8 mb-0\">$o->apellidos</p>
+																			<h6 class=\"mb-0 text-sm\">$cli_e->nombre</h6>
+																			<p class=\"text-xs text-white opacity-8 mb-0\">$cli_e->apellidos</p>
 																		</div>
 																	</div>
 																</td>
-																<td class=\"align-middle text-center text-sm\">$o->nombre_usuario</td>
+																<td class=\"align-middle text-center text-sm\">$cli_e->nombre_usuario</td>
 																<td>
-																	<p class=\"text-xs font-weight-bold mb-0\">$o->tel_cel</p>
-																	<p class=\"text-xs text-white opacity-8 mb-0\">$o->email</p>
+																	<p class=\"text-xs font-weight-bold mb-0\">$cli_e->tel_cel</p>
+																	<p class=\"text-xs text-white opacity-8 mb-0\">$cli_e->email</p>
 																</td>
-																<td class=\"align-middle text-center text-sm\">$o->cargo_en_sitio</td>
+																<td class=\"align-middle text-center text-sm\">$cli_e->cargo_en_sitio</td>
 																<td class=\"align-middle text-center font-weight-bold text-xs\">NO DISPONIBLE</td>
 															</tr>
 														";
@@ -125,21 +125,21 @@
 																<td>
 																	<div class=\"d-flex px-2 py-1\">
 																		<div class=\"d-flex flex-column justify-content-center\">
-																			<h6 class=\"mb-0 text-sm\">$o->nombre</h6>
-																			<p class=\"text-xs text-white opacity-8 mb-0\">$o->apellidos</p>
+																			<h6 class=\"mb-0 text-sm\">$cli_e->nombre</h6>
+																			<p class=\"text-xs text-white opacity-8 mb-0\">$cli_e->apellidos</p>
 																		</div>
 																	</div>
 																</td>
-																<td class=\"align-middle text-center text-sm\">$o->nombre_usuario</td>
+																<td class=\"align-middle text-center text-sm\">$cli_e->nombre_usuario</td>
 																<td>
-																	<p class=\"text-xs font-weight-bold mb-0\">$o->tel_cel</p>
-																	<p class=\"text-xs text-white opacity-8 mb-0\">$o->email</p>
+																	<p class=\"text-xs font-weight-bold mb-0\">$cli_e->tel_cel</p>
+																	<p class=\"text-xs text-white opacity-8 mb-0\">$cli_e->email</p>
 																</td>
-																<td class=\"align-middle text-center text-sm\">$o->cargo_en_sitio</td>
+																<td class=\"align-middle text-center text-sm\">$cli_e->cargo_en_sitio</td>
 																<td class=\"align-middle text-center\">
-																	<a href=\"./do/Details.php?id_cli=$o->nro_id_u\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
-																	<a href=\"./do/Edit.php?id_cli=$o->nro_id_u\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
-																	<a href=\"./do/Delete.php?id_cli=$o->nro_id_u\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
+																	<a href=\"./do/Details.php?id_cli=$cli_e->nro_id_u\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Detalles\"><i class=\"material-icons opacity-10\">info</i></a>
+																	<a href=\"./do/Edit.php?id_cli=$cli_e->nro_id_u\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Editar\"><i class=\"material-icons opacity-10\">edit</i></a>
+																	<a href=\"./do/Delete.php?id_cli=$cli_e->nro_id_u\" class=\"text-white opacity-8 font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"><i class=\"material-icons opacity-10\">delete</i></a>
 																</td>
 															</tr>
 														";

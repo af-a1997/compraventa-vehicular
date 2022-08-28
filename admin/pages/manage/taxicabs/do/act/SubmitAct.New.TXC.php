@@ -16,8 +16,8 @@
 	$o_txc->email = $_POST["fln_txc_emailaddr"];
 	$o_txc->clave = $_POST["fln_txc_pwd"];
 	$o_txc->ubicacion_residencia = $_POST["fln_txc_houseloc"];
-	$o_txc->tel_cel = $_POST["fln_txc_phone_cel"];
-	$o_txc->tel_fijo = $_POST["fln_txc_phone_home"];
+	$o_txc->tel_cel = str_replace(' ', '', $_POST["fln_txc_phone_cel"]);
+	$o_txc->tel_fijo = str_replace(' ', '', $_POST["fln_txc_phone_home"]);
 	$o_txc->costo_d = $_POST["fln_txc_cost_daily"];
 	$o_txc->costo_espera_h = $_POST["fln_txc_cost_hwait"];
 	$o_txc->divisa_precio = $_POST["fln_txc_cost_curr"];
