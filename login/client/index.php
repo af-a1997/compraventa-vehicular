@@ -3,7 +3,7 @@
 		header("Location:../../");
 	}
 	
-	include "../../shared/utils/Utils.Common_Strings.php";
+	include $_SERVER["DOCUMENT_ROOT"]."/shared/utils/Utils.Common_Strings.php";
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
 	<head>
         <?php include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.Head_Data_Setup.php"; ?>
 		
-		<title>Compraventa - <?php echo g_login; ?></title>
+		<title><?php echo g_sn." - ".g_login; ?></title>
 	</head>
 
 	<body>
@@ -25,23 +25,27 @@
 				}
 
 				include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.Header_Contents.php";
+				include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.Top_Links.php";
+
+				outTopHeader(5);
 			?>
 			
 			<div class="container-fluid pt-5">
 				<form id=id_form_cli_login method=POST action="./act/Login.php">
-					<div class="input-group input-group-outline">
-						<label class=form-label>Usuario</label>
+                    <div class="control-group col-md-6">
+						<label for=fln_cli_un class=form-label>Usuario</label>
 						<input class=form-control name=fln_cli_un />
 					</div>
 					<br />
-					<div class="input-group input-group-outline">
-						<label class=form-label>Clave</label>
+                    <div class="control-group col-md-6">
+						<label for=fln_cli_pwd class=form-label>Clave</label>
 						<input type=password class=form-control name=fln_cli_pwd />
 					</div>
 					
 					<br />
 					
-					<button class="btn btn-success" type=submit><?php echo g_login; ?></button> o <a href="/">volver al inicio</a>
+					<button class="btn btn-success py-2 px-4" type=submit><i class="fas fa-arrow-right-to-bracket"></i> <?php echo g_login; ?></button>
+                    <a class="btn btn-danger py-2 px-4" href="/"><i class="fas fa-xmark"></i> Cancelar</a>
 				</form>
 			</div>
 		</main>

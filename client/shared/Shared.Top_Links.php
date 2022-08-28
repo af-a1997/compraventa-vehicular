@@ -10,8 +10,8 @@
 
         if(!isset($_SESSION["client_session"]))
             $account_top_links = "
-                <a href=\"/login/client/\" class=\"nav-item nav-link\">Iniciar sesión</a>
-                <a href=\"/client/pages/register/\" class=\"nav-item nav-link\">Registrarse</a>
+                <a id=id_top_links_5 href=\"/login/client/\" class=\"nav-item nav-link\">Iniciar sesión</a>
+                <a id=id_top_links_6 href=\"/client/pages/register/\" class=\"nav-item nav-link\">".c_n_reg."</a>
             ";
 
         else

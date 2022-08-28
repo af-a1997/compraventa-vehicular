@@ -1,7 +1,7 @@
 <?php
 	include "../../../../shared/Utils.Admin.SessionCheck.php";
 	include "../../../../shared/Utils.Admin.BTL.php";
-	include "../../../../shared/Utils.Admin.Time.php";
+	include "../../../../../shared/utils/Utils.Gen.Time.php";
 	
 	include "../../../../classes/Utils_ClassLoader.class.php";
 	
@@ -25,7 +25,7 @@
 	// Checks if the username was taken, if yes, returns an error, otherwise proceeds to register the user.
 	$check_username_avail = $o_cli->CLI_VerifyUsernameAvail($o_cli->nombre_usuario);
 	if($check_username_avail == true)
-		header("Location:./?msg=username_taken");
+		header("Location:../../new/?msg=err_username_taken");
 	else
 		$r_add_cli = $o_cli->CLI_Add();
 	

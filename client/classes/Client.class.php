@@ -52,8 +52,16 @@
 			return $ret_compare_result;
 		}
 
+		public function PUBCLI_RegAcc(){
+			$sql_query_reg_cli = "INSERT INTO $this->tbl (nombre, apellidos, nombre_usuario, clave, cedula_identidad, email, residencia_actual, tel_cel, tel_fijo, momento_registro, cargo_en_sitio) VALUES ('$this->nombre', '$this->apellidos', '$this->nombre_usuario', '$this->clave', '$this->cedula_identidad', '$this->email', '$this->residencia_actual', '$this->tel_cel', '$this->tel_fijo', '$this->momento_registro', 2);";
+			
+			$r = mysqli_query($this->conn, $sql_query_reg_cli);
+			
+			return $r;
+		}
+
 		public function PUBCLI_ShowTheirInfo(){
-			$sql_query_list_1_cli ="SELECT * FROM $this->tbl WHERE nro_id_u=$this->nro_id_u";
+			$sql_query_list_1_cli = "SELECT * FROM $this->tbl WHERE nro_id_u=$this->nro_id_u";
 			
 			$retorno = mysqli_query($this->conn, $sql_query_list_1_cli);
 			

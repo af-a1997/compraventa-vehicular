@@ -7,7 +7,7 @@
 	include "../../../../shared/Constant_Strings[A].php";
 	include "../../../../../shared/utils/Utils.Common_Strings.php";
 	
-	include "../../../../shared/Utils.Admin.Time.php";
+	include "../../../../../shared/utils/Utils.Gen.Time.php";
 
 	$credentials = mysqli_connect("localhost","cmman_admin","#V!c2bMr69xo!8%A","gestion_veh") or die ("Hubo un fallo al conectarse a la BBDD, conexión abortada.");
 	

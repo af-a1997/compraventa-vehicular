@@ -56,7 +56,7 @@
 			<br />
 			
 			<?php
-				if(isset($_GET['msg']) && ($_GET['msg']) == "username_taken"){
+				if(isset($_GET['msg']) && ($_GET['msg']) == "err_username_taken"){
 					echo "
 						<div class=\"alert alert-danger\" role=alert>El nombre de usuario ya fue tomado, vuelve a intentarlo.</div>
 					";

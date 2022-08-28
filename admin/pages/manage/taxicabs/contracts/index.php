@@ -1,6 +1,6 @@
 <?php
 	include "../../../../shared/Utils.Admin.SessionCheck.php";
-	include "../../../../shared/Utils.Admin.Time.php";
+	include "../../../../../shared/utils/Utils.Gen.Time.php";
 
 	include "../../../../shared/Constant_Strings[A].php";
 	include "../../../../../shared/utils/Utils.Common_Strings.php";

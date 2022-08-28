@@ -81,7 +81,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <ul class="list-group list-group-flush">
-                                        <?php $f_mph = substr($o_cli_info->tel_cel,1); ?>
+                                        <?php
+                                            // Cell numbers in Uruguay always start with "09" and contain 9 digits, in international format, the lead "0" is taken out, which makes the number look like: [+5989XXXXXXX]. There's no lead "0" in home number phones, and no number is taken out, so they remain with 8 digits. Users in this system are assumed to be from Uruguay and can input mock number phones for the time being.
+                                            $f_mph = substr($o_cli_info->tel_cel,1);
+                                        ?>
 
                                         <li class="list-group-item px-0">
                                             <b>Celular:</b> <a href=<?php echo "\"tel:+598".$f_mph."\""; ?>><?php echo $o_cli_info->tel_cel; ?></a>

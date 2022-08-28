@@ -3,13 +3,7 @@
     include $_SERVER["DOCUMENT_ROOT"]."/client/classes/Utils.CliClassLoader.class.php";
     include $_SERVER["DOCUMENT_ROOT"]."/shared/utils/Utils.Common_Strings.php";
 
-    isForLoggedInUser(true);
-
-    $o_cli = new Client();
-
-    $o_cli->nro_id_u = $_SESSION["client_id"];
-    
-    $o_cli_info = $o_cli->PUBCLI_ShowTheirInfo();
+    isForLoggedInUser(false);
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +12,7 @@
     <head>
         <?php include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.Head_Data_Setup.php"; ?>
 
-        <title><?php echo c_u_prof." - ".g_sn; ?></title>
+        <title><?php echo c_n_reg." - ".g_sn; ?></title>
     </head>
 
     <body>
@@ -31,51 +25,69 @@
 
         <div class="container-fluid pt-5">
             <div class="text-center mb-4">
-                <h2 class="section-title px-5"><span class="px-2"><?php echo c_u_prof; ?></span></h2>
+                <h2 class="section-title px-5"><span class="px-2"><?php echo c_n_reg; ?></span></h2>
             </div>
             <div class="row px-xl-5">
                 <div class="col-lg-7 mb-5">
                     <div class="contact-form">
-                        <form id=id_form_edit_prof method=POST action="act/SubmitAct.Edit.OwnProf.php">
+                        <?php
+                            if(isset($_GET['msg']) && ($_GET['msg']) == "err_username_taken")
+                                echo "
+                                    <div class=\"alert alert-danger\" role=alert>El nombre de usuario ya fue tomado, vuelve a intentarlo.</div>
+                                ";
+                            // ---
+                        ?>
+
+                        <form id=id_form_edit_prof method=POST action="act/SubmitAct.Reg.UserAcc.php">
                             <div class="control-group">
                                 <label for=fln_usr_name>Nombre(s) <?php echo g_snp_reqf; ?></label>
-                                <input name=fln_usr_name class=form-control placeholder="Tu(s) nombre(s)" value=<?php echo "\"$o_cli_info->nombre\""; ?> />
+                                <input name=fln_usr_name class=form-control placeholder="Tu(s) nombre(s)" />
                             </div>
                             <br />
                             <div class="control-group">
                                 <label for=fln_usr_sn>Apellido(s) <?php echo g_snp_reqf; ?></label>
-                                <input name=fln_usr_sn class=form-control placeholder="Tu(s) apellido(s)" value=<?php echo "\"$o_cli_info->apellidos\""; ?> />
+                                <input name=fln_usr_sn class=form-control placeholder="Tu(s) apellido(s)" />
+                            </div>
+                            <br />
+                            <div class="control-group">
+                                <label for=fln_usr_un>Nombre de usuario <?php echo g_snp_reqf; ?></label>
+                                <input name=fln_usr_un class=form-control placeholder="Seudónimo de acceso a tu cuenta" />
+                            </div>
+                            <br />
+                            <div class="control-group">
+                                <label for=fln_usr_pwd>Clave <?php echo g_snp_reqf; ?></label>
+                                <input type=password name=fln_usr_pwd class=form-control placeholder="O contraseña, utilizada para acceder a tu cuenta" />
                             </div>
                             <br />
                             <div class="control-group">
                                 <label for=fln_usr_uypid>Cédula de Identidad <?php echo g_snp_reqf; ?></label>
-                                <input id=id_field_uypid name=fln_usr_uypid class=form-control value=<?php echo "\"$o_cli_info->cedula_identidad\""; ?> />
+                                <input id=id_field_uypid name=fln_usr_uypid class=form-control />
                             </div>
                             <br />
                             <div class="control-group">
                                 <label for=fln_usr_email>E-mail <?php echo g_snp_reqf; ?></label>
-                                <input name=fln_usr_email class=form-control placeholder="Tu dirección de correo" value=<?php echo "\"$o_cli_info->email\""; ?> />
+                                <input name=fln_usr_email class=form-control placeholder="Tu dirección de correo" />
                             </div>
                             <br />
                             <div class="control-group">
                                 <label for=fln_usr_hloc>Ubicación de residencia <?php echo g_snp_reqf; ?></label>
-                                <input name=fln_usr_hloc class=form-control placeholder="Calle y número de tu casa" value=<?php echo "\"$o_cli_info->residencia_actual\""; ?> />
+                                <input name=fln_usr_hloc class=form-control placeholder="Calle y número de tu casa" />
                             </div>
                             <br />
                             <div class="control-group">
                                 <label for=fln_usr_mph>Teléfono celular <?php echo g_snp_reqf; ?></label>
-                                <input id=id_field_mph name=fln_usr_mph class=form-control value=<?php echo "\"$o_cli_info->tel_cel\""; ?> />
+                                <input id=id_field_mph name=fln_usr_mph class=form-control />
                             </div>
                             <br />
                             <div class="control-group">
                                 <label for=fln_usr_lph>Teléfono fijo <?php echo g_snp_reqf; ?></label>
-                                <input id=id_field_lph name=fln_usr_lph class=form-control value=<?php echo "\"$o_cli_info->tel_fijo\""; ?> />
+                                <input id=id_field_lph name=fln_usr_lph class=form-control />
                             </div>
 
                             <br />
 
                             <div>
-                                <button class="btn btn-primary py-2 px-4" type="submit"><i class="fas fa-floppy-disk mr-1"></i>Guardar</button>
+                                <button class="btn btn-primary py-2 px-4" type="submit"><i class="fas fa-user-plus mr-1"></i> <?php echo c_n_reg; ?></button>
                                 <a class="btn btn-danger py-2 px-4" href="../"><i class="fas fa-xmark"></i> Cancelar</a>
                             </div>
                         </form>
@@ -83,7 +95,7 @@
                 </div>
                 <div class="col-lg-5 mb-5">
                     <h5 class="font-weight-semi-bold mb-3"><?php echo g_ab; ?></h5>
-                    <p>Aquí podrás editar tu perfil de usuario.</p>
+                    <p>Registrate hoy, y en breve podrás acceder a una amplia variedad de beneficios como contratación de remises fácil y rápida, alquileres, y realizar compras de vehículos nuevos y usados.</p>
                     <div class="d-flex flex-column mb-3">
                         <h5 class="font-weight-semi-bold mb-3">Recuerda que...</h5>
                         <p class="mb-2"><i class="fas fa-triangle-exclamation text-primary mr-3"></i> Todos los campos marcados con un &laquo;<?php echo g_snp_reqf; ?>&raquo; son obligatorios.</p>
@@ -116,6 +128,8 @@
 					rules:{
 						fln_usr_name: "required",
 						fln_usr_sn: "required",
+						fln_usr_un: "required",
+						fln_usr_pwd: "required",
 						fln_usr_uypid: "required",
 						fln_usr_email: {
                             email: true,
@@ -128,6 +142,8 @@
 					messages:{
 						fln_usr_name: "Ingresa tu nombre.",
 						fln_usr_sn: "Ingresa tu apellido.",
+						fln_usr_un: "Ingresa un seudónimo de acceso.",
+						fln_usr_pwd: "Ingresa tu clave de acceso.",
 						fln_usr_uypid: "Ingresa tu cédula de identidad.",
                         fln_usr_email: "Ingresa una dirección de correo válida.",
                         fln_usr_hloc: "Ingresa tu dirección de residencia.",

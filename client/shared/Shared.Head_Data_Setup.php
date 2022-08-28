@@ -106,3 +106,6 @@
 
 <!-- Customized Bootstrap Stylesheet -->
 <link href="/client/shared/template_files/css/style.css" rel="stylesheet">
+
+<!-- Shared strings for client/customer pages -->
+<?php include $_SERVER["DOCUMENT_ROOT"]."/client/shared/Shared.CliStrings.php"; ?>

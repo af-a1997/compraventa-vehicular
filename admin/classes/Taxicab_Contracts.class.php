@@ -148,7 +148,7 @@
 		
         // This function will delete all contracts that have already expired (i.e.: current date is newer than contract end date). For date comparison tutorial, check this: < https://stackoverflow.com/questions/804193/delete-from-a-table-based-on-date >
 		public function CON_DeleteAllExpired(){
-            include $_SERVER["DOCUMENT_ROOT"]."/admin/shared/Utils.Admin.Time.php";
+            include $_SERVER["DOCUMENT_ROOT"]."/admin/shared/Utils.Gen.Time.php";
 
 			$sql_query_del_expired_con = "DELETE FROM $this->tbl WHERE tiempo_fin <= \"".$cdt."\";";
 			$r = mysqli_query($this->conn, $sql_query_del_expired_con);
@@ -158,7 +158,7 @@
 		
 		// I find deleting one contract at a time makes little sense, it's slow and unnecessary, you'd prefer to clear all inactive contracts at once and leave the active ones out of it. This function will stop a contract by setting the end date to the current one.
 		public function CON_StopOne(){
-            include $_SERVER["DOCUMENT_ROOT"]."/admin/shared/Utils.Admin.Time.php";
+            include $_SERVER["DOCUMENT_ROOT"]."/admin/shared/Utils.Gen.Time.php";
 
 			$sql_query_stop_1_con = "UPDATE $this->tbl SET tiempo_fin='$cdt' WHERE id_entrada_reg=$this->id_entrada_reg;";
 			$r = mysqli_query($this->conn, $sql_query_stop_1_con);

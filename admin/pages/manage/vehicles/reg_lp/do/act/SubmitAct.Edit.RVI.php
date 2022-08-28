@@ -4,7 +4,7 @@
 	}
 	
 	include "../../../../../../shared/Utils.Admin.SessionCheck.php";
-	include "../../../../../../shared/Utils.Admin.Time.php";
+	include "../../../../../../../shared/utils/Utils.Gen.Time.php";
 	include "../../../../../../shared/Utils.Admin.BTL.php";
 	
 	include "../../../../../../classes/Utils_ClassLoader.class.php";
